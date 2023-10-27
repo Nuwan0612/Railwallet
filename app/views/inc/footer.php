@@ -1,3 +1,3 @@
-  <script src="<?php echo URLROOT;?>/js/main.js"></script>
+  <script src="<?php echo URLROOT;?>/js/index/main.js"></script>
 </body>
 </html>

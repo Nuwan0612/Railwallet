@@ -1,7 +1,147 @@
 <?php require APPROOT . '/views/inc/header.php';?>
-<h1><?php echo $data['title']; ?></h1>
+<div class="banner" id="Home">
+            <div class="navbar">
+                <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
+                <ul>
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#contact-us"> Contact Us</a></li>
+                    <li><a href="#about-section" id="about-link">About</a></li>
+                    <li><a href="#feedback-section">Feedback</a></li>
+                   
+                </ul>
+            </div>
+            <div class="content">
+                <h1>Travel Easily With RailWallet</h1><br>
+                <p>lets' start with signup.If you have a account,<br>lets explore the rilwallet</p>
+                <div>
+                <button type="button" onclick="redirectToSignUp()"><span></span>SignUp</button>
+                <button type="button" class="log-in" onclick="redirectToLogin()"><span></span>Login</button>
+                </div>
+            </div>
+        </div>
 
-<a href="<?php echo URLROOT;?>/users/logout">Logout</a>
+        <!--##AboutUs Section##-->
 
+        <section class="hero" id="about-section">
+            <div class="heading">
+                <h1>About Us</h1>
+            </div>
+            <div class="container">
+                <div class="aboutcontent">
+                    <h3>Welcome To Our Website</h3>
+                        <p>country in South Asia. It lies
+                        in the Indian Ocean, southwest of the Bay of Bengal, 
+                        <br>separated from the Indian peninsula by the Gulf of Mannar <br>
+                        
+                </div>
+            <div class="aboutimage">
+                 <img src="<?php echo URLROOT;?>public/css/index/ab1.jpg">
+            </div>
+        </section>
+
+        <!--###Feedback Section###-->
+
+        <section class="Feedback" id="feedback-section">
+        <div class="feedbackbg">
+
+        <div class="feedback-container">
+            <h1>Feedback</h1>
+            <div class="feedback">
+                <div class="feedback-column">
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="profile-pic">
+                                <img src="<?php echo URLROOT;?>public/css/index/profile.jpg" alt="Profile Picture1">
+                            </div>
+                            <h2>John Doe</h2>
+                        </div>
+                        <div class="feedback-content">
+                            <p>"I really love this website. It's user-friendly and has great content."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feedback-column">
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="profile-pic">
+                                <img src="<?php echo URLROOT;?>public/css/index/profile.jpg" alt="Profile Picture2">
+                            </div>
+                            <h2>Jane Smith</h2>
+                        </div>
+                        <div class="feedback-content">
+                            <p>"The information on this website is very helpful. Keep up the good work!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="feedback-column">
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="profile-pic">
+                                <img src=<?php echo URLROOT;?>public/css/index/"profile.jpg" alt="Profile Picture3">
+                            </div>
+                            <h2>David Johnson</h2>
+                        </div>
+                        <div class="feedback-content">
+                            <p>"This website has made my life easier. Thank you for providing such a valuable resource."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--## Contact Us ##-->
+<section class="contact" id="contact-us">
+    <div class="c-content">
+        <h2>Contact Us</h2>
+        <p>The above ER diagram illustrates the key information about the railway reservation system, including entities like PAX_info, Login_credentials, Ticket_reservation,</p>
+    </div>
+    <div class="c-container">
+        <div class="contactInfo">
+            <div class="box">
+                <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                <div class="text">
+                <h3>Address</h3>
+                <p>Keradewala,<br>Ma/Keradewala,<br>Hikkaduwa.</p>
+            </div>
+            </div>
+            <div class="box">
+                <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                <div class="text">
+                <h3>Phone</h3>
+                <p>076 3433025</p>
+            </div>
+            </div>
+            <div class="box">
+                <div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                <div class="text">
+                <h3>Email</h3>
+                <p>kvirangadias@gmail.com</p>
+            </div>
+            </div>
+        </div>
+        <div class="contactForm">
+            <form>
+                <h2>Send Message</h2>
+                <div class="inputBox">
+                    <input type="text" name="" required="required">
+                    <span>Full Name</span>
+                </div>
+                <div class="inputBox">
+                    <input type="text" name="" required="required">
+                    <span>Email</span>
+                </div>
+                <div class="inputBox">
+                   <textarea required="required"></textarea>
+                <span>Type Your Message ....</span>
+                </div>
+                <div class="inputBox">
+                    <input type="submit" name="" value="send">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 <?php require APPROOT . '/views/inc/footer.php';?>

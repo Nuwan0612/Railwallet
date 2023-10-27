@@ -3,18 +3,8 @@
     
 
     public function index(){
-      
-      $data = [
-        'title' => 'Welcome',
-      ];
-
-      $this->view('pages/index', $data);
+      $this->view('pages/index');
     }
 
-    public function about(){
-      $data = [
-        'title' => 'About us'
-      ];
-      $this->view('pages/about', $data);
-    }
+    
   }

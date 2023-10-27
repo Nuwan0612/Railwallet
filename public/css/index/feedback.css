@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+ .feedbackbg {
+        background-image: url('fb3.webp'); /* Replace 'your-background-image.jpg' with the actual image file path */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh; /* Adjust the height as needed */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff; /* Text color for content on top of the background image */
+}
+    
+
+
+.feedback-container {
+    max-width: 800px;
+    height: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color:#009688 ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.feedback {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feedback-column {
+    width: calc(33.33% - 20px);
+    
+
+}
+
+.feedback-card {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: left;
+    margin-bottom: 20px;
+    height: 300px;
+}
+
+.feedback-header h2 {
+    margin-top: 2px;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #009688; /* Header text color */
+}
+
+.feedback-content p {
+    font-size: 14px;
+    color: #333; /* Content text color */
+}
+
+.profile-pic {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    border-radius: 50%; /* This creates a circular shape */
+    overflow: hidden; /* Hide any image overflow outside the circle */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+
+.profile-pic img{
+   
+    height:auto;
+    width: 100%;
+
+}
+
