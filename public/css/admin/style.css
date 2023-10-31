@@ -1,0 +1,115 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+
+
+h1,h2{
+  color: #333;
+}
+
+h3{
+  color: #999;
+}
+
+/*Side Bar*/
+.side-menu{
+  padding-top: 20px;;
+  position: fixed;
+  background: #009688;
+  height: 1000vh;
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu .railwallet{
+  height: 10hv;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.side-menu li{
+  font-size: 20px;
+  padding: 10px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  
+}
+
+.side-menu li:hover{
+  background: white;
+  color: #009688;
+  cursor: pointer;
+}
+
+.container{
+  position: absolute;
+  right: 0;
+  width: 80vw;
+  background: #f1f1f1;
+}
+/*Header*/
+.container .header{
+  position: fixed;
+  padding: 20px;
+  top: 0;
+  right: 0;
+  width: 80vw;
+  height: 10vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.container .header .nav{
+  width: 97%;
+  display: flex;
+  align-items: center;
+}
+
+.container .header .nav .user{
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .header .nav .user .img-case{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: 20px;
+  background: #009688;
+}
+
+.container .header .nav .user .img-case img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fa-bell{
+  font-size: 30px;;
+}
+
+.icons{
+  margin-right: 10px;
+}

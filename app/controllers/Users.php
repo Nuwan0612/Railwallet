@@ -15,16 +15,20 @@
         // Init data
         $data =[
           'name' => trim($_POST['name']),
+          'nic' => trim($_POST['nic']),
+          'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
           'confirm_password' => trim($_POST['confirm_password']),
           'name_err' => '',
+          'nic_err' => '',
+          'phone_err' => '',
           'email_err' => '',
           'password_err' => '',
           'confirm_password_err' => ''
         ];
 
-        // Validate Email
+        //Validate Email
         if(empty($data['email'])){
           $data['email_err'] = 'Pleae enter email';
         } else {
@@ -34,9 +38,25 @@
           }
         }
 
+        // Validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Pleae enter NIC';
+        } else {
+          // Check NIC
+          if($this->userModel->findUserByEmail($data['nic'])){
+            $data['nic_err'] = 'NIC is already taken';
+          }
+        }
+
+
         // Validate Name
         if(empty($data['name'])){
           $data['name_err'] = 'Pleae enter name';
+        }
+
+        // Validate Phone
+        if(empty($data['phone'])){
+          $data['phone_err'] = 'Pleae enter phone number';
         }
 
         // Validate Password
@@ -56,7 +76,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])){
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
           // Validated
           
           // Hash Password
@@ -77,10 +97,14 @@
         // Init data
         $data =[
           'name' => '',
+          'nic' => '',
+          'phone' => '',
           'email' => '',
           'password' => '',
           'confirm_password' => '',
           'name_err' => '',
+          'nic_err' => '',
+          'phone_err' => '',
           'email_err' => '',
           'password_err' => '',
           'confirm_password_err' => ''
@@ -103,7 +127,8 @@
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
           'email_err' => '',
-          'password_err' => '',      
+          'password_err' => '',
+          'status' => '',      
         ];
 
         // Validate Email
@@ -129,7 +154,7 @@
           // Validated
           $loggedInUser = $this->userModel->login($data['email'],$data['password']);
 
-          if($loggedInUser){
+          if($loggedInUser && $loggedInUser->status){
             // Create Session
             $this->createUserSession($loggedInUser);
           } else {
@@ -160,23 +185,54 @@
     public function createUserSession($user){
       $_SESSION['user_id'] = $user->id;
       $_SESSION['user_email'] = $user->email;
+      $_SESSION['user_nic'] = $user->nic;
+      $_SESSION['user_phone'] = $user->phone;
       $_SESSION['user_name'] = $user->name;
-      redirect('pages/index');
+
+      if($user->type == 'admin'){
+        redirect('admins/dashboard');
+      } else if($user->type == 'user'){
+        echo 'User page';
+      } else{
+        redirect('users/login');
+      }
+      
     }
 
     public function logout(){
       unset($_SESSION['user_id']);
       unset($_SESSION['user_email']);
+      unset($_SESSION['user_nic']);
+      unset($_SESSION['user_phone']);
       unset($_SESSION['user_name']);
       session_destroy();
-      redirect('users/login');
+      redirect('pages/index');
     }
 
-    public function isLoggedIn(){
-      if(isset($_SESSION['user_id'])){
-        return true;
+    //activate User
+    public function activeUserStatus($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($this->userModel->activeUser($id)){
+          redirect('admins/users');
+        } else {
+          die('Something went wrong');
+        }
       } else {
-        return false;
+        redirect('admins/users');
       }
     }
+
+    //Deactivate User
+    public function deactiveUserStatus($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($this->userModel->deactiveUser($id)){
+          redirect('admins/users');
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        redirect('admins/users');
+      }
+    }
+    
   }
