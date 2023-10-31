@@ -192,7 +192,7 @@
       if($user->type == 'admin'){
         redirect('admins/dashboard');
       } else if($user->type == 'user'){
-        echo 'User page';
+        redirect('passengers/dashboard');
       } else{
         redirect('users/login');
       }
