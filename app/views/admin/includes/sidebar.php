@@ -12,7 +12,7 @@
 
     <a class="links" href="<?php echo URLROOT;?>admins/trains"><li><img src="<?php echo URLROOT;?>/img/train.png" alt=""><span>Trains</span></li></a>
 
-    <li><img src="<?php echo URLROOT;?>/img/qr.png" alt=""><span>Checkers</span></li>
+    <a class="links" href="<?php echo URLROOT;?>admins/checkers"><li><img src="<?php echo URLROOT;?>/img/qr.png" alt=""><span>Checkers</span></li></a>
 
     <li><img src="<?php echo URLROOT;?>/img/supp.png" alt=""><span>Support</span> </li>
 
