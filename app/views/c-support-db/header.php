@@ -30,7 +30,7 @@
                 <a href="#"><h3> Complaints</h3></a>
                 <a href="#"><h3> Booking Reqs</h3></a>
                 <a href="#"><h3> Live Chat</h3></a>
-                <a href="#"><h3> Log Out</h3></a>
+                <a href="<?php echo URLROOT;?>users/logout"><h3> Log Out</h3></a>
                 <!-- <a href="#"><h3> Fine Details</h3></a> -->
                 <div class="user">
                     

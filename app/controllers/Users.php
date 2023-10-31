@@ -193,7 +193,11 @@
         redirect('admins/dashboard');
       } else if($user->type == 'user'){
         redirect('passengers/dashboard');
-      } else{
+      } else if($user->type == 'checker'){
+        redirect('users/index');
+      } else if($user->type == 'supporter'){
+        redirect('supporters/dashboard');
+      } else {
         redirect('users/login');
       }
       
