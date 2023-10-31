@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/inc/header.php';?>
+<?php require APPROOT . '/views/Home/inc/header.php';?>
 <div class="banner" id="Home">
             <div class="navbar">
                 <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
@@ -144,4 +144,4 @@
     </div>
 </section>
 
-<?php require APPROOT . '/views/inc/footer.php';?>
+<?php require APPROOT . '/views/Home/inc/footer.php';?>
