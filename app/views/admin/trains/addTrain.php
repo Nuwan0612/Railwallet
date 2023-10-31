@@ -26,7 +26,7 @@
       </div>
 
       <div class="tbox <?php echo !empty($data['thirdCapacity_err']) ? 'error' : ''; ?>">
-      <input type="number" name="thirdCapacity" placeholder="Type" value="<?php echo $data['thirdCapacity']; ?>">
+      <input type="number" name="thirdCapacity" placeholder="Third class seats" value="<?php echo $data['thirdCapacity']; ?>">
         <div class="error-message"><?php echo $data['thirdCapacity_err'];?></div>
       </div>
 

@@ -129,7 +129,7 @@
           'password' => trim($_POST['password']),
           'email_err' => '',
           'password_err' => '',
-          'status' => '',      
+          'status' => '1',      
         ];
 
         // Validate Email
@@ -158,6 +158,9 @@
           if($loggedInUser && $loggedInUser->status){
             // Create Session
             $this->createUserSession($loggedInUser);
+          } else if($loggedInUser && !$loggedInUser->status){
+            $data['status'] = '0';
+            $this->view('users/login', $data);
           } else {
             $data['password_err'] = 'Password incorrect';
             $this->view('users/login', $data);
