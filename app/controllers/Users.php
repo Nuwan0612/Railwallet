@@ -20,6 +20,7 @@
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
           'confirm_password' => trim($_POST['confirm_password']),
+          'type' => 'user',
           'name_err' => '',
           'nic_err' => '',
           'phone_err' => '',

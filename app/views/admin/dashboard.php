@@ -8,7 +8,7 @@
           <h3>Users</h3>
         </div>
         <div class="icon-case">
-          <i class="fa-solid fa-users fa-2x"></i>
+          <img src="<?php echo URLROOT?>/img/user.png" alt="">
         </div>
       </div>
 
@@ -18,7 +18,7 @@
           <h3>Trains</h3>
         </div>
         <div class="icon-case">
-        <i class="fa-solid fa-train-subway fa-2x"></i>
+          <img src="<?php echo URLROOT?>/img/train.png" alt="">
         </div>
       </div>
 
@@ -28,7 +28,7 @@
           <h3>Checkers</h3>
         </div>
         <div class="icon-case">
-        <i class="fa-solid fa-qrcode fa-2x"></i>
+          <img src="<?php echo URLROOT?>/img/qr.png" alt="">
         </div>
       </div>
 
@@ -38,7 +38,7 @@
           <h3>Customer Suports</h3>
         </div>
         <div class="icon-case">
-        <i class="fa-solid fa-phone fa-2x"></i>
+          <img src="<?php echo URLROOT?>/img/supp.png" alt="">
         </div>
       </div>
 
@@ -48,7 +48,7 @@
           <h3>Feedbacks</h3>
         </div>
         <div class="icon-case">
-        <i class="fa-solid fa-comment-dots fa-2x"></i>
+          <img src="<?php echo URLROOT?>/img/feed.png" alt="">
         </div>
       </div> 
     </div> 

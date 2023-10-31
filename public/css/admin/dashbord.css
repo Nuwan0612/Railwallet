@@ -23,6 +23,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,0.19);
 }
 
+.container .content .cards .card img{
+  width: 50px;
+}
+
 /* .container .content .content-2{
   min-height: 60vh;
   display: flex;

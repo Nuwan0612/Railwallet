@@ -47,7 +47,11 @@ h3{
   color: white;
   display: flex;
   align-items: center;
-  
+}
+
+.side-menu ul img {
+  width: 40px;
+  margin-right: 20px;
 }
 
 .side-menu li:hover{
@@ -95,7 +99,6 @@ h3{
   height: 50px;
   margin-right: auto;
   margin-left: 20px;
-  background: #009688;
 }
 
 .container .header .nav .user .img-case img{
