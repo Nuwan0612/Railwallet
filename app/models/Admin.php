@@ -19,4 +19,11 @@
       $results = $this->db->resultSet();
       return $results;
     }
+
+    public function getSupporter(){
+      $this->db->query("SELECT * FROM users WHERE type = 'supporter';
+      ");
+      $results = $this->db->resultSet();
+      return $results;
+    }
   }

@@ -5,8 +5,8 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">Checkers</div>
-        <a href="<?php echo URLROOT; ?>admins/registerChecker"><button class="add-train">Register</button></a>
+        <div class="title">Customer Support</div>
+        <a href="<?php echo URLROOT; ?>admins/registerSupporter"><button class="add-train">Register</button></a>
       </div>
       <div class="search-bar">
         <input type="text" placeholder="Search">
@@ -24,25 +24,23 @@
                 <th>Name</th>
                 <th>NIC Number</th>
                 <th>Contact Number</th>
-                <th>Working Station</th>
                 <th>Option</th>
               </tr>
             </thead>
             
             <tbody>
-            <?php $rowNumber = 1; foreach($data['checkers'] as $checker):?>
+            <?php $rowNumber = 1; foreach($data['supporters'] as $supporter):?>
             <tr>
               <td><?php echo $rowNumber; ?></td>
-              <td><?php echo $checker->id; ?></td>
-              <td><?php echo $checker->name; ?></td>
-              <td><?php echo $checker->nic; ?></td>
-              <td><?php echo $checker->phone; ?></td>
-              <td></td>
+              <td><?php echo $supporter->id; ?></td>
+              <td><?php echo $supporter->name; ?></td>
+              <td><?php echo $supporter->nic; ?></td>
+              <td><?php echo $supporter->phone; ?></td>
               <td>
                 <div class="options">
-                  <a href="<?php echo URLROOT; ?>admins/editTrain/<?php echo $checker->id; ?>"><button class="edit-btn">Edit</button></a>
+                  <a href="<?php echo URLROOT; ?>admins/editTrain/<?php echo $supporter->id; ?>"><button class="edit-btn">Edit</button></a>
 
-                  <form action="<?php echo URLROOT; ?>admins/deleteChecker/<?php echo $checker->id?>" method ="post"><input class="delete-btn" type="submit" value="Delete"></form>
+                  <form action="<?php echo URLROOT; ?>admins/deleteSupporter/<?php echo $supporter->id?>" method ="post"><input class="delete-btn" type="submit" value="Delete"></form>
                 </div> 
               </td>
             </tr>
