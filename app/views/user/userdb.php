@@ -3,8 +3,8 @@
             <div class="cards">
                 <div class="card">
                     <div class="box">
-                        <h1>2194</h1>
-                        <h3>Uers</h3>
+                        <h1>LKR 2194</h1>
+                        <h3>Wallet Balance</h3>
                     </div>
                     <div class="icon-case">
                     <img src="<?php echo URLROOT;?>public/pics/man.png" alt="">
@@ -12,8 +12,8 @@
                 </div>
                 <div class="card">
                     <div class="box">
-                        <h1>53</h1>
-                        <h3>Checkers</h3>
+                        <h1>LKR 950</h1>
+                        <h3>Last Month Usage</h3>
                     </div>
                     <div class="icon-case">
                     <img src="<?php echo URLROOT;?>public/pics/qr-code.png" alt="">

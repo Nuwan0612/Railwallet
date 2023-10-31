@@ -1,44 +1,7 @@
 <?php require APPROOT . '/views/user/header.php';?>
         <div class="content">
-            <div class="cards">
-                <div class="card">
-                    <div class="box">
-                        <h1>2194</h1>
-                        <h3>Uers</h3>
-                    </div>
-                    <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/man.png" alt="">
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h1>53</h1>
-                        <h3>Checkers</h3>
-                    </div>
-                    <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/qr-code.png" alt="">
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <h1>2023/08/29</h1>
-                        <h3>Last Login</h3> 
-                       
-                    </div>
-                    <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/customer-service.png" alt="">
-                    </div>
-                </div>
-                <!-- <div class="card">
-                    <div class="box">
-                        <h1>350000</h1>
-                        <h3>Income</h3>
-                    </div>
-                    <div class="icon-case">
-                        <img src="income.png" alt="">
-                    </div>
-                </div> -->
-            </div>
+
+            
             <div class="content-2">
                 <div class="recent-payments">
                     <div class="title">
