@@ -11,8 +11,8 @@
                 </ul>
             </div>
             <div class="content">
-                <h1>Travel Easily With RailWallet</h1><br>
-                <p>lets' start with signup.If you have a account,<br>lets explore the rilwallet</p>
+                <h1>Easy Travel With RailWallet</h1><br>
+                <p>Let's get started with signing up. If you already have an account,<br>Let's explore RailWallet.</p>
                 <div>
                 <button type="button" onclick="redirectToSignUp()"><span></span>SignUp</button>
                 <button type="button" class="log-in" onclick="redirectToLogin()"><span></span>Login</button>
@@ -28,10 +28,9 @@
             </div>
             <div class="container">
                 <div class="aboutcontent">
-                    <h3>Welcome To Our Website</h3>
-                        <p>country in South Asia. It lies
-                        in the Indian Ocean, southwest of the Bay of Bengal, 
-                        <br>separated from the Indian peninsula by the Gulf of Mannar <br>
+                    <h3>Welcome To RailWallet</h3>
+                        <p>Welcome to "Online Rail Wallet" – your trusted partner in modernizing train travel. 
+                        <br>We're to provide a hassle-free and user-friendly train travel experience. Join us in this journey to make your trips simple and cashless. <br>
                         
                 </div>
             <div class="aboutimage">
@@ -53,7 +52,7 @@
                             <div class="profile-pic">
                                 <img src="<?php echo URLROOT;?>public/css/index/profile.jpg" alt="Profile Picture1">
                             </div>
-                            <h2>John Doe</h2>
+                            <h2>Julia Fernando</h2>
                         </div>
                         <div class="feedback-content">
                             <p>"I really love this website. It's user-friendly and has great content."</p>
@@ -66,7 +65,7 @@
                             <div class="profile-pic">
                                 <img src="<?php echo URLROOT;?>public/css/index/profile.jpg" alt="Profile Picture2">
                             </div>
-                            <h2>Jane Smith</h2>
+                            <h2>Gauri Abekoon</h2>
                         </div>
                         <div class="feedback-content">
                             <p>"The information on this website is very helpful. Keep up the good work!"</p>
@@ -77,9 +76,9 @@
                     <div class="feedback-card">
                         <div class="feedback-header">
                             <div class="profile-pic">
-                                <img src=<?php echo URLROOT;?>public/css/index/"profile.jpg" alt="Profile Picture3">
+                                <img src="<?php echo URLROOT;?>public/css/index/profile.jpg" alt="Profile Picture3">
                             </div>
-                            <h2>David Johnson</h2>
+                            <h2>Savithi Perera</h2>
                         </div>
                         <div class="feedback-content">
                             <p>"This website has made my life easier. Thank you for providing such a valuable resource."</p>
@@ -95,7 +94,7 @@
 <section class="contact" id="contact-us">
     <div class="c-content">
         <h2>Contact Us</h2>
-        <p>The above ER diagram illustrates the key information about the railway reservation system, including entities like PAX_info, Login_credentials, Ticket_reservation,</p>
+        <p>We're here to help! Our dedicated support team is just a message away. Feel free to reach out, and we'll do our best to assist you promptly.</p>
     </div>
     <div class="c-container">
         <div class="contactInfo">
@@ -103,21 +102,21 @@
                 <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
                 <div class="text">
                 <h3>Address</h3>
-                <p>Keradewala,<br>Ma/Keradewala,<br>Hikkaduwa.</p>
+                <p>23/4,<br>Marcus Place,<br>Colombo 07.</p>
             </div>
             </div>
             <div class="box">
                 <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
                 <div class="text">
                 <h3>Phone</h3>
-                <p>076 3433025</p>
+                <p>011 2222555</p>
             </div>
             </div>
             <div class="box">
                 <div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
                 <div class="text">
                 <h3>Email</h3>
-                <p>kvirangadias@gmail.com</p>
+                <p>railwallet123@gmail.com</p>
             </div>
             </div>
         </div>
