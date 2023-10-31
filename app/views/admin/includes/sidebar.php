@@ -14,7 +14,7 @@
 
     <a class="links" href="<?php echo URLROOT;?>admins/checkers"><li><img src="<?php echo URLROOT;?>/img/qr.png" alt=""><span>Checkers</span></li></a>
 
-    <li><img src="<?php echo URLROOT;?>/img/supp.png" alt=""><span>Support</span> </li>
+    <a class="links" href="<?php echo URLROOT;?>admins/supporters"><li><img src="<?php echo URLROOT;?>/img/supp.png" alt=""><span>Support</span> </li></a>
 
     <li><img src="<?php echo URLROOT;?>/img/feedback.png" alt=""><span>Feedback</span></li>
 

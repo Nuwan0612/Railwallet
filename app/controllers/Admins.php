@@ -56,6 +56,16 @@
       
     }
 
+    //Get all checkers
+    public function supporters(){
+      $supporters = $this->adminModel->getSupporter();
+      $data = [
+        'supporters' => $supporters
+      ];
+      $this->view('admin/supporter/supporter',$data);
+      
+    }
+
 /*=====================================================================================================================================
                                             TRAIN CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
@@ -315,6 +325,20 @@
       }
     }
 
+
+    //delete checker
+    public function deleteChecker($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($this->userModel->deleteUser($id)){
+          redirect('admins/checkers');
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        redirect('admins/checkers');
+      }
+    }
+
     // public function editTrain($id){
     //   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //     // Process form
@@ -386,5 +410,112 @@
     //     $this->view('admin/trains/editTrain', $data);
     //   }
     // }
+
+
+/*=====================================================================================================================================
+                                            SUPPORTER CRUD FUNCTIONALITIES IN ADMIN
+=======================================================================================================================================*/ 
+
+
+public function registerSupporter(){
+  // Check for POST
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    // Process form
+
+    // Sanitize POST data
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+    // Init data
+    $data =[
+      'name' => trim($_POST['name']),
+      'nic' => trim($_POST['nic']),
+      'phone' => trim($_POST['phone']),
+      'email' => trim($_POST['email']),
+      'password' => trim($_POST['nic']),
+      'type' => 'supporter',
+      'name_err' => '',
+      'nic_err' => '',
+      'phone_err' => '',
+      'email_err' => '',
+    ];
+
+    //Validate Email
+    if(empty($data['email'])){
+      $data['email_err'] = 'Pleae enter email';
+    } else {
+      // Check email
+      if($this->userModel->findUserByEmail($data['email'])){
+        $data['email_err'] = 'Employee is already registered in the system';
+      }
+    }
+
+    // Validate NIC
+    if(empty($data['nic'])){
+      $data['nic_err'] = 'Pleae enter NIC';
+    } else {
+      // Check NIC
+      if($this->userModel->findUserByEmail($data['nic'])){
+        $data['nic_err'] = 'Employee is already registered in the system';
+      }
+    }
+
+
+    // Validate Name
+    if(empty($data['name'])){
+      $data['name_err'] = 'Pleae enter name';
+    }
+
+    // Validate Phone
+    if(empty($data['phone'])){
+      $data['phone_err'] = 'Pleae enter phone number';
+    }
+
+    // Make sure errors are empty
+    if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+      // Validated
+      
+      // Hash Password
+      $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+      //Register User
+      if($this->userModel->register($data)){
+        redirect('admins/supporters');
+      } else {
+        die('something went wrong');
+      }
+    } else {
+      // Load view with errors
+      $this->view('admin/supporter/addSupporter', $data);
+    }
+
+  } else {
+    // Init data
+    $data =[
+      'name' => '',
+      'nic' => '',
+      'phone' => '',
+      'email' => '',
+      'name_err' => '',
+      'nic_err' => '',
+      'phone_err' => '',
+      'email_err' => '',
+    ];
+
+    // Load view
+    $this->view('admin/supporter/addSupporter', $data);
+  }
+}
+
+public function deleteSupporter($id){
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if($this->userModel->deleteUser($id)){
+      redirect('admins/supporters');
+    } else {
+      die('Something went wrong');
+    }
+  } else {
+    redirect('admins/supporters');
+  }
+}
 
 }
