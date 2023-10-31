@@ -20,6 +20,7 @@
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
           'confirm_password' => trim($_POST['confirm_password']),
+          'type' => 'user',
           'name_err' => '',
           'nic_err' => '',
           'phone_err' => '',
@@ -193,7 +194,11 @@
         redirect('admins/dashboard');
       } else if($user->type == 'user'){
         redirect('passengers/dashboard');
-      } else{
+      } else if($user->type == 'checker'){
+        redirect('users/index');
+      } else if($user->type == 'supporter'){
+        redirect('supporters/dashboard');
+      } else {
         redirect('users/login');
       }
       
