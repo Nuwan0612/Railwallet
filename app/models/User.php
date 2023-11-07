@@ -56,6 +56,31 @@
       }
     }
 
+    // Find user by NIC
+    public function findUserByNic($nic){
+      $this->db->query('SELECT * FROM users WHERE nic = :nic');
+      $this->db->bind(':nic', $nic);
+
+      $row = $this->db->single();
+
+      // Check row
+      if($this->db->rowCount() > 0){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // get user by id
+    public function getUser($id){
+      $this->db->query('SELECT * FROM users WHERE id = :id');
+      $this->db->bind(':id', $id);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
     //Active user state
     public function activeUser($id){
       $this->db->query('UPDATE users SET status = 1 WHERE id = :id');

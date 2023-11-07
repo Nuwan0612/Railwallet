@@ -9,8 +9,8 @@
         <a href="<?php echo URLROOT; ?>admins/addTrain"><button class="add-train">Add Train</button></a>
       </div>
       <div class="search-bar">
-        <input type="text" placeholder="Search">
-        <button class="search-button">
+        <input type="text" id="search-train" placeholder="Enter Train ID">
+        <button class="search-button" onclick="searchTrain()">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -20,6 +20,7 @@
             <thead>
               <tr>
                 <th>#</th>
+                <th>Train ID</th>
                 <th>Train Name</th>
                 <th>Train Type</th>
                 <th>First Class Seat</th>
@@ -33,6 +34,7 @@
             <?php $rowNumber = 1; foreach($data['trains'] as $train):?>
             <tr>
               <td><?php echo $rowNumber; ?></td>
+              <td><?php echo $train->trainID; ?></td>
               <td><?php echo $train->name; ?></td>
               <td><?php echo $train->type; ?></td>
               <td><?php echo $train->firstCapacity; ?></td>

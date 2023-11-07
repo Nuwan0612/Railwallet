@@ -24,7 +24,7 @@
 
       <div class="card">
         <div class="box">
-          <h1><?php echo $data['users']?></h1>
+          <h1><?php echo $data['checkers']?></h1>
           <h3>Checkers</h3>
         </div>
         <div class="icon-case">
@@ -34,7 +34,7 @@
 
       <div class="card">
         <div class="box">
-          <h1><?php echo $data['users']?></h1>
+          <h1><?php echo $data['supporters']?></h1>
           <h3>Customer Suports</h3>
         </div>
         <div class="icon-case">
@@ -44,7 +44,7 @@
 
       <div class="card">
         <div class="box">
-          <h1><?php echo $data['users']?></h1>
+          <h1>2</h1>
           <h3>Feedbacks</h3>
         </div>
         <div class="icon-case">

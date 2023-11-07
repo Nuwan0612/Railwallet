@@ -1,5 +1,5 @@
 <?php 
-  class Checker {
+  class Supporter {
 
     private $db;
 
@@ -7,7 +7,7 @@
       $this->db = new Database;
     }
 
-    public function editChecker($data){
+    public function editSupporter($data){
       $this->db->query('UPDATE users SET name = :name, nic = :nic, phone = :phone, email = :email, password = :password WHERE id = :id');
 
       $this->db->bind(':name', $data['name']);
