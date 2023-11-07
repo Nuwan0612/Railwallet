@@ -44,7 +44,7 @@
           $data['nic_err'] = 'Pleae enter NIC';
         } else {
           // Check NIC
-          if($this->userModel->findUserByEmail($data['nic'])){
+          if($this->userModel->findUserByNic($data['nic'])){
             $data['nic_err'] = 'NIC is already taken';
           }
         }

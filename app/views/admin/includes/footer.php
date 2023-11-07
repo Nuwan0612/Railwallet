@@ -1,4 +1,28 @@
 </div>
-  <script src="<?php echo URLROOT;?>/js/index/main.js"></script>
+  <script>
+    function searchChecker() {
+      const searchQuery = document.getElementById('search-checker').value;
+      if (searchQuery.trim() === "") {
+        return;
+      }
+      window.location.href = `<?php echo URLROOT; ?>admins/searchChecker/${searchQuery}`;
+    }
+
+    function searchSupporter() {
+      const searchQuery = document.getElementById('search-supporter').value;
+      if (searchQuery.trim() === "") {
+        return;
+      }
+      window.location.href = `<?php echo URLROOT; ?>admins/searchSupporter/${searchQuery}`;
+    }
+
+    function searchTrain() {
+      const searchQuery = document.getElementById('search-train').value;
+      if (searchQuery.trim() === "") {
+        return;
+      }
+      window.location.href = `<?php echo URLROOT; ?>admins/searchTrain/${searchQuery}`;
+    }
+  </script>
 </body>
 </html>

@@ -7,6 +7,12 @@
   </a>
   <div class="add-train-form">
     <form action="<?php echo URLROOT; ?>admins/addTrain" method ="post">
+
+      <div  class="tbox <?php echo !empty($data['trainID_err']) ? 'error' : ''; ?>">
+        <input type="text" name="trainID" placeholder="Train ID" value="<?php echo $data['trainID']; ?>">
+        <div class="error-message"><?php echo $data['trainID_err'];?></div>
+      </div>
+
       <div  class="tbox <?php echo !empty($data['name_err']) ? 'error' : ''; ?>">
       <input type="text" name="name" placeholder="Name" value="<?php echo $data['name']; ?>">
         <div class="error-message"><?php echo $data['name_err'];?></div>
