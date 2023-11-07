@@ -4,6 +4,7 @@
       $this->userModel = $this->model('User');
     }
 
+/*-----------------------------------------------------Register User-----------------------------------------------------------*/
     public function register(){
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -116,6 +117,8 @@
       }
     }
 
+
+/*-----------------------------------------------------Login User-----------------------------------------------------------*/
     public function login(){
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -186,6 +189,7 @@
       }
     }
 
+/*-----------------------------------------------------Create User Session-----------------------------------------------------------*/
     public function createUserSession($user){
       $_SESSION['user_id'] = $user->id;
       $_SESSION['user_email'] = $user->email;

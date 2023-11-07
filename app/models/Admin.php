@@ -6,9 +6,18 @@
       $this->db = new Database;
     }
 
+/*----------------------------------------------------------User----------------------------------------------------------*/
     public function getUser(){
       $this->db->query("SELECT * FROM users WHERE type = 'user';
       ");
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function searchUser($nic){
+      $this->db->query("SELECT * FROM users WHERE type = 'user' AND nic =:nic;
+      ");
+      $this->db->bind(':nic', $nic);
       $results = $this->db->resultSet();
       return $results;
     }
@@ -46,7 +55,7 @@
       return $results;
     }
 
-    // Find user by email
+// Find user by email
     public function findUserByEmail($email,$id){
       $this->db->query('SELECT * FROM users WHERE email = :email AND id != :id');
       $this->db->bind(':email', $email);
@@ -63,7 +72,7 @@
     }
   
 
-    // Find user by NIC
+// Find user by NIC
     public function findUserByNic($nic,$id){
       $this->db->query('SELECT * FROM users WHERE nic = :nic AND id != :id');
       $this->db->bind(':nic', $nic);
@@ -78,4 +87,4 @@
         return false;
       }
     }
-  }
+}

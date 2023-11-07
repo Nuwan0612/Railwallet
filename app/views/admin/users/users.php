@@ -8,8 +8,8 @@
       </div>
 
       <div class="search-bar">
-        <input type="text" placeholder="Search">
-        <button class="search-button">
+        <input type="text" id="search-users" placeholder="Enter User NIC Number">
+        <button class="search-button" onclick="searchUser()">
           <i class="fas fa-search"></i>
         </button>
       </div>

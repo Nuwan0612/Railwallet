@@ -31,7 +31,7 @@
       $this->view('admin/dashboard',$data);   
     }
 
-    //Get all trains
+//Get all trains
     public function trains(){
       $trains = $this->trainModel->getTrains();
       $data = [
@@ -42,17 +42,27 @@
     }
 
 
-    //Get all users
-    public function users(){
-      $users = $this->adminModel->getUser();
-      $data = [
-        'users' => $users
-      ];
-      $this->view('admin/users/users',$data);
-      
-    }
+//Get all users
+  public function users(){
+    $users = $this->adminModel->getUser();
+    $data = [
+      'users' => $users
+    ];
+    $this->view('admin/users/users',$data);
+    
+  }
 
-    //Get all checkers
+//Search User
+  public function searchUser($nic){
+    $users = $this->adminModel->searchUser($nic);
+    $data = [
+      'users' => $users
+    ];
+    $this->view('admin/users/users',$data);
+  }
+
+
+//Get all checkers
     public function checkers(){
       $checkers = $this->adminModel->getChecker();
       $data = [
@@ -62,7 +72,7 @@
       
     }
 
-    //Get all checkers
+//Get all supporters
     public function supporters(){
       $supporters = $this->adminModel->getSupporter();
       $data = [
@@ -280,7 +290,7 @@
     $data = [
       'trains' => $trains
     ];
-    $this->view('admin/trains/searchTrain',$data);
+    $this->view('admin/trains/trains',$data);
   }
 
 
@@ -400,7 +410,7 @@
       $data = [
         'checkers' => $checkers
       ];
-      $this->view('admin/chekers/search',$data);
+      $this->view('admin/chekers/checker',$data);
     }
 
 /*-----------------------------------------------------Edit Checker---------------------------------------------*/
@@ -604,13 +614,13 @@
     }
   }
 
-/*----------------------------------------------------Search Checker--------------------------------------------*/
+/*----------------------------------------------------Search Supporter--------------------------------------------*/
   public function searchSupporter($nic){
     $supporters = $this->adminModel->getSupporterById($nic);
     $data = [
       'supporters' => $supporters
     ];
-    $this->view('admin/supporter/search',$data);
+    $this->view('admin/supporter/supporter',$data);
   }
 
 /*-----------------------------------------------------Edit Supporter---------------------------------------------*/
