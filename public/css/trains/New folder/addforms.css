@@ -1,0 +1,77 @@
+
+.add-train-details {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 90px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #009688;
+  color: white; 
+  text-decoration: none;
+  border-radius: 30px; 
+}
+
+.close-button i {
+  font-size: 15px; 
+  padding: 3px 5px;
+}
+
+p{
+  color: white;
+}
+
+
+.add-train-details h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #333;
+  color: white;
+}
+
+.add-train-form {
+  background: #333;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.tbox {
+  margin: 15px 0;
+  position: relative;
+}
+
+.tbox input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #009688;
+  outline: none;
+  background: transparent;
+  color: #fff;
+}
+
+.tbox.error input {
+  border: 1px solid rgba(183, 24, 24, 0.79);
+}
+
+.error-message {
+  color: rgba(210, 42, 42, 0.593);
+  margin-top: 10px; 
+}
+
+.sbtn {
+  background: #009688;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

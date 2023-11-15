@@ -20,7 +20,7 @@
 
     <!-- <li><img src="<?php echo URLROOT;?>/img/dashboard.png" alt=""><span>Reports</span></li> -->
 
-    <li><img src="<?php echo URLROOT;?>/img/dashboard.png" alt=""><span>Settings</span></li>
+    <a class="links" href="<?php echo URLROOT;?>admins/profile"><li><img src="<?php echo URLROOT;?>/img/settings.png" alt=""><span>Settings</span></li></a>
 
     <a class="links" href="<?php echo URLROOT;?>users/logout"><li><img src="<?php echo URLROOT;?>/img/logout.png" alt=""><span>Logout</span></li></a>
   </ul>
