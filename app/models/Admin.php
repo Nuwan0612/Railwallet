@@ -6,6 +6,35 @@
       $this->db = new Database;
     }
 
+/*----------------------------------------------------------Admin----------------------------------------------------------*/
+  public function getAdmin(){
+    $this->db->query("SELECT * FROM users WHERE type = 'admin';
+    ");
+    $result = $this->db->single();
+    return $result;
+  }
+
+  public function editAdminDetails($data){
+    
+    $this->db->query('UPDATE users SET name = :name, nic = :nic, phone = :phone, email = :email, password = :newPassword, type = :type WHERE id = :id');
+    $this->db->bind(':id', $data['id']);
+    $this->db->bind(':name', $data['name']);
+    $this->db->bind(':nic', $data['nic']);
+    $this->db->bind(':phone', $data['phone']);
+    $this->db->bind(':email', $data['email']);
+    $this->db->bind(':newPassword', $data['newPassword']);
+    $this->db->bind(':type', $data['type']);
+      
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+  }
+
+
+
 /*----------------------------------------------------------User----------------------------------------------------------*/
     public function getUser(){
       $this->db->query("SELECT * FROM users WHERE type = 'user';

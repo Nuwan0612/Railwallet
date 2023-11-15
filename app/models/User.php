@@ -41,6 +41,21 @@
       }
     }
 
+    //check the old and new password
+    public function checkPassword($id, $oldPassword){
+      $this->db->query('SELECT * FROM users WHERE id = :id');
+      $this->db->bind(':id', $id);
+
+      $row =  $this->db->single();
+
+      $hased_password = $row->password;
+      if(password_verify($oldPassword, $hased_password)){
+        return $row;
+      } else {
+        return false;
+      }
+    }
+
     // Find user by email
     public function findUserByEmail($email){
       $this->db->query('SELECT * FROM users WHERE email = :email');

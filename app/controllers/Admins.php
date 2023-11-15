@@ -82,6 +82,153 @@
       
     }
 
+/*----------------------------------------------Manage Account Settings------------------------------------------------*/
+
+//display account details
+    public function profile(){
+      $admin = $this->adminModel->getAdmin();
+      $data = [
+        'id' => $admin->id,
+        'name' => $admin->name,
+        'nic' => $admin->nic,
+        'phone' => $admin->phone,
+        'email' => $admin->email
+      ];
+      
+      $this->view('admin/setting/manageAccount',$data);
+    }
+
+//update account details
+    public function setting($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        // Process form
+  
+        // Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+        // Init data
+        $data =[
+          'id' => $id,
+          'name' => trim($_POST['name']),
+          'nic' => trim($_POST['nic']),
+          'phone' => trim($_POST['phone']),
+          'email' => trim($_POST['email']),
+          'oldPassword' => trim($_POST['oldPassword']),
+          'newPassword' => trim($_POST['newPassword']),
+          'confirmPassword' => trim($_POST['confirmPassword']),
+          'type' => 'admin',
+          'oldPassword_err' => '',
+          'newPassword_err' => '',
+          'confirmPassword_err' => '',
+          'name_err' => '',
+          'nic_err' => '',
+          'phone_err' => '',
+          'email_err' => '',
+        ];
+  
+        //Validate Email
+        if(empty($data['email'])){
+          $data['email_err'] = 'Please enter email';
+        } else {
+          // Check email
+          if($this->adminModel->findUserByEmail($data['email'],$id)){
+            $data['email_err'] = 'Employee is already registered in the system';
+          }
+        }
+  
+        // Validate NIC
+        if(empty($data['nic'])){
+          $data['nic_err'] = 'Please enter NIC';
+        } else {
+          // Check NIC
+          if($this->adminModel->findUserByNic($data['nic'],$id)){
+            $data['nic_err'] = 'Employee is already registered in the system';
+          }
+        }
+  
+        // Validate Name
+        if(empty($data['name'])){
+          $data['name_err'] = 'Please enter name';
+        }
+  
+        // Validate Phone
+        if(empty($data['phone'])){
+          $data['phone_err'] = 'Please enter phone number';
+        }
+  
+
+        //Change password
+        if(!empty($data['oldPassword'])){
+
+          if(!$this->userModel->checkPassword($id,$data['oldPassword'])){
+            $data['oldPassword_err'] = 'Old passowrd does not match';
+          }
+
+          if(empty($data['newPassword'])){
+            $data['newPassword_err'] = 'Please enter new password';
+          }
+
+          if(empty($data['confirmPassword']) && !empty($data['newPassword'])) {
+            $data['confirmPassword_err'] = 'Please confirm new password';
+          } else {
+            if($data['newPassword'] != $data['confirmPassword']) {
+              $data['confirmPassword_err'] = 'Passwords do not match';
+            }
+          }
+
+        }
+
+        // Make sure errors are empty
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+          
+          // Hash Password
+          if(!empty($data['oldPassword']) && !empty($data['newPassword']) && !empty($data['confirmPassword'])){
+            $data['newPassword'] = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+          } else {
+            if(empty($data['newPassword'])){
+              $admin = $this->adminModel->getAdmin();
+              $data['newPassword'] = $admin->password;
+            }
+          }
+          
+          //Update Admin details
+          if($this->adminModel->editAdminDetails($data)){
+            redirect('admins/profile');
+          } else {
+            die('something went wrong');
+          }
+        } else {
+          // Load view with errors
+          $this->view('admin/setting/updateProfile', $data);
+        }
+  
+      } else {
+  
+        $admin = $this->userModel->getUser($id);
+        // Init data
+        $data =[
+          'id' => $id,
+          'name' => $admin->name,
+          'nic' => $admin->nic,
+          'phone' => $admin->phone,
+          'email' => $admin->email,
+          'oldPassword' => '',
+          'newPassword' => '',
+          'confirmPassword' => '',
+          'oldPassword_err' => '',
+          'newPassword_err' => '',
+          'confirmPassword_err' => '',
+          'name_err' => '',
+          'nic_err' => '',
+          'phone_err' => '',
+          'email_err' => '',
+        ];
+  
+        // Load view
+        $this->view('admin/setting/updateProfile', $data);
+      }
+    }
+
 
 /*=====================================================================================================================================
                                             TRAIN CRUD FUNCTIONALITIES IN ADMIN
@@ -714,5 +861,7 @@
       $this->view('admin/supporter/editSupporter', $data);
     }
   }
+
+
 
 }
