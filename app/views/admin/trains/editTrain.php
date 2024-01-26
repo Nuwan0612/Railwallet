@@ -1,17 +1,12 @@
 <?php require APPROOT . '/views/admin/includes/header.php';?>
 
 <div class="add-train-details">
-  <h1>Edit Train</h1>
+  <h1>Train ID <?php echo $data['trainID']; ?></h1>
   <a href="<?php echo URLROOT; ?>admins/trains" class="close-button">
     <i class="fas fa-times"></i></a> 
   <div class="add-train-form">
-    <form class="emp-train-form" action="<?php echo URLROOT; ?>admins/editTrain/<?php echo $data['id']; ?>" method ="post">
 
-      <label for="trainID" class="labels">Train ID:</label>
-      <div  class="tbox <?php echo !empty($data['trainID_err']) ? 'error' : ''; ?>">
-        <input type="text" name="trainID" placeholder="Train ID" value="<?php echo $data['trainID']; ?>">
-        <div class="error-message"><?php echo $data['trainID_err'];?></div>
-      </div>
+    <form class="emp-train-form" action="<?php echo URLROOT; ?>admins/editTrain/<?php echo $data['trainID']; ?>" method ="post">
 
       <label for="name" class="labels">Name:</label>
       <div  class="tbox <?php echo !empty($data['name_err']) ? 'error' : ''; ?>">

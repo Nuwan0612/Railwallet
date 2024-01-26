@@ -17,7 +17,29 @@
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':password', $data['password']);
 
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
 
+    public function deactivateSupporter($id){
+      $this->db->query("UPDATE users SET status = 0 WHERE id = :id");
+
+      $this->db->bind(':id', $id);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function activateSupporter($id){
+      $this->db->query("UPDATE users SET status = 1 WHERE id = :id");
+
+      $this->db->bind(':id', $id);
 
       if($this->db->execute()){
         return true;

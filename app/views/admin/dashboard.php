@@ -2,6 +2,7 @@
 
   <div class="content">
     <div class="cards">
+
       <div class="card">
         <div class="box">
           <h1><?php echo $data['users']?></h1>
@@ -44,6 +45,17 @@
 
       <div class="card">
         <div class="box">
+          <h1><?php echo $data['stations']?></h1>
+          <h3>Stations</h3>
+        </div>
+        <div class="icon-case">
+          <img src="<?php echo URLROOT?>/img/station.png" alt="">
+        </div>
+      </div>
+
+
+      <div class="card">
+        <div class="box">
           <h1>2</h1>
           <h3>Feedbacks</h3>
         </div>
@@ -51,6 +63,9 @@
           <img src="<?php echo URLROOT?>/img/feed.png" alt="">
         </div>
       </div> 
+
+       
+
     </div> 
 
     <!-- <div class="content-2">

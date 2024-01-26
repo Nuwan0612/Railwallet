@@ -5,8 +5,7 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">All Trains</div>
-        <a href="<?php echo URLROOT; ?>admins/addTrain"><button class="add-train">Add Train</button></a>
+        <div class="title">Not Working Trains</div>
       </div>
 
       <div class="search-bar-outer-container">
@@ -18,12 +17,15 @@
             </button> 
           </div>
         </div>
+
         
         <div class="hide-outer-container">
-        <a class="links" href="<?php echo URLROOT;?>admins/unavailbleTrains"><button class="delete-btn">Unavailable Trains</button></a>
-        </div>  
+        <a class="links" href="<?php echo URLROOT;?>admins/trains"><button class="edit-btn">Availabe Trains</button></a>
+        </div>
+        
       </div>
 
+    
       <div class="detail-body">
         <div class="table-container">
           <table>
@@ -52,9 +54,8 @@
               <td><?php echo $train->thirdCapacity; ?></td>
               <td>
                 <div class="options">
-                  <a href="<?php echo URLROOT; ?>admins/editTrain/<?php echo $train->trainID; ?>"><button class="edit-btn">Edit</button></a>
-
-                  <form action="<?php echo URLROOT; ?>admins/setNotRunning/<?php echo $train->trainID?>" method ="post"><input class="delete-btn" type="submit" value="Out of Service"></form>
+                  
+                  <form action="<?php echo URLROOT; ?>admins/setRunning/<?php echo $train->trainID?>" method ="post"><input class="edit-btn" type="submit" value="Set as active"></form>
                 </div> 
               </td>
             </tr>
