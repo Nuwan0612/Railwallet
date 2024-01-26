@@ -4,7 +4,7 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">Users</div>
+        <div class="title">Deactivated Users</div>
       </div>
 
       <div class="search-bar-outer-container">
@@ -19,11 +19,10 @@
 
         
         <div class="hide-outer-container">
-        <a class="links" href="<?php echo URLROOT;?>admins/deactivateUsers"><button class="delete-btn">Blocked Users</button></a>
+        <a class="links" href="<?php echo URLROOT;?>admins/users"><button class="edit-btn">Actived Users</button></a>
         </div>
         
       </div>
-      
 
       <div class="detail-body">
         <div class="table-container">
@@ -53,7 +52,7 @@
               <td></td>
               <td>
                 <div class="options">
-                  <form action="<?php echo URLROOT; ?>users/deactiveUserStatus/<?php echo $user->id?>" method ="post"><input class="delete-btn" type="submit" value="Deactivate"></form>
+                  <form action="<?php echo URLROOT; ?>users/activeUserStatus/<?php echo $user->id?>" method ="post"><input class="edit-btn" type="submit" value="Activate"></form>
                 </div> 
               </td>
             </tr>

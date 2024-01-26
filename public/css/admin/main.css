@@ -49,10 +49,12 @@ h3{
   align-items: center;
 }
 
+
 .side-menu ul img {
   width: 40px;
   margin-right: 20px;
 }
+
 
 .side-menu li:hover{
   background: white;

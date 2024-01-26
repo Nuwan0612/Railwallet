@@ -225,12 +225,12 @@
     public function activeUserStatus($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($this->userModel->activeUser($id)){
-          redirect('admins/users');
+          redirect('admins/deactivateUsers');
         } else {
           die('Something went wrong');
         }
       } else {
-        redirect('admins/users');
+        redirect('admins/deactivateUsers');
       }
     }
 

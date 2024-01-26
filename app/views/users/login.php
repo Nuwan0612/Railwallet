@@ -21,7 +21,7 @@
 
           <div>
             <input class="sbtn" type="submit" value="Login">
-            <a class="register-link" href="<?php echo URLROOT;?>users/register">No an account? Register</a>
+            <a class="register-link" href="<?php echo URLROOT;?>users/register">Don't have an account? Register</a>
           </div>
         </form>
       </div>

@@ -5,10 +5,9 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">Customer Support Operator</div>
-        <a href="<?php echo URLROOT; ?>admins/registerSupporter"><button class="add-train">Register</button></a>
+        <div class="title">Resign Customer Support Operator</div>
       </div>
-
+      
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">
@@ -20,7 +19,7 @@
         </div>
  
         <div class="hide-outer-container">
-        <a class="links" href="<?php echo URLROOT;?>admins/resignedSupporters"><button class="delete-btn">Resigned Employees</button></a>
+        <a class="links" href="<?php echo URLROOT;?>admins/supporters"><button class="edit-btn">Working Employees</button></a>
         </div>        
       </div>
 
@@ -50,8 +49,7 @@
               <td><?php echo $supporter->email; ?></td>
               <td>
                 <div class="options">
-                <a href="<?php echo URLROOT; ?>admins/editSupporter/<?php echo $supporter->id; ?>"><button class="edit-btn">Edit</button></a>
-                  <form action="<?php echo URLROOT; ?>admins/deactivateSupporter/<?php echo $supporter->id?>" method ="post"><input class="delete-btn" type="submit" value="Resign"></form>
+                  <form action="<?php echo URLROOT; ?>admins/activateSupporter/<?php echo $supporter->id?>" method ="post"><input class="edit-btn" type="submit" value="Working"></form>
                 </div> 
               </td>
             </tr>

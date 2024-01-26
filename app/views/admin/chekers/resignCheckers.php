@@ -5,8 +5,7 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">Checkers</div>
-        <a href="<?php echo URLROOT; ?>admins/registerChecker"><button class="add-train">Register</button></a>
+        <div class="title">Resign Checkers</div>
       </div>
 
       <div class="search-bar-outer-container">
@@ -20,7 +19,7 @@
         </div>
  
         <div class="hide-outer-container">
-        <a class="links" href="<?php echo URLROOT;?>admins/resignCheckers"><button class="delete-btn">Resigned Checkers</button></a>
+        <a class="links" href="<?php echo URLROOT;?>admins/checkers"><button class="edit-btn">Working Checkers</button></a>
         </div>        
       </div>
 
@@ -53,8 +52,7 @@
               <td></td>
               <td>
               <div class="options">
-                <a href="<?php echo URLROOT; ?>admins/editChecker/<?php echo $checker->id; ?>"><button class="edit-btn">Edit</button></a>
-                <form action="<?php echo URLROOT; ?>admins/deactiveCheckerStatus/<?php echo $checker->id?>" method ="post"><input class="delete-btn" type="submit" value="Resign"></form>
+                <form action="<?php echo URLROOT; ?>admins/activeCheckerStatus/<?php echo $checker->id?>" method ="post"><input class="edit-btn" type="submit" value="Working"></form>
               </div> 
               </td>
             </tr>

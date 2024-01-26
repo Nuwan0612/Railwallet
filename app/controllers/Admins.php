@@ -11,80 +11,196 @@
       $this->checkerModel = $this->model('Checker');
       $this->trainModel = $this->model('Train');
       $this->userModel = $this->model('User');
+      $this->stationModel = $this->model('Station');
+      $this->routeModel = $this->model('Route');
+      $this->ticketModel = $this->model('Ticket');
+      $this->sheduleModel = $this->model('Shedule');
     }
 
 /*=====================================================================================================================================
                                             GET DETAILS TO DASHBOARD
 =======================================================================================================================================*/ 
 
-    public function dashboard(){ 
-      $users = count($this->adminModel->getUser());
-      $trains = count($this->trainModel->getTrains());
-      $checkers = count($this->adminModel->getChecker());
-      $supporters = count($this->adminModel->getSupporter());
-      $data = [
-        'users' => $users,
-        'trains' => $trains,
-        'checkers' => $checkers,
-        'supporters' => $supporters,
-      ];
-      $this->view('admin/dashboard',$data);   
-    }
+  public function dashboard(){ 
+    $users = count($this->adminModel->getUser());
+    $trains = count($this->trainModel->getTrains());
+    $checkers = count($this->adminModel->getChecker());
+    $supporters = count($this->adminModel->getSupporter());
+    $stations = count($this->adminModel->getStation());
+    $data = [
+      'users' => $users,
+      'trains' => $trains,
+      'checkers' => $checkers,
+      'supporters' => $supporters,
+      'stations' => $stations,
+    ];
+    $this->view('admin/dashboard',$data);   
+  }
 
-//Get all trains
-    public function trains(){
-      $trains = $this->trainModel->getTrains();
+/*=====================================================================================================================================
+                                            LOAD PAGES
+=======================================================================================================================================*/
+  //Get all service trains
+      public function trains(){
+        $trains = $this->trainModel->getTrains();
+        $data = [
+          'trains' => $trains
+        ];
+        $this->view('admin/trains/trains',$data);
+        
+      }
+  //Get all unavailble trains
+    public function unavailbleTrains(){
+      $trains = $this->trainModel->getUnavilableTrains();
       $data = [
         'trains' => $trains
       ];
-      $this->view('admin/trains/trains',$data);
+      $this->view('admin/trains/hideTrains',$data);
+      
+    }
+
+  //Get all active users
+    public function users(){
+      $users = $this->adminModel->getUser();
+      $data = [
+        'users' => $users
+      ];
+      $this->view('admin/users/users',$data);
+      
+    }
+  //Get decativate users
+    public function deactivateUsers(){
+      $users = $this->adminModel->getBlockedUser();
+      $data = [
+        'users' => $users
+      ];
+      $this->view('admin/users/hideUsers',$data);
+      
+    }
+
+  //Search User
+    public function searchUser($nic){
+      $users = $this->adminModel->searchUser($nic);
+      $data = [
+        'users' => $users
+      ];
+      if($users[0]->status == 1){
+        $this->view('admin/users/users',$data);
+      } else {
+        $this->view('admin/users/hideUsers',$data);
+      }
       
     }
 
 
-//Get all users
-  public function users(){
-    $users = $this->adminModel->getUser();
-    $data = [
-      'users' => $users
-    ];
-    $this->view('admin/users/users',$data);
-    
-  }
+  //Get all checkers
+      public function checkers(){
+        $checkers = $this->adminModel->getChecker();
+        $data = [
+          'checkers' => $checkers
+        ];
+        $this->view('admin/chekers/checker',$data);   
+      }
 
-//Search User
-  public function searchUser($nic){
-    $users = $this->adminModel->searchUser($nic);
-    $data = [
-      'users' => $users
-    ];
-    $this->view('admin/users/users',$data);
-  }
-
-
-//Get all checkers
-    public function checkers(){
-      $checkers = $this->adminModel->getChecker();
+  //Get all resigned checkers
+    public function resignCheckers(){
+      $checkers = $this->adminModel->getResignedChecker();
       $data = [
         'checkers' => $checkers
       ];
-      $this->view('admin/chekers/checker',$data);
-      
+      $this->view('admin/chekers/resignCheckers',$data);   
     }
 
-//Get all supporters
+  //Get all supporters
     public function supporters(){
       $supporters = $this->adminModel->getSupporter();
       $data = [
         'supporters' => $supporters
       ];
-      $this->view('admin/supporter/supporter',$data);
-      
+      $this->view('admin/supporter/supporter',$data);     
+    }
+    
+  //Get all resigned supporters
+    public function resignedSupporters(){
+      $supporters = $this->adminModel->resignedSupporters();
+      $data = [
+        'supporters' => $supporters
+      ];
+      $this->view('admin/supporter/resignSupporter',$data);    
+    }
+
+  // Get all stations
+    public function stations(){
+      $stations = $this->adminModel->getStation();
+      $data = [
+        'stations' => $stations
+      ];
+
+      // echo '<pre>';
+      // var_dump($data); 
+      // echo '</pre>';
+
+      $this->view('admin/stations/stations',$data);
+    }
+
+  // Get all closed stations
+    public function closedStations(){
+      $stations = $this->adminModel->closedStations();
+      $data = [
+        'stations' => $stations
+      ];
+
+      $this->view('admin/stations/hideStation',$data);
+    }
+
+  //Get available shedules
+    public function shedules(){
+      $shedules = $this->sheduleModel->getAvailableShedules();
+      $data = [
+        'shedules' => $shedules
+      ];
+      $this->view('admin/shedules/shedules',$data);
+    }
+  
+  //Deactivated Shedules
+    public function deactivatedShedules(){
+      $shedules = $this->sheduleModel->deactivatedShedules();
+      $data = [
+        'shedules' => $shedules
+      ];
+      $this->view('admin/shedules/hideShedules',$data);
+    }
+
+  //Get all routes
+    public function routes(){
+      $routes = $this->adminModel->getRoutes();
+      $data = [
+        'routes' => $routes
+      ];
+      $this->view('admin/routes/routes',$data);
+    }
+
+  //Get all availabletickets
+    public function tickets(){
+      $tickets = $this->ticketModel->getTickets();
+      $data = [
+        'tickets' => $tickets
+      ];
+      $this->view('admin/tickets/tickets', $data);
+    }
+
+  //Get all unavilable tickets
+    public function unavailbleTickets(){
+      $tickets = $this->ticketModel->getuUnavilableTickets();
+      $data = [
+        'tickets' => $tickets
+      ];
+      $this->view('admin/tickets/notAvailableTickets', $data);
     }
 
 /*----------------------------------------------Manage Account Settings------------------------------------------------*/
 
-//display account details
+  //display account details
     public function profile(){
       $admin = $this->adminModel->getAdmin();
       $data = [
@@ -98,7 +214,7 @@
       $this->view('admin/setting/manageAccount',$data);
     }
 
-//update account details
+  //update account details
     public function setting($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
@@ -326,7 +442,7 @@
     }
 
 /*-----------------------------------------------------Edit Train---------------------------------------------*/
-    public function editTrain($id){
+    public function editTrain($trainID){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
   
@@ -335,8 +451,7 @@
 
         // Init data
         $data =[
-          'id' => $id,
-          'trainID' => trim($_POST['trainID']),
+          'trainID' => $trainID,
           'name' => trim($_POST['name']),
           'type' => trim($_POST['type']),
           'firstCapacity' => trim($_POST['firstCapacity']),
@@ -355,18 +470,8 @@
           $data['name_err'] = 'Pleae enter train name';
         } else {
           // Check Train
-          if($this->trainModel->findTrainName($data['name'], $id)){
+          if($this->trainModel->findTrainName($data['name'], $trainID)){
             $data['name_err'] = 'Train is alredy registered';
-          }
-        }
-
-        //Validate Train ID
-        if(empty($data['trainID'])){
-          $data['trainID_err'] = 'Pleae enter train ID';
-        } else {
-          // Check Train
-          if($this->trainModel->findTrainID($data['trainID'], $id)){
-            $data['trainID_err'] = 'Train is alredy registered';
           }
         }
 
@@ -381,7 +486,7 @@
         } 
 
         // Make sure errors are empty
-        if(empty($data['name_err']) && empty($data['type_err']) && empty($data['thirdCapacity_err']) && empty($data['trainID_err'])){
+        if(empty($data['name_err']) && empty($data['type_err']) && empty($data['thirdCapacity_err'])){
 
           //Update train
           if($this->trainModel->editTrain($data)){
@@ -396,10 +501,9 @@
 
       } else {
 
-        $train = $this->trainModel->getTrain($id);
+        $train = $this->trainModel->getTrain($trainID);
         // Init data
         $data =[
-          'id' => $id,
           'trainID' => $train->trainID,
           'name' => $train->name,
           'type' => $train->type,
@@ -418,10 +522,10 @@
     }
 
 
-/*-----------------------------------------------------Delete Train---------------------------------------------*/
-    public function deleteTrain($id){
+/*-----------------------------------------------------Update Train Service status---------------------------------------------*/
+    public function setNotRunning($trainID){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if($this->trainModel->deleteTrain($id)){
+        if($this->trainModel->notRunningTrain($trainID)){
           redirect('admins/trains');
         } else {
           die('Something went wrong');
@@ -431,13 +535,33 @@
       }
     }
 
-/*----------------------------------------------------Search Train--------------------------------------------*/
+    public function setRunning($trainID){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($this->trainModel->RunningTrain($trainID)){
+          redirect('admins/unavailbleTrains');
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        redirect('admins/unavailbleTrains');
+      }
+    }
+
+/*-----------------------------------------------------Search Train--------------------------------------------*/
   public function searchTrain($trainID){
     $trains = $this->trainModel->searchTrainById($trainID);
     $data = [
       'trains' => $trains
     ];
-    $this->view('admin/trains/trains',$data);
+    
+    if(!$trains){
+      $this->view('admin/trains/trains',$data);
+    } else if($trains[0]->service == 1){
+      $this->view('admin/trains/trains',$data);
+    } else if($trains[0]->service == 0){
+      $this->view('admin/trains/hideTrains',$data);
+    }
+      
   }
 
 
@@ -537,10 +661,10 @@
     }
 
 
-/*-----------------------------------------------------Delete Checker---------------------------------------------*/
-    public function deleteChecker($id){
+/*-----------------------------------------------------Update Checker working status---------------------------------------------*/
+    public function deactiveCheckerStatus($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if($this->userModel->deleteUser($id)){
+        if($this->checkerModel->resignChecker($id)){
           redirect('admins/checkers');
         } else {
           die('Something went wrong');
@@ -550,14 +674,34 @@
       }
     }
 
+    public function activeCheckerStatus($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if($this->checkerModel->activateChecker($id)){
+          redirect('admins/resignCheckers');
+        } else {
+          die('Something went wrong');
+        }
+      } else {
+        redirect('admins/resignCheckers');
+      }
+    }
 
-/*----------------------------------------------------Search Checker--------------------------------------------*/
+
+/*-----------------------------------------------------Search Checker--------------------------------------------*/
     public function searchChecker($nic){
       $checkers = $this->adminModel->getCheckerById($nic);
       $data = [
         'checkers' => $checkers
       ];
-      $this->view('admin/chekers/checker',$data);
+
+      if(!$checkers){
+        $this->view('admin/chekers/checker',$data);
+      } else if($checkers[0]->status == 1){
+        $this->view('admin/chekers/checker',$data);
+      } else if($checkers[0]->status == 0){
+        $this->view('admin/chekers/resignCheckers',$data);
+      }
+        
     }
 
 /*-----------------------------------------------------Edit Checker---------------------------------------------*/
@@ -657,7 +801,8 @@
                                             SUPPORTER CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
-/*-------------------------------------------------------Register Supporter--------------------------------------------------*/
+
+/*-----------------------------------------------------Register Supporter--------------------------------------------------*/
   public function registerSupporter(){
     // Check for POST
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -748,10 +893,10 @@
   }
 
 
-/*-------------------------------------------------------Delete Supporter--------------------------------------------------*/
-  public function deleteSupporter($id){
+/*-----------------------------------------------------Upadate Supporter working status--------------------------------------------------*/
+  public function deactivateSupporter($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      if($this->userModel->deleteUser($id)){
+      if($this->supporterModel->deactivateSupporter($id)){
         redirect('admins/supporters');
       } else {
         die('Something went wrong');
@@ -761,13 +906,33 @@
     }
   }
 
-/*----------------------------------------------------Search Supporter--------------------------------------------*/
+  public function activateSupporter($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->supporterModel->activateSupporter($id)){
+        redirect('admins/resignedSupporters');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
+      redirect('admins/resignedSupporters');
+    }
+  }
+
+/*-----------------------------------------------------Search Supporter--------------------------------------------*/
   public function searchSupporter($nic){
     $supporters = $this->adminModel->getSupporterById($nic);
     $data = [
       'supporters' => $supporters
     ];
-    $this->view('admin/supporter/supporter',$data);
+
+    if(!$supporters){
+      $this->view('admin/supporter/supporter',$data);
+    } else if($supporters[0]->status == 1){
+      $this->view('admin/supporter/supporter',$data);
+    } else if($supporters[0]->status == 0){
+      $this->view('admin/supporter/resignSupporter',$data);
+    }
+       
   }
 
 /*-----------------------------------------------------Edit Supporter---------------------------------------------*/
@@ -863,5 +1028,699 @@
   }
 
 
+/*=====================================================================================================================================
+                                            STATIONS CRUD FUNCTIONALITIES IN ADMIN
+=======================================================================================================================================*/ 
 
+
+/*-----------------------------------------------------Add Station---------------------------------------------------------*/
+  public function addStation(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      // Process form
+
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init data
+      $data =[
+        'stationID' => trim($_POST['stationID']),
+        'name' => trim($_POST['name']),
+        'stationID_err' => '',
+        'name_err' => '',
+      ];
+
+      //Validate Station Name
+      if(empty($data['name'])){
+        $data['name_err'] = 'Please enter station name';
+      } else {
+        // Check Station
+        if($this->stationModel->findStationByName($data['name'])){
+          $data['name_err'] = 'Station is aleady added to the system';
+        }
+      }
+
+      //Validate Station ID
+      if(empty($data['stationID'])){
+        $data['stationID_err'] = 'Please enter station ID';
+      } else {
+        // Check Station
+        if($this->stationModel->findStationByID($data['stationID'])){
+          $data['stationID_err'] = 'Station is aleady added to the system';
+        }
+      }
+    
+      // Make sure errors are empty
+      if(empty($data['name_err']) && empty($data['stationID_err'])){
+
+        //Register User
+        if($this->stationModel->addStation($data)){
+          redirect('admins/stations');
+        } else {
+          die('something went wrong');
+        }
+      } else {
+        // Load view with errors
+        $this->view('admin/stations/addStation', $data);
+      }
+
+    } else {
+       // Init data
+       $data =[
+        'stationID' => '',
+        'name' => '',
+        'stationID_err' => '',
+        'name_err' => '',
+      ];
+
+      // Load view
+      $this->view('admin/stations/addStation', $data);
+    }
+  }
+    
+/*-----------------------------------------------------Edit Station---------------------------------------------------------*/
+
+  public function editStation($stationID){
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init data
+      $data =[
+        'stationID' => $stationID,
+        'name' => trim($_POST['name']),
+        'stationID_err' => '',
+        'name_err' => '',
+      ];
+
+      //Validate Station Name
+      if(empty($data['name'])){
+        $data['name_err'] = 'Please enter station name';
+      } else {
+        // Check Station
+        if($this->stationModel->findStationName($data)){
+          $data['name_err'] = 'Station is aleady added to the system';
+        }
+      }
+    
+      // Make sure errors are empty
+      if(empty($data['name_err'])){
+
+        //Register User
+        if($this->stationModel->editStation($data)){
+          redirect('admins/stations');
+        } else {
+          die('something went wrong');
+        }
+      } else {
+        // Load view with errors
+        $this->view('admin/stations/editStation', $data);
+      }
+
+    } else {
+      
+      $station = $this->adminModel->findStationByStationID($stationID);
+      // Init data
+      $data =[
+        'stationID' => $stationID,
+        'name' => $station->name,
+        'stationID_err' => '',
+        'name_err' => '',
+      ];
+
+      // Load view
+      $this->view('admin/stations/editStation', $data);
+    }
+  }
+
+/*-----------------------------------------------------Update Station availability--------------------------------------------*/
+
+  public function deactiveStation($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->stationModel->deactivateStation($id)){
+        redirect('admins/stations');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
+      redirect('admins/stations');
+    }
+  }
+
+  public function activeStation($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->stationModel->activateStation($id)){
+        redirect('admins/closedStations');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
+      redirect('admins/closedStations');
+    }
+  }
+
+/*-----------------------------------------------------Search Station---------------------------------------------------------*/
+  public function searchStation($nameOrId){
+
+    $stations = $this->adminModel->findStationByName($nameOrId);
+   
+    $data =[
+      'stations' => $stations,
+    ];
+
+    if(!$stations){
+      $this->view('admin/stations/stations',$data);
+    } else if($data['stations'][0]->status == 1){
+      $this->view('admin/stations/stations',$data);
+    } else if($data['stations'][0]->status == 0){
+      $this->view('admin/stations/hideStation',$data);
+    }
+       
+  }
+
+/*=====================================================================================================================================
+                                            SHEDULES CRUD FUNCTIONALITIES IN ADMIN
+=======================================================================================================================================*/ 
+
+/*-----------------------------------------------------Add Shedules--------------------------------------------------------------*/
+  public function addTrainShedule(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      $data = [
+        'sheduleID' => trim($_POST['sheduleID']),
+        'trainID'=> trim($_POST['trainID']),
+        'departureStationID' => trim($_POST['departureStationID']),
+        'departureDate' => (trim($_POST['departureDate'])),
+        'departureTime' => trim($_POST['departureTime']),
+        'arrivalStationID' => trim($_POST['arrivalStationID']),
+        'arrivalDate' => trim($_POST['arrivalDate']),
+        'arrivalTime' => trim($_POST['arrivalTime']),
+        'sheduleID_err' => '',
+        'trainID_err' => '',
+        'departureStationID_err' => '',
+        'departureDate_err' => '',
+        'departureTime_err' => '',
+        'arrivalStationID_err' => '',
+        'arrivalDate_err' => '',
+        'arrivalTime_err' => '',
+      ];
+
+      // echo '<pre>';
+      // var_dump($data); 
+      // echo '</pre>';
+
+      //Chechk shedule ID
+      if(empty($data['sheduleID'])){
+        $data['sheduleID_err'] = 'Please enter shedule ID';
+      } else {
+        if($this->sheduleModel->findSheduleById($data['sheduleID'])){
+          $data['sheduleID_err'] = 'Shedule is already exists';
+        }
+      }
+
+      //Check if the train is registered
+      if(empty($data['trainID'])){
+        $data['trainID_err'] = 'Please enter train ID';
+      } else {
+        if(!$this->trainModel->searchTrainById($data['trainID'])){
+          $data['trainID_err'] = 'Train is not registered';
+        }
+      }
+
+      //Check the Station ID are the same
+      if($data['departureStationID'] == $data['arrivalStationID']){
+        $data['departureStationID_err'] = 'Arrival station and Departure station can not be the same';
+        $data['arrivalStationID_err'] = 'Arrival station and Departure station can not be the same';
+      }
+
+      //Check the station is regeitered
+      if(empty($data['departureStationID'])){
+        $data['departureStationID_err'] = 'Please enter departure station ID';
+      } else {
+        if(!$this->adminModel->findStationByStationID($data['departureStationID'])){
+          $data['departureStationID_err'] = 'Station is not registered';
+        }
+      }
+
+      if(empty($data['arrivalStationID'])){
+        $data['arrivalStationID_err'] = 'Please enter arrival station ID';
+      } else {
+        if(!$this->adminModel->findStationByStationID($data['arrivalStationID'])){
+          $data['arrivalStationID_err'] = 'Station is not registered';
+        }
+      }
+
+      //check date and time
+      if(empty($data['departureDate'])){
+        $data['departureDate_err'] = 'Please enter departure date';
+      } 
+
+      if(empty($data['departureTime'])){
+        $data['departureTime_err'] = 'Please enter departure time';
+      }
+
+      if(empty($data['arrivalDate'])){
+        $data['arrivalDate_err'] = 'Please enter arrival date';
+      }
+
+      if(empty($data['arrivalTime'])){
+        $data['arrivalTime_err'] = 'Please enter arrival time';
+      }
+
+      if(($data['arrivalDate'] < $data['departureDate']) && (!empty($data['arrivalDate']) && !empty($data['departureDate']))){
+        $data['departureDate_err'] = 'Departure date cannot be grater than the Arrival date';
+        $data['arrivalDate_err'] = 'Arrival date cannot be smaller than the Departure date';
+      }
+
+      if(($data['arrivalDate'] == $data['departureDate']) && ($data['arrivalTime'] < $data['departureTime']) &&(!empty($data['arrivalDate']) && !empty($data['departureDate']))){
+        $data['departureTime_err'] = 'Departure time cannot be grater than the Arrival time';
+        $data['arrivalTime_err'] = 'Arrival time cannot be smaller than the Departure time';
+      }
+      
+      //Make sure errors are empty
+      if(empty($data['sheduleID_err']) && empty($data['tarinID_err']) && empty($data['departureStationID_err']) && empty($data['departureDate_err']) && empty($data['departureTime_err']) && empty($data['arrivalStationID_err']) && empty($data['arrivalDate_err']) && empty($data['arrivalTime_err'])){
+
+        // $data['departureDate'] = date('y-m-d',strtotime(trim($_POST['departureDate'])));
+        // $data['arrivalDate'] = date('y-m-d',strtotime(trim($_POST['arrivalDate'])));
+
+        if($this->sheduleModel->addShedule($data)){
+          redirect('admins/shedules');
+        } else {
+          die('Something went wrong');
+        }
+
+      } else {
+        // Load view with errors
+        $this->view('admin/shedules/addShedule', $data);
+      }
+
+    } else {
+      $data = [
+        'sheduleID' => '',
+        'trainID'=>'',
+        'departureStationID' =>'',
+        'departureDate' =>'',
+        'departureTime' =>'',
+        'arrivalStationID' =>'',
+        'arrivalDate' =>'',
+        'arrivalTime' =>'',
+        'sheduleID_err' => '',
+        'trainID_err' => '',
+        'departureStationID_err' => '',
+        'departureDate_err' => '',
+        'departureTime_err' => '',
+        'arrivalStationID_err' => '',
+        'arrivalDate_err' => '',
+        'arrivalTime_err' => '',
+      ];
+
+      $this->view('admin/shedules/addShedule', $data);
+    }
+  }
+
+/*-----------------------------------------------------Update Activity----------------------------------------------------------*/
+  public function activateShedule($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->sheduleModel->activateShedule($id)){
+        redirect('admins/deactivatedShedules');
+      } else {
+        die('Somthing went wrong');
+      }
+    } else {
+      redirect('admins/deactivatedShedules');
+    }
+  }
+
+  public function deactivateShedule($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->sheduleModel->deactivateShedule($id)){
+        redirect('admins/shedules');
+      } else {
+        die('Somthing went wrong');
+      }
+    } else {
+      redirect('admins/shedules');
+    }
+  }
+
+/*-----------------------------------------------------Search Shedule-----------------------------------------------------------*/
+  public function searchSheduleByID(){
+
+    $result = $this->adminModel->findShedulebySheduleId($_GET['id']);
+    $data =[
+      'shedules' => $result,
+    ];
+
+    if(!$result){
+      $this->view('admin/shedules/shedules',$data);
+    }else if($result[0]->sheduleValidity == 1){
+      $this->view('admin/shedules/shedules',$data);
+    } else if($result[0]->sheduleValidity == 0){
+      $this->view('admin/shedules/hideShedules',$data);
+    }   
+       
+  }
+
+  public function searchSheduleByStation(){
+    $result = $this->adminModel->findShedulebyDate($_GET['departuerStation'],$_GET['arrivalStation'],$_GET['date']);
+    $data = [
+      'shedules' => $result,
+    ];
+
+    $this->view('admin/shedules/shedules',$data);
+  } 
+
+/*=====================================================================================================================================
+                                            ROUTES CRUD FUNCTIONALITIES IN ADMIN
+=======================================================================================================================================*/ 
+
+/*---------------------------------------------------------Add Rotes--------------------------------------------------------------*/
+  public function addRoutes(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      // Process form
+
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init data
+      $data =[
+        'trainID' => trim($_POST['trainID']),
+        'stationID' => trim($_POST['stationID']),
+        'stopOrder' => trim($_POST['stopOrder']),
+        'trainID_err' => '',
+        'stationID_err' => '',
+        'stopOrder_err' => '',
+      ];
+
+      //Validate train ID
+      if(empty($data['trainID'])){
+        $data['trainID_err'] = 'Please enter train ID';
+      } else {
+        // Check Station
+        if(!$this->trainModel->searchTrainById($data['trainID'])){
+          $data['trainID_err'] = 'Train is not registered in the system';
+        }
+      }
+
+      //Validate Station ID
+      if(empty($data['stationID'])){
+        $data['stationID_err'] = 'Please enter station ID';
+      } else {
+        // Check Station
+        if(!$this->adminModel->findStationByStationID($data['stationID'])){
+          $data['stationID_err'] = 'Station is not registered in the system';
+        }
+      }
+
+      //Validate Stop Order
+      if(empty($data['stopOrder'])){
+        $data['stopOrder_err'] = 'Please enter Stop Order';
+      }
+    
+      // Make sure errors are empty
+      if(empty($data['trainID_err']) && empty($data['stationID_err']) && empty($data['stopOrder_err'])){
+
+        //Add Routes
+        if($this->routeModel->addRoute($data)){
+          redirect('admins/routes');
+        } else {
+          die('something went wrong');
+        }
+      } else {
+        // Load view with errors
+        $this->view('admin/routes/addRoute', $data);
+      }
+
+    } else {
+
+      // Init data
+      $data =[
+        'trainID' => '',
+        'stationID' => '',
+        'stopOrder' => '',
+        'trainID_err' => '',
+        'stationID_err' => '',
+        'stopOrder_err' => '',
+      ];
+
+      // Load view
+      $this->view('admin/routes/addRoute', $data);
+    }
+  }
+
+/*=====================================================================================================================================
+                                            TICEKTS CRUD FUNCTIONALITIES IN ADMIN
+=======================================================================================================================================*/ 
+
+/*---------------------------------------------------------Add Ticket--------------------------------------------------------------*/
+  public function addTickets(){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      // Process form
+
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init data
+      $data =[
+        'ticketID' => trim($_POST['ticketID']),
+        'DepartureStationID' => trim($_POST['DepartureStationID']),
+        'ArrivalStationID' => trim($_POST['ArrivalStationID']),
+        'ClassID' => trim($_POST['ClassID']),
+        'price' => trim($_POST['price']),
+        'ticketID_err' => '',
+        'DepartureStationID_err' => '',
+        'ArrivalStationID_err' => '',
+        'ClassID_err' => '',
+        'price_err' => ''
+      ];
+
+      //Validate Ticket 
+      if(empty($data['ticketID'])){
+        $data['ticketID_err'] = 'Please enter Ticeket ID';
+      } else {
+        if($this->stationModel->findTicketById($data['ticketID'])){
+          $data['ticketID_err'] = 'Ticket is already added to the system';
+        }
+      }
+
+      //Check the Station ID are the same
+      if($data['DepartureStationID'] == $data['ArrivalStationID']){
+        $data['DepartureStationID_err'] = 'Arrival Station and Departure station can not be the same';
+        $data['ArrivalStationID_err'] = 'Arrival Station and Departure station can not be the same';
+      }
+
+      //Validate Departure Station ID 
+      if(empty($data['DepartureStationID'])){
+        $data['DepartureStationID_err'] = 'Please enter Departure Station ID';
+      } else {
+        // Check Station
+        if(!$this->adminModel->findStationByStationID($data['DepartureStationID'])){
+          $data['DepartureStationID_err'] = 'Station is not registered in the system';
+        }
+      }
+
+      //Validate Arival Station ID
+      if(empty($data['ArrivalStationID'])){
+        $data['ArrivalStationID_err'] = 'Please enter station ID';
+      } else {
+        // Check Station
+        if(!$this->adminModel->findStationByStationID($data['ArrivalStationID'])){
+          $data['ArrivalStationID_err'] = 'Station is not registered in the system';
+        }
+      }
+
+      //Validate Class
+      if(empty($data['ClassID'])){
+        $data['ClassID_err'] = 'Please enter class ID';
+      } else {
+        if(!$this->adminModel->findClassById($data['ClassID'])){
+          $data['ClassID_err'] = 'Please enter valid class ID';
+        }
+      }
+
+      //Validate ticket price
+      if(empty($data['price'])){
+        $data['price_err'] = 'Ticket price can not be empty';
+      } else if($data['price'] <= 0){
+        $data['price_err'] = 'Ticket price can not be negative or zero';
+      }
+    
+      // Make sure errors are empty
+      if(empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
+
+        //Add Tickets
+        if($this->ticketModel->addTicket($data)){
+          redirect('admins/tickets');
+        } else {
+          die('something went wrong');
+        }
+      } else {
+        // Load view with errors
+        $this->view('admin/tickets/addTicket', $data);
+      }
+
+    } else {
+
+      // Init data
+      $data =[
+        'ticketID' => '',
+        'DepartureStationID' => '',
+        'ArrivalStationID' => '',
+        'ClassID' => '',
+        'price' => '',
+        'DepartureStationID_err' => '',
+        'ArrivalStationID_err' => '',
+        'ClassID_err' => '',
+        'ticketID_err' => '',
+        'price_err' => ''
+      ];
+
+      // Load view
+      $this->view('admin/tickets/addTicket', $data);
+    }
+  }
+
+/*---------------------------------------------------------Edit Ticket-----------------------------------------------------------*/ 
+  public function editTicket($ticketTD){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init data
+      $data =[
+        'ticketID' => $ticketTD,
+        'DepartureStationID' => trim($_POST['DepartureStationID']),
+        'ArrivalStationID' => trim($_POST['ArrivalStationID']),
+        'ClassID' => trim($_POST['ClassID']),
+        'price' => trim($_POST['price']),
+        'ticketID_err' => '',
+        'DepartureStationID_err' => '',
+        'ArrivalStationID_err' => '',
+        'ClassID_err' => '',
+        'price_err' => ''
+      ];
+
+      //Validate Departure Station ID 
+      if(empty($data['DepartureStationID'])){
+        $data['DepartureStationID_err'] = 'Please enter Departure Station ID';
+      } else {
+        // Check Station
+        if(!$this->adminModel->findStationByStationID($data['DepartureStationID'])){
+          $data['DepartureStationID_err'] = 'Station is not registered in the system';
+        }
+      }
+
+      //Check the Station ID are the same
+      if($data['DepartureStationID'] == $data['ArrivalStationID']){
+        $data['DepartureStationID_err'] = 'Arrival Station and Departure station can not be the same';
+        $data['ArrivalStationID_err'] = 'Arrival Station and Departure station can not be the same';
+      }
+
+      //Validate Arival Station ID
+      if(empty($data['ArrivalStationID'])){
+        $data['ArrivalStationID_err'] = 'Please enter station ID';
+      } else {
+        // Check Station
+        if(!$this->adminModel->findStationByStationID($data['ArrivalStationID'])){
+          $data['ArrivalStationID_err'] = 'Station is not registered in the system';
+        }
+      }
+
+      //Validate Class
+      if(empty($data['ClassID'])){
+        $data['ClassID_err'] = 'Please enter class ID';
+      } else {
+        if(!$this->adminModel->findClassById($data['ClassID'])){
+          $data['ClassID_err'] = 'Please enter valid class ID';
+        }
+      }
+
+      //Validate ticket price
+      if(empty($data['price'])){
+        $data['price_err'] = 'Ticket price can not be empty';
+      } else if($data['price'] <= 0){
+        $data['price_err'] = 'Ticket price can not be negative or zero';
+      }
+    
+      // Make sure errors are empty
+      if(empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
+
+        //Add Tickets
+        if($this->ticketModel->updateTicket($data)){
+          redirect('admins/tickets');
+        } else {
+          die('something went wrong');
+        }
+      } else {
+        // Load view with errors
+        $this->view('admin/tickets/editTickets', $data);
+      }
+    } else {
+      
+      $ticket = $this->ticketModel->getTicketByID($ticketTD);
+
+      $data =[
+        'ticketID' => $ticketTD,
+        'DepartureStationID' => $ticket->departureStationID,
+        'ArrivalStationID' => $ticket->arrivalStationID,
+        'ClassID' => $ticket->classID,
+        'price' => $ticket->price,
+        'DepartureStationID_err' => '',
+        'ArrivalStationID_err' => '',
+        'ClassID_err' => '',
+        'ticketID_err' => '',
+        'price_err' => ''
+      ];
+
+      // Load view
+      $this->view('admin/tickets/editTickets', $data);
+    }
+  }
+
+/*---------------------------------------------------------Update Availability-------------------------------------------------- */
+  public function disableTicektAvalability($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->ticketModel->disableTicket($id)){
+        redirect('admins/tickets');
+      } else {
+        die('something went wrong');
+      } 
+    } else {
+      redirect('admins/tickets');
+    }
+  }
+
+  public function enableTicektAvalability($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      if($this->ticketModel->enableTicket($id)){
+        redirect('admins/unavailbleTickets');
+      } else {
+        die('something went wrong');
+      } 
+    } else {
+      redirect('admins/unavailbleTickets');
+    }
+  }
+
+/*---------------------------------------------------------Search Ticket Prices ----------------------------------------------------*/
+  public function searchTicketPrice($id){
+    $tickets = $this->ticketModel->getTicketPriceById($id);
+    
+    $data = [
+      'tickets' => $tickets
+    ];
+
+    if(!$tickets){
+      $this->view('admin/tickets/tickets',$data);
+    } else if($tickets[0]->valid == 1){
+      $this->view('admin/tickets/tickets',$data);
+    } else if($tickets[0]->valid == 0){
+      $this->view('admin/tickets/notAvailableTickets',$data);
+    }  
+    
+  }
 }
