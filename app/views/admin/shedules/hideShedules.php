@@ -5,8 +5,8 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">Deactivated Shedules</div>
-        <a href="<?php echo URLROOT; ?>admins/addTrainShedule"><button class="add-train">Add Shedule</button></a>
+        <div class="title">Deactivated Schedules</div>
+        <a href="<?php echo URLROOT; ?>admins/addTrainShedule"><button class="add-train">Add Schedule</button></a>
       </div>
 
       <div class="search-bar-outer-container-shedule">
@@ -32,6 +32,15 @@
           <div class="search-bar-shedule">
           <input type="text" id="search-arrival-station" placeholder="Arrival Station" onfocus="(this.type = 'date')" onblur="(this.type='text')">
             <button class="search-button" onclick="searchArrivalStation()">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="search-bar-inner-container-shedule">
+          <div class="search-bar-shedule">
+          <input type="text" id="search-date" placeholder="Date" onfocus="(this.type = 'date')" onblur="(this.type='text')">
+            <button class="search-button" onclick="searchDepartureStation()">
               <i class="fas fa-search"></i>
             </button>
           </div>

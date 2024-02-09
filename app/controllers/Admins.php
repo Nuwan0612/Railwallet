@@ -1045,6 +1045,7 @@
       $data =[
         'stationID' => trim($_POST['stationID']),
         'name' => trim($_POST['name']),
+        'qrCodePath' => '',
         'stationID_err' => '',
         'name_err' => '',
       ];
@@ -1072,6 +1073,11 @@
       // Make sure errors are empty
       if(empty($data['name_err']) && empty($data['stationID_err'])){
 
+        //Generate QR
+        if($qr = $this->genarateQR($data['stationID'])){
+          $data['qrCodePath'] = $qr;
+        }
+
         //Register User
         if($this->stationModel->addStation($data)){
           redirect('admins/stations');
@@ -1088,6 +1094,7 @@
        $data =[
         'stationID' => '',
         'name' => '',
+        'qrCodePath' => '',
         'stationID_err' => '',
         'name_err' => '',
       ];
@@ -1110,6 +1117,7 @@
       $data =[
         'stationID' => $stationID,
         'name' => trim($_POST['name']),
+        'qrCodePath' => '',
         'stationID_err' => '',
         'name_err' => '',
       ];
@@ -1140,11 +1148,12 @@
 
     } else {
       
-      $station = $this->adminModel->findStationByStationID($stationID);
+      $station = $this->stationModel->findStationByStationID($stationID);
       // Init data
       $data =[
         'stationID' => $stationID,
         'name' => $station->name,
+        'qrCodePath' => '',
         'stationID_err' => '',
         'name_err' => '',
       ];
@@ -1182,12 +1191,22 @@
 
 /*-----------------------------------------------------Search Station---------------------------------------------------------*/
   public function searchStation($nameOrId){
-
-    $stations = $this->adminModel->findStationByName($nameOrId);
-   
-    $data =[
-      'stations' => $stations,
+    
+    $data = [
+      'stations' => []
     ];
+
+    if($stations = $this->adminModel->findStationByName($nameOrId)){
+      $data =[
+        'stations' => $stations,
+      ];
+    } else if($stations = $this->adminModel->findStationByStationID($nameOrId)){
+      $data =[
+        'stations' => $stations,
+      ];
+    }
+   
+    
 
     if(!$stations){
       $this->view('admin/stations/stations',$data);
@@ -1341,6 +1360,139 @@
     }
   }
 
+/*-----------------------------------------------------Edit Train Shedule--------------------------------------------------------*/
+  public function editTrainShedule($sheduleID){
+      
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+      // Init data
+      $data = [
+        'sheduleID' => $sheduleID,
+        'trainID'=> trim($_POST['trainID']),
+        'departureStationID' => trim($_POST['departureStationID']),
+        'departureDate' => (trim($_POST['departureDate'])),
+        'departureTime' => trim($_POST['departureTime']),
+        'arrivalStationID' => trim($_POST['arrivalStationID']),
+        'arrivalDate' => trim($_POST['arrivalDate']),
+        'arrivalTime' => trim($_POST['arrivalTime']),
+        'sheduleID_err' => '',
+        'trainID_err' => '',
+        'departureStationID_err' => '',
+        'departureDate_err' => '',
+        'departureTime_err' => '',
+        'arrivalStationID_err' => '',
+        'arrivalDate_err' => '',
+        'arrivalTime_err' => '',
+      ];
+
+      //Check if the train is registered
+      if(empty($data['trainID'])){
+        $data['trainID_err'] = 'Please enter train ID';
+      } else {
+        if(!$this->trainModel->searchTrainById($data['trainID'])){
+          $data['trainID_err'] = 'Train is not registered';
+        }
+      }
+
+      //Check the Station ID are the same
+      if($data['departureStationID'] == $data['arrivalStationID']){
+        $data['departureStationID_err'] = 'Arrival station and Departure station can not be the same';
+        $data['arrivalStationID_err'] = 'Arrival station and Departure station can not be the same';
+      }
+
+      //Check the station is regeitered
+      if(empty($data['departureStationID'])){
+        $data['departureStationID_err'] = 'Please enter departure station ID';
+      } else {
+        if(!$this->adminModel->findStationByStationID($data['departureStationID'])){
+          $data['departureStationID_err'] = 'Station is not registered';
+        }
+      }
+
+      if(empty($data['arrivalStationID'])){
+        $data['arrivalStationID_err'] = 'Please enter arrival station ID';
+      } else {
+        if(!$this->adminModel->findStationByStationID($data['arrivalStationID'])){
+          $data['arrivalStationID_err'] = 'Station is not registered';
+        }
+      }
+
+      //check date and time
+      if(empty($data['departureDate'])){
+        $data['departureDate_err'] = 'Please enter departure date';
+      } 
+
+      if(empty($data['departureTime'])){
+        $data['departureTime_err'] = 'Please enter departure time';
+      }
+
+      if(empty($data['arrivalDate'])){
+        $data['arrivalDate_err'] = 'Please enter arrival date';
+      }
+
+      if(empty($data['arrivalTime'])){
+        $data['arrivalTime_err'] = 'Please enter arrival time';
+      }
+
+      if(($data['arrivalDate'] < $data['departureDate']) && (!empty($data['arrivalDate']) && !empty($data['departureDate']))){
+        $data['departureDate_err'] = 'Departure date cannot be grater than the Arrival date';
+        $data['arrivalDate_err'] = 'Arrival date cannot be smaller than the Departure date';
+      }
+
+      if(($data['arrivalDate'] == $data['departureDate']) && ($data['arrivalTime'] < $data['departureTime']) &&(!empty($data['arrivalDate']) && !empty($data['departureDate']))){
+        $data['departureTime_err'] = 'Departure time cannot be grater than the Arrival time';
+        $data['arrivalTime_err'] = 'Arrival time cannot be smaller than the Departure time';
+      }
+    
+      //Make sure errors are empty
+      if(empty($data['sheduleID_err']) && empty($data['trainID_err']) && empty($data['departureStationID_err']) && empty($data['departureDate_err']) && empty($data['departureTime_err']) && empty($data['arrivalStationID_err']) && empty($data['arrivalDate_err']) && empty($data['arrivalTime_err'])){
+
+        // $data['departureDate'] = date('y-m-d',strtotime(trim($_POST['departureDate'])));
+        // $data['arrivalDate'] = date('y-m-d',strtotime(trim($_POST['arrivalDate'])));
+
+        if($this->sheduleModel->editShedule($data)){
+          redirect('admins/shedules');
+        } else {
+          die('Something went wrong');
+        }
+
+      } else {
+        // Load view with errors
+        $this->view('admin/shedules/editShedule', $data);
+      }
+
+    } else {
+      
+      $shedule = $this->adminModel->findShedulebySheduleId($sheduleID);
+      // Init data
+      $data = [
+        'sheduleID' => $sheduleID,
+        'trainID'=>$shedule[0]->trainID,
+        'departureStationID' =>$shedule[0]->departureStationID,
+        'departureDate' =>$shedule[0]->departureDate,
+        'departureTime' =>$shedule[0]->departureTime,
+        'arrivalStationID' =>$shedule[0]->arrivalStationID,
+        'arrivalDate' =>$shedule[0]->arrivalDate,
+        'arrivalTime' =>$shedule[0]->arrivalTime,
+        'sheduleID_err' => '',
+        'trainID_err' => '',
+        'departureStationID_err' => '',
+        'departureDate_err' => '',
+        'departureTime_err' => '',
+        'arrivalStationID_err' => '',
+        'arrivalDate_err' => '',
+        'arrivalTime_err' => '',
+      ];
+        // echo '<pre>';
+        // var_dump($shedule[0]->sheduleID);
+        // echo '<pre>';
+      $this->view('admin/shedules/editShedule', $data);
+    }
+  }
+
 /*-----------------------------------------------------Update Activity----------------------------------------------------------*/
   public function activateShedule($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -1369,12 +1521,22 @@
 /*-----------------------------------------------------Search Shedule-----------------------------------------------------------*/
   public function searchSheduleByID(){
 
-    $result = $this->adminModel->findShedulebySheduleId($_GET['id']);
-    $data =[
-      'shedules' => $result,
+    $data = [
+      'shedules' => [],
     ];
 
-    if(!$result){
+    if($result = $this->adminModel->findShedulebySheduleId($_GET['id'])){
+      $data =[
+        'shedules' => $result,
+      ];
+    } else if($result = $this->adminModel->findSheduleByTrainId($_GET['id'])){
+      $data = [
+        'shedules' => $result,
+      ];
+    }
+    
+
+    if(!$data['shedules']){
       $this->view('admin/shedules/shedules',$data);
     }else if($result[0]->sheduleValidity == 1){
       $this->view('admin/shedules/shedules',$data);
@@ -1490,6 +1652,7 @@
         'ArrivalStationID' => trim($_POST['ArrivalStationID']),
         'ClassID' => trim($_POST['ClassID']),
         'price' => trim($_POST['price']),
+        'qrCode' => '',
         'ticketID_err' => '',
         'DepartureStationID_err' => '',
         'ArrivalStationID_err' => '',
@@ -1551,6 +1714,11 @@
       // Make sure errors are empty
       if(empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
 
+        //Generate QR
+        if($qr = $this->genarateQR($data['ticketID'])){
+          $data['qrCode'] = $qr;
+        }
+
         //Add Tickets
         if($this->ticketModel->addTicket($data)){
           redirect('admins/tickets');
@@ -1571,6 +1739,7 @@
         'ArrivalStationID' => '',
         'ClassID' => '',
         'price' => '',
+        'qrCode' => '',
         'DepartureStationID_err' => '',
         'ArrivalStationID_err' => '',
         'ClassID_err' => '',
@@ -1597,6 +1766,7 @@
         'ArrivalStationID' => trim($_POST['ArrivalStationID']),
         'ClassID' => trim($_POST['ClassID']),
         'price' => trim($_POST['price']),
+        'qrCode' => '',
         'ticketID_err' => '',
         'DepartureStationID_err' => '',
         'ArrivalStationID_err' => '',
@@ -1669,6 +1839,7 @@
         'ArrivalStationID' => $ticket->arrivalStationID,
         'ClassID' => $ticket->classID,
         'price' => $ticket->price,
+        'qrCode' => '',
         'DepartureStationID_err' => '',
         'ArrivalStationID_err' => '',
         'ClassID_err' => '',

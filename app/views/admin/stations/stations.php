@@ -45,7 +45,7 @@
               <td><?php echo $rowNumber; ?></td>
               <td><?php echo $stations->stationID; ?></td>
               <td><?php echo $stations->name; ?></td>
-              <td><?php echo $stations->qr; ?></td>
+              <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $stations->qr; ?>" alt=""></td>
               <td>
                 <div class="options">
                 <a href="<?php echo URLROOT; ?>admins/editStation/<?php echo $stations->stationID; ?>"><button class="edit-btn">Edit</button></a>
