@@ -26,6 +26,25 @@
       }
     }
 
+    //edit schedule
+    public function editShedule($data){
+      $this->db->query('UPDATE shedules SET trainID = :trainID, departureStationID = :departureStationID, departureDate = :departureDate, departureTime = :departureTime, arrivalStationID = :arrivalStationID, arrivalDate = :arrivalDate, arrivalTime = :arrivalTime WHERE sheduleID = :sheduleID');
+      $this->db->bind(':sheduleID', $data['sheduleID']);
+      $this->db->bind(':trainID', $data['trainID']);
+      $this->db->bind(':departureStationID', $data['departureStationID']);
+      $this->db->bind(':departureDate', $data['departureDate']);
+      $this->db->bind(':departureTime', $data['departureTime']);
+      $this->db->bind(':arrivalStationID', $data['arrivalStationID']);
+      $this->db->bind(':arrivalDate', $data['arrivalDate']);
+      $this->db->bind(':arrivalTime', $data['arrivalTime']);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     //get available shedules
     public function getAvailableShedules(){
       $this->db->query('SELECT * FROM shedules WHERE sheduleValidity = 1');

@@ -34,6 +34,7 @@
                 <th>Arival station</th>
                 <th>Class</th>
                 <th>Price (Rs.)</th>
+                <th>QR Code</th>
                 <th>Options</th>
               </tr>
             </thead>
@@ -47,6 +48,7 @@
               <td><?php echo $ticket->arrivalStationName; ?></td>
               <td><?php echo $ticket->className; ?></td>
               <td><?php echo $ticket->price; ?></td>
+              <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $ticket->qrCode; ?>" alt=""></td>
               <td>
                 <div class="options">
                   <form action="<?php echo URLROOT; ?>admins/enableTicektAvalability/<?php echo $ticket->ticketPriceID?>" method ="post"><input class="edit-btn" type="submit" value="In use"></form>

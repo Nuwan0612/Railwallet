@@ -24,4 +24,25 @@
         // die('Views does not exits');
       }
     }
+
+    //Generate QR code
+    public function genarateQR($id){
+
+      // URL for the Google Charts API
+      $googleApiUrl = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" . urlencode($id);
+
+      //Read the content of the QR code
+      $qrCodeImage = file_get_contents($googleApiUrl);
+
+      //save path
+      $savePath = "C:/xampp/htdocs/railwallet/public/qrCodes/".uniqid().".png";
+      
+      //save qr
+      file_put_contents($savePath, $qrCodeImage);
+
+      $filename = pathinfo($savePath, PATHINFO_FILENAME).".png";
+
+      return $filename;
+    }
+
   } 

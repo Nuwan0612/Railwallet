@@ -35,6 +35,7 @@
                 <th>Arival station</th>
                 <th>Class</th>
                 <th>Price (Rs.)</th>
+                <th>QR Code</th>
                 <th>Options</th>
               </tr>
             </thead>
@@ -48,6 +49,7 @@
               <td><?php echo $ticket->arrivalStationName; ?></td>
               <td><?php echo $ticket->className; ?></td>
               <td><?php echo $ticket->price; ?></td>
+              <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $ticket->qrCode; ?>" alt=""></td>
               <td>
                 <div class="options">
                 <a href="<?php echo URLROOT; ?>admins/editTicket/<?php echo $ticket->ticketPriceID; ?>"><button class="edit-btn">Edit</button></a>

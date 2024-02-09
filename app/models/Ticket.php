@@ -7,13 +7,14 @@
     }
 
     public function addTicket($data){
-      $this->db->query('INSERT INTO ticketprices(ticketPriceID, departureStationID, arrivalStationID, classID, price) VALUES (:ticketID, :DepartureStationID, :arrivalStationID, :classID, :price)');
+      $this->db->query('INSERT INTO ticketprices(ticketPriceID, departureStationID, arrivalStationID, classID, price, qrCode) VALUES (:ticketID, :DepartureStationID, :arrivalStationID, :classID, :price, :qrCode)');
 
       $this->db->bind(':ticketID',$data['ticketID']);    
       $this->db->bind(':DepartureStationID',$data['DepartureStationID']);
       $this->db->bind(':arrivalStationID',$data['ArrivalStationID']);
       $this->db->bind(':classID',$data['ClassID']);
       $this->db->bind(':price',$data['price']);
+      $this->db->bind(':qrCode',$data['qrCode']);
 
       //Execute
       if($this->db->execute()){
@@ -33,7 +34,8 @@
                             arrStation.name AS arrivalStationName,
                             tp.classID,
                             tc.className,
-                            tp.price
+                            tp.price,
+                            tp.qrCode
                         FROM
                             ticketprices tp
                         JOIN
@@ -60,7 +62,8 @@
                             arrStation.name AS arrivalStationName,
                             tp.classID,
                             tc.className,
-                            tp.price
+                            tp.price,
+                            tp.qrCode
                         FROM
                             ticketprices tp
                         JOIN

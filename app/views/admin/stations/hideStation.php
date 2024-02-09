@@ -42,7 +42,7 @@
               <td><?php echo $rowNumber; ?></td>
               <td><?php echo $stations->stationID; ?></td>
               <td><?php echo $stations->name; ?></td>
-              <td><?php echo $stations->qr; ?></td>
+              <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $stations->qr; ?>" alt=""></td>
               <td>
                 <div class="options">
                   <form action="<?php echo URLROOT; ?>admins/activeStation/<?php echo $stations->stationID?>" method ="post"><input class="edit-btn" type="submit" value="Open"></form>

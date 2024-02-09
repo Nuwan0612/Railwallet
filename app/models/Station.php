@@ -7,11 +7,13 @@
     }
 
     public function addStation($data){
-      $this->db->query('INSERT INTO stations (stationID, name) VALUES(:stationID, :name)
+      $this->db->query('INSERT INTO stations (stationID, name, qr) VALUES(:stationID, :name, :qrCodePath)
       ');
 
       $this->db->bind(':stationID', $data['stationID']);
       $this->db->bind(':name', $data['name']);
+      $this->db->bind(':qrCodePath', $data['qrCodePath']);
+
 
       //Execute
       if($this->db->execute()){
@@ -67,18 +69,10 @@
 
 // Find Station by Id when edit 
   public function findStationByStationID($stationID){
-    $this->db->query('SELECT * FROM stations WHERE LOWER(name) LIKE LOWER(:name) AND stationID != :stationID');
-    $this->db->bind(':stationID', $data['stationID']);
-    $this->db->bind(':id', $data['id']);
-
+    $this->db->query('SELECT * FROM stations WHERE stationID = :stationID');
+    $this->db->bind(':stationID', $stationID);
     $row = $this->db->single();
-
-    // Check row
-    if($this->db->rowCount() > 0){
-      return true;
-    } else {
-      return false;
-    }
+    return $row;
   }
 
 // Find Station by Name when edit 

@@ -28,7 +28,7 @@
       </div>
 
       <div class="tbox <?php echo !empty($data['price_err']) ? 'error' : ''; ?>">
-        <input type="number" name="price" placeholder="Ticket Price" value="<?php echo $data['price']; ?>">
+        <input type="number" step="any" name="price" placeholder="Ticket Price" value="<?php echo $data['price']; ?>">
         <div class="error-message"><?php echo $data['price_err'];?></div>
       </div>
 

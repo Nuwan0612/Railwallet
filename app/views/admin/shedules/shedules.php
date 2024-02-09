@@ -5,7 +5,7 @@
     <div class="all-trains">
 
       <div class="head">
-        <div class="title">Train Shedules</div>
+        <div class="title">Train Schedules</div>
         <a href="<?php echo URLROOT; ?>admins/addTrainShedule"><button class="add-train">Add Shedule</button></a>
       </div>
 
@@ -84,7 +84,7 @@
               <td><?php echo $shedule->arrivalTime; ?></td>
               <td>
                 <div class="options">
-                  <a href="<?php echo URLROOT; ?>admins/editShedule/<?php echo $shedule->sheduleID; ?>"><button class="edit-btn">Edit</button></a>
+                  <a href="<?php echo URLROOT; ?>admins/editTrainShedule/<?php echo $shedule->sheduleID; ?>"><button class="edit-btn">Edit</button></a>
 
                   <form action="<?php echo URLROOT; ?>admins/deactivateShedule/<?php echo $shedule->sheduleID?>" method ="post"><input class="delete-btn" type="submit" value="Hide"></form>
                 </div> 
