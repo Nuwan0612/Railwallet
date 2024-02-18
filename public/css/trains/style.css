@@ -149,7 +149,7 @@ thead {
   background-color: #009688; 
   color: #fff;
   position: sticky; 
-  top: 0; 
+  top: -0.1px; 
   z-index: 2;
 }
 

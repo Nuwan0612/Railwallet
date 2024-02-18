@@ -1,0 +1,142 @@
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+} */
+
+:root {
+  --black: #333;
+  --green: #009688;
+  --green-dark: #007d71;
+  --red: #96000e;
+  --red-dark: #7d000c;
+  --yellow: #e3cd00;
+  --white: #fff;
+  --dark-white: #f1f1f1;
+  --shadow: 8px 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.container .feedback {
+  background: var(--dark-white);
+  margin-top: 23vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  background: var(--white);
+  padding: 2rem;
+  max-width: 800px;
+  width: 100%;
+  border-radius: .75rem;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.wrapper h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-gap: .5rem;
+  font-size: 2rem;
+  color: var(--yellow);
+  margin-bottom: 2rem;
+}
+
+.rating .star {
+  cursor: pointer;
+}
+
+.rating .star.active {
+  opacity: 0;
+  animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
+}
+
+@keyframes animate {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rating .star:hover {
+  transform: scale(1.1);
+}
+
+textarea {
+  width: 100%;
+  background: var(--dark-white);
+  padding: 1rem;
+  border-radius: .5rem;
+  border: none;
+  outline: none;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-group .btn{
+  padding: .75rem 1rem;
+  border-radius: .5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.btn-group .btn.submit{
+  background: var(--green);
+  color: var(--white);
+}
+
+.btn-group .btn.submit:hover{
+  background: var(--green-dark);
+  color: var(--white);
+}
+
+.btn-group .btn.cancel {
+  background: var(--red);
+  color: var(--white);
+}
+
+.btn-group .btn.cancel:hover {
+  background: var(--red-dark);
+  color: var(--white);
+}
+
+.rate-us{
+  color: var(--black)
+}
+
+.tbox.error textarea {
+  border: 1px solid var(--red);
+}
+
+.error-message {
+  color: var(--red);
+  margin-top: 8px; 
+  margin-bottom: 12px;
+}
