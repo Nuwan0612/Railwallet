@@ -21,11 +21,27 @@
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,0.19);
+  transition: all 0.3s ease; /* Transition effect */
 }
 
 .container .content .cards .card img{
   width: 50px;
 }
+
+.db-link{
+  text-decoration: none;
+}
+
+.container .content .cards .db-link .card:hover{
+  background-color: #00d7c2; /* New background color on hover */
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+.container .content .cards .db-link .card:hover h3 {
+  color: #333; /* New text color on hover */
+}
+
+
 
 /* .container .content .content-2{
   min-height: 60vh;

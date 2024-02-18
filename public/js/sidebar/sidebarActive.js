@@ -1,4 +1,4 @@
-const list = document.querySelectorAll('.list');
+const list = document.querySelectorAll('side-menu ul a .side-list');
 
 function activeLink(){
   list.forEach((item) => 

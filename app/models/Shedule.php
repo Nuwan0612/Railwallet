@@ -99,4 +99,29 @@
       }
     }
 
+    //deactivate Schedule when the station closed
+    public function disScheduleWhenStationClosed($stationID){
+      $this->db->query('UPDATE shedules SET sheduleValidity = 0 WHERE departureStationID = :stationID OR arrivalStationID = :stationID');
+      $this->db->bind(':stationID',$stationID);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    //deactivate Schedule when the train is not running
+    public function deactivateWhenTrainNotRunning($trainID){
+      $this->db->query('UPDATE shedules SET sheduleValidity = 0 WHERE trainID = :trainID');
+      $this->db->bind(':trainID',$trainID);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    
   }

@@ -35,7 +35,8 @@
                 <th>NIC</th>
                 <th>Phone</th>
                 <th>Status</th>
-                <th>Complains</th>
+                <th>Feedbacks</th>
+                <th>Complains</th> 
                 <th>Travel History</th>
                 <th>Option</th>  
               </tr>
@@ -49,6 +50,9 @@
               <td><?php echo $user->nic; ?></td>
               <td><?php echo $user->phone; ?></td>
               <td><?php echo $user->status; ?></td>
+              <td class="options">
+                <form action="<?php echo URLROOT; ?>users/deactiveUserStatus/<?php echo $user->id?>" method ="post"><input class="edit-btn" type="submit" value="View"></form>
+              </td>
               <td></td>
               <td></td>
               <td>
