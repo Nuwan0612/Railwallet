@@ -29,6 +29,13 @@
     </li>
 
     <li>
+      <a href="<?php echo URLROOT;?>admins/trains">
+        <img src="<?php echo URLROOT;?>/img/train.png">
+        <span>Train</span>
+      </a>
+    </li>
+
+    <li>
       <a href="<?php echo URLROOT;?>admins/stations">
         <img src="<?php echo URLROOT;?>/img/station.png">
         <span>Stations</span>

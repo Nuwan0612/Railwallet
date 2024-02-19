@@ -1,7 +1,6 @@
 <?php require APPROOT . '/views/user/header.php';?>
         <div class="content">
 
-            
             <div class="content-2">
                 <div class="recent-payments">
                     <div class="title">
