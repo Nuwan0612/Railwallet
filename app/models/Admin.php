@@ -162,6 +162,30 @@
       return $results;
     }
 
+/*----------------------------------------------------------Feedback-----------------------------------------------------*/
+    public function getFeedback(){
+      $this->db->query('SELECT * FROM feedbacks;');
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+    public function getuserfeedback($id){
+      $this->db->query("SELECT 
+                          us.name,
+                          us.email,
+                          us.id,
+                          fb.*
+                        FROM 
+                          users us
+                        JOIN 
+                          feedbacks fb ON us.id = fb.userID
+                        WHERE
+                          us.type = 'user' AND us.id = $id");
+
+      $results = $this->db->resultSet();
+      return $results; 
+    }
+
 // Find user by email
     public function findUserByEmail($email,$id){
       $this->db->query('SELECT * FROM users WHERE email = :email AND id != :id');

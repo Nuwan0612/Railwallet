@@ -15,10 +15,11 @@
       $this->routeModel = $this->model('Route');
       $this->ticketModel = $this->model('Ticket');
       $this->sheduleModel = $this->model('Shedule');
+      $this->passengerModel = $this->model('Passenger');
     }
 
 /*=====================================================================================================================================
-                                            GET DETAILS TO DASHBOARD
+                                                      GET DETAILS TO DASHBOARD
 =======================================================================================================================================*/ 
 
   public function dashboard(){ 
@@ -27,18 +28,20 @@
     $checkers = count($this->adminModel->getChecker());
     $supporters = count($this->adminModel->getSupporter());
     $stations = count($this->adminModel->getStation());
+    $feedbacks = count($this->adminModel->getFeedback());
     $data = [
       'users' => $users,
       'trains' => $trains,
       'checkers' => $checkers,
       'supporters' => $supporters,
       'stations' => $stations,
+      'feedbacks' => $feedbacks,
     ];
     $this->view('admin/dashboard',$data);   
   }
 
 /*=====================================================================================================================================
-                                            LOAD PAGES
+                                                       LOAD PAGES
 =======================================================================================================================================*/
   //Get all service trains
       public function trains(){
@@ -198,7 +201,7 @@
       $this->view('admin/tickets/notAvailableTickets', $data);
     }
 
-/*----------------------------------------------Manage Account Settings------------------------------------------------*/
+/*----------------------------------------------Manage Account Settings---------------------------------------------*/
 
   //display account details
     public function profile(){
@@ -347,11 +350,11 @@
 
 
 /*=====================================================================================================================================
-                                            TRAIN CRUD FUNCTIONALITIES IN ADMIN
+                                                TRAIN CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
 
-/*-----------------------------------------------------Add Train---------------------------------------------*/
+/*-----------------------------------------------------Add Train----------------------------------------------------*/
     public function addTrain(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
@@ -441,7 +444,7 @@
       }
     }
 
-/*-----------------------------------------------------Edit Train---------------------------------------------*/
+/*-----------------------------------------------------Edit Train---------------------------------------------------*/
     public function editTrain($trainID){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
@@ -522,10 +525,13 @@
     }
 
 
-/*-----------------------------------------------------Update Train Service status---------------------------------------------*/
+/*-----------------------------------------------------Update Train Service status----------------------------------*/
     public function setNotRunning($trainID){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if($this->trainModel->notRunningTrain($trainID)){
+
+        $schedule = $this->sheduleModel->deactivateWhenTrainNotRunning($trainID);
+
+        if($this->trainModel->notRunningTrain($trainID) && $schedule){
           redirect('admins/trains');
         } else {
           die('Something went wrong');
@@ -547,7 +553,7 @@
       }
     }
 
-/*-----------------------------------------------------Search Train--------------------------------------------*/
+/*-----------------------------------------------------Search Train-------------------------------------------------*/
   public function searchTrain($trainID){
     $trains = $this->trainModel->searchTrainById($trainID);
     $data = [
@@ -566,7 +572,7 @@
 
 
 /*=====================================================================================================================================
-                                            CHECKER CRUD FUNCTIONALITIES IN ADMIN
+                                                CHECKER CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
 
@@ -661,7 +667,7 @@
     }
 
 
-/*-----------------------------------------------------Update Checker working status---------------------------------------------*/
+/*-----------------------------------------------------Update Checker working status--------------------------------*/
     public function deactiveCheckerStatus($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if($this->checkerModel->resignChecker($id)){
@@ -687,7 +693,7 @@
     }
 
 
-/*-----------------------------------------------------Search Checker--------------------------------------------*/
+/*-----------------------------------------------------Search Checker-----------------------------------------------*/
     public function searchChecker($nic){
       $checkers = $this->adminModel->getCheckerById($nic);
       $data = [
@@ -704,7 +710,7 @@
         
     }
 
-/*-----------------------------------------------------Edit Checker---------------------------------------------*/
+/*-----------------------------------------------------Edit Checker-------------------------------------------------*/
     public function editChecker($id){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
@@ -798,11 +804,11 @@
 
 
 /*=====================================================================================================================================
-                                            SUPPORTER CRUD FUNCTIONALITIES IN ADMIN
+                                                SUPPORTER CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
 
-/*-----------------------------------------------------Register Supporter--------------------------------------------------*/
+/*-----------------------------------------------------Register Supporter---------------------------------------------*/
   public function registerSupporter(){
     // Check for POST
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -893,7 +899,7 @@
   }
 
 
-/*-----------------------------------------------------Upadate Supporter working status--------------------------------------------------*/
+/*-----------------------------------------------------Upadate Supporter working status-------------------------------*/
   public function deactivateSupporter($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if($this->supporterModel->deactivateSupporter($id)){
@@ -918,7 +924,7 @@
     }
   }
 
-/*-----------------------------------------------------Search Supporter--------------------------------------------*/
+/*-----------------------------------------------------Search Supporter-----------------------------------------------*/
   public function searchSupporter($nic){
     $supporters = $this->adminModel->getSupporterById($nic);
     $data = [
@@ -935,7 +941,7 @@
        
   }
 
-/*-----------------------------------------------------Edit Supporter---------------------------------------------*/
+/*-----------------------------------------------------Edit Supporter-------------------------------------------------*/
   public function editSupporter($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       // Process form
@@ -1029,7 +1035,7 @@
 
 
 /*=====================================================================================================================================
-                                            STATIONS CRUD FUNCTIONALITIES IN ADMIN
+                                                STATIONS CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
 
@@ -1104,7 +1110,7 @@
     }
   }
     
-/*-----------------------------------------------------Edit Station---------------------------------------------------------*/
+/*-----------------------------------------------------Edit Station--------------------------------------------------------*/
 
   public function editStation($stationID){
     
@@ -1163,11 +1169,16 @@
     }
   }
 
-/*-----------------------------------------------------Update Station availability--------------------------------------------*/
+/*-----------------------------------------------------Update Station availability-----------------------------------------*/
 
   public function deactiveStation($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      if($this->stationModel->deactivateStation($id)){
+
+      $ticket = $this->ticketModel->disTicketWhenStationClosed($id);
+      $station = $this->stationModel->deactivateStation($id);
+      $schedule = $this->sheduleModel->disScheduleWhenStationClosed($id);
+
+      if($ticket && $station && $schedule){
         redirect('admins/stations');
       } else {
         die('Something went wrong');
@@ -1189,7 +1200,7 @@
     }
   }
 
-/*-----------------------------------------------------Search Station---------------------------------------------------------*/
+/*-----------------------------------------------------Search Station------------------------------------------------------*/
   public function searchStation($nameOrId){
     
     $data = [
@@ -1219,10 +1230,10 @@
   }
 
 /*=====================================================================================================================================
-                                            SHEDULES CRUD FUNCTIONALITIES IN ADMIN
+                                                SHEDULES CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
-/*-----------------------------------------------------Add Shedules--------------------------------------------------------------*/
+/*-----------------------------------------------------Add Shedules---------------------------------------------------------*/
   public function addTrainShedule(){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -1360,7 +1371,7 @@
     }
   }
 
-/*-----------------------------------------------------Edit Train Shedule--------------------------------------------------------*/
+/*-----------------------------------------------------Edit Train Shedule---------------------------------------------------*/
   public function editTrainShedule($sheduleID){
       
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -1493,7 +1504,7 @@
     }
   }
 
-/*-----------------------------------------------------Update Activity----------------------------------------------------------*/
+/*-----------------------------------------------------Update Activity------------------------------------------------------*/
   public function activateShedule($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if($this->sheduleModel->activateShedule($id)){
@@ -1518,7 +1529,7 @@
     }
   }
 
-/*-----------------------------------------------------Search Shedule-----------------------------------------------------------*/
+/*-----------------------------------------------------Search Shedule-------------------------------------------------------*/
   public function searchSheduleByID(){
 
     $data = [
@@ -1556,7 +1567,7 @@
   } 
 
 /*=====================================================================================================================================
-                                            ROUTES CRUD FUNCTIONALITIES IN ADMIN
+                                                ROUTES CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
 /*---------------------------------------------------------Add Rotes--------------------------------------------------------------*/
@@ -1634,10 +1645,10 @@
   }
 
 /*=====================================================================================================================================
-                                            TICEKTS CRUD FUNCTIONALITIES IN ADMIN
+                                                TICEKTS CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
-/*---------------------------------------------------------Add Ticket--------------------------------------------------------------*/
+/*---------------------------------------------------------Add Ticket---------------------------------------------------------*/
   public function addTickets(){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       // Process form
@@ -1755,7 +1766,7 @@
     }
   }
 
-/*---------------------------------------------------------Edit Ticket-----------------------------------------------------------*/ 
+/*---------------------------------------------------------Edit Ticket--------------------------------------------------------*/ 
   public function editTicket($ticketTD){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
@@ -1855,7 +1866,7 @@
     }
   }
 
-/*---------------------------------------------------------Update Availability-------------------------------------------------- */
+/*---------------------------------------------------------Update Availability----------------------------------------------- */
   public function disableTicektAvalability($id){
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if($this->ticketModel->disableTicket($id)){
@@ -1880,7 +1891,7 @@
     }
   }
 
-/*---------------------------------------------------------Search Ticket Prices ----------------------------------------------------*/
+/*---------------------------------------------------------Search Ticket Prices ----------------------------------------------*/
   public function searchTicketPrice($id){
     $tickets = $this->ticketModel->getTicketPriceById($id);
     
@@ -1897,4 +1908,23 @@
     }  
     
   }
+
+/*=================================================================================================================================
+                                              USER CRUD FUNCTIONALITY IN ADMIN
+===================================================================================================================================*/
+
+/*-----------------------------------------------------View Feedbacks-------------------------------------------------------*/
+  public function feedback(){
+    $feedback = $this->passengerModel->getFeedbacks();
+    $data = ['feedback' => $feedback];
+    $this->view('admin/feedback/feedback',$data);
+  }
+
+  public function getuserfeedback($id){
+    $userFeedback = $this->adminModel->getuserfeedback($id);
+    $data = ['feedback' => $userFeedback];
+    $this->view('admin/users/userFeedback',$data);
+     
+  }
+
 }

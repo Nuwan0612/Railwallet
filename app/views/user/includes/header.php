@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/user.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/booking.css">
-    <link rel="stylesheet" href="<?php echo 'https://unicons.iconscout.com/release/v4.0.8/css/line.css'; ?>">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/user.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/rating.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/ratingView.css">
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>
@@ -19,12 +18,12 @@
         </div>
         <ul>
             <a href="<?php echo URLROOT;?>passengers/dashboard"><li> <img src="<?php echo URLROOT;?>public/pics/db.png" alt="">&nbsp;<span>Dashboard</span></li></a>
-            <a href="#"><li> <img src="<?php echo URLROOT;?>public/pics/wallet.png" alt="">&nbsp;<span>Wallet</span></li></a>
-            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/seats.png" alt="">&nbsp;<span>Seat Booking</span></li></a>
-            <!-- <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/ticket.png" alt="">&nbsp;<span>Ticket Prices</span></li></a> -->
-            <!-- <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/money-transfer.png" alt="">&nbsp;<span>Transaction History</span></li></a> -->
+            <a href="#"><li> <img src="<?php echo URLROOT;?>public/pics/wallet.png" alt="">&nbsp;<span>TopUp</span></li></a>
+            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/seats.png" alt="">&nbsp;<span>Seat Reservation</span></li></a>
+            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/ticket.png" alt="">&nbsp;<span>Ticket Prices</span></li></a>
+            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/money-transfer.png" alt="">&nbsp;<span>Transaction History</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/shedule"><li><img src="<?php echo URLROOT;?>public/pics/september.png" alt="">&nbsp;<span>Shedule</span></li></a>
-            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/feedback.png" alt="">&nbsp;<span>Feedback</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><img src="<?php echo URLROOT;?>public/pics/feedback.png" alt="">&nbsp;<span>Feedback</span></li></a>
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
             <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/customer-service.png" alt="">&nbsp;<span>Customer Support</span></li></a>
             <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/settings.png" alt="">&nbsp;<span>Settings</span></li></a>
