@@ -1673,7 +1673,7 @@
 
       //Validate Ticket 
       if(empty($data['ticketID'])){
-        $data['ticketID_err'] = 'Please enter Ticeket ID';
+        $data['ticketID_err'] = 'Please enter Ticket ID';
       } else {
         if($this->stationModel->findTicketById($data['ticketID'])){
           $data['ticketID_err'] = 'Ticket is already added to the system';
@@ -1721,8 +1721,11 @@
       } else if($data['price'] <= 0){
         $data['price_err'] = 'Ticket price can not be negative or zero';
       }
+
+      
+
     
-      // Make sure errors are empty
+      //Make sure errors are empty
       if(empty($data['ticketID_err']) && empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
 
         //Generate QR
