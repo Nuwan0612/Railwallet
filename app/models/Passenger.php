@@ -19,4 +19,23 @@
         return false;
       }
     }
+
+    //Get feedbacks
+    public function getFeedbacks(){
+      $this->db->query("SELECT 
+                          us.name,
+                          us.email,
+                          us.id,
+                          fb.*
+                        FROM 
+                          users us
+                        JOIN 
+                          feedbacks fb ON us.id = fb.userID
+                        WHERE
+                          us.type = 'user'  ");
+
+      $results = $this->db->resultSet();
+      return $results; 
+    }
+
   }

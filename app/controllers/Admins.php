@@ -15,6 +15,7 @@
       $this->routeModel = $this->model('Route');
       $this->ticketModel = $this->model('Ticket');
       $this->sheduleModel = $this->model('Shedule');
+      $this->passengerModel = $this->model('Passenger');
     }
 
 /*=====================================================================================================================================
@@ -27,12 +28,14 @@
     $checkers = count($this->adminModel->getChecker());
     $supporters = count($this->adminModel->getSupporter());
     $stations = count($this->adminModel->getStation());
+    $feedbacks = count($this->adminModel->getFeedback());
     $data = [
       'users' => $users,
       'trains' => $trains,
       'checkers' => $checkers,
       'supporters' => $supporters,
       'stations' => $stations,
+      'feedbacks' => $feedbacks,
     ];
     $this->view('admin/dashboard',$data);   
   }
@@ -1908,8 +1911,17 @@
 ===================================================================================================================================*/
 
 /*-----------------------------------------------------View Feedbacks-------------------------------------------------------*/
-  public function viewfeedback(){
+  public function feedback(){
+    $feedback = $this->passengerModel->getFeedbacks();
+    $data = ['feedback' => $feedback];
+    $this->view('admin/feedback/feedback',$data);
+  }
 
+  public function getuserfeedback($id){
+    $userFeedback = $this->adminModel->getuserfeedback($id);
+    $data = ['feedback' => $userFeedback];
+    $this->view('admin/users/userFeedback',$data);
+     
   }
 
 }
