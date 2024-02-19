@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/user/header.php';?>
+<?php require APPROOT . '/views/user/includes/header.php';?>
 
 <div class="container">
         <div class="card_box">
@@ -85,4 +85,4 @@
         </div>
     </div>
 
-    <?php require APPROOT . '/views/user/footer.php';?>  
+    <?php require APPROOT . '/views/user/includes/footer.php';?>  

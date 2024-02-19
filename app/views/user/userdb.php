@@ -100,4 +100,4 @@
                     </div>
 
     
-    <?php require APPROOT . '/views/user/footer.php';?>   
+    <?php require APPROOT . '/views/user/includes/footer.php';?>   
