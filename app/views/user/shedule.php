@@ -1,83 +1,48 @@
 <?php require APPROOT . '/views/user/header.php';?>
-        <div class="content">
-
-            <div class="content-2">
-                <div class="recent-payments">
-                    <div class="title">
-                        <h2>Train Shedule</h2>
-                        <a href="#" class="btn">View All</a>
-                    </div>
-                    <table>
-                        <tr>
-                            <th>Date</th>
-                            <th>Journy_Id</th>
-                            <th>Train_Id</th>
-                            <th>Train Name</th>
-                            <th>Departure </th>
-                            <th>Arrival </th>
-                        </tr>
-                        <tr>
-                            <td>2023/10/29</td>
-                            <td>J01</td>
-                            <td>T01</td>
-                            <td>Ruhunu Devi</td>
-                            <td>Pettah</td>
-                            <td>Hikkaduwa</td>
-                            <td><a href="#" class="btn">View</a></td>
-                           
-                        </tr>
-                        <tr>
-                            <td>2023/10/29</td>
-                            <td>J01</td>
-                            <td>T01</td>
-                            <td>Ruhunu Devi</td>
-                            <td>Pettah</td>
-                            <td>Hikkaduwa</td>
-                            <td><a href="#" class="btn">View</a></td>
-                            
-                        </tr>
-                        <tr>
-                            <td>2023/10/29</td>
-                            <td>J01</td>
-                            <td>T01</td>
-                            <td>Ruhunu Devi</td>
-                            <td>Pettah</td>
-                            <td>Hikkaduwa</td>
-                            <td><a href="#" class="btn">View</a></td>
-                           
-                        </tr>
-                        <tr>
-                            <td>2023/10/29</td>
-                            <td>J01</td>
-                            <td>T01</td>
-                            <td>Ruhunu Devi</td>
-                            <td>Pettah</td>
-                            <td>Hikkaduwa</td>
-                            <td><a href="#" class="btn">View</a></td>
-                            
-                        </tr>
-                        <tr>
-                            <td>2023/10/29</td>
-                            <td>J01</td>
-                            <td>T01</td>
-                            <td>Ruhunu Devi</td>
-                            <td>Pettah</td>
-                            <td>Hikkaduwa</td>
-                            <td><a href="#" class="btn">View</a></td>
-                        </tr>
-                        <tr>
-                            <td>2023/10/29</td>
-                            <td>J01</td>
-                            <td>T01</td>
-                            <td>Ruhunu Devi</td>
-                            <td>Pettah</td>
-                            <td>Hikkaduwa</td>
-                            <td><a href="#" class="btn">View</a></td>
-                           
-                        </tr>
-                    </table>
-                </div>
+<div class="container-main">
+        <div class="container2">
+            <div class="container3">
+            
+    <div class="wrapper">
+        <div class="select-btn">
+            <span class="Select Station">Departure Station</span>
+            <i class="uil uil-angle-down"> </i>
+        </div>
+        <div class="content1">
+            <div class="search">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="search" id="searchInput1">
             </div>
+            <ul class="options" id="options1">
+            </ul>
         </div>
     </div>
+
+    <div class="wrapper2">
+        <div class="select-btn2">
+            <span class="Select Station">Arrival Station</span>
+            <i class="uil uil-angle-down"> </i>
+        </div>
+        <div class="content2">
+            <div class="search2">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="search" id="searchInput2">
+            </div>
+            <ul class="options2" id="options2">
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="date">
+        <input type="date">
+    </div>
+   
+<div class="text">
+<input type="button" value="Search" id="btn">
+</div>
+</div>
+
+
+</div>
+</div>
     <?php require APPROOT . '/views/user/footer.php';?>   
