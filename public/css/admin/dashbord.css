@@ -33,7 +33,7 @@
 }
 
 .container .content .cards .db-link .card:hover{
-  background-color: #00d7c2; /* New background color on hover */
+  /* background-color: #00d7c2; New background color on hover */
   transform: scale(1.05); /* Scale effect on hover */
 }
 

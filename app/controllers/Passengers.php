@@ -18,8 +18,10 @@
     }
 
     //veiw feedback
-    public function Feedbacks(){
-      $this->view('user/feedback');
+    public function Feedbacks(){     
+      $feedback = $this->passengerModel->getFeedbacks();
+      $data = ['feedback' => $feedback];
+      $this->view('user/feedback',$data);
     }
 
     //add feedback
@@ -42,7 +44,7 @@
         if(empty($data['feedback_err'])) {
 
           if($this->passengerModel->addFeedback($data)){
-            redirect('passengers/addFeedback');
+            redirect('passengers/Feedbacks');
           } else {
             die('Something went wrong');
           }

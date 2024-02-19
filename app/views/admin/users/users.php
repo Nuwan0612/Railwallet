@@ -51,7 +51,7 @@
               <td><?php echo $user->phone; ?></td>
               <td><?php echo $user->status; ?></td>
               <td class="options">
-                <form action="<?php echo URLROOT; ?>users/deactiveUserStatus/<?php echo $user->id?>" method ="post"><input class="edit-btn" type="submit" value="View"></form>
+                <a href="<?php echo URLROOT; ?>admins/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               </td>
               <td></td>
               <td></td>

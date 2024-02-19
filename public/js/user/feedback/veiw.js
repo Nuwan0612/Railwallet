@@ -1,7 +1,10 @@
 const allStar = document.querySelectorAll('.star');
-    
-let rateValue = 5;
+  
+function getrate(rate){
+  let rateValue = rate;
+  console.log("hello")
 
-for(let i = 0; i<rateValue; i++){
-  allStar[i].classList.replace('bx-star', 'bxs-star');
+  for(let i = 0; i<rateValue; i++){
+    allStar[i].classList.replace('bx-star', 'bxs-star');
+  }
 }

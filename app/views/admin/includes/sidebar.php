@@ -61,7 +61,12 @@
       </li>
     </a>
 
-    <!-- <li class=""><img src="<?php echo URLROOT;?>/img/feedback.png" alt=""><span>Feedback</span></li> -->
+    <a class="links" href="<?php echo URLROOT;?>admins/feedback">
+      <li class="side-list">
+        <img src="<?php echo URLROOT;?>/img/feedback.png" alt="">
+        <span>Feedback</span>
+      </li>
+    </a>
 
     <a class="links" href="<?php echo URLROOT;?>admins/profile">
       <li class="side-list">

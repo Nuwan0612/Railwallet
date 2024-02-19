@@ -67,10 +67,10 @@
       
 
 
-      <a href="" class="db-link">
+      <a href="<?php echo URLROOT;?>admins/feedback" class="db-link">
         <div class="card">
           <div class="box">
-            <h1>2</h1>
+            <h1><?php echo $data['feedbacks']?></h1>
             <h3>Feedbacks</h3>
           </div>
           <div class="icon-case">

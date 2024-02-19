@@ -2,13 +2,10 @@
   text-decoration: none;
 }
 
-.content{
-  text-align: center;
-}
-
 .details{
   display: inline-block;
   text-align: left;
+  min-height: calc(100vh - 10vh);
 }
 
 /*Train Heading*/

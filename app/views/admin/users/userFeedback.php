@@ -1,11 +1,10 @@
-<?php require APPROOT . '/views/user/includes/header.php';?>
+<?php require APPROOT . '/views/admin/includes/header.php';?>
 
 <div class="feedback-content">
   <div class="testimonials">
 
     <div class="testimonials-heading">
       <h1>Feedbacks</h1>
-      <a href="<?php echo URLROOT; ?>passengers/addFeedback"><button>Give Feedback</button></a>
     </div>
 
     <div class="testimonial-box-container">
@@ -47,9 +46,6 @@
 
           <div class="foot">
             <div><?php echo $feedback->dateTime; ?></div>
-            <?php if($_SESSION['user_id'] == $feedback->userID): ?>
-              <button>Edit</button>
-            <?php endif; ?>
           </div>
         </div>
         
@@ -61,4 +57,4 @@
 </div>
   
 
-<?php require APPROOT . '/views/user/includes/footer.php';?>   
+<?php require APPROOT . '/views/admin/includes/footer.php';?>

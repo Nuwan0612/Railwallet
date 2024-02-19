@@ -25,7 +25,7 @@ a{
   position: relative;
   margin-top: 12vh;
   min-height: 80%;
-  background: #ffffff;
+  background: #f1f1f1;
 }
 
 .testimonials {
@@ -58,7 +58,7 @@ a{
   color: var(--white);
 }
 
-.testimonials-heading button {
+.testimonials-heading button, .testimonial-box .foot button {
   background: #009688;
   color: #fff;
   padding: 8px 12px;
@@ -68,7 +68,7 @@ a{
   cursor: pointer;
 }
 
-.testimonials-heading button:hover {
+.testimonials-heading button:hover, .testimonial-box .foot button:hover {
   background: #007d71;
   color: #fff;
   padding: 8px 12px;
@@ -178,3 +178,25 @@ a{
     margin-top: 10px;
   }
 }
+
+.testimonial-box .foot{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.testimonial-box .foot div{
+  font-size: 0.8rem;
+  color: #979797;
+}
+
+/* .testimonial-box .foot button{
+  background: #009688;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  margin-right: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+} */
