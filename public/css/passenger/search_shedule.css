@@ -1,0 +1,295 @@
+.links {
+    text-decoration: none;
+  }
+  
+  .details{
+    display: inline-block;
+    text-align: left;
+    min-height: calc(100vh - 10vh);
+  }
+  
+  /*Train Heading*/
+  .all-trains{
+    margin-top: 90px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .head {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 10vh;
+    background-color:  #333;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 100px;
+  }
+  
+  .title2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .add-train {
+    background: #009688;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s; 
+  }
+  
+  .add-train:hover{
+    opacity: 0.8;
+  }
+  
+  /* search bar
+  .search-bar-outer-container{
+    display: flex;
+    /* grid-template-columns: 1fr 100px;
+    align-items: center; 
+    justify-content: center; 
+  } */
+  
+  .wrapper_shedule{
+    display: flex;
+    justify-content: center;
+  }
+  .search-bar-outer-container-shedule{
+    /* display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr 1fr; */
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin-left: 10px;
+    
+  }
+
+  .search-bar-inner-container-shedule1,.search-bar-inner-container-shedule2,.search-bar-inner-container-shedule3{
+    margin-left: 20px;
+    width: auto;
+  }
+  .hide-outer-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    
+  }
+  
+  .search-bar-shedule{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    max-width: 250px;
+    margin: 0 auto; 
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .search-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+  }
+  
+  input[type="date"] {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    outline: none;
+  }
+
+ 
+
+  .result-box1 {
+    max-height: 150px;
+    overflow-y: auto; /* Change to 'auto' to show scrollbar only when needed */
+    flex: 6;
+    z-index: 3;
+    position: fixed; /* or 'absolute' depending on your layout */
+    bottom: 10; /* Adjust as needed to position the div */
+    left: 10; /* Adjust as needed to position the div */
+    width: 10%; /* Stretch the div to the full width */
+    background: white;
+}
+
+  .result-box1 ul{
+    border-top: 1px solid #999;
+    padding: 15px 10px;  flex:6;
+    z-index: 10;
+  }
+  
+  .result-box1 ul li{
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+  }
+
+  .result-box1 ul li:hover{
+    background: #e9f3ff;
+  }
+
+  /* ## input box2 ## */
+
+  .result-box2 {
+    max-height: 150px;
+    overflow-y: auto; /* Change to 'auto' to show scrollbar only when needed */
+    flex: 6;
+    z-index: 3;
+    position: fixed; /* or 'absolute' depending on your layout */
+    bottom: 10; /* Adjust as needed to position the div */
+    left: 10; /* Adjust as needed to position the div */
+    width: 10%; /* Stretch the div to the full width */
+    background: white;
+}
+
+  .result-box2 ul{
+    border-top: 1px solid #999;
+    padding: 15px 10px;  flex:6;
+    z-index: 10;
+  }
+  
+  .result-box2 ul li{
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+  }
+
+  .result-box2 ul li:hover{
+    background: #e9f3ff;
+  }
+
+/* ## End inbox2 ## */
+
+  .search-button {
+    background: #009688;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    
+  }
+  
+  .search-button i {
+    font-size: 16px;
+  }
+  
+  /* Table
+  .detail-body {
+    display: flex;
+    align-items: center;
+  }
+  
+  .table-container {
+    background: #fff; 
+    flex: 1; 
+    overflow: auto;
+    max-height: 500px; 
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  
+  table {
+    width: 100%; 
+    border-collapse: collapse; 
+  }
+  
+  thead {
+    background-color: #009688; 
+    color: #fff;
+    position: sticky; 
+    top: -0.1px; 
+    z-index: 2;
+  }
+  
+  th, td {
+    border: 1px solid #ddd; 
+    padding: 8px;
+    text-align: left;
+  }
+  
+  
+  td{
+    z-index: 1; 
+  }
+   */
+  /* .options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+  
+  .edit-btn{
+    background: #009688;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-btn{
+    background: rgb(208, 46, 46);
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    margin-left: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .detail-body{
+    display: flex;
+    /* justify-content: center; */
+    background-color: #fff;
+    margin: 10px 200px;  
+  }
+
+  .card-box{
+    
+  }
+
+  .card1{
+    margin: 20px 50px 20px 50px;
+    padding:20px 20px 20px 20px ;
+    display: grid;
+    width: 800px;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+
+  }
+
+  .card1 h3{
+    margin-bottom:10px ;
+  }
+
+ .train_type{
+   background-color: #009688;
+  }
