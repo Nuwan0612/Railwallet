@@ -38,4 +38,29 @@
       return $results; 
     }
 
+    //get user details
+    public function getUserDetails($id){
+      $this->db->query('SELECT * FROM users WHERE id = :id');
+      $this->db->bind(':id', $id);
+
+      $results = $this->db->single();
+      return $results;
+    }
+
+    //edit user details
+    public function editPassengerDetails($data){
+      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword WHERE id = :id');
+      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':phone', $data['phone']);
+      $this->db->bind(':newPassword', $data['newPassword']);
+      $this->db->bind(':id', $data['id']);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   }

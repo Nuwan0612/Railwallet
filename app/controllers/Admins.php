@@ -205,108 +205,111 @@
 
   //display account details
     public function profile(){
-      $admin = $this->adminModel->getAdmin();
+      $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
       $data = [
         'id' => $admin->id,
         'name' => $admin->name,
         'nic' => $admin->nic,
         'phone' => $admin->phone,
-        'email' => $admin->email
+        'email' => $admin->email,
+        'name_err' => '',
+        'email_err' => '',
+        'phone_err' => '',
+        'oldPassword_err' => '',
+        'newPassword_err' => '',
+        'confirmPassword_err' => '',
       ];
       
       $this->view('admin/setting/manageAccount',$data);
     }
 
   //update account details
-    public function setting($id){
+    public function setting(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        // Process form
-  
+
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-  
-        // Init data
-        $data =[
-          'id' => $id,
+
+        $data = [
+          'id' => $_SESSION['user_id'],
+          'nic' => $_SESSION['user_nic'],
           'name' => trim($_POST['name']),
-          'nic' => trim($_POST['nic']),
-          'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
+          'phone' => trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
           'newPassword' => trim($_POST['newPassword']),
           'confirmPassword' => trim($_POST['confirmPassword']),
-          'type' => 'admin',
+          'id_err' => '',
+          'name_err' => '',
+          'email_err' => '',
+          'phone_err' => '',
           'oldPassword_err' => '',
           'newPassword_err' => '',
           'confirmPassword_err' => '',
-          'name_err' => '',
-          'nic_err' => '',
-          'phone_err' => '',
-          'email_err' => '',
+          'email_err_value' => '',
+          'phone_err_value' => '',
+          'oldPassword_err_value' => '',
+          'newPassword_err_value' => '',
+          'confirmPassword_err_value' => ''
         ];
-  
-        //Validate Email
-        if(empty($data['email'])){
-          $data['email_err'] = 'Please enter email';
-        } else {
-          // Check email
-          if($this->adminModel->findUserByEmail($data['email'],$id)){
-            $data['email_err'] = 'Employee is already registered in the system';
-          }
-        }
-  
-        // Validate NIC
-        if(empty($data['nic'])){
-          $data['nic_err'] = 'Please enter NIC';
-        } else {
-          // Check NIC
-          if($this->adminModel->findUserByNic($data['nic'],$id)){
-            $data['nic_err'] = 'Employee is already registered in the system';
-          }
-        }
-  
-        // Validate Name
+
+        $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
+
         if(empty($data['name'])){
-          $data['name_err'] = 'Please enter name';
-        }
-  
-        // Validate Phone
+          $data['name'] = $admin->name;
+        } 
+
         if(empty($data['phone'])){
-          $data['phone_err'] = 'Please enter phone number';
+          $data['phone'] = $admin->phone;
+        } else {
+          if(strlen($data['phone']) < 10){
+            $data['phone_err'] = "Please enter valid phone number";
+          }
         }
-  
+        
+        if(empty($data['email'])){
+          $data['email'] = $admin->email;
+        } else {
+          if($this->adminModel->findUserByEmail($data['email'],$_SESSION['user_id'])){
+            $data['email_err'] = "Email is already registered";
+          }
+        }
+        
 
-        //Change password
-        if(!empty($data['oldPassword'])){
+        if(!empty($data['oldPassword']) || !empty($data['newPassword']) || !empty($data['confirmPassword'])){
 
-          if(!$this->userModel->checkPassword($id,$data['oldPassword'])){
+          if(!$this->userModel->checkPassword($_SESSION['user_id'],$data['oldPassword'])){
             $data['oldPassword_err'] = 'Old passowrd does not match';
           }
 
-          if(empty($data['newPassword'])){
-            $data['newPassword_err'] = 'Please enter new password';
+          if($data['newPassword'] != $data['confirmPassword']) {
+            $data['confirmPassword_err'] = 'Password does not match';
           }
 
-          if(empty($data['confirmPassword']) && !empty($data['newPassword'])) {
-            $data['confirmPassword_err'] = 'Please confirm new password';
-          } else {
-            if($data['newPassword'] != $data['confirmPassword']) {
-              $data['confirmPassword_err'] = 'Passwords do not match';
-            }
+          if(empty($data['oldPassword'])) {
+            $data['oldPassword_err'] = "Please enter old password"; 
           }
 
+          if(empty($data['newPassword'])) {
+            $data['newPassword_err'] = "Please enter new password"; 
+          }
+
+          if(empty($data['confirmPassword'])) {
+            $data['confirmPassword_err'] = "Please confirm password"; 
+          }   
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+            
           
           // Hash Password
           if(!empty($data['oldPassword']) && !empty($data['newPassword']) && !empty($data['confirmPassword'])){
             $data['newPassword'] = password_hash($data['newPassword'], PASSWORD_DEFAULT);
           } else {
             if(empty($data['newPassword'])){
-              $admin = $this->adminModel->getAdmin();
-              $data['newPassword'] = $admin->password;
+              $user = $this->adminModel->getAdmin();
+              $data['newPassword'] = $user->password;
             }
           }
           
@@ -317,34 +320,42 @@
             die('something went wrong');
           }
         } else {
+
+          $data['phone_err_value'] = $data['phone'];
+          $data['email_err_value'] = $data['email'];
+          $data['oldPassword_err_value'] = $data['oldPassword'];
+          $data['newPassword_err_value'] = $data['newPassword'];
+          $data['confirmPassword_err_value'] = $data['confirmPassword'];
+          $data['name'] = $admin->name;
+          $data['email'] = $admin->email;
+          $data['phone'] = $admin->phone;
+
+          // echo '<pre>';
+          // var_dump($data);
+          // echo '</pre>';
+
           // Load view with errors
-          $this->view('admin/setting/updateProfile', $data);
+          $this->view('admin/setting/manageAccount', $data);
         }
-  
+
       } else {
-  
-        $admin = $this->userModel->getUser($id);
-        // Init data
-        $data =[
-          'id' => $id,
-          'name' => $admin->name,
-          'nic' => $admin->nic,
-          'phone' => $admin->phone,
-          'email' => $admin->email,
-          'oldPassword' => '',
-          'newPassword' => '',
-          'confirmPassword' => '',
+        $user = $this->adminModel->getAdmin($_SESSION['user_id']);
+
+        $data = [
+          'id' => $user->id,
+          'name' => $user->name,
+          'nic' => $user->nic,
+          'phone' => $user->phone,
+          'email' => $user->email,
+          'name_err' => '',
+          'email_err' => '',
+          'phone_err' => '',
           'oldPassword_err' => '',
           'newPassword_err' => '',
           'confirmPassword_err' => '',
-          'name_err' => '',
-          'nic_err' => '',
-          'phone_err' => '',
-          'email_err' => '',
-        ];
   
-        // Load view
-        $this->view('admin/setting/updateProfile', $data);
+        ];
+        $this->view('admin/setting/manageAccount',$data);
       }
     }
 
@@ -352,7 +363,6 @@
 /*=====================================================================================================================================
                                                 TRAIN CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
-
 
 /*-----------------------------------------------------Add Train----------------------------------------------------*/
     public function addTrain(){
@@ -575,7 +585,6 @@
                                                 CHECKER CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
-
 /*-----------------------------------------------------Register Checker---------------------------------------------*/
     public function registerChecker(){
       // Check for POST
@@ -601,7 +610,7 @@
 
         //Validate Email
         if(empty($data['email'])){
-          $data['email_err'] = 'Pleae enter email';
+          $data['email_err'] = 'Please enter email';
         } else {
           // Check email
           if($this->userModel->findUserByEmail($data['email'])){
@@ -610,24 +619,42 @@
         }
 
         // Validate NIC
+        if((strlen($data['nic']) < 10) || (strlen($data['nic']) > 10 && strlen($data['nic']) < 12) || (strlen($data['nic']) > 12)) {
+          $data['nic_err'] = 'Please enter valid NIC number';
+        }
+
+        if(strlen($data['nic']) == 12 && preg_match('/[^0-9]/', $data['nic'])){
+          $data['nic_err'] = 'Please enter valid NIC number';
+        }  
+        
+        if(strlen($data['nic']) == 10 && substr($data['nic'],-1) != 'X' ){
+          if(substr($data['nic'],-1) != 'V'){
+            $data['nic_err'] = 'Please enter valid NIC number';
+          }  
+        } 
+        
         if(empty($data['nic'])){
-          $data['nic_err'] = 'Pleae enter NIC';
+          $data['nic_err'] = 'Please enter NIC number';  
         } else {
           // Check NIC
-          if($this->userModel->findUserByEmail($data['nic'])){
-            $data['nic_err'] = 'Employee is already registered in the system';
+          if($this->userModel->findUserByNic($data['nic'])){
+            $data['nic_err'] = 'NIC is already taken';
           }
         }
 
 
         // Validate Name
         if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+          $data['name_err'] = 'Please enter name';
         }
 
         // Validate Phone
         if(empty($data['phone'])){
-          $data['phone_err'] = 'Pleae enter phone number';
+          $data['phone_err'] = 'Please enter phone number';
+        } else {
+          if(strlen($data['phone']) != 10){
+            $data['phone_err'] = 'Please enter valid phone number';
+          }
         }
 
         // Make sure errors are empty
@@ -807,7 +834,6 @@
                                                 SUPPORTER CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
 
-
 /*-----------------------------------------------------Register Supporter---------------------------------------------*/
   public function registerSupporter(){
     // Check for POST
@@ -841,25 +867,43 @@
         }
       }
 
-      // Validate NIC
+       // Validate NIC
+       if((strlen($data['nic']) < 10) || (strlen($data['nic']) > 10 && strlen($data['nic']) < 12) || (strlen($data['nic']) > 12)) {
+        $data['nic_err'] = 'Please enter valid NIC number';
+      }
+
+      if(strlen($data['nic']) == 12 && preg_match('/[^0-9]/', $data['nic'])){
+        $data['nic_err'] = 'Please enter valid NIC number';
+      }  
+      
+      if(strlen($data['nic']) == 10 && substr($data['nic'],-1) != 'X' ){
+        if(substr($data['nic'],-1) != 'V'){
+          $data['nic_err'] = 'Please enter valid NIC number';
+        }  
+      } 
+      
       if(empty($data['nic'])){
-        $data['nic_err'] = 'Pleae enter NIC';
+        $data['nic_err'] = 'Please enter NIC number';  
       } else {
         // Check NIC
         if($this->userModel->findUserByNic($data['nic'])){
-          $data['nic_err'] = 'Employee is already registered in the system';
+          $data['nic_err'] = 'NIC is already taken';
         }
       }
 
 
       // Validate Name
       if(empty($data['name'])){
-        $data['name_err'] = 'Pleae enter name';
+        $data['name_err'] = 'Please enter name';
       }
 
       // Validate Phone
       if(empty($data['phone'])){
-        $data['phone_err'] = 'Pleae enter phone number';
+        $data['phone_err'] = 'Please enter phone number';
+      } else {
+        if(strlen($data['phone']) != 10){
+          $data['phone_err'] = 'Please enter valid phone number';
+        }
       }
 
       // Make sure errors are empty
@@ -1037,7 +1081,6 @@
 /*=====================================================================================================================================
                                                 STATIONS CRUD FUNCTIONALITIES IN ADMIN
 =======================================================================================================================================*/ 
-
 
 /*-----------------------------------------------------Add Station---------------------------------------------------------*/
   public function addStation(){
