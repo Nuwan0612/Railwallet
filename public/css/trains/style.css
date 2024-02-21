@@ -94,7 +94,7 @@
   margin-bottom: 10px;
 }
 
-input[type="text"] {
+.border-search {
   flex: 1;
   padding: 10px;
   border: none;
@@ -137,12 +137,12 @@ input[type="date"] {
 }
 
 
-table {
+.table-container table {
   width: 100%; 
   border-collapse: collapse; 
 }
 
-thead {
+.table-container thead {
   background-color: #009688; 
   color: #fff;
   position: sticky; 
@@ -150,14 +150,14 @@ thead {
   z-index: 2;
 }
 
-th, td {
+.table-container th, td {
   border: 1px solid #ddd; 
   padding: 8px;
   text-align: left;
 }
 
 
-td{
+.table-container td{
   z-index: 1; 
 }
 

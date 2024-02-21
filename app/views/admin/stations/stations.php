@@ -12,7 +12,7 @@
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">
-          <input type="text" id="search-station" placeholder="Enter Station ID or Name">
+          <input type="text" class="border-search" id="search-station" placeholder="Enter Station ID or Name">
             <button class="search-button" onclick="searchStation()">
               <i class="fas fa-search"></i>
             </button>

@@ -11,6 +11,7 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/booking.css"> -->
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/shedule.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/setting.css">
 
     <title><?php echo SITENAME; ?></title>
 </head>
@@ -35,9 +36,14 @@
             <a href="#"><li><i class='bx bx-money-withdraw' ></i><span>Fines</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><i class='bx bxs-like' ></i><span>Feedback</span></li></a>
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
+
             <a href="#"><li><i class='bx bx-support' ></i><span>Customer Support</span></li></a>
             <a href="#"><li><i class='bx bxs-cog'></i><span>Settings</span></li></a>
             <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out'></i><span>Logout</span></li></a>
+
+            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/customer-service.png" alt="">&nbsp;<span>Customer Support</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/settings"><li><img src="<?php echo URLROOT;?>public/pics/settings.png" alt="">&nbsp;<span>Settings</span></li></a>
+
         </ul>
     </div>
     <div class="container">
