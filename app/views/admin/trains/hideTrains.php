@@ -11,7 +11,7 @@
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">
-            <input type="text" id="search-train" placeholder="Enter Train ID">
+            <input type="text" class="border-search" id="search-train" placeholder="Enter Train ID">
             <button class="search-button" onclick="searchTrain()">
               <i class="fas fa-search"></i>
             </button> 

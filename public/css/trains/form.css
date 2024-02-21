@@ -40,7 +40,7 @@
   border-radius: 5px;
 }
 
-label{
+.add-train-form label{
   color: white;
   margin-bottom: 10px;
   display: flex;
@@ -48,14 +48,14 @@ label{
   margin-top: 10px
 }
 
-.tbox{
+.add-train-form .tbox{
   margin-bottom: 10px;
   display: relative; 
   justify-content: start;
   align-items: center; 
 }
 
-.tbox input{
+.add-train-form .tbox input{
   width: 100%;
   padding: 10px;
   border: 1px solid #009688;

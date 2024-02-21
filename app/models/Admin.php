@@ -16,21 +16,18 @@
 
   public function editAdminDetails($data){
     
-    $this->db->query('UPDATE users SET name = :name, nic = :nic, phone = :phone, email = :email, password = :newPassword, type = :type WHERE id = :id');
-    $this->db->bind(':id', $data['id']);
+    $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword WHERE id = :id');
     $this->db->bind(':name', $data['name']);
-    $this->db->bind(':nic', $data['nic']);
-    $this->db->bind(':phone', $data['phone']);
     $this->db->bind(':email', $data['email']);
+    $this->db->bind(':phone', $data['phone']);
     $this->db->bind(':newPassword', $data['newPassword']);
-    $this->db->bind(':type', $data['type']);
-      
+    $this->db->bind(':id', $data['id']);
 
-      if($this->db->execute()){
-        return true;
-      } else {
-        return false;
-      }
+    if($this->db->execute()){
+      return true;
+    } else {
+      return false;
+    }
   }
 
 
@@ -56,6 +53,13 @@
       $this->db->bind(':nic', $nic);
       $results = $this->db->resultSet();
       return $results;
+    }
+
+    public function User(){
+      $this->db->query("SELECT * FROM users WHERE type = 'user';
+      ");
+      $result = $this->db->single();
+      return $result;
     }
 
   

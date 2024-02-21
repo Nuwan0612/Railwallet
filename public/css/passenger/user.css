@@ -14,12 +14,8 @@ a {
 li {
     list-style: none;
 }
-li img{
-    max-width: 40px;
-}
-img{
-    max-width: 40px;
-}
+
+
 h1,
 h2 {
     color: #444;
@@ -84,6 +80,11 @@ td {
     background: white;
     color: #009688;
 }
+
+.side-menu li img{
+    width: 40px;
+}
+
 .container {
     position: absolute;
     right: 0;
@@ -174,6 +175,12 @@ td {
     justify-content: space-around;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.container .content .cards .card img{
+    width: 40px;
+    
+}
+
 .container .content .content-2 {
     min-height: 60vh;
     display: flex;
