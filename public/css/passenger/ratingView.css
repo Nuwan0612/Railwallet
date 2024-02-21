@@ -34,7 +34,8 @@ a{
   align-items: center;
   width: 100%;
   overflow-y: auto;
-  height: calc(100vh - 15vh); 
+  height: calc(100vh - 15vh);
+  background-color: #f1f1f1;
 }
 
 .testimonials-heading {
@@ -84,6 +85,7 @@ a{
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
+  background-color: #f1f1f1;
 }
 
 .testimonial-box {
