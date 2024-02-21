@@ -60,6 +60,7 @@ td {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .side-menu .brand-name {
     height: 10vh;
@@ -73,8 +74,8 @@ td {
 }
 .side-menu .brand-name .logo{
     margin-right: 10px;
-    width: 100px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
 }
 .side-menu li {
     font-size: 19px;
