@@ -7,17 +7,48 @@
       }
 
       $this->passengerModel = $this->model('Passenger');
+      $this->adminModel=$this->model('Admin');
+      $this->sheduleModel=$this->model('Shedule');
     }
 
     public function dashboard(){
       $this->view('user/userdb');
     }
 
-    public function shedule(){
-      $this->view('user/shedule');
+    public function shedule_list(){
+     
+      $this->view('user/shedule_list');
     }
 
-    //veiw feedback
+    // ## Select Shedule ## 
+    public function shedule(){
+      $stations=$this->adminModel->getStation();
+      if($_SERVER['REQUEST_METHOD']=='POST'){
+        $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+           $data=[
+              'from'=>trim($_POST['fromStation']),
+              'to'=>trim($_POST['toStation']),
+              'date'=>trim($_POST['date']),
+              'stations'=>$stations,
+              'filterd_station'=>''
+           ];
+           
+            $shedules=$this->sheduleModel->searchTrainShedule($data);
+            $data['filterd_station']=$shedules;
+            $this->view('user/shedule',$data);    
+      }
+      else{
+       $data=[
+        'stations'=>$stations,
+        'filterd_station'=>[],
+        'from'=>''
+       ];
+    $this->view('user/shedule',$data);
+   }
+      
+    }
+
+    //view feedback
     public function Feedbacks(){     
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];

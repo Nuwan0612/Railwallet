@@ -270,19 +270,23 @@
     display: flex;
     /* justify-content: center; */
     background-color: #fff;
-    margin: 10px 200px;  
+    margin: 10px 50px;  
   }
 
   .card-box{
-    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
   }
 
   .card1{
     margin: 20px 50px 20px 50px;
     padding:20px 20px 20px 20px ;
     display: grid;
-    width: 800px;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    background-color: #f1f1f1;
+    width: 1000px;
+    grid-template-columns: 14% 17% 17% 12% 12% 12% 15%;
 
   }
 
@@ -290,6 +294,35 @@
     margin-bottom:10px ;
   }
 
- .train_type{
-   background-color: #009688;
+  .train-name{
+    color: #333;
+    font-weight: bold;
+  }
+
+  .train-type{
+    background-color: #009688;
+    padding: 5px 5px 5px 5px;
+  }
+
+  .departure-time,.departure-stat,.arrival-stat,.arrival-time,
+  .first-class-topic,.second-class-topic,.third-class-topic,
+  .first-class-price,.second-class-price,.third-class-price{
+    display: flex;
+    justify-content: center;
+  }
+
+  .book-button{
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .book-now-button{
+    background: #009688;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
   }

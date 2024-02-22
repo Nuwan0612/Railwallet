@@ -122,6 +122,46 @@
         return false;
       }
     }
-
     
+//search shedule - PASSENGER
+public function searchTrainShedule($data){
+  // Selecting fields from 'shedules' table and 'trains' table
+  $this->db->query('SELECT s.*, t.name, t.type
+                    FROM shedules s
+                    INNER JOIN trains t ON s.trainID = t.trainID
+                    WHERE s.departureDate = :date 
+                    AND s.departureStationID = :departureStationID 
+                    AND s.arrivalStationID = :arrivalStationID');
+
+  // Binding parameters
+  $this->db->bind(':date', $data['date']);
+  $this->db->bind(':departureStationID', $data['from']);
+  $this->db->bind(':arrivalStationID', $data['to']);
+
+  // Executing the query and fetching the results
+  $sheduleResults = $this->db->resultSet();
+
+  // Fetching ticket prices for 1st class, 2nd class, and 3rd class from 'ticketprices' table
+  $this->db->query('SELECT firstclassprice, secondclassprice, thirdclassprice
+                    FROM ticketprices 
+                    WHERE departureStationID = :departureStationID 
+                    AND arrivalStationID = :arrivalStationID');
+
+  // Binding parameters
+  $this->db->bind(':departureStationID', $data['from']);
+  $this->db->bind(':arrivalStationID', $data['to']);
+
+  // Executing the query and fetching the results
+  $ticketPriceResult = $this->db->single();
+
+  // Merging schedule results with ticket price result
+  $mergedResults = [
+      'sheduleResults' => $sheduleResults,
+      'ticketPriceResult' => $ticketPriceResult
+  ];
+
+  return $mergedResults;
+}
+
+
   }
