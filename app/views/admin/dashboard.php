@@ -34,7 +34,7 @@
             <h3>Checkers</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/qr.png" alt="">
+            <img src="<?php echo URLROOT?>/img/qr-code.png" alt="">
           </div>
         </div>
       </a>
@@ -47,7 +47,7 @@
             <h3>Customer Suports</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/supp.png" alt="">
+            <img src="<?php echo URLROOT?>/img/customer-service.png" alt="">
           </div>
         </div>
       </a>
@@ -60,7 +60,7 @@
             <h3>Stations</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/station.png" alt="">
+            <img src="<?php echo URLROOT?>/img/train-station.png" alt="">
           </div>
         </div>
       </a>
@@ -74,7 +74,7 @@
             <h3>Feedbacks</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/feed.png" alt="">
+            <img src="<?php echo URLROOT?>/img/feedback.png" alt="">
           </div>
         </div> 
       </a>

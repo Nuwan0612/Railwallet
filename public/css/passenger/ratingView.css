@@ -25,7 +25,7 @@ a{
   position: relative;
   margin-top: 12vh;
   min-height: 80%;
-  background: #f1f1f1;
+  background: #fff;
 }
 
 .testimonials {
@@ -90,10 +90,22 @@ a{
   width: 500px;
   box-shadow: var(--shadow);
   background-color: var(--background);
+  background-color: rgba(42, 149, 138, 0.3);
   padding: 20px;
   margin: 15px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.testimonial-box:hover {
+  transform: scale(1.02); /* Apply scale transformation on hover */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Apply box shadow on hover */
+}
+
+/* .testimonial-box:hover {
+  transform: translateY(-10px);
+  transition: all ease 0.3s;
+} */
 
 .profile-img {
   width: 50px;
@@ -147,10 +159,6 @@ a{
   color: #4b4b4b;
 }
 
-.testimonial-box:hover {
-  transform: translateY(-10px);
-  transition: all ease 0.3s;
-}
 
 @media (max-width: 1060px) {
   .testimonial-box {
