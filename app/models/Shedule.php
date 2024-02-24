@@ -126,39 +126,45 @@
 //search shedule - PASSENGER
 public function searchTrainShedule($data){
   // Selecting fields from 'shedules' table and 'trains' table
-  $this->db->query('SELECT s.*, t.name, t.type
-                    FROM shedules s
-                    INNER JOIN trains t ON s.trainID = t.trainID
-                    WHERE s.departureDate = :date 
-                    AND s.departureStationID = :departureStationID 
-                    AND s.arrivalStationID = :arrivalStationID');
+  $this->db->query('SELECT 
+  stations_departure.name AS departure_station_name,
+  stations_arrival.name AS arrival_station_name,
+  shedules.departureDate,
+  shedules.arrivalDate,
+  shedules.arrivalTime,
+  shedules.departureTime,
+  trains.name AS train_name,
+  trains.type AS train_type,
+  MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
+  MAX(CASE WHEN ticketprices.classID = 2 THEN ticketprices.price ELSE NULL END) AS second_class_price,
+  MAX(CASE WHEN ticketprices.classID = 3 THEN ticketprices.price ELSE NULL END) AS third_class_price
+FROM 
+  shedules
+JOIN 
+  stations AS stations_departure ON shedules.departureStationID = stations_departure.stationID
+JOIN 
+  stations AS stations_arrival ON shedules.arrivalStationID = stations_arrival.stationID
+JOIN 
+  trains ON shedules.trainID = trains.trainID
+JOIN
+  ticketprices ON ticketprices.departureStationID = shedules.departureStationID AND ticketprices.arrivalStationID = shedules.arrivalStationID
+WHERE 
+  shedules.departureStationID = :departureStationID;
+  AND shedules.arrivalStationID = :arrivalStationID;
+  AND shedules.departureDate = :date;
+GROUP BY
+  stations_departure.name,
+  stations_arrival.name,
+  shedules.departureDate,
+  shedules.arrivalTime,
+  shedules.departureTime,
+  trains.name,
+  trains.type;');
 
   // Binding parameters
   $this->db->bind(':date', $data['date']);
   $this->db->bind(':departureStationID', $data['from']);
   $this->db->bind(':arrivalStationID', $data['to']);
-
-  // Executing the query and fetching the results
-  $sheduleResults = $this->db->resultSet();
-
-  // Fetching ticket prices for 1st class, 2nd class, and 3rd class from 'ticketprices' table
-  $this->db->query('SELECT firstclassprice, secondclassprice, thirdclassprice
-                    FROM ticketprices 
-                    WHERE departureStationID = :departureStationID 
-                    AND arrivalStationID = :arrivalStationID');
-
-  // Binding parameters
-  $this->db->bind(':departureStationID', $data['from']);
-  $this->db->bind(':arrivalStationID', $data['to']);
-
-  // Executing the query and fetching the results
-  $ticketPriceResult = $this->db->single();
-
-  // Merging schedule results with ticket price result
-  $mergedResults = [
-      'sheduleResults' => $sheduleResults,
-      'ticketPriceResult' => $ticketPriceResult
-  ];
 
   return $mergedResults;
 }

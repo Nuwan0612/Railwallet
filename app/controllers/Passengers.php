@@ -23,30 +23,38 @@
     // ## Select Shedule ## 
     public function shedule(){
       $stations=$this->adminModel->getStation();
-      if($_SERVER['REQUEST_METHOD']=='POST'){
-        $_POST=filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
-           $data=[
-              'from'=>trim($_POST['fromStation']),
-              'to'=>trim($_POST['toStation']),
-              'date'=>trim($_POST['date']),
-              'stations'=>$stations,
-              'filterd_station'=>''
-           ];
-           
-            $shedules=$this->sheduleModel->searchTrainShedule($data);
-            $data['filterd_station']=$shedules;
-            $this->view('user/shedule',$data);    
-      }
-      else{
-       $data=[
-        'stations'=>$stations,
-        'filterd_station'=>[],
-        'from'=>''
-       ];
-    $this->view('user/shedule',$data);
-   }
+      // $schedules = $this->passengerModel->searchSchedule($data);
       
+      $data=[
+        'stations'=>$stations,
+        'schedules' => []
+      ];
+
+      $this->view('user/shedule',$data);
     }
+
+    //search Schedule
+    public function searchSchedule(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'from' => trim($_POST['fromStation']),
+          'to' => trim($_POST['toStation']),
+          'date' => trim($_POST['date']),
+          'stations'=>'',
+        ];
+        $stations=$this->adminModel->getStation();
+        $schedules = $this->passengerModel->searchSchedule($data);
+        $data = ['stations'=>$stations,
+                'schedules' => $schedules];
+
+        $this->view('user/shedule',$data);
+        
+      }
+    }
+      
+    
 
     //view feedback
     public function Feedbacks(){     
