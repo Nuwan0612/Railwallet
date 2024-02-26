@@ -52,10 +52,19 @@
         </div>
 
         <div class="detail-body">
-            <div class="card-box">
-                <?php foreach ($data['schedules'] as $schedule): ?>
-                    <div class="card1">
-                        <div class="train_details">
+            <div class="card-box"> 
+                    <?php foreach ($data['schedules'] as $schedule): ?>
+                        <form class="cards" action="<?php echo URLROOT?>passengers/getTrainDetails" method="POST">
+                        <div class="card1">
+                         <!-- input type eka hidden kerl apit yawanna oon id eka yawenawa -->
+                         <input type="hidden" name="schedule_id" value="<?= $schedule->sheduleID ?>">
+                         <input type="hidden" name="train_name" value="<?= $schedule->train_name ?>">
+                         <input type="hidden" name="train_type" value="<?= $schedule->train_type ?>">
+                         <input type="hidden" name="departure_station" value="<?= $schedule->departure_station_name ?>">
+                         <input type="hidden" name="arrival_station" value="<?= $schedule->arrival_station_name ?>">
+                    
+                         
+                         <div class="train_details">
                             <h3><span class="train-name"><b><?=$schedule->train_name?></b></span></h3>
                             <span class="train-type"><?= $schedule->train_type?></span> 
                         </div>
@@ -84,12 +93,12 @@
                             <span class="third-class-topic"><h3>3rd Class</h3></span>
                             <span class="third-class-price"><?= $schedule->third_class_price ?></span>
                         </div>
-
                         <div class="book-button">
-                            <button class="book-now-button" onclick="#">Book Now</button>
+                        <a href="<?php echo URLROOT ?>passengers/getTrainDetails"><button class="book-now-button" >Book Now</button></a>
                         </div>
                     </div>
                 <?php endforeach; ?>
+                </form>
             </div>
         </div>  
     </div>

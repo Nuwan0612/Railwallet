@@ -43,9 +43,10 @@
       $this->db->query('SELECT 
                             stations_departure.name AS departure_station_name,
                             stations_arrival.name AS arrival_station_name,
+                            shedules.sheduleID,
                             shedules.departureDate,
                             shedules.arrivalTime,
-                            shedules.departureTime,
+                            shedules.departureTime, 
                             trains.name AS train_name,
                             trains.type AS train_type,
                             MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
@@ -81,5 +82,28 @@
       $results = $this->db->resultSet();
       return $results;
     }
+
+    // get available train seats in a train shedule
+
+    public function bookingDetailsByScheduleId($data){
+      $this->db->query('SELECT 
+      firstClassBooked,
+      secondClassBooked,
+      thirdClassBooked,
+      departureDate,
+      departureTime,
+      arrivalTime
+  FROM 
+      shedules
+  WHERE 
+      sheduleID = :scheduleID
+      
+      ');
+      $this->db->bind(':scheduleID', $data['shID']);
+
+      $result = $this->db->Single();
+      return $result;
+    }
+    
 
   }

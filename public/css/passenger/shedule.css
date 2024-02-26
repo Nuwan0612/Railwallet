@@ -200,16 +200,7 @@
 .first span,.second span,.third span{
     font-size: 20px;
 }
-.text{
-    text-align: center;
-    font-size: 25px;
-    
-    /* padding-left: 25px;
-    padding: 0px; */
-    padding-bottom: 50px;
 
-   
-}
 
 .text #btn {
     font-weight: bold;

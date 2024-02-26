@@ -53,8 +53,37 @@
         
       }
     }
+
+    // ## Booking Seats ## 
+
+    public function getTrainDetails(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        
+        $data=[
+          'shID'=>trim($_POST['schedule_id'])
+        ];
+        $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
+        
+        $data=[
+          'firstBooked'=>$trainDetails->firstClassBooked,
+          'secondBooked'=>$trainDetails->secondClassBooked,
+          'thirdBooked'=>$trainDetails->thirdClassBooked,
+          'dDate'=>$trainDetails->departureDate,
+          'dTime'=>$trainDetails->departureTime,
+          'aTime'=>$trainDetails->arrivalTime,
+          'trainName'=>trim($_POST['train_name']),
+          'trainType'=>trim($_POST['train_type']),
+          'departureStation'=>trim($_POST['departure_station']),
+          'arrivalStation'=>trim($_POST['arrival_station'])
+        ];
+
+        $this->view('user/booking',$data);
+        // die($data['arrivalStation']);
+        
+      };
       
-    
+    }
 
     //view feedback
     public function Feedbacks(){     
