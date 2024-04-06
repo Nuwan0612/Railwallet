@@ -1,5 +1,5 @@
-<?php require APPROOT . '/views/admin/includes/header.php';?>
-
+<?php require APPROOT . '/views/user/includes/header.php';?>
+    
 <div class="setting-container">
   <div class="inner-container">
 
@@ -39,7 +39,7 @@
         </div>
 
         <div class="right">
-          <form action="<?php echo URLROOT; ?>admins/setting" method="POST">
+          <form action="<?php echo URLROOT; ?>passengers/editUser" method="POST">
               <div class="form-group">
                 <label for="name">Name:</label>
                 <div class="tbox <?php echo !empty($data['name_err']) ? 'error' : ''; ?>">
@@ -47,7 +47,12 @@
                   <div class="error-message"><?php echo $data['name_err'];?></div>  
                 </div>
               </div>
-              
+              <!-- <div class="form-group">
+                <label for="title2">NIC:</label>
+                <div class="tbox">
+                  <input type="text" name="nic" readonly>
+                </div>                 
+              </div> -->
               <div class="form-group">
                 <label for="phone">Phone Number:</label>
                 <div class="tbox <?php echo !empty($data['phone_err']) ? 'error' : ''; ?>">
@@ -65,7 +70,7 @@
               <div class="form-group">
                 <label for="oldPassword">Old Password:</label>
                 <div class="tbox <?php echo !empty($data['oldPassword_err']) ? 'error' : ''; ?>">
-                  <input type="password" name="oldPassword" value="<?php echo !empty($data['oldPassword_err_value']) || !empty($data['newPassword_err_value']) || !empty($data['confirmPassword_err_value']) ?  $data['oldPassword_err_value']: ''; ?>">
+                  <input type="password" name="oldPassword" value="<?php echo !empty($data['oldPassword_err_value']) || !empty($data['newPassword_err_value']) || !empty($data['confirmPassword_err_value'])?  $data['oldPassword_err_value']: ''; ?>">
                   <div class="error-message"><?php echo $data['oldPassword_err'];?></div>
                 </div>                 
               </div>
@@ -83,7 +88,7 @@
                   <div class="error-message"><?php echo $data['confirmPassword_err'];?></div>
                 </div>                 
               </div>
-              
+              <!-- Add more form fields as needed -->
               <button type="submit">Update</button>
           </form>
         </div>
@@ -91,5 +96,5 @@
       
   </div>
 </div>
-
-<?php require APPROOT . '/views/admin/includes/footer.php';?>
+    
+<?php require APPROOT . '/views/user/includes/footer.php';?>   

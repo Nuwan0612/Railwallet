@@ -47,9 +47,6 @@
 
           <div class="foot">
             <div><?php echo $feedback->dateTime; ?></div>
-            <?php if($_SESSION['user_id'] == $feedback->userID): ?>
-              <button>Edit</button>
-            <?php endif; ?>
           </div>
         </div>
         

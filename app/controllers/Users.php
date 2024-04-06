@@ -32,7 +32,7 @@
 
         //Validate Email
         if(empty($data['email'])){
-          $data['email_err'] = 'Pleae enter email';
+          $data['email_err'] = 'Please enter email';
         } else {
           // Check email
           if($this->userModel->findUserByEmail($data['email'])){
@@ -41,8 +41,22 @@
         }
 
         // Validate NIC
+        if((strlen($data['nic']) < 10) || (strlen($data['nic']) > 10 && strlen($data['nic']) < 12) || (strlen($data['nic']) > 12)) {
+          $data['nic_err'] = 'Please enter valid NIC number';
+        }
+
+        if(strlen($data['nic']) == 12 && preg_match('/[^0-9]/', $data['nic'])){
+          $data['nic_err'] = 'Please enter valid NIC number';
+        }  
+        
+        if(strlen($data['nic']) == 10 && substr($data['nic'],-1) != 'X' ){
+          if(substr($data['nic'],-1) != 'V'){
+            $data['nic_err'] = 'Please enter valid NIC number';
+          }  
+        } 
+        
         if(empty($data['nic'])){
-          $data['nic_err'] = 'Pleae enter NIC';
+          $data['nic_err'] = 'Please enter NIC number';  
         } else {
           // Check NIC
           if($this->userModel->findUserByNic($data['nic'])){
@@ -50,27 +64,31 @@
           }
         }
 
-
+       
         // Validate Name
         if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+          $data['name_err'] = 'Please enter name';
         }
 
         // Validate Phone
         if(empty($data['phone'])){
-          $data['phone_err'] = 'Pleae enter phone number';
+          $data['phone_err'] = 'Please enter phone number';
+        } else {
+          if(strlen($data['phone']) != 10){
+            $data['phone_err'] = 'Please enter valid phone number';
+          }
         }
 
         // Validate Password
         if(empty($data['password'])){
-          $data['password_err'] = 'Pleae enter password';
+          $data['password_err'] = 'Please enter password';
         } elseif(strlen($data['password']) < 6){
           $data['password_err'] = 'Password must be at least 6 characters';
         }
 
         // Validate Confirm Password
         if(empty($data['confirm_password'])){
-          $data['confirm_password_err'] = 'Pleae confirm password';
+          $data['confirm_password_err'] = 'Please confirm password';
         } else {
           if($data['password'] != $data['confirm_password']){
             $data['confirm_password_err'] = 'Passwords do not match';
@@ -137,7 +155,7 @@
 
         // Validate Email
         if(empty($data['email'])){
-          $data['email_err'] = 'Pleae enter email';
+          $data['email_err'] = 'Please enter email';
         }
 
         // Validate Password

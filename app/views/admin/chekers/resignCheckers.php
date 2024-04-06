@@ -11,7 +11,7 @@
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">
-            <input type="text" id="search-checker" placeholder="Enter Employee NIC">
+            <input type="text" class="border-search" id="search-checker" placeholder="Enter Employee NIC">
               <button class="search-button" onclick="searchChecker()">
               <i class="fas fa-search"></i>
               </button> 
