@@ -63,4 +63,24 @@
       }
     }
 
+    //check ticket before scan
+    public function checkTicketAvailability($depID, $arrID, $classID){
+      $this->db->query('SELECT * FROM ticketprices WHERE departureStationID = :depID AND arrivalStationID = :arrID AND classID = :class');
+      $this->db->bind(':depID', $depID);
+      $this->db->bind(':arrID', $arrID);
+      $this->db->bind(':class', $classID);
+
+      $results = $this->db->single();
+      return $results;
+    }
+
+    //get Passenger Wallet balance
+    public function getWalletBlance($id){
+      $this->db->query('SELECT * FROM wallet WHERE passenger_id =:id');
+      $this->db->bind(':id', $id);
+
+      $result = $this->db->single();
+      return $result;
+    }
+
   }
