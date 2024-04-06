@@ -72,5 +72,5 @@ function searchDepartureStation(){
   if(!date){
     alert('Please enter date')
   }
-  window.location.href = `http://localhost/railwallet/searchSheduleByStation?departuerStation=${departueStation}&arrivalStation=${arrivalStation}&date=${date}`;
+  window.location.href = `http://localhost/railwallet/admins/searchSheduleByStation?departuerStation=${departueStation}&arrivalStation=${arrivalStation}&date=${date}`;
 }

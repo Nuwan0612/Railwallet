@@ -23,6 +23,9 @@
     public function Feedbacks(){     
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
+      // echo '<pre>';
+      // var_dump($data);
+      // echo '</pre>';
       $this->view('user/feedback/feedback',$data);
     }
 
@@ -220,5 +223,47 @@
       }
     }
 
+    //Scan qrcode
+    public function qrScan() {
+      $stations = $this->adminModel->getStation();
+      $classes = $this->adminModel->getClasses();
+      $data = [
+        'stations' => $stations,
+        'classes' => $classes
+      ];
+      $this->view('user/scanQR',$data);
+    }
 
+    //check ticket before Scan
+    public function checkTicketBeforeScan() {
+      
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $departureStation = $requestData['depID'] ?? null;
+      $arrivalStation = $requestData['arrID'] ?? null;
+      $trainClass = $requestData['class'] ?? null;
+
+      $ticketAvailable = $this->passengerModel->checkTicketAvailability($departureStation, $arrivalStation, $trainClass);
+      $walletBalance = $this->passengerModel->getWalletBlance($_SESSION['user_id']);
+
+      $responseData = '';
+
+      if(!$ticketAvailable){
+
+      } else if($ticketAvailable->price > $walletBalance->balance) {
+
+      } else {
+
+      }
+
+      // Prepare response data
+      $responseData = array(
+          'success' => $ticketAvailable // true or false based on query result
+      );
+
+      // Send JSON response
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+    }
   }
