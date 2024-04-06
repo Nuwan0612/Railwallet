@@ -14,13 +14,13 @@
             <h3>C_Support-K.V.Dias</h3>
         </div>
         <ul>
-            <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>public/pics/db.png" >&nbsp;<span>Dashboard</span></li></a>
-            <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>public/pics/man.png">&nbsp;<span>Users</span></li></a>
+            <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>public/img/dashboard.png" >&nbsp;<span>Dashboard</span></li></a>
+            <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>public/img/user.png">&nbsp;<span>Users</span></li></a>
             <!-- <a href="checker.html"><li><img src="<?php echo URLROOT;?>public/pics/qr-code.png" >&nbsp;<span>Checkers</span></li></a> -->
-            <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>public/pics/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
-            <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>public/pics/september.png" >&nbsp;<span>Shedule</span></li></a>
+            <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>public/img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
+            <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>public/img/calendar.png" >&nbsp;<span>Shedule</span></li></a>
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
-            <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/settings.png" >&nbsp;<span>Settings</span></li></a>
+            <a href="#"><li><img src="<?php echo URLROOT;?>public/img/settings.png" >&nbsp;<span>Settings</span></li></a>
         </ul>
     </div>
     <div class="container">
