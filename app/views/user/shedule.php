@@ -97,8 +97,8 @@
                         <a href="<?php echo URLROOT ?>passengers/getTrainDetails"><button class="book-now-button" >Book Now</button></a>
                         </div>
                     </div>
-                <?php endforeach; ?>
                 </form>
+                <?php endforeach; ?>
             </div>
         </div>  
     </div>

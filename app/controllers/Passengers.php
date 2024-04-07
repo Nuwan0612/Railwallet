@@ -61,8 +61,9 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
         $data=[
-          'shID'=>trim($_POST['schedule_id'])
+          'shID'=>trim($_POST['schedule_id']) 
         ];
+        
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
         
         $data=[
