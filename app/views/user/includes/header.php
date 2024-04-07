@@ -12,6 +12,7 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/shedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/setting.css">
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/transaction.css"> -->
 
     <title><?php echo SITENAME; ?></title>
 </head>
@@ -25,7 +26,7 @@
         </div>
         <ul>
             <!-- <a href="<?php echo URLROOT;?>passengers/dashboard"><li> <img src="<?php echo URLROOT;?>public/pics/db.png" alt="">&nbsp;<span>Dashboard</span></li></a> -->
-            <a href="<?php echo URLROOT;?>passengers/dashboard"><li><i class='bx bxs-wallet' ></i><span>Wallet</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/wallet"><li><i class='bx bxs-wallet' ></i><span>Wallet</span></li></a>
             <!-- <a href="#"><li> <img src="<?php echo URLROOT;?>public/pics/wallet.png" alt="">&nbsp;<span>TopUp</span></li></a>
             <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/seats.png" alt="">&nbsp;<span>Seat Reservation</span></li></a>
             <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/ticket.png" alt="">&nbsp;<span>Ticket Prices</span></li></a>
@@ -38,8 +39,8 @@
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
 
             <a href="#"><li><i class='bx bx-support' ></i><span>Customer Support</span></li></a>
-            <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out'></i><span>Logout</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/settings"><li><i class='bx bxs-cog'></i><span>Settings</span></li></a>
+            <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out'></i><span>Logout</span></li></a>
 
             <!-- <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/customer-service.png" alt="">&nbsp;<span>Customer Support</span></li></a> -->
             <!-- <a href="<?php echo URLROOT;?>passengers/settings"><li><img src="<?php echo URLROOT;?>public/pics/settings.png" alt="">&nbsp;<span>Settings</span></li></a> -->

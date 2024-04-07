@@ -11,8 +11,12 @@
       $this->userModel = $this->model('User');
     }
 
-    public function dashboard(){
-      $this->view('user/userdb');
+    public function wallet(){
+      $this->view('user/wallet');
+    }
+
+    public function transaction(){
+      $this->view('user/transaction');
     }
 
     public function shedule(){
@@ -20,7 +24,7 @@
     }
 
     //veiw feedback
-    public function Feedbacks(){     
+    public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
       $this->view('user/feedback/feedback',$data);
