@@ -1,23 +1,34 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
-        <div class="container">
+        <div class="wallet-container">
             <div class="content">
+            <div class="wallet-heading">
+                <h1>My Wallet</h1>
+                <!-- <a href="<?php echo URLROOT; ?>passengers/addFeedback"><button>Give Feedback</button></a> -->
+                <a href="<?php echo URLROOT;?>passengers/transaction" class="btn"><li><span>Topup</span></li></a>
+            </div>
                 <div class="cards">
                     <div class="card">
-                    <i class='bx bxs-dollar-circle' ></i>
+                        <div class="i">
+                        <i class='bx bxs-dollar-circle' ></i>
+                        </div>
                         <div class="box">
                             <h1>$500</h1>
                             <h2>Amount</h2>
                         </div>
                     </div>
                     <div class="card">
+                    <div class="i">
                     <i class='bx bxs-credit-card' ></i>
+                    </div>
                         <div class="box">
                             <h1>$1000</h1>
                             <h2>Spent</h2>
                         </div>
                     </div>
                     <div class="card">
+                    <div class="i">
                     <i class='bx bxs-bank'></i>
+                    </div>
                         <div class="box">
                             <h1>$3000</h1>
                             <h2>Balance</h2>
@@ -87,7 +98,6 @@
                         <div class="title">
                         <i class='bx bx-line-chart'></i>
                             <h2>Chart</h2>
-                            <a href="<?php echo URLROOT;?>passengers/transaction" class="btn"><li><span>Topup</span></li></a>
                         </div>
                         <div class="line-chart">
                             <div id="curve_chart" style="width: 500px; height: 300px"></div>
