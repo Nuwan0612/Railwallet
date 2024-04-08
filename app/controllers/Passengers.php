@@ -23,6 +23,10 @@
       $this->view('user/shedule');
     }
 
+    public function ticket(){
+      $this->view('user/ticket');
+    }
+
     //veiw feedback
     public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();

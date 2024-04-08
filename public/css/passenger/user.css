@@ -18,9 +18,9 @@ li {
 li img{
     max-width: 40px;
 }
-img{
+/* img{
     max-width: 40px;
-}
+} */
 h1,
 h2 {
     color: #444;
@@ -81,7 +81,7 @@ td {
 }
 .side-menu .brand-name .logo{
     margin-right: 10px;
-    width: 100px;
+    width: 60px;
     height: 50px;
 }
 .side-menu li a{
@@ -382,8 +382,9 @@ td {
     margin-top: 5px;
   }
   
-  .transaction-container form .row .col .inputBox img{
+  .transaction-container form .row .col .inputBox .card-img{
     height: 34px;
+    width: 250px;
     margin-top: 5px;
     filter: drop-shadow(0 0 1px #000);
   }

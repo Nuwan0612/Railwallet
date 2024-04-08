@@ -12,6 +12,7 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/shedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/setting.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/ticket.css">
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/transaction.css"> -->
 
     <title><?php echo SITENAME; ?></title>
@@ -33,7 +34,7 @@
             <a href="#"><li><img src="<?php echo URLROOT;?>public/pics/money-transfer.png" alt="">&nbsp;<span>Transaction History</span></li></a> -->
             <a href="<?php echo URLROOT;?>passengers/shedule"><li><i class='bx bxs-calendar'></i><span>Shedule</span></li></a>
             <a href="#"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
-            <a href="#"><li><i class='bx bx-search-alt'></i><span>View Ticket</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bx-search-alt'></i><span>View Ticket</span></li></a>
             <a href="#"><li><i class='bx bx-money-withdraw' ></i><span>Fines</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><i class='bx bxs-like' ></i><span>Feedback</span></li></a>
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
