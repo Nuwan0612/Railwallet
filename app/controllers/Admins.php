@@ -189,6 +189,9 @@
       $data = [
         'tickets' => $tickets
       ];
+      // echo '<pre>';
+      // var_dump($tickets);
+      // echo '</pre>';
       $this->view('admin/tickets/tickets', $data);
     }
 
@@ -1122,12 +1125,15 @@
       // Make sure errors are empty
       if(empty($data['name_err']) && empty($data['stationID_err'])){
 
+
+        
         //Generate QR
+        
         if($qr = $this->genarateQR($data['stationID'])){
           $data['qrCodePath'] = $qr;
         }
 
-        //Register User
+        // Add Station
         if($this->stationModel->addStation($data)){
           redirect('admins/stations');
         } else {
@@ -1702,14 +1708,14 @@
       // Init data
       $data =[
         'ticketID' => trim($_POST['ticketID']),
-        'DepartureStationID' => trim($_POST['DepartureStationID']),
-        'ArrivalStationID' => trim($_POST['ArrivalStationID']),
+        'Station_1_ID' => trim($_POST['Station_1_ID']),
+        'Station_2_ID' => trim($_POST['Station_2_ID']),
         'ClassID' => trim($_POST['ClassID']),
         'price' => trim($_POST['price']),
         'qrCode' => '',
         'ticketID_err' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
+        'Station_1_ID_err' => '',
+        'Station_2_ID_err' => '',
         'ClassID_err' => '',
         'price_err' => ''
       ];
@@ -1724,28 +1730,28 @@
       }
 
       //Check the Station ID are the same
-      if($data['DepartureStationID'] == $data['ArrivalStationID']){
-        $data['DepartureStationID_err'] = 'Arrival Station and Departure station can not be the same';
-        $data['ArrivalStationID_err'] = 'Arrival Station and Departure station can not be the same';
+      if($data['Station_1_ID'] == $data['Station_2_ID']){
+        $data['Station_1_ID_err'] = 'Station_1 and station_2 can not be the same';
+        $data['Station_2_ID_err'] = 'Station_1 and station_2 can not be the same';
       }
 
       //Validate Departure Station ID 
-      if(empty($data['DepartureStationID'])){
-        $data['DepartureStationID_err'] = 'Please enter Departure Station ID';
+      if(empty($data['Station_1_ID'])){
+        $data['Station_1_ID_err'] = 'Please enter Station_1 ID';
       } else {
         // Check Station
-        if(!$this->adminModel->findStationByStationID($data['DepartureStationID'])){
-          $data['DepartureStationID_err'] = 'Station is not registered in the system';
+        if(!$this->adminModel->findStationByStationID($data['Station_1_ID'])){
+          $data['Station_1_ID_err'] = 'Station is not registered in the system';
         }
       }
 
       //Validate Arival Station ID
-      if(empty($data['ArrivalStationID'])){
-        $data['ArrivalStationID_err'] = 'Please enter station ID';
+      if(empty($data['Station_2_ID'])){
+        $data['Station_2_ID_err'] = 'Please enter Station_2 ID';
       } else {
         // Check Station
-        if(!$this->adminModel->findStationByStationID($data['ArrivalStationID'])){
-          $data['ArrivalStationID_err'] = 'Station is not registered in the system';
+        if(!$this->adminModel->findStationByStationID($data['Station_2_ID'])){
+          $data['Station_2_ID_err'] = 'Station is not registered in the system';
         }
       }
 
@@ -1769,7 +1775,7 @@
 
     
       //Make sure errors are empty
-      if(empty($data['ticketID_err']) && empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
+      if(empty($data['ticketID_err']) && empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['Station_2_ID_err']) && empty($data['Station_1_ID_err'])){
 
         //Generate QR
         if($qr = $this->genarateQR($data['ticketID'])){
@@ -1792,15 +1798,15 @@
       // Init data
       $data =[
         'ticketID' => '',
-        'DepartureStationID' => '',
-        'ArrivalStationID' => '',
+        'Station_1_ID' => '',
+        'Station_2_ID' => '',
         'ClassID' => '',
         'price' => '',
         'qrCode' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
-        'ClassID_err' => '',
         'ticketID_err' => '',
+        'Station_1_ID_err' => '',
+        'Station_2_ID_err' => '',
+        'ClassID_err' => '',
         'price_err' => ''
       ];
 
@@ -1815,47 +1821,21 @@
     
       // Sanitize POST data
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $ticket = $this->ticketModel->getTicketByID($ticketTD);
 
       // Init data
       $data =[
         'ticketID' => $ticketTD,
-        'DepartureStationID' => trim($_POST['DepartureStationID']),
-        'ArrivalStationID' => trim($_POST['ArrivalStationID']),
+        'Station_1_name' => $ticket->station_1_name,
+        'Station_2_name' => $ticket->station_2_name,
         'ClassID' => trim($_POST['ClassID']),
         'price' => trim($_POST['price']),
         'qrCode' => '',
         'ticketID_err' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
         'ClassID_err' => '',
         'price_err' => ''
       ];
 
-      //Validate Departure Station ID 
-      if(empty($data['DepartureStationID'])){
-        $data['DepartureStationID_err'] = 'Please enter Departure Station ID';
-      } else {
-        // Check Station
-        if(!$this->adminModel->findStationByStationID($data['DepartureStationID'])){
-          $data['DepartureStationID_err'] = 'Station is not registered in the system';
-        }
-      }
-
-      //Check the Station ID are the same
-      if($data['DepartureStationID'] == $data['ArrivalStationID']){
-        $data['DepartureStationID_err'] = 'Arrival Station and Departure station can not be the same';
-        $data['ArrivalStationID_err'] = 'Arrival Station and Departure station can not be the same';
-      }
-
-      //Validate Arival Station ID
-      if(empty($data['ArrivalStationID'])){
-        $data['ArrivalStationID_err'] = 'Please enter station ID';
-      } else {
-        // Check Station
-        if(!$this->adminModel->findStationByStationID($data['ArrivalStationID'])){
-          $data['ArrivalStationID_err'] = 'Station is not registered in the system';
-        }
-      }
 
       //Validate Class
       if(empty($data['ClassID'])){
@@ -1868,13 +1848,13 @@
 
       //Validate ticket price
       if(empty($data['price'])){
-        $data['price_err'] = 'Ticket price can not be empty';
-      } else if($data['price'] <= 0){
-        $data['price_err'] = 'Ticket price can not be negative or zero';
+        $data['price_err'] = 'Ticket price can not be empty or zero';
+      } else if($data['price'] < 0){
+        $data['price_err'] = 'Ticket price can not be negative';
       }
     
       // Make sure errors are empty
-      if(empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
+      if(empty($data['price_err']) && empty($data['ClassID_err'])){
 
         //Add Tickets
         if($this->ticketModel->updateTicket($data)){
@@ -1892,13 +1872,11 @@
 
       $data =[
         'ticketID' => $ticketTD,
-        'DepartureStationID' => $ticket->departureStationID,
-        'ArrivalStationID' => $ticket->arrivalStationID,
+        'Station_1_name' => $ticket->station_1_name,
+        'Station_2_name' => $ticket->station_2_name,
         'ClassID' => $ticket->classID,
         'price' => $ticket->price,
         'qrCode' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
         'ClassID_err' => '',
         'ticketID_err' => '',
         'price_err' => ''
@@ -1968,6 +1946,22 @@
     $data = ['feedback' => $userFeedback];
     $this->view('admin/users/userFeedback',$data);
      
+  }
+
+/*-----------------------------------------------------Travel History-------------------------------------------------------*/
+
+  public function getuserTravelDetails($id){
+    $results = $this->adminModel->getuserTravelDetails($id);
+    $data = ['userTravelDetails' => $results];
+    $this->view('admin/users/userTravelDetails',$data);
+    
+  }
+
+/*-----------------------------------------------------Search Travel Details------------------------------------------------*/
+  public function searchTravelDetails(){
+    $result = $this->adminModel->searchTravelDetails($_GET['date'],$_GET['id']);
+    $data = ['userTravelDetails' => $result];
+    $this->view('admin/users/userTravelDetails',$data);
   }
 
 }

@@ -206,6 +206,39 @@ input[type="date"] {
   margin-right: 20px;
   border-radius: 5px;
   cursor: pointer;
+<<<<<<< HEAD
+}
+
+td{
+  text-align: center;
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 30%;
+  left: 20%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+=======
   transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
   transform: translateY(0); /* Start from initial position */
   opacity: 1; /* Initially fully opaque */
@@ -214,4 +247,5 @@ input[type="date"] {
 .delete-btn:hover {
   opacity: 0.9; /* Reduce opacity when popping up */
   transform: translateY(-1px); /* lift up */
+>>>>>>> 7005e7c59737428a198892e6ee2a6ceaa9f47b5d
 }

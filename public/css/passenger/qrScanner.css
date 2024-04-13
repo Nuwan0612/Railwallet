@@ -110,7 +110,7 @@ video {
 	background-color: var(--green-dark);
 }
 
-#end-journey-btn {
+#end-journey-btn, #cancel-journey-btn {
 	padding: 10px 20px;
 	border: none;
 	outline: none;
@@ -123,9 +123,10 @@ video {
 	display: none;
 }
 
-#end-journey-btn:hover {
+#end-journey-btn:hover, #cancel-journey-btn:hover {
 	background-color: var(--red-dark);
 }
+
 
 .warning {
 	margin: 20px 0;

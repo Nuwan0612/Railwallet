@@ -12,14 +12,14 @@
         <div class="error-message"><?php echo $data['ticketID_err'];?></div>
       </div>
 
-      <div class="tbox <?php echo !empty($data['DepartureStationID_err']) ? 'error' : ''; ?>">
-        <input type="text" name="DepartureStationID" placeholder="Departure Station ID Number" value="<?php echo $data['DepartureStationID']; ?>">
-        <div class="error-message"><?php echo $data['DepartureStationID_err'];?></div>
+      <div class="tbox <?php echo !empty($data['Station_1_ID_err']) ? 'error' : ''; ?>">
+        <input type="text" name="Station_1_ID" placeholder="Station_1 ID Number" value="<?php echo $data['Station_1_ID']; ?>">
+        <div class="error-message"><?php echo $data['Station_1_ID_err'];?></div>
       </div>
 
-      <div class="tbox <?php echo !empty($data['ArrivalStationID_err']) ? 'error' : ''; ?>">
-        <input type="text" name="ArrivalStationID" placeholder="Arrival Station ID Number" value="<?php echo $data['ArrivalStationID']; ?>">
-        <div class="error-message"><?php echo $data['ArrivalStationID_err'];?></div>
+      <div class="tbox <?php echo !empty($data['Station_2_ID_err']) ? 'error' : ''; ?>">
+        <input type="text" name="Station_2_ID" placeholder="Station_2 ID Number" value="<?php echo $data['Station_2_ID']; ?>">
+        <div class="error-message"><?php echo $data['Station_2_ID_err'];?></div>
       </div>
 
       <div class="tbox <?php echo !empty($data['ClassID_err']) ? 'error' : ''; ?>">
