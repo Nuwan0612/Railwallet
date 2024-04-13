@@ -26,7 +26,6 @@ h2{
 h3 {
     color: #999;
 }
-
 .btn {
     background: #009688;
     color: white;
@@ -56,29 +55,46 @@ td {
 }
 .side-menu {
     position: fixed;
-    background: #009688;
+    background: white;
     width: 20%;
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .side-menu .brand-name {
     height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.side-menu li {
-    font-size: 24px;
-    padding: 10px 40px;
-    color: white;
-    display: flex;
-    align-items: center;
-}
-.side-menu li:hover {
     background: white;
     color: #009688;
+    font-size: 28px;
+    font-weight: bold;
+}
+.side-menu .brand-name .logo{
+    margin-right: 10px;
+    width: 70px;
+    height: 70px;
+}
+.side-menu li {
+    font-size: 19px;
+    padding: 20px 40px;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    transition: transform 0.3s;
+    position: relative;
+}
+.side-menu li:hover {
+    color: white;
+    background: #009688;
+    transform: translateX(10px);
+}
+.side-menu li span{
+    margin-left: 20px;
 }
 
 .side-menu li img{
@@ -98,7 +114,7 @@ td {
     right: 0;
     width: 80%;
     height: 10%;
-    background: #009688;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -110,18 +126,17 @@ td {
     display: flex;
     align-items: center;
 }
-
 .container .header .nav  h3{
-
     padding: 10px 40px;
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
-
+    font-size: 19px;
+    transition: transform 0.3s;
 }
 .container .header .nav h3:hover{
-    background: white;
     color: #009688;
+    transform: scale(1.2);
 }
 .container .header .nav .search input[type=text] {
     border: none;
@@ -129,7 +144,6 @@ td {
     padding: 10px;
     width: 50%;
 }
-
 .container .header .nav .user {
     flex: 1;
     display: flex;
@@ -139,6 +153,10 @@ td {
 .container .header .nav .user img {
     width: 40px;
     height: 40px;
+}
+.container .header .nav .user .notify{
+    margin-left: 800px;
+    margin-right: -800px;
 }
 .container .header .nav .user .img-case {
     position: relative;
@@ -151,6 +169,11 @@ td {
     left: 0;
     width: 100%;
     height: 100%;
+}
+.container .header .nav .user .img-name{
+    font-size: 19px;
+    font-weight: bold;
+    margin-left: -800px;
 }
 .container .content {
     position: relative;
@@ -169,7 +192,7 @@ td {
     width: 250px;
     height: 150px;
     background: white;
-    margin: 20px 10px;
+    margin: 20px 70px;
     display: flex;
     align-items: center;
     justify-content: space-around;
