@@ -86,8 +86,8 @@
           <div class="warning"></div>
 
           <div class="option-buttons">
-            <button id="start-journey-btn">Start Journey</button>
-            <button id="end-journey-btn">End Journey</button>
+            <button id="start-journey-btn" onclick="startJourney()">Start Journey</button>
+            <button id="end-journey-btn" onclick="endJourney()">End Journey</button>
           </div>	
                  
       </div>
