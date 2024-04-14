@@ -55,7 +55,7 @@ function searchSheduleByID() {
   window.location.href = `http://localhost/railwallet/admins/searchSheduleByID?id=${id}`;   
 }
 
-function searchDepartureStation(){
+function searchDepartureStation() {
   const departueStation = document.getElementById('search-departure-station').value;
   const arrivalStation = document.getElementById('search-arrival-station').value;
   const date = document.getElementById('search-date').value;
@@ -72,5 +72,26 @@ function searchDepartureStation(){
   if(!date){
     alert('Please enter date')
   }
-  window.location.href = `http://localhost/railwallet/searchSheduleByStation?departuerStation=${departueStation}&arrivalStation=${arrivalStation}&date=${date}`;
+  window.location.href = `http://localhost/railwallet/admins/searchSheduleByStation?departuerStation=${departueStation}&arrivalStation=${arrivalStation}&date=${date}`;
+}
+
+function searchTravelDetails() {
+  const searchQuery = document.getElementById('search-travel-details').value;
+  if(searchQuery.trim() === ""){
+    return;
+  }
+
+  let id = '';
+
+  const url = window.location.href;
+  const segments = url.split('=')
+  const urlSegments = window.location.pathname.split('/')
+  
+  if(segments.length > 1) {
+    id = segments[2]
+  } else {
+    id = urlSegments[urlSegments.length -1];
+  }
+
+  window.location.href = `http://localhost/railwallet/admins/searchTravelDetails?date=${searchQuery}&id=${id}`; 
 }

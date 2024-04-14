@@ -1,4 +1,4 @@
-.body-container{
+/* .body-container{
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -52,4 +52,110 @@
   justify-content: start;
   align-items: center;
 }
+ */
 
+.setting-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.inner-container{
+  width: 90%;
+  background: white;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px 0;
+  margin-top: 50px;
+}
+
+.table-title {
+  font-weight: bold;
+}
+
+.body-container .left table, .body-container .left th, .body-container .left td {
+  border: none;
+}
+
+.user-values{
+  text-align: left;
+}
+
+.inner-container h1{
+  margin-bottom: 20px;
+}
+
+.body-container{
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  margin-top: 20px;
+}
+
+.left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid black;
+}
+
+.image{
+  width: 15rem;
+  height: 15rem;
+  border: 1px solid black;
+  padding: 5px; 
+  margin-bottom: 10px;
+}
+
+.image img{
+  width: 100%;
+  height: 100%;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #009688;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00796b;
+}
+
+.tbox.error textarea {
+  border: 1px solid #96000e;
+}
+
+.error-message {
+  color: #96000e;
+  margin-top: 8px; 
+  margin-bottom: 12px;
+}
