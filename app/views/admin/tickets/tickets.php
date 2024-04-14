@@ -31,8 +31,8 @@
               <tr>
                 <th>#</th>
                 <th>Ticket ID</th>
-                <th>Departure station</th>
-                <th>Arival station</th>
+                <th>Station_1</th>
+                <th>Station_2</th>
                 <th>Class</th>
                 <th>Price (Rs.)</th>
                 <th>QR Code</th>
@@ -45,8 +45,8 @@
             <tr>
               <td><?php echo $rowNumber; ?></td>
               <td><?php echo $ticket->ticketPriceID; ?></td>
-              <td><?php echo $ticket->departureStationName; ?></td>
-              <td><?php echo $ticket->arrivalStationName; ?></td>
+              <td><?php echo $ticket->station_1_name; ?></td>
+              <td><?php echo $ticket->station_2_name; ?></td>
               <td><?php echo $ticket->className; ?></td>
               <td><?php echo $ticket->price; ?></td>
               <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $ticket->qrCode; ?>" alt=""></td>

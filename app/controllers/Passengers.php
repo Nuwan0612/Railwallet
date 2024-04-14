@@ -31,6 +31,9 @@
     public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
+      // echo '<pre>';
+      // var_dump($data);
+      // echo '</pre>';
       $this->view('user/feedback/feedback',$data);
     }
 
@@ -228,5 +231,129 @@
       }
     }
 
+    /*================================================================================================================================
+                                                            QR SCAN PROCESS
+    ================================================================================================================================*/
 
+    //Scan qrcode
+      public function qrScan() {
+        $stations = $this->adminModel->getStation();
+        $classes = $this->adminModel->getClasses();
+        $data = [
+          'stations' => $stations,
+          'classes' => $classes
+        ];
+        $this->view('user/scanQR',$data);
+      }
+
+    //check ticket before Scan
+      public function checkTicketBeforeScan() {
+        
+        $inputJSON = file_get_contents('php://input');
+        $requestData = json_decode($inputJSON, true);
+
+        $departureStation = $requestData['depID'] ?? null;
+        $arrivalStation = $requestData['arrID'] ?? null;
+        $trainClass = $requestData['class'] ?? null;
+
+        $ticketAvailable = $this->passengerModel->checkTicketAvailability($departureStation, $arrivalStation, $trainClass);
+        $walletBalance = $this->passengerModel->getWalletBlance($_SESSION['user_id']);
+
+        $responseData = '';
+
+        if(!$ticketAvailable){
+          $responseData = array(
+            'success' => false
+          );
+
+        } else if($ticketAvailable->price > $walletBalance->balance) {
+            $responseData = array(
+              'success' => $ticketAvailable->ticketPriceID,
+              'wallet' => false
+            );
+        } else {
+          $responseData = array(
+            'success' => $ticketAvailable->ticketPriceID,
+            'wallet' => true
+          );
+        }
+
+        // Send JSON response
+        header('Content-Type: application/json');
+        echo json_encode($responseData);
+      }
+
+    //add Journey
+    public function StartJourney(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $data = [
+        "depStation" => $requestData["depID"],
+        "arrStation" => $requestData["arrID"],
+        "ticket_id" => $requestData["ticket"],
+        "passenger_id" => $_SESSION["user_id"]
+      ];
+
+      $responseData = false;
+
+      if($current = $this->passengerModel->getCurrentJourney($data['passenger_id'])) {
+        $data = [
+          'depStationName' => $this->adminModel->findStationByStationID($current->depStation)[0]->name,
+          'arrStationName' => $this->adminModel->findStationByStationID($current->arrStation)[0]->name,
+          'ticketClass' => $this->adminModel->getTicketClass($current->ticket_id)
+        ];
+        
+        $responseData = array(
+          'unfinished' => $data
+        );
+      } else {
+        if($this->passengerModel->addJourney($data)){
+          $current = $this->passengerModel->getCurrentJourney($data['passenger_id']);
+          if($this->passengerModel->addJourneyQrCode($this->genarateQR($current->id),$current->id) && $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id)){
+            $responseData = array(
+              'success' => true
+            );
+          }
+        }
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+
+    }
+
+    //end Journey
+    public function endJourney(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $responseData = false;
+
+      $depID = $requestData["depID"];
+      $arrID = $requestData["arrID"];
+      $ticket = $requestData["ticket"];
+
+      $current = $this->passengerModel->getCurrentJourney($_SESSION['user_id']);
+        
+      if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
+        if($this->passengerModel->endJourney($current->id)){
+          $responseData = array(
+            'success' => true,
+          );
+        } 
+      } else {
+        $data = [
+          'depStationName' => $this->adminModel->findStationByStationID($current->depStation)[0]->name,
+          'arrStationName' => $this->adminModel->findStationByStationID($current->arrStation)[0]->name,
+          'ticketClass' => $this->adminModel->getTicketClass($current->ticket_id)
+        ];
+        $responseData = array(
+          'unfinished' => $data
+        );
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+    }
   }

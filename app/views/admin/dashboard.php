@@ -6,7 +6,7 @@
       <a class="db-link" href="<?php echo URLROOT;?>admins/users">
         <div class="card">
           <div class="box">
-            <h1><?php echo $data['users']?></h1>
+            <p><?php echo $data['users']?></p>
             <h3>Users</h3>
           </div>
           <div class="icon-case">
@@ -18,7 +18,7 @@
       <a href="<?php echo URLROOT;?>admins/trains" class="db-link">
         <div class="card">
           <div class="box">
-            <h1><?php echo $data['trains']?></h1>
+            <p><?php echo $data['trains']?></p>
             <h3>Trains</h3>
           </div>
           <div class="icon-case">
@@ -30,11 +30,11 @@
       <a href="<?php echo URLROOT;?>admins/checkers" class="db-link">
         <div class="card">
           <div class="box">
-            <h1><?php echo $data['checkers']?></h1>
+            <p><?php echo $data['checkers']?></p>
             <h3>Checkers</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/qr.png" alt="">
+            <img src="<?php echo URLROOT?>/img/qr-code.png" alt="">
           </div>
         </div>
       </a>
@@ -43,11 +43,11 @@
       <a href="<?php echo URLROOT;?>admins/supporters" class="db-link">
         <div class="card">
           <div class="box">
-            <h1><?php echo $data['supporters']?></h1>
+            <p><?php echo $data['supporters']?></p>
             <h3>Customer Suports</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/supp.png" alt="">
+            <img src="<?php echo URLROOT?>/img/customer-service.png" alt="">
           </div>
         </div>
       </a>
@@ -56,11 +56,11 @@
       <a href="<?php echo URLROOT;?>admins/stations" class="db-link">
         <div class="card">
           <div class="box">
-            <h1><?php echo $data['stations']?></h1>
+            <p><?php echo $data['stations']?></p>
             <h3>Stations</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/station.png" alt="">
+            <img src="<?php echo URLROOT?>/img/train-station.png" alt="">
           </div>
         </div>
       </a>
@@ -70,11 +70,11 @@
       <a href="<?php echo URLROOT;?>admins/feedback" class="db-link">
         <div class="card">
           <div class="box">
-            <h1><?php echo $data['feedbacks']?></h1>
+            <p><?php echo $data['feedbacks']?></p>
             <h3>Feedbacks</h3>
           </div>
           <div class="icon-case">
-            <img src="<?php echo URLROOT?>/img/feed.png" alt="">
+            <img src="<?php echo URLROOT?>/img/feedback.png" alt="">
           </div>
         </div> 
       </a>
