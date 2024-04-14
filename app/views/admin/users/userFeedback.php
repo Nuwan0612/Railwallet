@@ -45,7 +45,7 @@
           </div>
 
           <div class="foot">
-            <div><?php echo $feedback->dateTime; ?></div>
+            <div><?php echo $feedback->date_time; ?></div>
           </div>
         </div>
         

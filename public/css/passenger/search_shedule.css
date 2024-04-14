@@ -1,0 +1,224 @@
+/* Links */
+.links {
+  text-decoration: none;
+}
+
+/* Details */
+.details {
+  display: inline-block;
+  text-align: left;
+  min-height: calc(100vh - 10vh);
+}
+
+/* Train Heading */
+.all-trains {
+  margin-top: 90px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: #f1f1f1;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 100px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3)
+}
+
+.title2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.add-train {
+  background: #009688;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.add-train:hover {
+  opacity: 0.8;
+}
+
+/* Search bar */
+.wrapper_shedule {
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar-outer-container-shedule {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  margin-left: 10px;
+}
+
+.search-bar-inner-container-shedule1,
+.search-bar-inner-container-shedule2,
+.search-bar-inner-container-shedule3 {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: auto;
+}
+
+.hide-outer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.search-bar-shedule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 250px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="date"] {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.result-box1,
+.result-box2 {
+  width: 250px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  outline: none;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.result-box1::before,
+.result-box2::before {
+  content: attr(placeholder);
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.result-box1 ul,
+.result-box2 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.result-box1 ul li,
+.result-box2 ul li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.result-box1 ul li:hover,
+.result-box2 ul li:hover {
+  background-color: #f0f0f0;
+}
+
+.search-btn {
+  background: rgb(208, 46, 46);
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  margin-left: 5px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.detail-body {
+  display: flex;
+  background-color: #fff;
+  margin: 10px 50px;
+}
+
+.card-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card1 {
+  margin: 20px 50px 20px 50px;
+  padding: 20px 20px 20px 20px;
+  display: grid;
+  background-color: #f1f1f1;
+  width: 1000px;
+  grid-template-columns: 15% 17% 17% 12% 12% 12% 15%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.card1 h3 {
+  margin-bottom: 10px;
+}
+
+.train-name {
+  color: #009688;
+  font-weight: bold;
+}
+
+.train-type {
+  background-color: rgba(0, 150, 136,0.2);
+  padding: 5px 5px 5px 5px;
+}
+
+.departure-time,
+.departure-stat,
+.arrival-stat,
+.arrival-time,
+.first-class-topic,
+.second-class-topic,
+.third-class-topic,
+.first-class-price,
+.second-class-price,
+.third-class-price {
+  display: flex;
+  justify-content: center;
+}
+.arrival-stat h3,.departure-stat h3,.first-class-topic h3,.second-class-topic h3,.third-class-topic h3 {
+  color: black;
+}
+.book-button {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-now-button {
+  background: #009688;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}

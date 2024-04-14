@@ -7,21 +7,76 @@
       }
 
       $this->passengerModel = $this->model('Passenger');
+
+      $this->sheduleModel=$this->model('Shedule');
+
+      $this->adminModel = $this->model('Admin');
+      $this->userModel = $this->model('User');
+
     }
 
-    public function dashboard(){
-      $this->view('user/userdb');
+    public function wallet(){
+      $this->view('user/wallet');
     }
 
+    public function transaction(){
+      $this->view('user/transaction');
+    }
+
+    public function shedule_list(){
+     
+      $this->view('user/shedule_list');
+    }
+
+    // ## Select Shedule ## 
     public function shedule(){
-      $this->view('user/shedule');
+      $stations=$this->adminModel->getStation();
+      // $schedules = $this->passengerModel->searchSchedule($data);
+      
+      $data=[
+        'stations'=>$stations,
+        'schedules' => []
+      ];
+
+      $this->view('user/shedule',$data);
+    }
+
+    //search Schedule
+    public function searchSchedule(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'from' => trim($_POST['fromStation']),
+          'to' => trim($_POST['toStation']),
+          'date' => trim($_POST['date']),
+          'stations'=>'',
+        ];
+        $stations=$this->adminModel->getStation();
+        $schedules = $this->passengerModel->searchSchedule($data);
+        $data = ['stations'=>$stations,
+                'schedules' => $schedules];
+
+        $this->view('user/shedule',$data);
+        
+      }
+    }
+      
+    
+
+
+    public function ticket(){
+      $this->view('user/ticket');
     }
 
     //veiw feedback
-    public function Feedbacks(){     
+    public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
-      $this->view('user/feedback',$data);
+      // echo '<pre>';
+      // var_dump($data);
+      // echo '</pre>';
+      $this->view('user/feedback/feedback',$data);
     }
 
     //add feedback
@@ -53,7 +108,7 @@
           // echo '<pre>';
           // var_dump($data);
           // echo '</pre>';
-          $this->view('user/addfeedback',$data);
+          $this->view('user/feedback/addfeedback',$data);
         }
 
       } else {
@@ -65,7 +120,282 @@
        ];
  
        // Load view
-       $this->view('user/addfeedback', $data);
+       $this->view('user/feedback/addfeedback', $data);
      }
+    }
+
+    //settings
+    public function settings(){
+      $user = $this->passengerModel->getUserDetails($_SESSION['user_id']);
+      
+      $data = [
+        'id' => $user->id,
+        'name' => $user->name,
+        'nic' => $user->nic,
+        'phone' => $user->phone,
+        'email' => $user->email,
+        'name_err' => '',
+        'email_err' => '',
+        'phone_err' => '',
+        'oldPassword_err' => '',
+        'newPassword_err' => '',
+        'confirmPassword_err' => '',
+
+      ];
+      $this->view('user/setting',$data);
+    }
+
+    //edit user details
+    public function editUser(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        // Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'id' => $_SESSION['user_id'],
+          'nic' => $_SESSION['user_nic'],
+          'name' => trim($_POST['name']),
+          'email' => trim($_POST['email']),
+          'phone' => trim($_POST['phone']),
+          'oldPassword' => trim($_POST['oldPassword']),
+          'newPassword' => trim($_POST['newPassword']),
+          'confirmPassword' => trim($_POST['confirmPassword']),
+          'id_err' => '',
+          'name_err' => '',
+          'email_err' => '',
+          'phone_err' => '',
+          'oldPassword_err' => '',
+          'newPassword_err' => '',
+          'confirmPassword_err' => '',
+          'email_err_value' => '',
+          'phone_err_value' => '',
+          'oldPassword_err_value' => '',
+          'newPassword_err_value' => '',
+          'confirmPassword_err_value' => ''
+        ];
+
+        $user = $this->passengerModel->getUserDetails($_SESSION['user_id']);
+
+        if(empty($data['name'])){
+          $data['name'] = $user->name;
+        } 
+
+        if(empty($data['phone'])){
+          $data['phone'] = $user->phone;
+        } else {
+          if(strlen($data['phone']) < 10){
+            $data['phone_err'] = "Please enter valid phone number";
+          }
+        }
+        
+        if(empty($data['email'])){
+          $data['email'] = $user->email;
+        } else {
+          if($this->adminModel->findUserByEmail($data['email'],$_SESSION['user_id'])){
+            $data['email_err'] = "Email is already registered";
+          }
+        }
+        
+
+        if(!empty($data['oldPassword']) || !empty($data['newPassword']) || !empty($data['confirmPassword'])){
+
+          if(!$this->userModel->checkPassword($_SESSION['user_id'],$data['oldPassword'])){
+            $data['oldPassword_err'] = 'Old passowrd does not match';
+          }
+
+          if($data['newPassword'] != $data['confirmPassword']) {
+            $data['confirmPassword_err'] = 'Password does not match';
+          }
+
+          if(empty($data['oldPassword'])) {
+            $data['oldPassword_err'] = "Please enter old password"; 
+          }
+
+          if(empty($data['newPassword'])) {
+            $data['newPassword_err'] = "Please enter new password"; 
+          }
+
+          if(empty($data['confirmPassword'])) {
+            $data['confirmPassword_err'] = "Please confirm password"; 
+          }   
+        }
+
+        // Make sure errors are empty
+        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+            
+          
+          // Hash Password
+          if(!empty($data['oldPassword']) && !empty($data['newPassword']) && !empty($data['confirmPassword'])){
+            $data['newPassword'] = password_hash($data['newPassword'], PASSWORD_DEFAULT);
+          } else {
+            if(empty($data['newPassword'])){
+              $user = $this->adminModel->User();
+              $data['newPassword'] = $user->password;
+            }
+          }
+          
+          //Update Admin details
+          if($this->passengerModel->editPassengerDetails($data)){
+            
+            
+            redirect('passengers/settings');
+          } else {
+            die('something went wrong');
+          }
+        } else {
+
+          $data['phone_err_value'] = $data['phone'];
+          $data['email_err_value'] = $data['email'];
+          $data['oldPassword_err_value'] = $data['oldPassword'];
+          $data['newPassword_err_value'] = $data['newPassword'];
+          $data['confirmPassword_err_value'] = $data['confirmPassword'];
+          $data['name'] = $user->name;
+          $data['email'] = $user->email;
+          $data['phone'] = $user->phone;
+
+          // Load view with errors
+          $this->view('user/setting', $data);
+        }
+
+      } else {
+        $user = $this->passengerModel->getUserDetails($userId);
+
+        $data = [
+          'id' => $user->id,
+          'name' => $user->name,
+          'nic' => $user->nic,
+          'phone' => $user->phone,
+          'email' => $user->email,
+  
+        ];
+        $this->view('user/setting',$data);
+      }
+    }
+
+    /*================================================================================================================================
+                                                            QR SCAN PROCESS
+    ================================================================================================================================*/
+
+    //Scan qrcode
+      public function qrScan() {
+        $stations = $this->adminModel->getStation();
+        $classes = $this->adminModel->getClasses();
+        $data = [
+          'stations' => $stations,
+          'classes' => $classes
+        ];
+        $this->view('user/scanQR',$data);
+      }
+
+    //check ticket before Scan
+      public function checkTicketBeforeScan() {
+        
+        $inputJSON = file_get_contents('php://input');
+        $requestData = json_decode($inputJSON, true);
+
+        $departureStation = $requestData['depID'] ?? null;
+        $arrivalStation = $requestData['arrID'] ?? null;
+        $trainClass = $requestData['class'] ?? null;
+
+        $ticketAvailable = $this->passengerModel->checkTicketAvailability($departureStation, $arrivalStation, $trainClass);
+        $walletBalance = $this->passengerModel->getWalletBlance($_SESSION['user_id']);
+
+        $responseData = '';
+
+        if(!$ticketAvailable){
+          $responseData = array(
+            'success' => false
+          );
+
+        } else if($ticketAvailable->price > $walletBalance->balance) {
+            $responseData = array(
+              'success' => $ticketAvailable->ticketPriceID,
+              'wallet' => false
+            );
+        } else {
+          $responseData = array(
+            'success' => $ticketAvailable->ticketPriceID,
+            'wallet' => true
+          );
+        }
+
+        // Send JSON response
+        header('Content-Type: application/json');
+        echo json_encode($responseData);
+      }
+
+    //add Journey
+    public function StartJourney(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $data = [
+        "depStation" => $requestData["depID"],
+        "arrStation" => $requestData["arrID"],
+        "ticket_id" => $requestData["ticket"],
+        "passenger_id" => $_SESSION["user_id"]
+      ];
+
+      $responseData = false;
+
+      if($current = $this->passengerModel->getCurrentJourney($data['passenger_id'])) {
+        $data = [
+          'depStationName' => $this->adminModel->findStationByStationID($current->depStation)[0]->name,
+          'arrStationName' => $this->adminModel->findStationByStationID($current->arrStation)[0]->name,
+          'ticketClass' => $this->adminModel->getTicketClass($current->ticket_id)
+        ];
+        
+        $responseData = array(
+          'unfinished' => $data
+        );
+      } else {
+        if($this->passengerModel->addJourney($data)){
+          $current = $this->passengerModel->getCurrentJourney($data['passenger_id']);
+          if($this->passengerModel->addJourneyQrCode($this->genarateQR($current->id),$current->id) && $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id)){
+            $responseData = array(
+              'success' => true
+            );
+          }
+        }
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+
+    }
+
+    //end Journey
+    public function endJourney(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $responseData = false;
+
+      $depID = $requestData["depID"];
+      $arrID = $requestData["arrID"];
+      $ticket = $requestData["ticket"];
+
+      $current = $this->passengerModel->getCurrentJourney($_SESSION['user_id']);
+        
+      if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
+        if($this->passengerModel->endJourney($current->id)){
+          $responseData = array(
+            'success' => true,
+          );
+        } 
+      } else {
+        $data = [
+          'depStationName' => $this->adminModel->findStationByStationID($current->depStation)[0]->name,
+          'arrStationName' => $this->adminModel->findStationByStationID($current->arrStation)[0]->name,
+          'ticketClass' => $this->adminModel->getTicketClass($current->ticket_id)
+        ];
+        $responseData = array(
+          'unfinished' => $data
+        );
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
     }
   }

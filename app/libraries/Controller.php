@@ -29,8 +29,8 @@
     public function genarateQR($id){
 
       // URL for the Google Charts API
-      $googleApiUrl = "https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=" . urlencode($id);
-
+      $googleApiUrl = "https://quickchart.io/qr?size=200&text=" . urlencode($id);
+      
       //Read the content of the QR code
       $qrCodeImage = file_get_contents($googleApiUrl);
 

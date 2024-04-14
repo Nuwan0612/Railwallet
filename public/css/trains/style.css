@@ -19,10 +19,11 @@
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  height: 10vh;
+  height: 8vh;
   background-color:  #333;
   padding-left: 15px;
   padding-right: 15px;
+  border-radius: 10px;
 }
 
 .title {
@@ -49,6 +50,7 @@
 .search-bar-outer-container{
   display: grid;
   grid-template-columns: 1fr 100px;
+  margin-top: 25px; 
   /* align-items: center;
   justify-content: center;  */
 }
@@ -56,7 +58,7 @@
 .search-bar-outer-container-shedule{
   display: grid;
   grid-template-columns: 3fr 3fr 3fr 3fr 1fr;
-  
+  margin-top: 25px; 
 }
 
 
@@ -64,6 +66,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+  transform: translateY(0); /* Start from initial position */
+  opacity: 1; /* Initially fully opaque */
+  
+}
+
+.hide-outer-container:hover {
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-1px); /* lift up */
 }
 
 .search-bar-shedule{
@@ -94,7 +105,7 @@
   margin-bottom: 10px;
 }
 
-input[type="text"] {
+.border-search {
   flex: 1;
   padding: 10px;
   border: none;
@@ -134,15 +145,16 @@ input[type="date"] {
   max-height: 500px; 
   overflow-y: auto;
   position: relative;
+  margin-top: 35px;
 }
 
 
-table {
+.table-container table {
   width: 100%; 
   border-collapse: collapse; 
 }
 
-thead {
+.table-container thead {
   background-color: #009688; 
   color: #fff;
   position: sticky; 
@@ -150,14 +162,14 @@ thead {
   z-index: 2;
 }
 
-th, td {
+.table-container th, td {
   border: 1px solid #ddd; 
   padding: 8px;
   text-align: left;
 }
 
 
-td{
+.table-container td{
   z-index: 1; 
 }
 
@@ -175,6 +187,14 @@ td{
   margin-right: 5px;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+  transform: translateY(0); /* Start from initial position */
+  opacity: 1; /* Initially fully opaque */
+}
+
+.edit-btn:hover {
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-1px); /* lift up */
 }
 
 .delete-btn{
@@ -182,7 +202,50 @@ td{
   color: #fff;
   padding: 8px 12px;
   border: none;
-  margin-left: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
   border-radius: 5px;
   cursor: pointer;
+<<<<<<< HEAD
+}
+
+td{
+  text-align: center;
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 30%;
+  left: 20%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+=======
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+  transform: translateY(0); /* Start from initial position */
+  opacity: 1; /* Initially fully opaque */
+}
+
+.delete-btn:hover {
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-1px); /* lift up */
+>>>>>>> 7005e7c59737428a198892e6ee2a6ceaa9f47b5d
 }
