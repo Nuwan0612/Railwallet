@@ -7,8 +7,12 @@
       }
 
       $this->passengerModel = $this->model('Passenger');
+
+      $this->sheduleModel=$this->model('Shedule');
+
       $this->adminModel = $this->model('Admin');
       $this->userModel = $this->model('User');
+
     }
 
     public function wallet(){
@@ -19,9 +23,47 @@
       $this->view('user/transaction');
     }
 
-    public function shedule(){
-      $this->view('user/shedule');
+    public function shedule_list(){
+     
+      $this->view('user/shedule_list');
     }
+
+    // ## Select Shedule ## 
+    public function shedule(){
+      $stations=$this->adminModel->getStation();
+      // $schedules = $this->passengerModel->searchSchedule($data);
+      
+      $data=[
+        'stations'=>$stations,
+        'schedules' => []
+      ];
+
+      $this->view('user/shedule',$data);
+    }
+
+    //search Schedule
+    public function searchSchedule(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'from' => trim($_POST['fromStation']),
+          'to' => trim($_POST['toStation']),
+          'date' => trim($_POST['date']),
+          'stations'=>'',
+        ];
+        $stations=$this->adminModel->getStation();
+        $schedules = $this->passengerModel->searchSchedule($data);
+        $data = ['stations'=>$stations,
+                'schedules' => $schedules];
+
+        $this->view('user/shedule',$data);
+        
+      }
+    }
+      
+    
+
 
     public function ticket(){
       $this->view('user/ticket');

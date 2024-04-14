@@ -14,11 +14,13 @@
                 </div>
                 <div class="inputBox">
                     <span>phone number :</span>
-                    <input type="text" placeholder="+94 123 456 789">
+
+                    <input type="number" placeholder="+94 123 456 789">
                 </div>
                 <div class="inputBox">
                     <span>cards accepted :</span>
-                    <img src="<?php echo URLROOT;?>public/css/index/card_img.png" class="card-img">
+                    <img src="card_img.png" alt="">
+
                 </div>
             </div>
             <div class="col">
@@ -29,7 +31,9 @@
                 </div>
                 <div class="inputBox">
                     <span>credit card number :</span>
-                    <input type="text" placeholder="1111-2222-3333-4444">
+
+                    <input type="number" placeholder="1111-2222-3333-4444">
+
                 </div>
                 <div class="inputBox">
                     <span>CVV :</span>
@@ -39,7 +43,9 @@
                 <div class="flex">
                     <div class="inputBox">
                         <span>exp year :</span>
-                        <input type="text" placeholder="2022">
+
+                        <input type="number" placeholder="2022">
+
                     </div>
                     <div class="inputBox">
                         <span>exp month :</span>
