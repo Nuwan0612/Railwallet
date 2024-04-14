@@ -92,9 +92,14 @@
       thirdClassBooked,
       departureDate,
       departureTime,
-      arrivalTime
+      arrivalTime,
+      firstCapacity,
+      secondCapacity,
+      thirdCapacity
   FROM 
       shedules
+  JOIN
+      trains ON trains.trainID = shedules.trainID
   WHERE 
       sheduleID = :scheduleID
       
@@ -105,5 +110,21 @@
       return $result;
     }
     
+    //update booked counts
 
+    public function updateSeatsByScheduleId($data){
+      $this->db->query('UPDATE shedules SET 
+      firstClassBooked=firstClassBooked+:fcount,
+      secondClassBooked=secondClassBooked+:scount,
+      thirdClassBooked=thirdClassBooked+:tcount
+  WHERE 
+      sheduleID =:scheduleID ');
+
+      $this->db->bind(':scheduleID', $data['sheduleId']);
+      $this->db->bind(':fcount', $data['fcount']);
+      $this->db->bind(':scount', $data['scount']);
+      $this->db->bind(':tcount', $data['tcount']);
+
+      $this->db->execute();
+    }
   }

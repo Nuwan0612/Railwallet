@@ -70,13 +70,17 @@
           'firstBooked'=>$trainDetails->firstClassBooked,
           'secondBooked'=>$trainDetails->secondClassBooked,
           'thirdBooked'=>$trainDetails->thirdClassBooked,
+          'fCapacity'=>$trainDetails->firstCapacity,
+          'sCapacity'=>$trainDetails->secondCapacity,
+          'tCapacity'=>$trainDetails->thirdCapacity,
           'dDate'=>$trainDetails->departureDate,
           'dTime'=>$trainDetails->departureTime,
           'aTime'=>$trainDetails->arrivalTime,
           'trainName'=>trim($_POST['train_name']),
           'trainType'=>trim($_POST['train_type']),
           'departureStation'=>trim($_POST['departure_station']),
-          'arrivalStation'=>trim($_POST['arrival_station'])
+          'arrivalStation'=>trim($_POST['arrival_station']),
+          'shId'=>trim($_POST['schedule_id']) 
         ];
 
         $this->view('user/booking',$data);
@@ -84,6 +88,26 @@
         
       };
       
+    }
+    public function bookingTickets(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data=[
+          // 'shid'=>trim($_POST['schedule_id']),
+          
+          'fcount'=>trim($_POST['fClassCount']),
+          'scount'=>trim($_POST['sClassCount']),
+          'tcount'=>trim($_POST['tClassCount']),
+          'sheduleId'=>trim($_POST['sheduleId'])
+          
+        ];
+         $this->passengerModel->updateSeatsByScheduleId($data);
+        // $this->view('user/booking',$data);
+         //die($data['sheduleId']);
+        
+      
+      }
     }
 
     //view feedback

@@ -43,8 +43,11 @@
                                 </div>
                             </div>
                             
+                            <form class="bookingTickets" action="<?php echo URLROOT?>passengers/bookingTickets" method="POST">
+                            <input type="text" name="sheduleId" hidden value="<?php echo $data['shId']?>">
                             <div class="tickets">
                                 <div class="box-class">
+                        
                                 <div class="classes">
                                     <div class="text-box">
                                        <div class="f_text"> First Class:<br></div>
@@ -53,24 +56,25 @@
                                     </div>
                                     <div class="inputs">
                                         <div class="f_class">
-                                            <input type="text" id="first" placeholder="<?php echo $data['firstBooked'];?>">
+                                            <input type="text" id="first" name="fClassCount" placeholder=" <?php echo $data['firstBooked'];?>/<?php echo $data['fCapacity'];?>">
                                         </div>
                                         <div class="s_class">
-                                            <input type="text" id="second" placeholder="<?php echo $data['secondBooked'];?>">
+                                            <input type="text" id="second" name="sClassCount" placeholder=" <?php echo $data['secondBooked'];?>/<?php echo $data['sCapacity'];?>">
                                         </div>
                                         <div class="t_class">
-                                            <input type="text" id="third" placeholder="<?php echo $data['thirdBooked'];?>">
+                                            <input type="text" id="third" name="tClassCount" placeholder=" <?php echo $data['thirdBooked'];?>/<?php echo $data['tCapacity'];?>">
                                         </div>
                                     </div> 
                                      
                                 </div>
                                 <div class="btn-main">
                                     <div class="btn5">
-                                        <button><span class="button-text">Book Now</span></button>     
+                                    <button type="submit"><span class="button-text">Book Now</span></button>     
                                     </div>
                                 </div>
                                 
                             </div>
+                            </form>
                             </div>
                        </div>
                     </div>
