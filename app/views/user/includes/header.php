@@ -12,9 +12,13 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/shedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/setting.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/ticket.css">
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/transaction.css"> -->
 
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>
 
+
 <?php require APPROOT . '/views/user/includes/sidemenu.php';?>
+

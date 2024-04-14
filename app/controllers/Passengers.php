@@ -11,16 +11,24 @@
       $this->userModel = $this->model('User');
     }
 
-    public function dashboard(){
-      $this->view('user/userdb');
+    public function wallet(){
+      $this->view('user/wallet');
+    }
+
+    public function transaction(){
+      $this->view('user/transaction');
     }
 
     public function shedule(){
       $this->view('user/shedule');
     }
 
+    public function ticket(){
+      $this->view('user/ticket');
+    }
+
     //veiw feedback
-    public function Feedbacks(){     
+    public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
       // echo '<pre>';

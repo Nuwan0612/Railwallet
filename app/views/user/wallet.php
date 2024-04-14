@@ -1,55 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="history.css">
-        <title>Transaction History</title>
-
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                    ['Month', 'Topup', 'Expenses'],
-                    ['January', 1000, 500],
-                    ['February', 2000, 500],
-                    ['March', 1000, 1000],
-                    ['April', 4000, 2500]
-                ]);
-
-                var options = {
-                    title: 'My Wallet',
-                    curveType: 'function',
-                    legend: { position: 'bottom' }
-                };
-
-                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-                chart.draw(data, options);
-            }
-        </script>
-    </head>
-    <body>
-        <div class="container">
+<?php require APPROOT . '/views/user/includes/header.php';?>
+        <div class="wallet-container">
             <div class="content">
+            <div class="wallet-heading">
+                <h1>My Wallet</h1>
+                <!-- <a href="<?php echo URLROOT; ?>passengers/addFeedback"><button>Give Feedback</button></a> -->
+                <a href="<?php echo URLROOT;?>passengers/transaction" class="btn"><li><span>Topup</span></li></a>
+            </div>
                 <div class="cards">
                     <div class="card">
+                        <div class="i">
+                        <i class='bx bxs-dollar-circle' ></i>
+                        </div>
                         <div class="box">
                             <h1>$500</h1>
                             <h2>Amount</h2>
                         </div>
                     </div>
                     <div class="card">
+                    <div class="i">
+                    <i class='bx bxs-credit-card' ></i>
+                    </div>
                         <div class="box">
                             <h1>$1000</h1>
                             <h2>Spent</h2>
                         </div>
                     </div>
                     <div class="card">
+                    <div class="i">
+                    <i class='bx bxs-bank'></i>
+                    </div>
                         <div class="box">
                             <h1>$3000</h1>
                             <h2>Balance</h2>
@@ -59,6 +38,7 @@
                 <div class="content-2">
                     <div class="recent-payments">
                         <div class="title">
+                        <i class='bx bx-history'></i>
                             <h2>Transaction History</h2>
                             <a href="#" class="btn">View All</a>
                         </div>
@@ -116,6 +96,7 @@
                     </div>
                     <div class="chart">
                         <div class="title">
+                        <i class='bx bx-line-chart'></i>
                             <h2>Chart</h2>
                         </div>
                         <div class="line-chart">
@@ -125,5 +106,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+<?php require APPROOT . '/views/user/includes/footer.php';?>
