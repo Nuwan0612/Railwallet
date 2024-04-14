@@ -90,7 +90,7 @@
   margin-bottom: 10px;
 }
 
-input[type="text"],
+.search-bar-inner-container-shedule3 input[type="text"],
 input[type="date"] {
   flex: 1;
   padding: 10px;

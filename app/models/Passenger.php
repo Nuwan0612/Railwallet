@@ -43,9 +43,10 @@
       $this->db->query('SELECT 
                             stations_departure.name AS departure_station_name,
                             stations_arrival.name AS arrival_station_name,
+                            shedules.sheduleID,
                             shedules.departureDate,
                             shedules.arrivalTime,
-                            shedules.departureTime,
+                            shedules.departureTime, 
                             trains.name AS train_name,
                             trains.type AS train_type,
                             MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
@@ -80,6 +81,52 @@
       
       $results = $this->db->resultSet();
       return $results;
+    }
+
+
+    // get available train seats in a train shedule
+
+    public function bookingDetailsByScheduleId($data){
+      $this->db->query('SELECT 
+      firstClassBooked,
+      secondClassBooked,
+      thirdClassBooked,
+      departureDate,
+      departureTime,
+      arrivalTime,
+      firstCapacity,
+      secondCapacity,
+      thirdCapacity
+  FROM 
+      shedules
+  JOIN
+      trains ON trains.trainID = shedules.trainID
+  WHERE 
+      sheduleID = :scheduleID
+      
+      ');
+      $this->db->bind(':scheduleID', $data['shID']);
+
+      $result = $this->db->Single();
+      return $result;
+    }
+    
+    //update booked counts
+
+    public function updateSeatsByScheduleId($data){
+      $this->db->query('UPDATE shedules SET 
+      firstClassBooked=firstClassBooked+:fcount,
+      secondClassBooked=secondClassBooked+:scount,
+      thirdClassBooked=thirdClassBooked+:tcount
+  WHERE 
+      sheduleID =:scheduleID ');
+
+      $this->db->bind(':scheduleID', $data['sheduleId']);
+      $this->db->bind(':fcount', $data['fcount']);
+      $this->db->bind(':scount', $data['scount']);
+      $this->db->bind(':tcount', $data['tcount']);
+
+      $this->db->execute();
     }
 
 
