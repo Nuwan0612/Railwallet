@@ -12,7 +12,7 @@
       <div class="search-bar-outer-container-shedule">
         <div class="search-bar-inner-container-shedule">
           <div class="search-bar-shedule">
-          <input type="text" id="search-shedule-by-ID" placeholder="Shedule or Train ID" >
+          <input type="text" class="border-search" id="search-shedule-by-ID" placeholder="Shedule or Train ID" >
             <button class="search-button" onclick="searchSheduleByID()">
               <i class="fas fa-search"></i>
             </button>

@@ -14,15 +14,24 @@
 
 .container .content .cards .card{
   width: 250px;
+  /* width: calc(33.33% - 20px); */
   height: 150px;
   background: white;
-  margin: 20px 10px;
+  margin: 30px 30px;
+  
+  /* margin-bottom: 20px; */
   display: flex;
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,0.19);
   transition: all 0.3s ease; /* Transition effect */
 }
+
+/* .container .content .cards .card:hover {
+  color: #009688;
+  transform: translateX(10px);
+  cursor: pointer;
+} */
 
 .container .content .cards .card img{
   width: 50px;
@@ -35,10 +44,27 @@
 .container .content .cards .db-link .card:hover{
   /* background-color: #00d7c2; New background color on hover */
   transform: scale(1.05); /* Scale effect on hover */
+  background-color: rgba(0, 150, 136, 0.3); 
+  transform: translateY(-5px); /* Lift up effect */
 }
 
 .container .content .cards .db-link .card:hover h3 {
-  color: #333; /* New text color on hover */
+  color: #009688; /* New text color on hover */
+}
+
+.container .content .cards .card p
+{
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
+}
+
+.container .content .cards .db-link .card:hover p
+{
+  color: #009688;
+
 }
 
 

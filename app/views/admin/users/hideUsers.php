@@ -10,7 +10,7 @@
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">
-            <input type="text" id="search-users" placeholder="Enter User NIC Number">
+            <input type="text" class="border-search" id="search-users" placeholder="Enter User NIC Number">
             <button class="search-button" onclick="searchUser()">
               <i class="fas fa-search"></i>
             </button> 
@@ -34,6 +34,7 @@
                 <th>NIC</th>
                 <th>Phone</th>
                 <th>Status</th>
+                <th>Feedbacks</th>
                 <th>Complains</th>
                 <th>Travel History</th>
                 <th>Option</th>  
@@ -48,8 +49,12 @@
               <td><?php echo $user->nic; ?></td>
               <td><?php echo $user->phone; ?></td>
               <td><?php echo $user->status; ?></td>
+              <td class="options">
+                <a href="<?php echo URLROOT; ?>admins/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>
               <td></td>
-              <td></td>
+              <td class="options">
+              <a href="<?php echo URLROOT; ?>admins/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               <td>
                 <div class="options">
                   <form action="<?php echo URLROOT; ?>users/activeUserStatus/<?php echo $user->id?>" method ="post"><input class="edit-btn" type="submit" value="Activate"></form>
