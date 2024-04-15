@@ -193,8 +193,8 @@ input[type="date"] {
 }
 
 .edit-btn:hover {
-  opacity: 0.9; /* Reduce opacity when popping up */
-  transform: translateY(-1px); /* lift up */
+  opacity: 0.92; /* Reduce opacity when popping up */
+  /* transform: translateY(-1px);  */
 }
 
 .delete-btn{
@@ -202,8 +202,8 @@ input[type="date"] {
   color: #fff;
   padding: 8px 12px;
   border: none;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 1px;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
@@ -212,6 +212,6 @@ input[type="date"] {
 }
 
 .delete-btn:hover {
-  opacity: 0.9; /* Reduce opacity when popping up */
-  transform: translateY(-1px); /* lift up */
+  opacity: 0.92; /* Reduce opacity when popping up */
+  /* transform: translateY(-1px);  */
 }

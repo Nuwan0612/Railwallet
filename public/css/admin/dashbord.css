@@ -48,24 +48,24 @@
   transform: translateY(-5px); /* Lift up effect */
 }
 
-.container .content .cards .db-link .card:hover h3 {
-  color: #009688; /* New text color on hover */
-}
+/* .container .content .cards .db-link .card:hover h3 {
+  color: #009688; 
+} */
 
 .container .content .cards .card p
 {
   color: #333;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 30px;
   text-align: center;
 }
 
-.container .content .cards .db-link .card:hover p
+/* .container .content .cards .db-link .card:hover p
 {
   color: #009688;
 
-}
+} */
 
 
 
