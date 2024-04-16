@@ -6,16 +6,16 @@
                 <h3 class="transaction-title">billing address</h3>
                 <div class="inputBox">
                     <span>full name :</span>
-                    <input type="text" placeholder="john deo">
+                    <input type="text" placeholder="Kavindu Perera">
                 </div>
                 <div class="inputBox">
                     <span>email :</span>
-                    <input type="email" placeholder="example@example.com">
+                    <input type="email" placeholder="kavindu@gmail.com">
                 </div>
                 <div class="inputBox">
                     <span>phone number :</span>
 
-                    <input type="number" placeholder="+94 123 456 789">
+                    <input type="tel" placeholder="+94 123 456 789">
                 </div>
                 <div class="inputBox">
                     <span>cards accepted :</span>
@@ -27,12 +27,12 @@
                 <h3 class="transaction-title">payment</h3>
                 <div class="inputBox">
                     <span>name on card :</span>
-                    <input type="text" placeholder="mr. john deo">
+                    <input type="text" placeholder="Mr. Kavindu Perera">
                 </div>
                 <div class="inputBox">
                     <span>credit card number :</span>
 
-                    <input type="number" placeholder="1111-2222-3333-4444">
+                    <input type="text" placeholder="1111-2222-3333-4444">
 
                 </div>
                 <div class="inputBox">

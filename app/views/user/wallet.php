@@ -37,7 +37,7 @@
                 </div>
                 <div class="content-2">
                     <div class="recent-payments">
-                        <div class="title">
+                        <div class="wallet-title">
                         <i class='bx bx-history'></i>
                             <h2>Transaction History</h2>
                             <a href="#" class="btn">View All</a>
@@ -95,7 +95,7 @@
                         </table>
                     </div>
                     <div class="chart">
-                        <div class="title">
+                        <div class="wallet-title">
                         <i class='bx bx-line-chart'></i>
                             <h2>Chart</h2>
                         </div>

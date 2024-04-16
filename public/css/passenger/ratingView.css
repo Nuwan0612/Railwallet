@@ -92,14 +92,16 @@ a{
   width: 500px;
   box-shadow: var(--shadow);
   background-color: var(--background);
-  background-color: rgba(42, 149, 138, 0.3);
+  background: white;
   padding: 20px;
   margin: 15px;
+  border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .testimonial-box:hover {
+  background-color: rgba(0, 150, 136, 0.3);
   transform: scale(1.02); /* Apply scale transformation on hover */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Apply box shadow on hover */
 }
