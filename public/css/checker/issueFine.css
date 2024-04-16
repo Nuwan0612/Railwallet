@@ -1,0 +1,77 @@
+:root{
+  --green: #009688;
+  --green-dark: #007d71;
+  --red: #96000e;
+  --red-dark: #7d000c;
+}
+
+
+.option-buttons-checker{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-buttons-checker button{
+  margin-right: 20px;
+}
+
+.option-buttons-checker .delete-btn{
+  background-color: var(--red)
+}
+
+.option-buttons-checker .delete-btn:hover{
+  background-color: var(--red-dark)
+}
+
+.option-buttons-checker .edit-btn{
+  background-color: var(--green)
+}
+
+.option-buttons-checker .edit-btn:hover{
+  background-color: var(--green-dark)
+}
+
+.reason-amount{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#fine-details{
+  margin-right: 30px;
+  padding: 10px;
+  width: 50vw;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+#fine-amount{
+  padding: 10px;
+  width: 25vw;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.warning-message{
+  display: flex;
+  justify-content: center;
+}
+
+.ticket{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.ticket-details-outerbox{
+  padding-top: 30px;
+}

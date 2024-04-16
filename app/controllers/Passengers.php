@@ -84,6 +84,7 @@
         'nic' => $user->nic,
         'phone' => $user->phone,
         'email' => $user->email,
+        'image' => $user->userImage,
         'name_err' => '',
         'email_err' => '',
         'phone_err' => '',
@@ -92,6 +93,7 @@
         'confirmPassword_err' => '',
 
       ];
+
       $this->view('user/setting',$data);
     }
 

@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/checker/header.php';?>
+<?php require APPROOT . '/views/checker/includes/header.php';?>
         <div class="content">
             <div class="cards">
                 <div class="card">
