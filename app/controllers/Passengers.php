@@ -7,21 +7,127 @@
       }
 
       $this->passengerModel = $this->model('Passenger');
+
+      $this->sheduleModel=$this->model('Shedule');
+
       $this->adminModel = $this->model('Admin');
       $this->userModel = $this->model('User');
+
       $this->stationModel = $this->model('Station');
+
+
     }
 
-    public function dashboard(){
-      $this->view('user/userdb');
+    public function wallet(){
+      $this->view('user/wallet');
     }
 
+    public function transaction(){
+      $this->view('user/transaction');
+    }
+
+    public function shedule_list(){
+     
+      $this->view('user/shedule_list');
+    }
+
+    // ## Select Shedule ## 
     public function shedule(){
-      $this->view('user/shedule');
+      $stations=$this->adminModel->getStation();
+      // $schedules = $this->passengerModel->searchSchedule($data);
+      
+      $data=[
+        'stations'=>$stations,
+        'schedules' => []
+      ];
+
+      $this->view('user/shedule',$data);
+    }
+
+    //search Schedule
+    public function searchSchedule(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'from' => trim($_POST['fromStation']),
+          'to' => trim($_POST['toStation']),
+          'date' => trim($_POST['date']),
+          'stations'=>'',
+        ];
+        $stations=$this->adminModel->getStation();
+        $schedules = $this->passengerModel->searchSchedule($data);
+        $data = ['stations'=>$stations,
+                'schedules' => $schedules];
+
+        $this->view('user/shedule',$data);
+        
+      }
+    }
+
+    // ## Booking Seats ## 
+
+    public function getTrainDetails(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        
+        $data=[
+          'shID'=>trim($_POST['schedule_id']) 
+        ];
+        
+        $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
+        
+        $data=[
+          'firstBooked'=>$trainDetails->firstClassBooked,
+          'secondBooked'=>$trainDetails->secondClassBooked,
+          'thirdBooked'=>$trainDetails->thirdClassBooked,
+          'fCapacity'=>$trainDetails->firstCapacity,
+          'sCapacity'=>$trainDetails->secondCapacity,
+          'tCapacity'=>$trainDetails->thirdCapacity,
+          'dDate'=>$trainDetails->departureDate,
+          'dTime'=>$trainDetails->departureTime,
+          'aTime'=>$trainDetails->arrivalTime,
+          'trainName'=>trim($_POST['train_name']),
+          'trainType'=>trim($_POST['train_type']),
+          'departureStation'=>trim($_POST['departure_station']),
+          'arrivalStation'=>trim($_POST['arrival_station']),
+          'shId'=>trim($_POST['schedule_id']) 
+        ];
+
+        $this->view('user/booking',$data);
+        // die($data['arrivalStation']);
+        
+      };
+      
+    }
+    public function bookingTickets(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data=[
+          // 'shid'=>trim($_POST['schedule_id']),
+          
+          'fcount'=>trim($_POST['fClassCount']),
+          'scount'=>trim($_POST['sClassCount']),
+          'tcount'=>trim($_POST['tClassCount']),
+          'sheduleId'=>trim($_POST['sheduleId'])
+          
+        ];
+         $this->passengerModel->updateSeatsByScheduleId($data);
+        // $this->view('user/booking',$data);
+         //die($data['sheduleId']);
+        
+      
+      }
+    }
+
+
+    public function ticket(){
+      $this->view('user/ticket');
     }
 
     //veiw feedback
-    public function Feedbacks(){     
+    public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
       // echo '<pre>';

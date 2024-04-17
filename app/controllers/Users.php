@@ -9,7 +9,7 @@
       // Check for POST
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // Process form
-  
+
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -218,7 +218,7 @@
       if($user->type == 'admin'){
         redirect('admins/dashboard');
       } else if($user->type == 'user'){
-        redirect('passengers/dashboard');
+        redirect('passengers/wallet');
       } else if($user->type == 'checker'){
         redirect('checkers/dashboard');
       } else if($user->type == 'supporter'){

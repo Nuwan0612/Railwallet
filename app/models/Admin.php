@@ -184,7 +184,7 @@
       $this->db->query("SELECT * FROM stations WHERE status = 1;");
       $results = $this->db->resultSet();
       return $results;
-    }
+    } 
 
     public function closedStations(){
       $this->db->query("SELECT * FROM stations WHERE status = 0;");
