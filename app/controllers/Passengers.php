@@ -13,6 +13,9 @@
       $this->adminModel = $this->model('Admin');
       $this->userModel = $this->model('User');
 
+      $this->stationModel = $this->model('Station');
+
+
     }
 
     public function wallet(){
@@ -433,8 +436,12 @@
       $ticket = $requestData["ticket"];
 
       $current = $this->passengerModel->getCurrentJourney($_SESSION['user_id']);
-        
-      if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
+
+      if(!$current) {
+        $responseData = array(
+          'startJourney' => $current
+        );
+      } else if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
         if($this->passengerModel->endJourney($current->id)){
           $responseData = array(
             'success' => true,
@@ -450,8 +457,25 @@
           'unfinished' => $data
         );
       }
+      
 
       header('Content-Type: application/json');
       echo json_encode($responseData);
+    }
+
+    //Get lattitude and longitude
+    public function getStationLatAndLng(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $details = $this->stationModel->getStationLatAndLng($requestData['depID'], $requestData['arrID']);
+      $responseData = array(
+        'station1'=>$details[0],
+        'station2'=>$details[1]
+      );
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+
     }
   }

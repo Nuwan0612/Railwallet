@@ -1,5 +1,5 @@
 #map { 
-  height: 580px; 
+  height: 500px; 
   width: 100%;
 }
 .map-outer-container{
@@ -7,13 +7,13 @@
   justify-content: center;
   border: 2px solid black;
   padding: 1vh;
-  width: 99%;  
+  width: 90%;  
 }
 .Station-name{
   text-align: center;
   margin-bottom: 2vh;
   background-color: #333;
-  width: 200px;
+  width: 300px;
   color: #fff;
   padding: 10px;
   font-size: 25px;
@@ -30,5 +30,5 @@
  flex-direction: column;
  justify-content: center;
  align-items: center;
- margin-top: 20px;
+ padding-top: 20px;
 }

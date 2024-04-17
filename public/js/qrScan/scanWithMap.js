@@ -4,6 +4,8 @@ let departureStation = '';
 let arrivalStation = '';
 let trainClass = '';
 let ticket = '';
+let station1lat = '' , station2lat = '';
+let station1lng = '' , station2lng = '';
 
 
 function updateName(selectedli, type, staionOrClass) {
@@ -21,7 +23,9 @@ function updateName(selectedli, type, staionOrClass) {
 	}
 
 	document.querySelector('.warning').innerHTML = "";
-	reomveButtons();
+	document.getElementById('end-journey-btn').style.display = 'none';
+  document.getElementById('start-journey-btn').style.display = 'none';
+
 	if(departureStation && arrivalStation && trainClass){
 		checkTicketAvailability();	
 	}
@@ -117,15 +121,12 @@ function onScanSuccess(decodeText, decodeResult, departureStation, arrivalStatio
 		document.querySelector('.warning').innerHTML = "Please Select Train class";	
 	} else if (decodeText == departureStation) {
 		if(ticket){
-			document.querySelector('.warning').innerHTML = "";
-			document.getElementById('start-journey-btn').style.display = 'inline-block';
-			document.getElementById('end-journey-btn').style.display = 'none';
+      getStationLocations('startJourney');
 		}
 	} else if (decodeText == arrivalStation) {
 		if(ticket){
-			document.querySelector('.warning').innerHTML = "";
-			document.getElementById('end-journey-btn').style.display = 'inline-block';
-			document.getElementById('start-journey-btn').style.display = 'none';
+      getStationLocations('endJourney');
+			
 		}	
 	} else {
 		document.querySelector('.warning').innerHTML = "Selected Station Does not match";
@@ -163,6 +164,7 @@ function startJourney() {
 			if(response.unfinished) {
 				document.querySelector('.warning').innerHTML = `There is a unfinished journey from ${response.unfinished.depStationName} to ${response.unfinished.arrStationName} with ${response.unfinished.ticketClass.className} class ticket.`;
 				document.getElementById('start-journey-btn').style.display = 'none';
+				document.getElementById('cancel-journey-btn').style.display = 'inline-block';
 			} else if (response.success) {
 				document.querySelector('.warning').style.color = 'var(--green)';
 				document.querySelector('.warning').innerHTML = 'Have a safe Journey';
@@ -192,15 +194,10 @@ function endJourney(){
 			"ticket": ticket
 		}),
 		success: function(response) {
-
 			if (response.success){
 				document.querySelector('.warning').style.color = 'var(--green)';
 				document.querySelector('.warning').innerHTML = 'You have completed the journey successfully';
 				reomveButtons()
-			} else if(!response.startJourney) {
-				document.querySelector('.warning').innerHTML = 'Please Start a Journey first';
-				reomveButtons()
-				console.log(response.startJourney)
 			} else if(response.unfinished){
 				document.querySelector('.warning').innerHTML = `There is a unfinished journey from ${response.unfinished.depStationName} to ${response.unfinished.arrStationName} with ${response.unfinished.ticketClass.className} class ticket.`;
 			}
@@ -214,4 +211,84 @@ function endJourney(){
 function reomveButtons() {
 	document.getElementById('start-journey-btn').style.display = 'none';
 	document.getElementById('end-journey-btn').style.display = 'none';
+}
+
+function getStationLocations(StartOrEnd){
+
+  $.ajax({
+		type: "POST",
+		url: "http://localhost/railwallet/passengers/getStationLatAndLng",
+		contentType: "application/json",
+		data: JSON.stringify({
+			"depID": departureStation,
+			"arrID": arrivalStation,
+		}),
+    success: function(response){
+      if(response){
+        station1lat = response.station1.latitude;
+				station1lng = response.station1.longitude;
+				station2lat = response.station2.latitude;
+				station2lng = response.station2.longitude;
+				findIsUserInRightLocation(StartOrEnd);
+      }
+    },
+    error: function(xhr, status, error){
+      console.log(xhr.responseText)
+    }
+  });
+
+}
+
+function findIsUserInRightLocation(StartOrEnd){
+	const circleCenterStation1 = L.latLng(station1lat, station1lng);
+	const circleCenterStation2 = L.latLng(station2lat, station2lng);
+	const circleRadius = 170; // Radius in meters
+
+navigator.geolocation.watchPosition(success,error,{ 
+  enableHighAccuracy: true,
+  timeout: 5000, // 10 seconds
+  maximumAge: 10000   // Don't use a cached position
+});
+
+	function success(pos) {
+		const lat = pos.coords.latitude
+		const lng = pos.coords.longitude
+
+		// Create a LatLng object for current position
+		const currentLatLng = L.latLng(lat, lng);
+
+		// Calculate the distance between current location and circle center
+		const distance1 = currentLatLng.distanceTo(circleCenterStation1); // Distance in meters
+		const distance2 = currentLatLng.distanceTo(circleCenterStation2);
+
+		// Check if the distance is within the circle's radius
+		const isInsideCircleStation1 = distance1 <= circleRadius;
+		const isInsideCircleStation2 = distance2 <= circleRadius;
+
+		console.log(isInsideCircleStation1)
+		console.log(isInsideCircleStation2);
+
+		if(isInsideCircleStation1 || isInsideCircleStation2) {
+			if(StartOrEnd == 'startJourney'){
+				document.querySelector('.warning').innerHTML = "";
+				document.getElementById('start-journey-btn').style.display = 'inline-block';
+				document.getElementById('end-journey-btn').style.display = 'none';
+			} else if(StartOrEnd == 'endJourney'){
+				document.querySelector('.warning').innerHTML = "";
+				document.getElementById('end-journey-btn').style.display = 'inline-block';
+				document.getElementById('start-journey-btn').style.display = 'none';
+			}  
+		} else {
+			document.querySelector('.warning').innerHTML = 'You are not at correct station'
+			reomveButtons()
+		}
+	}
+
+	function error(err) {
+		if (err.code === 1) {
+			alert("Please allow geolocation access");
+		} else {
+			alert("Cannot get current location")
+		}
+	}
 }

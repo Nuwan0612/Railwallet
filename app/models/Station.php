@@ -69,6 +69,14 @@
       }
     }
 
+    public function getStationLatAndLng($depID,$arrID){
+      $this->db->query('SELECT * FROM stations WHERE stationID = :depID OR stationID = :arrID');
+      $this->db->bind(':depID', $depID);
+      $this->db->bind(':arrID', $arrID);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
 // Find Station by Id when edit 
   public function findStationByStationID($stationID){
     $this->db->query('SELECT * FROM stations WHERE stationID = :stationID');
