@@ -7,9 +7,11 @@
     }
 
     public function addStation($data){
-      $this->db->query('INSERT INTO stations (stationID, name, qr) VALUES(:stationID, :name, :qrCodePath)
+      $this->db->query('INSERT INTO stations (stationID, name, qr, latitude, longitude) VALUES(:stationID, :name, :qrCodePath, :latitude, :longitude)
       ');
 
+      $this->db->bind(':latitude',$data['latitude']);
+      $this->db->bind(':longitude',$data['longitude']);
       $this->db->bind(':stationID', $data['stationID']);
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':qrCodePath', $data['qrCodePath']);

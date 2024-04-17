@@ -215,6 +215,7 @@
         'nic' => $admin->nic,
         'phone' => $admin->phone,
         'email' => $admin->email,
+        'image' => $admin->userImage,
         'name_err' => '',
         'email_err' => '',
         'phone_err' => '',
@@ -233,6 +234,8 @@
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+        $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
+
         $data = [
           'id' => $_SESSION['user_id'],
           'nic' => $_SESSION['user_nic'],
@@ -242,6 +245,7 @@
           'oldPassword' => trim($_POST['oldPassword']),
           'newPassword' => trim($_POST['newPassword']),
           'confirmPassword' => trim($_POST['confirmPassword']),
+          'img' => $admin->userImage,
           'id_err' => '',
           'name_err' => '',
           'email_err' => '',
@@ -255,8 +259,6 @@
           'newPassword_err_value' => '',
           'confirmPassword_err_value' => ''
         ];
-
-        $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
 
         if(empty($data['name'])){
           $data['name'] = $admin->name;
@@ -300,6 +302,34 @@
           if(empty($data['confirmPassword'])) {
             $data['confirmPassword_err'] = "Please confirm password"; 
           }   
+        }
+
+        if (!empty($_FILES['image']['name'])) {
+          if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+              $uploadDir = PICTURE.'pics/userPics/';
+              $userDir = $uploadDir . $_SESSION['user_id'] . '/';
+              $tempName = $_FILES['image']['tmp_name'];
+              $originalName = $_FILES['image']['name'];
+              $imageFileType = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+              if (!file_exists($userDir)) {
+                mkdir($userDir, 0777, true); // Create directory recursively
+              }
+              
+              // Generate unique filename
+              $uniqueFileName = uniqid('', true) . '.' . $imageFileType;
+              $uploadPath = $userDir . $uniqueFileName;
+
+              // Move uploaded file to new location
+              if (move_uploaded_file($tempName, $uploadPath)) {
+                  // File upload successful, update database with image path
+                  $data['img'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
+              } else {
+                  $data['img_err'] = 'Failed to move uploaded file.';
+              }
+          } else {
+              $data['img_err'] = 'File upload error: ' . $_FILES['image']['error'];
+          }
         }
 
         // Make sure errors are empty
@@ -1097,6 +1127,10 @@
       $data =[
         'stationID' => trim($_POST['stationID']),
         'name' => trim($_POST['name']),
+        'latitude' => trim($_POST['latitude']),
+        'longitude' => trim($_POST['longitude']),
+        'latitude_err' => '',
+        'longitude_err' => '',
         'qrCodePath' => '',
         'stationID_err' => '',
         'name_err' => '',
@@ -1112,6 +1146,16 @@
         }
       }
 
+      //Validate Latitude
+      if(empty($data['latitude'])){
+        $data['latitude_err'] = 'Please enter station latitude';
+      }
+
+      //validate Longitude
+      if(empty($data['longitude'])){
+        $data['longitude_err'] = 'Please enter station longitude';
+      }
+
       //Validate Station ID
       if(empty($data['stationID'])){
         $data['stationID_err'] = 'Please enter station ID';
@@ -1123,10 +1167,8 @@
       }
     
       // Make sure errors are empty
-      if(empty($data['name_err']) && empty($data['stationID_err'])){
-
-
-        
+      if(empty($data['name_err']) && empty($data['stationID_err']) && empty($data['longitude_err']) && empty($data['latitude_err'])){
+       
         //Generate QR
         
         if($qr = $this->genarateQR($data['stationID'])){
@@ -1148,8 +1190,12 @@
        // Init data
        $data =[
         'stationID' => '',
+        'latitude' => '',
+        'longitude' => '',
         'name' => '',
         'qrCodePath' => '',
+        'latitude_err' => '',
+        'longitude_err' => '',
         'stationID_err' => '',
         'name_err' => '',
       ];
@@ -1264,9 +1310,7 @@
       $data =[
         'stations' => $stations,
       ];
-    }
-   
-    
+    }  
 
     if(!$stations){
       $this->view('admin/stations/stations',$data);
@@ -1276,6 +1320,13 @@
       $this->view('admin/stations/hideStation',$data);
     }
        
+  }
+
+/*----------------------------------------------------------------view Station Location------------------------------------------*/
+  public function viewStationLocation($id){
+    $details = $this->adminModel->findStationByStationID($id);
+    $data = ['details' => $details[0]];
+    $this->view('admin/stations/viewLocation',$data);
   }
 
 /*=====================================================================================================================================
@@ -1948,7 +1999,7 @@
      
   }
 
-/*-----------------------------------------------------Travel History-------------------------------------------------------*/
+/*-----------------------------------------------------Travel Details-------------------------------------------------------*/
 
   public function getuserTravelDetails($id){
     $results = $this->adminModel->getuserTravelDetails($id);
@@ -1962,6 +2013,13 @@
     $result = $this->adminModel->searchTravelDetails($_GET['date'],$_GET['id']);
     $data = ['userTravelDetails' => $result];
     $this->view('admin/users/userTravelDetails',$data);
+  }
+
+/*-----------------------------------------------------User Fine Details--------------------------------------------------*/
+  public function getuserFineDetails($id){
+    $results = $this->adminModel->getuserFineDetails($id);
+    $data = ['userFineDetails' => $results];
+    $this->view('admin/users/userFines',$data);
   }
 
 }

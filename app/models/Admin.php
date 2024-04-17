@@ -16,12 +16,13 @@
 
     public function editAdminDetails($data){
       
-      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword WHERE id = :id');
+      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword, userImage = :img  WHERE id = :id');
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
       $this->db->bind(':newPassword', $data['newPassword']);
       $this->db->bind(':id', $data['id']);
+      $this->db->bind(':img', $data['img']);
 
       if($this->db->execute()){
         return true;
@@ -124,6 +125,13 @@
       $this->db->bind(':id', $id);
       $reslts = $this->db->resultSet();
       return $reslts;
+    }
+
+    public function getuserFineDetails($id){
+      $this->db->query("SELECT * FROM fines WHERE passenger_id = :id");
+      $this->db->bind(':id', $id);
+      $results = $this->db->resultSet();
+      return $results;
     }
 
     
