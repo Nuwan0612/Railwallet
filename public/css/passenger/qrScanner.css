@@ -25,6 +25,8 @@
 
 .container h1 {
 	color: #ffffff;
+	/* overflow-y: auto;
+    height: calc(100vh - 15vh); */
 }
 
 .section {
@@ -63,18 +65,19 @@ button {
 	padding: 10px 20px;
 	border: 1px solid #b2b2b2;
 	outline: none;
-	border-radius: 0.25em;
+	border-radius: 0.5rem;
 	color: white;
 	font-size: 15px;
 	cursor: pointer;
 	margin-top: 15px;
 	margin-bottom: 10px;
-	background-color: #008000ad;
-	transition: 0.3s background-color;
+	background-color: #009688;
+	transition: 0.3s ;
 }
 
 button:hover {
-	background-color: #008000;
+	background-color: #ccc;
+	color: #130f40;
 }
 
 #html5-qrcode-anchor-scan-type-change {

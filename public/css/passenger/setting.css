@@ -86,12 +86,14 @@ button {
   background-color: #009688;
   color: white;
   border: none;
-  border-radius: 4px;
+  font-size: 20px;
+  border-radius: .5rem;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #00796b;
+  background-color: #ccc;
+  color: #130f40;
 }
 
 .tbox.error textarea {
