@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/qrScanner.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/drop.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>
@@ -82,6 +85,7 @@
             </div>
           </div>
 
+          <div id="map"></div>
           <div class="warning"></div>
 
           <div class="option-buttons">
@@ -96,5 +100,6 @@
   <script src="https://unpkg.com/html5-qrcode"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="<?php echo URLROOT?>/js/qrScan/script.js"></script>
+  <!-- <script src="<?php echo URLROOT?>/js/qrScan/scanWithMap.js"></script> -->
     
 <?php require APPROOT . '/views/user/includes/footer.php';?>   

@@ -18,7 +18,7 @@
       </div>
 
       <div class="tbox <?php echo !empty($data['latitude_err']) ? 'error' : ''; ?>">
-        <input type="text" name="latitude" placeholder="Latidude" value="<?php echo $data['latitude']; ?>">
+        <input type="text" name="latitude" placeholder="Latitude" value="<?php echo $data['latitude']; ?>">
         <div class="error-message"><?php echo $data['latitude_err'];?></div>
       </div>
 

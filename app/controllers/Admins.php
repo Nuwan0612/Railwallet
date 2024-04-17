@@ -1322,7 +1322,7 @@
        
   }
 
-/*----------------------------------------------------------------view Station Location------------------------------------------*/
+/*-----------------------------------------------------view Station Location-----------------------------------------------*/
   public function viewStationLocation($id){
     $details = $this->adminModel->findStationByStationID($id);
     $data = ['details' => $details[0]];
