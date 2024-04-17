@@ -18,18 +18,18 @@
 
             <a href="<?php echo URLROOT;?>passengers/wallet"><li><i class='bx bxs-wallet' ></i><span>Wallet</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/shedule"><li><i class='bx bxs-calendar'></i><span>Shedule</span></li></a>
-            <a href="#"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
-            <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bx-search-alt'></i><span>View Ticket</span></li></a>
-            <a href="#"><li><i class='bx bx-money-withdraw' ></i><span>Fines</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/qrScan"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bxs-file-find'></i><span>View Ticket</span></li></a>
+            <a href="#"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><i class='bx bxs-like' ></i><span>Feedback</span></li></a>
             <a href="#"><li><i class='bx bx-support' ></i><span>Customer Support</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/settings"><li><i class='bx bxs-cog'></i><span>Settings</span></li></a>
-            <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out'></i><span>Logout</span></li></a>
+            <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out-circle' ></i><span>Logout</span></li></a>
         </ul>
     </div>
-    <div class="container">
-        <div class="header">
-            <div class="nav">
+    <div class="user-container">
+        <div class="user-header">
+            <div class="user-nav">
 
                 <!-- <a href="<?php echo URLROOT;?>passengers/qrScan"><h3> QR Scanner</h3></a>
                 <a href="#"><h3> View Ticket</h3></a>
