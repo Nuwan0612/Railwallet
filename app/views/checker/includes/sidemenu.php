@@ -1,7 +1,12 @@
 <div class="side-menu">
-    <div class="brand-name">
+    <!-- <div class="brand-name">
         <h3>Checker-Keshali</h3>
+    </div> -->
+    <div class="brand-name">
+        <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
+        <p>RailWallet</p>
     </div>
+
     <ul>
         <a href="<?php echo URLROOT; ?>checkers/dashboard"><li><img src="<?php echo URLROOT;?>public/pics/db.png" >&nbsp;<span>Dashboard</span></li></a>
         <a href="<?php echo URLROOT; ?>/checkers/users"><li><img src="<?php echo URLROOT;?>public/pics/man.png">&nbsp;<span>Users</span></li></a>
@@ -15,9 +20,9 @@
     </ul>
 </div>
 
-<div class="container">
-    <div class="header">
-        <div class="nav">
+<div class="checker-container">
+    <div class="checker-header">
+        <div class="checker-nav">
             <a href="<?php echo URLROOT; ?>checkers/qrScan"><h3>QR Scanner</h3></a>
             <a href="#"><h3> Add Fines</h3></a>
             <a href="#"><h3> Issue Ticket</h3></a>
