@@ -9,7 +9,7 @@
 
     <ul>
         <a href="<?php echo URLROOT; ?>/checkers/qrScan"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
-        <a href="<?php echo URLROOT; ?>/checkers/users"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
+        <a href="<?php echo URLROOT; ?>/checkers/fine"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
         <!-- <a href="#"><li><img src="customer-service.png" alt="">&nbsp;<span>Checkers</span></li></a>
         <a href="#"><li><img src="feedback.png" alt="">&nbsp;<span>FeedBacks</span></li></a> -->
         <a href="<?php echo URLROOT; ?>/checkers/shedules"><li><i class='bx bxs-calendar' ></i><span>Shedule</span></li></a>

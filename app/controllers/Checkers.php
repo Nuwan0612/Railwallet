@@ -13,6 +13,10 @@
       $this->view('checker/checker');
     }
 
+    public function fine(){
+      $this->view('checker/fine');
+    }
+
     public function qrScan(){
       $this->view('checker/scanQR');
     }
