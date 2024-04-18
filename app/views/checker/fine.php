@@ -5,9 +5,8 @@
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">
-            <input type="text" class="border-search" id="search-users" placeholder="Enter User ID">
-            <button class="search-button">
-            <!-- <button class="search-button" onclick="searchUser()"> -->
+            <input type="text" class="border-search" id="search-fines" placeholder="Enter User ID">
+            <button class="search-button" onclick="searchFines()">
               <i class="fas fa-search"></i>
             </button> 
           </div>
@@ -30,32 +29,20 @@
               </tr>
             </thead>
             
-            <!-- <tbody>
-            <?php $rowNumber = 1; foreach($data['users'] as $user):?>
+            <tbody>
+            <?php $rowNumber = 1; foreach($data['fines'] as $fine):?>
             <tr>
               <td><?php echo $rowNumber; ?></td>
-              <td><?php echo $user->name; ?></td>
-              <td><?php echo $user->nic; ?></td>
-              <td><?php echo $user->phone; ?></td>
-              <td><?php echo $user->status; ?></td>
-              <td class="options">
-                <a href="<?php echo URLROOT; ?>admins/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
-              </td>
-              <td>
-              <a href="<?php echo URLROOT; ?>admins/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
-              </td>
-              <td class="options">
-                <a href="<?php echo URLROOT; ?>admins/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
-              </td>
-              <td></td>
-              <td>
-                <div class="options">
-                  <form action="<?php echo URLROOT; ?>users/deactiveUserStatus/<?php echo $user->id?>" method ="post"><input class="delete-btn" type="submit" value="Deactivate"></form>
-                </div> 
-              </td>
+              <td><?php echo $fine->passenger_id; ?></td>
+              <td><?php echo $fine->journey_id; ?></td>
+              <td><?php echo $fine->fine_reason; ?></td>
+              <td><?php echo $fine->fine_amount; ?></td>
+              <td><?php echo $fine->fine_date; ?></td>
+              <td><?php echo $fine->payment_status; ?></td>
+              <td><?php echo $fine->payment_date; ?></td>
             </tr>
             <?php $rowNumber++; endforeach; ?>
-            </tbody> -->
+            </tbody>
           </table>
         </div>
       </div>  

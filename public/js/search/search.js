@@ -55,6 +55,14 @@ function searchSheduleByID() {
   window.location.href = `http://localhost/railwallet/admins/searchSheduleByID?id=${id}`;   
 }
 
+function searchFines() {
+  const id = document.getElementById('search-fines').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchFinesByUserId/${id}`;   
+}
+
 function searchDepartureStation() {
   const departueStation = document.getElementById('search-departure-station').value;
   const arrivalStation = document.getElementById('search-arrival-station').value;

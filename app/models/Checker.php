@@ -115,4 +115,19 @@
         return false;
       }
     }
+
+    public function viewFinesById($id){
+      $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    public function viewFineDetailsByCheckerId($id){
+      $this->db->query("SELECT * FROM `fines` WHERE checker_id=:cid;");
+
+      $this->db->bind(':cid', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
   }

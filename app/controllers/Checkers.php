@@ -13,8 +13,28 @@
       $this->view('checker/checker');
     }
 
+    // View fine details
     public function fine(){
-      $this->view('checker/fine');
+
+      $result = $this->checkerModel->viewFineDetailsByCheckerId($_SESSION["user_id"]);
+      $data = ["fines"=>$result];
+
+       $this->view('checker/fine',$data);
+    }
+
+    public function searchFinesByUserId($id){
+      $result = $this->checkerModel->viewFinesById($id);
+      $data = ["fines"=>$result];
+      $this->view('checker/fine',$data);
+    }
+
+    // View schedule details
+    public function schedules(){
+
+      // $result = $this->checkerModel->viewFineDetailsByCheckerId($_SESSION["user_id"]);
+      // $data = ["fines"=>$result];
+
+      $this->view('checker/schedule');
     }
 
     public function qrScan(){
@@ -44,7 +64,7 @@
         $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
         $this->checkerModel->updatefinePayment($data['journey_id']);
       }
-
+;
       if($addFine && $this->checkerModel->cancelTicket($_GET['id'])){
         $this->qrScan();
       }
