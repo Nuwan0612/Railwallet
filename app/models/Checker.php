@@ -115,4 +115,34 @@
         return false;
       }
     }
+
+    public function getPassengerJourneyDetails($id){
+      $this->db->query("SELECT  
+                          u.name AS userName, 
+                          st1.name AS depStation, 
+                          st2.name AS arrStation, 
+                          tc.className, 
+                          tp.price, 
+                          DATE(j.start_time) AS startDate, 
+                          j.completed, 
+                          j.canceled 
+                        FROM 
+                          journey j 
+                        JOIN 
+                          users u ON j.passenger_id = u.id 
+                        JOIN 
+                          stations st1 ON st1.stationID = j.depStation 
+                        JOIN 
+                          stations st2 ON st2.stationID = j.arrStation 
+                        JOIN 
+                          ticketprices tp ON tp.ticketPriceID = j.ticket_id 
+                        JOIN 
+                          trainclasses tc ON tc.classID = tp.classID 
+                        WHERE 
+                          j.id = :id;"
+                      );
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
   }
