@@ -92,7 +92,7 @@ td {
     color: white;
 }
 .side-menu li {
-    font-size: 19px;
+    font-size: 17px;
     padding: 20px 40px;
     color: black;
     font-weight: bold;
@@ -186,18 +186,28 @@ td {
     align-items: center;
 }
 .checker-container .checker-header .checker-nav .user img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    margin-left: -800px;
+    /* padding: 0; */
 }
-.checker-container .checker-header .checker-nav .user .notify{
+.checker-container .checker-header .checker-nav .user p {
+    font-size: 21px;
+    font-weight: bold;
+    margin-left: -40px;
+}
+/* .checker-container .checker-header .checker-nav .user .notify{
     margin-left: 800px;
     margin-right: -800px;
     font-size: 30px;
-}
+} */
 .checker-container .checker-header .checker-nav .user .img-case {
     position: relative;
-    width: 50px;
-    height: 50px;
+    /* width: 50px;
+    height: 50px; */
+}
+.checker-container .checker-header .checker-nav .user .img-case i {
+    font-size: 30px;
 }
 .checker-container .checker-header .checker-nav .user .img-case img {
     position: absolute;
@@ -211,6 +221,58 @@ td {
     font-weight: bold;
     margin-left: -800px;
 }
+ .content {
+    position: relative;
+    margin-top: 10vh;
+    min-height: 90vh;
+    background: white;
+}
+ .content .cards {
+    padding: 20px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+ .content .cards .card {
+    width: 250px;
+    height: 150px;
+    background: white;
+    margin: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+ .content .content-2 {
+    min-height: 60vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+ .content .content-2 .recent-payments {
+    min-height: 50vh;
+    flex: 5;
+    background: white;
+    margin: 0 25px 25px 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+}
+/* .container .content .content-2 .new-students {
+    flex: 2;
+    background: white;
+    min-height: 50vh;
+    margin: 0 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+}
+.container .content .content-2 .new-students table td:nth-child(1) img {
+    height: 40px;
+    width: 40px;
+} */
 @media screen and (max-width: 1050px) {
     .side-menu li {
         font-size: 18px;
