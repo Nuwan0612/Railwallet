@@ -29,9 +29,41 @@
 
     // View schedule details
     public function schedules(){
-      $result = $this->checkerModel->viewSchedule($_GET['id']);
+      $result = $this->checkerModel->viewSchedule();
       $data = ["schedules"=>$result];
 
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by schedule id
+    public function searchSchedulesByScheduleId($id){
+      $result = $this->checkerModel->viewSchedulesByScheduleId($id);
+      // print_r( $result);
+      $data = ['schedules'=>$result];
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by departure station
+    public function searchSchedulesByDepartureStation($id){
+      $result = $this->checkerModel->viewSchedulesByDepartureStation($id);
+
+      $data = ['schedules'=>$result];
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by arrival station
+    public function searchSchedulesByArrivalStation($id){
+      $result = $this->checkerModel->viewSchedulesByArrivalStation($id);
+
+      $data = ['schedules'=>$result];
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by date
+    public function searchSchedulesByDate($id){
+      $result = $this->checkerModel->viewSchedulesByDate($id);
+
+      $data = ['schedules'=>$result];
       $this->view('checker/schedule',$data);
     }
 
