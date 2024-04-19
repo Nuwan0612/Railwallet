@@ -123,11 +123,21 @@
       return $result;
     }
 
+    // View fine details
     public function viewFineDetailsByCheckerId($id){
       $this->db->query("SELECT * FROM `fines` WHERE checker_id=:cid;");
 
       $this->db->bind(':cid', $id);
       $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // View schedule details
+    public function viewSchedule($id){
+      $this->db->query("SELECT * FROM `shedules` WHERE sheduleID=:id;");
+
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
       return $result;
     }
   }

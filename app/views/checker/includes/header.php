@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>css/checker/checker.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>css/checker/issueFine.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>css/checker/fine.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>css/checker/schedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/qrScanner.css">
     <title><?php echo SITENAME; ?></title>
 </head>

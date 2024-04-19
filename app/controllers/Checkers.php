@@ -15,13 +15,12 @@
 
     // View fine details
     public function fine(){
-
       $result = $this->checkerModel->viewFineDetailsByCheckerId($_SESSION["user_id"]);
       $data = ["fines"=>$result];
-
-       $this->view('checker/fine',$data);
+      $this->view('checker/fine',$data);
     }
 
+    // Search fines by user id
     public function searchFinesByUserId($id){
       $result = $this->checkerModel->viewFinesById($id);
       $data = ["fines"=>$result];
@@ -30,11 +29,10 @@
 
     // View schedule details
     public function schedules(){
+      $result = $this->checkerModel->viewSchedule($_GET['id']);
+      $data = ["schedules"=>$result];
 
-      // $result = $this->checkerModel->viewFineDetailsByCheckerId($_SESSION["user_id"]);
-      // $data = ["fines"=>$result];
-
-      $this->view('checker/schedule');
+      $this->view('checker/schedule',$data);
     }
 
     public function qrScan(){
