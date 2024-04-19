@@ -10,4 +10,7 @@ function calculateChecksum() {
 
       const hash = md5(stringToHash + merchantSecretHASH).toUpperCase();
       document.getElementById('hashField').value = hash;
+    
+
+    
   }

@@ -236,5 +236,29 @@
       }
     }
 
+    // Recharge wallet
+    public function walletRecharge($id){
+      $this->db->query("SELECT transaction_id 
+      FROM topupdetails 
+      WHERE user_id = :id
+      ORDER BY transaction_id DESC 
+      LIMIT 1;
+      ");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function updateAmount($data){
+      $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
+      $this->db->bind(':uid', $data["uid"]);
+      $this->db->bind(':amount', $data["amount"]);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
 
   }
