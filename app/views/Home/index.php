@@ -1,4 +1,7 @@
 <?php require APPROOT . '/views/Home/inc/header.php';?>
+
+<link rel="stylesheet" href="<?php echo URLROOT; ?>/css/abc/style.css">
+
 <div class="banner" id="Home">
             <div class="navbar">
                 <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
@@ -43,51 +46,87 @@
                 <h1>FAQs?</h1>
                 <span class="close-btn material-symbols-outlined">close</span>
             </header>
+
                 <div class="tab">
-                    <input type="radio" name="acc" id="acc1">
-                    <label for="acc1">
-                        <h2>01</h2>
-                        <h3>How do I create an account on RailWallet?</h3>
-                    </label>
-                    <div class="content"><p>Creating an account on RailWallet is simple! 
+
+                    <div onclick="displayAnswer('ans1')">
+                        <label>
+                            <h2>01</h2>
+                            <h3>How do I create an account on RailWallet?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none;" id="ans1">Creating an account on RailWallet is simple! 
                     Just click on the "Sign Up" button and follow the instructions to 
-                    set up your account with your email address and password.</p>
+                    set up your account with your email address and password.
                     </div>
+                    
                 </div>
+
                 <div class="tab">
-                    <input type="radio" name="acc" id="acc2">
-                    <label for="acc2">
-                        <h2>02</h2>
-                        <h3>Can I top up my RailWallet using cash?</h3>
-                    </label>
-                    <div class="content"><p>Currently, RailWallet supports online top-ups
+
+                    <div onclick="displayAnswer('ans2')">
+                        <label>
+                            <h2>02</h2>
+                            <h3>Can I top up my RailWallet using cash?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none; border: 1px solid red" id="ans2">Currently, RailWallet supports online top-ups
                          through various payment methods. We do not support cash top-ups 
-                         at this time for security reasons.</p>
+                         at this time for security reasons.
                     </div>
+
+                    <!-- <input type="radio" name="acc" id="acc1">
+                    <label for="acc1">
+                        
+                    </label> -->
+                    
                 </div>
+
                 <div class="tab">
-                    <input type="radio" name="acc" id="acc3">
-                    <label for="acc3">
-                        <h2>03</h2>
-                        <h3>How do I reserve a seat using RailWallet?</h3>
-                    </label>
-                    <div class="content"><p>Once you've logged into your RailWallet account, 
+
+                    <div onclick="displayAnswer('ans3')">
+                        <label>
+                            <h2>03</h2>
+                            <h3>How do I reserve a seat using RailWallet?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none; border: 1px solid red" id="ans3">Once you've logged into your RailWallet account, 
                         navigate to the "Seat Reservation" section, select your desired 
-                        train and seat, and follow the prompts to complete your reservation.</p>
+                        train and seat, and follow the prompts to complete your reservation.
                     </div>
+
+                    <!-- <input type="radio" name="acc" id="acc1">
+                    <label for="acc1">
+                        
+                    </label> -->
+                    
                 </div>
+
                 <div class="tab">
-                    <input type="radio" name="acc" id="acc4">
-                    <label for="acc4">
-                        <h2>04</h2>
-                        <h3>What should I do if my train is delayed?</h3>
-                    </label>
-                    <div class="content"><p> In case of train delays, you will receive 
+
+                    <div onclick="displayAnswer('ans4')">
+                        <label>
+                            <h2>04</h2>
+                            <h3>What should I do if my train is delayed?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none; border: 1px solid red" id="ans4">In case of train delays, you will receive 
                         notifications via email or SMS provided during registration. 
                         You can also check the updated train schedule on our website 
-                        for real-time information.</p>
+                        for real-time information.
                     </div>
+
+                    <!-- <input type="radio" name="acc" id="acc1">
+                    <label for="acc1">
+                        
+                    </label> -->
+                    
                 </div>
+
             </div>   
         </div>
 
@@ -224,6 +263,32 @@
 
     containerCloseBtn.addEventListener("click", () => outerContainer.classList.remove("show-container"));
     containerToggler.addEventListener("click", () => outerContainer.classList.toggle("show-container"));
+
+
+    function displayAnswer(answer) {
+
+        var question = document.getElementById(answer);
+        const boxes = document.querySelectorAll('.answer-box');
+
+        if (question.style.display == "block")
+        {
+            boxes.forEach(function(box) {
+                box.parentNode.style.background = '';
+            });
+            question.style.display = "none";
+        }
+        else
+        {
+            boxes.forEach(function(box) {
+                box.style.display = 'none';
+                box.parentNode.style.background = '';
+            });
+
+            question.style.display = "block";
+            question.parentNode.style.background = "green";
+        }
+
+    }
 
 
 </script>
