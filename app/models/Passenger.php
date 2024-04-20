@@ -97,13 +97,13 @@
       firstCapacity,
       secondCapacity,
       thirdCapacity
-  FROM 
-      shedules
-  JOIN
-      trains ON trains.trainID = shedules.trainID
-  WHERE 
-      sheduleID = :scheduleID
-      
+      FROM 
+        shedules
+      JOIN
+        trains ON trains.trainID = shedules.trainID
+      WHERE 
+        sheduleID = :scheduleID
+          
       ');
       $this->db->bind(':scheduleID', $data['shID']);
 
@@ -115,11 +115,11 @@
 
     public function updateSeatsByScheduleId($data){
       $this->db->query('UPDATE shedules SET 
-      firstClassBooked=firstClassBooked+:fcount,
-      secondClassBooked=secondClassBooked+:scount,
-      thirdClassBooked=thirdClassBooked+:tcount
-  WHERE 
-      sheduleID =:scheduleID ');
+        firstClassBooked=firstClassBooked+:fcount,
+        secondClassBooked=secondClassBooked+:scount,
+        thirdClassBooked=thirdClassBooked+:tcount
+      WHERE 
+        sheduleID =:scheduleID ');
 
       $this->db->bind(':scheduleID', $data['sheduleId']);
       $this->db->bind(':fcount', $data['fcount']);
@@ -141,10 +141,11 @@
 
     //edit user details
     public function editPassengerDetails($data){
-      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword WHERE id = :id');
+      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword, userImage = :img WHERE id = :id');
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
+      $this->db->bind(':img', $data['img']);
       $this->db->bind(':newPassword', $data['newPassword']);
       $this->db->bind(':id', $data['id']);
 
@@ -229,6 +230,30 @@
       $this->db->bind(':qr', $qr);
       $this->db->bind(':id', $id);
 
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // Recharge wallet
+    public function walletRecharge($id){
+      $this->db->query("SELECT transaction_id 
+      FROM topupdetails 
+      WHERE user_id = :id
+      ORDER BY transaction_id DESC 
+      LIMIT 1;
+      ");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function updateAmount($data){
+      $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
+      $this->db->bind(':uid', $data["uid"]);
+      $this->db->bind(':amount', $data["amount"]);
       if($this->db->execute()){
         return true;
       } else {

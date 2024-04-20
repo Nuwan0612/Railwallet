@@ -32,6 +32,9 @@
                 <th>Station ID</th>
                 <th>Name</th>
                 <th>QR Code</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>location View</th>
                 <th>Options</th>
               </tr>
             </thead>
@@ -43,6 +46,9 @@
               <td><?php echo $stations->stationID; ?></td>
               <td><?php echo $stations->name; ?></td>
               <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $stations->qr; ?>" alt=""></td>
+              <td><?php echo $stations->latitude; ?></td>
+              <td><?php echo $stations->longitude; ?></td>
+              <td><a class="links" href="<?php echo URLROOT;?>admins/viewStationLocation/<?php echo $stations->stationID?>"><button   class="edit-btn">View</button></a></td>
               <td>
                 <div class="options">
                   <form action="<?php echo URLROOT; ?>admins/activeStation/<?php echo $stations->stationID?>" method ="post"><input class="edit-btn" type="submit" value="Open"></form>

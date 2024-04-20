@@ -11,9 +11,11 @@
   // App Root
   define('APPROOT' , dirname(dirname(__FILE__)));
 
+  //Picture Root
+  define('PICTURE' , 'C:/xampp/htdocs/railwallet/public/');
 
   //URL Root
   define('URLROOT', 'http://localhost/railwallet/');
 
   //Site name
-  define('SITENAME', 'RailWalet');
+  define('SITENAME', 'RailWallet');

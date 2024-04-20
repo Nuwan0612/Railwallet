@@ -50,7 +50,7 @@
 .search-bar-outer-container{
   display: grid;
   grid-template-columns: 1fr 100px;
-  margin-top: 25px; 
+  margin-top: 5px; 
   /* align-items: center;
   justify-content: center;  */
 }
@@ -145,7 +145,7 @@ input[type="date"] {
   max-height: 500px; 
   overflow-y: auto;
   position: relative;
-  margin-top: 35px;
+  margin-top: 5px;
 }
 
 
@@ -202,11 +202,9 @@ input[type="date"] {
   color: #fff;
   padding: 8px 12px;
   border: none;
-  margin-left: 20px;
-  margin-right: 20px;
   border-radius: 5px;
   cursor: pointer;
-<<<<<<< HEAD
+
 }
 
 td{
@@ -238,7 +236,7 @@ td{
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-=======
+
   transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
   transform: translateY(0); /* Start from initial position */
   opacity: 1; /* Initially fully opaque */
@@ -247,5 +245,4 @@ td{
 .delete-btn:hover {
   opacity: 0.9; /* Reduce opacity when popping up */
   transform: translateY(-1px); /* lift up */
->>>>>>> 7005e7c59737428a198892e6ee2a6ceaa9f47b5d
 }

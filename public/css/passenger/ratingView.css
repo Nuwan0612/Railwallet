@@ -35,7 +35,7 @@ a{
   width: 100%;
   overflow-y: auto;
   height: calc(100vh - 15vh);
-  background-color: #f1f1f1;
+  background-color: white;
 }
 
 .testimonials-heading {
@@ -65,13 +65,14 @@ a{
   padding: 8px 12px;
   border: none;
   margin-right: 5px;
-  border-radius: 5px;
+  font-size: 15px;
+  border-radius: .5rem;
   cursor: pointer;
 }
 
 .testimonials-heading button:hover, .testimonial-box .foot button:hover {
-  background: #007d71;
-  color: #fff;
+  background: #ccc;
+  color: #130f40;
   padding: 8px 12px;
   border: none;
   margin-right: 5px;
@@ -85,21 +86,23 @@ a{
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  background-color: #f1f1f1;
+  background-color: white;
 }
 
 .testimonial-box {
   width: 500px;
   box-shadow: var(--shadow);
   background-color: var(--background);
-  background-color: rgba(42, 149, 138, 0.3);
+  background: white;
   padding: 20px;
   margin: 15px;
+  border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .testimonial-box:hover {
+  background-color: rgba(0, 150, 136, 0.3);
   transform: scale(1.02); /* Apply scale transformation on hover */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Apply box shadow on hover */
 }
