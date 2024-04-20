@@ -154,6 +154,7 @@
     // Search schedules by departure station
     public function viewSchedulesByDepartureStation($id){
       $this->db->query("SELECT * FROM `shedules` WHERE departureStationID=:id;");
+    }
 
     public function getPassengerJourneyDetails($id){
       $this->db->query("SELECT  
