@@ -116,7 +116,7 @@
       }
     }
 
-
+    // Search fines by passenger id
     public function viewFinesById($id){
       $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
       $this->db->bind(':id', $id);
@@ -134,9 +134,26 @@
     }
 
     // View schedule details
-    public function viewSchedule($id){
-      $this->db->query("SELECT * FROM `shedules` WHERE sheduleID=:id;");
+    public function viewSchedule(){
+      // $this->db->query("SELECT * FROM `shedules`;");
+      $this->db->query("SELECT s.sheduleID, s.trainID, s.departureStationID, dep.name AS dName, s.departureDate, s.departureTime, s.arrivalStationID, arr.name AS aName, s.arrivalDate, s.arrivalTime FROM shedules s INNER JOIN stations dep ON s.departureStationID = dep.stationID INNER JOIN stations arr ON s.arrivalStationID = arr.stationID;");
 
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // Search schedules by schedule id
+    public function viewSchedulesByScheduleId($id){
+      $this->db->query("SELECT * FROM `shedules` WHERE sheduleID=:id;");
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+
+    // Search schedules by departure station
+    public function viewSchedulesByDepartureStation($id){
+      $this->db->query("SELECT * FROM `shedules` WHERE departureStationID=:id;");
 
     public function getPassengerJourneyDetails($id){
       $this->db->query("SELECT  
@@ -165,7 +182,23 @@
                       );
 
       $this->db->bind(':id', $id);
-      $result = $this->db->single();
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // Search schedules by arrival station
+    public function viewSchedulesByArrivalStation($id){
+      $this->db->query("SELECT * FROM `shedules` WHERE arrivalStationID=:id;");
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // Search schedules by date
+    public function viewSchedulesByDate($id){
+      $this->db->query("SELECT * FROM `shedules` WHERE departureDate=:id;");
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
       return $result;
     }
   }

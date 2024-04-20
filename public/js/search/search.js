@@ -55,12 +55,49 @@ function searchSheduleByID() {
   window.location.href = `http://localhost/railwallet/admins/searchSheduleByID?id=${id}`;   
 }
 
+// Search fines by checker id
 function searchFines() {
   const id = document.getElementById('search-fines').value;
   if (id.trim() === "") {
     return;
   }  
   window.location.href = `http://localhost/railwallet/checkers/searchFinesByUserId/${id}`;   
+}
+
+// Search schedule by schedule id
+function searchByScheduleID() {
+  const id = document.getElementById('search-shedule-by-SID').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByScheduleId/${id}`;   
+}
+
+// Search schedule by departure station
+function searchByDepartureStation() {
+  const id = document.getElementById('search-departureStation').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByDepartureStation/${id}`;   
+}
+
+// Search schedule by arrival station
+function searchByArrivalStation() {
+  const id = document.getElementById('search-arrivalStation').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByArrivalStation/${id}`;   
+}
+
+// Search schedule by date
+function searchByDate() {
+  const id = document.getElementById('search-by-date').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByDate/${id}`;   
 }
 
 function searchDepartureStation() {
