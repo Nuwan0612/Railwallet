@@ -23,7 +23,22 @@
     }
 
     public function transaction(){
-      $this->view('user/transaction');
+      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+
+        if(empty($result)){
+          $result = 1;
+        } else {
+          $result = $result->transaction_id + 1;
+        }
+        $data = ["transactions"=>$result];
+        $this->view('user/transaction',$data);
+      // $this->view('user/transaction');
+    }
+
+    public function failTransaction(){
+
+      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+      $this->view('user/fail');
     }
 
     public function shedule_list(){
@@ -318,7 +333,7 @@
         }
 
       } else {
-        $user = $this->passengerModel->getUserDetails($userId);
+        $user = $this->passengerModel->getUserDetails($_SESSION['user_id']);
 
         $data = [
           'id' => $user->id,
@@ -478,4 +493,15 @@
       echo json_encode($responseData);
 
     }
+
+    public function updateTransaction($details){
+      $data = ["uid"=>$_SESSION["user_id"],
+                "amount"=>$details];
+      $result = $this->passengerModel->updateAmount($data);
+      if ($result){
+        redirect("passengers/wallet");
+      }
+      
+    }
+    
   }
