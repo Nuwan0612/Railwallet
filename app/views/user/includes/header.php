@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/user.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/rating.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/ratingView.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/travelHis.css">
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/booking.css"> -->
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/shedule.css">

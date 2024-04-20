@@ -1,4 +1,4 @@
-.ticket-body {
+/* .ticket-body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     display: flex;
@@ -6,6 +6,27 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+} */
+
+.ticket-body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    height: 80%;
+    margin-top: 150px;
+    margin-bottom: 100px;
+    overflow-y: scroll;
+}
+
+.ticket-all {
+    display: block; /* Make it display as block */
+    width: 100%; /* Takes up full width of container */
+    margin-bottom: 20px; /* Optional: Add some space between rows */
+}
+
+.ticket-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px; /* Optional: Add some space between tickets */
 }
 
 .ticket {

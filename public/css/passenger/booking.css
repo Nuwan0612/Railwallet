@@ -141,7 +141,7 @@
 
 .stop_stations button{
     border-radius: 10px;
-    height:30px;
+    /* height:30px; */
     background-color:#009688 ;  
     margin-top: 20px;
     
@@ -183,17 +183,20 @@
 } */
 
 .f_text{
-    margin-top: 10px;
+    margin-top: 15px;
     font-weight: bold;
+    height: 33%;
 }
 .s_text{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     font-weight: bold;
+    height: 33%;
 }
 .t_text{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-bottom: 5px;
     font-weight: bold;
+    height: 33%;
 }
 .f_class,.s_class,.t_class{
     margin-top: 7px;
@@ -225,8 +228,10 @@
 .btn5 button{
     border-radius: 10px;
     height:25px;
+    padding: 6px 6px;
     background-color:#009688 ;  
     border: none;
+    color: black;
 }
 
 .btn5 button:hover{
