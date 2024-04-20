@@ -68,8 +68,29 @@
       }
     }
 
-    public function validateTicket($Id){   
-      $this->view('checker/validateTicket');
+    public function validateTicket($id){
+      $details = $this->checkerModel->getPassengerJourneyDetails($id);
+      
+      $status = '';
+
+      if(!$details->completed && !$details->canceled){
+        $status = "On Journey";
+      } else if($details->canceled) {
+        $status = "Canceled";
+      } else if($details->completed) {
+        $status = "Completed";
+      }
+
+      $data = [
+        'name' => $details->userName,
+        'depStation' => $details->depStation,
+        'arrStation' => $details->arrStation,
+        'class' => $details->className,
+        'price' => $details->price,
+        'date' => $details->startDate,
+        'status' => $status
+      ];
+      $this->view('checker/validateTicket', $data);
     }
 
     public function checkavailabiltyOfJourney(){

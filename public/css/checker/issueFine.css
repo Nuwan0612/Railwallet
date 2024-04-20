@@ -65,7 +65,7 @@
   justify-content: center;
 }
 
-.ticket{
+.ticket-inner{
   display: flex;
   align-items: center;
   justify-content: center;
