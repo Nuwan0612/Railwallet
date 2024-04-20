@@ -24,7 +24,7 @@
         <!--##ChatBox##-->
 
         <div class="outer-container">
-            <button class="container-toggler">
+            <button class="container-toggler" style="z-index: 1000;">
                 <!-- <span class="material-symbols-outlined">+</span> -->
                 <img src="<?php echo URLROOT;?>/img/messenger_image.png" alt="">
                 <!-- <img src="image.png" alt="Icon"> -->
@@ -72,7 +72,7 @@
                         </label>
                     </div>
 
-                    <div class="answer-box" style="display: none; border: 1px solid red" id="ans2">Currently, RailWallet supports online top-ups
+                    <div class="answer-box" style="display: none;" id="ans2">Currently, RailWallet supports online top-ups
                          through various payment methods. We do not support cash top-ups 
                          at this time for security reasons.
                     </div>
@@ -93,7 +93,7 @@
                         </label>
                     </div>
 
-                    <div class="answer-box" style="display: none; border: 1px solid red" id="ans3">Once you've logged into your RailWallet account, 
+                    <div class="answer-box" style="display: none;" id="ans3">Once you've logged into your RailWallet account, 
                         navigate to the "Seat Reservation" section, select your desired 
                         train and seat, and follow the prompts to complete your reservation.
                     </div>
@@ -114,7 +114,7 @@
                         </label>
                     </div>
 
-                    <div class="answer-box" style="display: none; border: 1px solid red" id="ans4">In case of train delays, you will receive 
+                    <div class="answer-box" style="display: none;" id="ans4">In case of train delays, you will receive 
                         notifications via email or SMS provided during registration. 
                         You can also check the updated train schedule on our website 
                         for real-time information.
