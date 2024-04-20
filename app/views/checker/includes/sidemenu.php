@@ -9,11 +9,11 @@
 
     <ul>
         <a href="<?php echo URLROOT; ?>/checkers/qrScan"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
-        <a href="<?php echo URLROOT; ?>/checkers/users"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
+        <a href="<?php echo URLROOT; ?>/checkers/fine"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
         <!-- <a href="#"><li><img src="customer-service.png" alt="">&nbsp;<span>Checkers</span></li></a>
         <a href="#"><li><img src="feedback.png" alt="">&nbsp;<span>FeedBacks</span></li></a> -->
-        <a href="<?php echo URLROOT; ?>/checkers/shedules"><li><i class='bx bxs-calendar' ></i><span>Shedule</span></li></a>
-        <a href="#"> <li><i class='bx bx-support' ></i><span>Customer Support</span></li>
+        <a href="<?php echo URLROOT; ?>/checkers/schedules"><li><i class='bx bxs-calendar' ></i><span>Shedule</span></li></a>
+        <!-- <a href="#"> <li><i class='bx bx-support' ></i><span>Customer Support</span></li> -->
         <!-- <a href="#"><li><i class='bx bxs-cog' ></i><span>Settings</span></li></a> -->
         <a href="<?php echo URLROOT; ?>/users/logout"><li><i class='bx bx-log-out-circle' ></i><span>LogOut</span></li></a>
 

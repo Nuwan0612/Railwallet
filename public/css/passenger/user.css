@@ -384,6 +384,13 @@ td {
     flex-wrap: wrap;
     gap:15px;
   }
+
+  .transaction-container form h3{
+    font-size: 21px;
+    color: #000;
+    align-items: center;
+    margin-left: 250px;
+  }
   
   .transaction-container form .row .col{
     flex:1 1 250px;
@@ -433,7 +440,7 @@ td {
     filter: drop-shadow(0 0 1px #000);
   }
   
-  .transaction-container form .submit-btn{
+  .transaction-container form button{
     width: 100%;
     margin-top: 5px;
     display: inline-block;
@@ -446,7 +453,7 @@ td {
     background: #009688;
   }
   
-  .transaction-container form .submit-btn:hover{
+  .transaction-container form button:hover{
     background: #ccc;
     color: #130f40;
   }

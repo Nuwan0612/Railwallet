@@ -116,6 +116,28 @@
       }
     }
 
+
+    public function viewFinesById($id){
+      $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // View fine details
+    public function viewFineDetailsByCheckerId($id){
+      $this->db->query("SELECT * FROM `fines` WHERE checker_id=:cid;");
+
+      $this->db->bind(':cid', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // View schedule details
+    public function viewSchedule($id){
+      $this->db->query("SELECT * FROM `shedules` WHERE sheduleID=:id;");
+
+
     public function getPassengerJourneyDetails($id){
       $this->db->query("SELECT  
                           u.name AS userName, 
@@ -141,6 +163,7 @@
                         WHERE 
                           j.id = :id;"
                       );
+
       $this->db->bind(':id', $id);
       $result = $this->db->single();
       return $result;
