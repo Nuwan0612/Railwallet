@@ -18,4 +18,4 @@
   define('URLROOT', 'http://localhost/railwallet/');
 
   //Site name
-  define('SITENAME', 'RailWalet');
+  define('SITENAME', 'RailWallet');
