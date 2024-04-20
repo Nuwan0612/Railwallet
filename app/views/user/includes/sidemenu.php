@@ -2,7 +2,7 @@
         <div class="brand-name">
             <!-- <h3>User-K.V.Dias</h3> -->
             <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
-            <p>RailWallet</p>
+            <p><?php echo SITENAME;?></p>
         </div>
         <ul>
             <!-- <a href="<?php echo URLROOT;?>passengers/dashboard"><li> <img src="<?php echo URLROOT;?>public/pics/db.png" alt="">&nbsp;<span>Dashboard</span></li></a>
@@ -43,9 +43,9 @@
                 <!-- <img src="<?php echo URLROOT;?>public/pics/notification.png" alt=""> -->
                 <div class="notify"><i class='bx bxs-bell-ring'></i></div>
                     <div class="img-case">
-                        <img src="<?php echo URLROOT;?>public/pics/man.png" alt="">
+                        <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" alt="">
                     </div>
-                    <div class="img-name"><p>Viranga Dias</p></div>
+                    <div class="img-name"><p><?php echo $_SESSION['user_name']?></p></div>
                 </div>
             </div>
         </div>

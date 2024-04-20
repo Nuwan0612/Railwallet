@@ -280,7 +280,6 @@
           }
         }
         
-
         if(!empty($data['oldPassword']) || !empty($data['newPassword']) || !empty($data['confirmPassword'])){
 
           if(!$this->userModel->checkPassword($_SESSION['user_id'],$data['oldPassword'])){
@@ -324,6 +323,7 @@
               if (move_uploaded_file($tempName, $uploadPath)) {
                   // File upload successful, update database with image path
                   $data['img'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
+                  $_SESSION['user_image'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
               } else {
                   $data['img_err'] = 'Failed to move uploaded file.';
               }
@@ -345,6 +345,8 @@
               $data['newPassword'] = $user->password;
             }
           }
+
+          $_SESSION['user_name'] = $data['name'];
           
           //Update Admin details
           if($this->adminModel->editAdminDetails($data)){
