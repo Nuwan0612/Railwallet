@@ -13,6 +13,9 @@
       $this->adminModel = $this->model('Admin');
       $this->userModel = $this->model('User');
 
+      $this->stationModel = $this->model('Station');
+
+
     }
 
     public function wallet(){
@@ -20,7 +23,22 @@
     }
 
     public function transaction(){
-      $this->view('user/transaction');
+      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+
+        if(empty($result)){
+          $result = 1;
+        } else {
+          $result = $result->transaction_id + 1;
+        }
+        $data = ["transactions"=>$result];
+        $this->view('user/transaction',$data);
+      // $this->view('user/transaction');
+    }
+
+    public function failTransaction(){
+
+      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+      $this->view('user/fail');
     }
 
     public function shedule_list(){
@@ -258,6 +276,7 @@
         'nic' => $user->nic,
         'phone' => $user->phone,
         'email' => $user->email,
+        'image' => $user->userImage,
         'name_err' => '',
         'email_err' => '',
         'phone_err' => '',
@@ -266,6 +285,7 @@
         'confirmPassword_err' => '',
 
       ];
+
       $this->view('user/setting',$data);
     }
 
@@ -273,6 +293,7 @@
     public function editUser(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+        $user = $this->passengerModel->getUserDetails($_SESSION['user_id']);
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -285,6 +306,7 @@
           'oldPassword' => trim($_POST['oldPassword']),
           'newPassword' => trim($_POST['newPassword']),
           'confirmPassword' => trim($_POST['confirmPassword']),
+          'img' => $user->userImage,
           'id_err' => '',
           'name_err' => '',
           'email_err' => '',
@@ -298,8 +320,6 @@
           'newPassword_err_value' => '',
           'confirmPassword_err_value' => ''
         ];
-
-        $user = $this->passengerModel->getUserDetails($_SESSION['user_id']);
 
         if(empty($data['name'])){
           $data['name'] = $user->name;
@@ -320,7 +340,6 @@
             $data['email_err'] = "Email is already registered";
           }
         }
-        
 
         if(!empty($data['oldPassword']) || !empty($data['newPassword']) || !empty($data['confirmPassword'])){
 
@@ -345,6 +364,35 @@
           }   
         }
 
+        if (!empty($_FILES['image']['name'])) {
+          if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+              $uploadDir = PICTURE.'pics/userPics/';
+              $userDir = $uploadDir . $_SESSION['user_id'] . '/';
+              $tempName = $_FILES['image']['tmp_name'];
+              $originalName = $_FILES['image']['name'];
+              $imageFileType = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+              if (!file_exists($userDir)) {
+                mkdir($userDir, 0777, true); // Create directory recursively
+              }
+              
+              // Generate unique filename
+              $uniqueFileName = uniqid('', true) . '.' . $imageFileType;
+              $uploadPath = $userDir . $uniqueFileName;
+
+              // Move uploaded file to new location
+              if (move_uploaded_file($tempName, $uploadPath)) {
+                  // File upload successful, update database with image path
+                  $data['img'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
+                  $_SESSION['user_image'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
+              } else {
+                  $data['img_err'] = 'Failed to move uploaded file.';
+              }
+          } else {
+              $data['img_err'] = 'File upload error: ' . $_FILES['image']['error'];
+          }
+        }
+
         // Make sure errors are empty
         if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
             
@@ -358,11 +406,11 @@
               $data['newPassword'] = $user->password;
             }
           }
+
+          $_SESSION['user_name'] = $data['name'];
           
           //Update Admin details
           if($this->passengerModel->editPassengerDetails($data)){
-            
-            
             redirect('passengers/settings');
           } else {
             die('something went wrong');
@@ -383,7 +431,7 @@
         }
 
       } else {
-        $user = $this->passengerModel->getUserDetails($userId);
+        $user = $this->passengerModel->getUserDetails($_SESSION['user_id']);
 
         $data = [
           'id' => $user->id,
@@ -501,8 +549,12 @@
       $ticket = $requestData["ticket"];
 
       $current = $this->passengerModel->getCurrentJourney($_SESSION['user_id']);
-        
-      if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
+
+      if(!$current) {
+        $responseData = array(
+          'startJourney' => $current
+        );
+      } else if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
         if($this->passengerModel->endJourney($current->id)){
           $responseData = array(
             'success' => true,
@@ -518,8 +570,36 @@
           'unfinished' => $data
         );
       }
+      
 
       header('Content-Type: application/json');
       echo json_encode($responseData);
     }
+
+    //Get lattitude and longitude
+    public function getStationLatAndLng(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $details = $this->stationModel->getStationLatAndLng($requestData['depID'], $requestData['arrID']);
+      $responseData = array(
+        'station1'=>$details[0],
+        'station2'=>$details[1]
+      );
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+
+    }
+
+    public function updateTransaction($details){
+      $data = ["uid"=>$_SESSION["user_id"],
+                "amount"=>$details];
+      $result = $this->passengerModel->updateAmount($data);
+      if ($result){
+        redirect("passengers/wallet");
+      }
+      
+    }
+    
   }

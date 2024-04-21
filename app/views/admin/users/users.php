@@ -36,8 +36,9 @@
                 <th>Phone</th>
                 <th>Status</th>
                 <th>Feedbacks</th>
-                <th>Complains</th> 
+                <th>Fines</th> 
                 <th>Travel History</th>
+                <th>Bookings</th>
                 <th>Option</th>  
               </tr>
             </thead>
@@ -53,10 +54,13 @@
               <td class="options">
                 <a href="<?php echo URLROOT; ?>admins/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               </td>
-              <td></td>
+              <td>
+              <a href="<?php echo URLROOT; ?>admins/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>
               <td class="options">
                 <a href="<?php echo URLROOT; ?>admins/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               </td>
+              <td></td>
               <td>
                 <div class="options">
                   <form action="<?php echo URLROOT; ?>users/deactiveUserStatus/<?php echo $user->id?>" method ="post"><input class="delete-btn" type="submit" value="Deactivate"></form>

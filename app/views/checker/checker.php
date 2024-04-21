@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/checker/header.php';?>
+<?php require APPROOT . '/views/checker/includes/header.php';?>
         <div class="content">
             <div class="cards">
                 <div class="card">
@@ -7,7 +7,7 @@
                         <h3>Checked Users</h3>
                     </div>
                     <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/man.png" >
+                    <!-- <img src="<?php echo URLROOT;?>public/pics/man.png" > -->
                     </div>
                 </div>
                 <div class="card">
@@ -16,7 +16,7 @@
                         <h3>Last Week Total Fines</h3>
                     </div>
                     <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/money-transfer.png" >
+                    <!-- <img src="<?php echo URLROOT;?>public/pics/money-transfer.png" > -->
                     </div>
                 </div>
                 <div class="card">
@@ -26,7 +26,7 @@
                        
                     </div>
                     <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/customer-service.png" >
+                    <!-- <img src="<?php echo URLROOT;?>public/pics/customer-service.png" > -->
                     </div>
                 </div>
                 <!-- <div class="card">

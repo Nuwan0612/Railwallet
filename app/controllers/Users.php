@@ -214,6 +214,7 @@
       $_SESSION['user_nic'] = $user->nic;
       $_SESSION['user_phone'] = $user->phone;
       $_SESSION['user_name'] = $user->name;
+      $_SESSION['user_image'] = $user->userImage;
 
       if($user->type == 'admin'){
         redirect('admins/dashboard');
@@ -235,6 +236,7 @@
       unset($_SESSION['user_nic']);
       unset($_SESSION['user_phone']);
       unset($_SESSION['user_name']);
+      unset($_SESSION['user_image']);
       session_destroy();
       redirect('pages/index');
     }
