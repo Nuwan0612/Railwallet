@@ -18,9 +18,12 @@
 
             <a href="<?php echo URLROOT;?>passengers/wallet"><li><i class='bx bxs-wallet' ></i><span>Wallet</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/shedule"><li><i class='bx bxs-calendar'></i><span>Shedule</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/viewTicketsByUserId"><li><i class='bx bx-search-alt'></i><span>Travel History</span></li></a>
+<!--             <a href="#"><li><i class='bx bx-money-withdraw' ></i><span>Fines</span></li></a> -->
             <a href="<?php echo URLROOT;?>passengers/qrScan"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bxs-file-find'></i><span>View Ticket</span></li></a>
-            <a href="#"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/fineDetails"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
+
             <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><i class='bx bxs-like' ></i><span>Feedback</span></li></a>
             <a href="#"><li><i class='bx bx-support' ></i><span>Customer Support</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/settings"><li><i class='bx bxs-cog'></i><span>Settings</span></li></a>
@@ -45,7 +48,7 @@
                     <div class="img-case">
                         <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" alt="">
                     </div>
-                    <div class="img-name"><p><?php echo $_SESSION['user_name']?></p></div>
+                    <div class="img-name"><p><?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p></div>
                 </div>
             </div>
         </div>

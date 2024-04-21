@@ -17,7 +17,7 @@
 }
 
 .option-buttons-checker .delete-btn{
-  background-color: var(--red)
+  background-color: var(--red) 
 }
 
 .option-buttons-checker .delete-btn:hover{
@@ -74,4 +74,29 @@
 
 .ticket-details-outerbox{
   padding-top: 30px;
+}
+
+.isuue-fine-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.isuue-fine-details #fine-detail, #fine-amount-user, #user-id{
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 ;
+  box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+}
+
+#fine-btn{
+  background-color: var(--red) 
+}
+
+#fine-btn:hover{
+  background-color: var(--red-dark);
+  color: white;
 }

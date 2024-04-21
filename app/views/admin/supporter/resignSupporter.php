@@ -43,7 +43,7 @@
             <tr>
               <td><?php echo $rowNumber; ?></td>
               <td><?php echo $supporter->id; ?></td>
-              <td><?php echo $supporter->name; ?></td>
+              <td><?php echo $supporter->fname.' '.$supporter->lname; ?></td>
               <td><?php echo $supporter->nic; ?></td>
               <td><?php echo $supporter->phone; ?></td>
               <td><?php echo $supporter->email; ?></td>

@@ -47,7 +47,7 @@
             <?php $rowNumber = 1; foreach($data['users'] as $user):?>
             <tr>
               <td><?php echo $rowNumber; ?></td>
-              <td><?php echo $user->name; ?></td>
+              <td><?php echo $user->fname.' '.$user->lname; ?></td>
               <td><?php echo $user->nic; ?></td>
               <td><?php echo $user->phone; ?></td>
               <td><?php echo $user->status; ?></td>
