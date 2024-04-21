@@ -265,10 +265,10 @@
     height: 50px;
     width: 50px;
 }
-.show-container .container-toggler
+/* .show-container .container-toggler
 {
     transform: rotate(90deg);
-}
+} */
 .container-toggler span
 {
     position: absolute;
@@ -320,7 +320,7 @@
 
 .chat-container .title 
 {
-    background-color: #dad8d8
+    background-color: #9f9c9c
     
 }
 
@@ -342,6 +342,7 @@
     position: relative;
     border-radius: 10px;
     transition: background-color 0.3s ease; 
+    height: 50px;
 }
 
 #live-chat-header:hover {
@@ -354,6 +355,7 @@
     padding: 10px;
     text-align: center;
     position: relative;
+    height: 50px;
 }
 
 
@@ -449,23 +451,23 @@
 
 .chat-container .tab:nth-child(4) label h2
 {
-    background: linear-gradient(135deg, #70f570, #49c628);
+    background: linear-gradient(135deg, #009688, #009688);
 }
 .chat-container .tab:nth-child(5) label h2
 {
-    background: linear-gradient(135deg, #3c8ce7, #00eaff);
+    background: linear-gradient(135deg, #009688, #009688);
 }
 .chat-container .tab:nth-child(6) label h2
 {
-    background: linear-gradient(135deg, #ff96f9, #c32bac);
+    background: linear-gradient(135deg, #009688, #009688);
 }
 .chat-container .tab:nth-child(7) label h2
 {
-    background: linear-gradient(135deg, #fd6e6a, #ffc600);
+    background: linear-gradient(135deg, #009688, #009688);
 }
 .chat-container .tab:nth-child(8) label h2
 {
-    background: linear-gradient(135deg, #e19389,   #d2374b);
+    background: linear-gradient(135deg, #009688,   #009688);
 }
 .chat-container .tab label h3
 {

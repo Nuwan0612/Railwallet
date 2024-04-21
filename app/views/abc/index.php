@@ -76,18 +76,6 @@
                         for real-time information.</p>
                     </div>
                 </div>
-                <!-- <div class="tab">
-                    <input type="radio" name="acc" id="acc5">
-                    <label for="acc5">
-                        <h2>05</h2>
-                        <h3>How do I contact RailWallet support for assistance ?</h3>
-                    </label>
-                    <div class="content"><p> You can reach out to our support team by
-                         clicking on the "Contact Us" link at the bottom of the page
-                         or by emailing us. We're here to help with any questions or 
-                         concerns you may have!</p>
-                    </div>
-                </div> -->
             </div>   
         </div>
 
