@@ -36,7 +36,7 @@
                 <a href="<?php echo URLROOT;?>users/logout"><h3> Log Out</h3></a>
                 <!-- <a href="#"><h3> Fine Details</h3></a> -->
                 <div class="user">
-                    <img src="<?php echo URLROOT;?>public/pics/notification.png" alt="">
+                    <img src="<?php echo URLROOT;?>img/notification.png" alt="">
                     <div class="img-case">
                     <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
                     <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image'] ?>" alt="">

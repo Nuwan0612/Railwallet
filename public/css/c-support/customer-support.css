@@ -22,7 +22,13 @@ li img{
 img{
     max-width: 40px;
 }
+
 h1,
+h3 {
+    color: #333;
+    margin-left: 15px;
+}
+
 h2 {
     color: #444;
 }
@@ -31,7 +37,7 @@ h2{
 }
 
 .side-menu .brand-name img{
-    margin-right: 10px;
+    margin-right: 3px;
 }
 
 
@@ -53,24 +59,71 @@ h2{
 .side-menu .brand-name .logo img {
     width: 100px; /* Adjust the width of the logo as needed */
     height: auto; /* Maintain the aspect ratio */
-    margin-left: 40px; /* Add some margin to the left */
+    margin-left: 30px; /* Add some margin to the left */
     transform: scale(1.4);
 }
 
 
 
 .btn {
+
     background: #009688;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
+    color: #fff;
+    font-size: small;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+    transform: translateY(0); /* Start from initial position */
+    opacity: 1; /* Initially fully opaque */
 }
+
 .btn:hover {
-    color: #009688;
-    background: white;
-    padding: 3px 8px;
-    border: 2px solid #009688;
+
+    opacity: 0.9; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
 }
+
+.update-btn {
+    background: #333;
+    color: #fff;
+    font-size: small;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+    transform: translateY(0); /* Start from initial position */
+    opacity: 1; /* Initially fully opaque */
+}
+
+.update-btn:hover{
+    opacity: 0.9; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
+}
+
+.dlt-btn {
+    background: rgb(208, 46, 46);
+    color: #fff;
+    font-size: small;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+    transform: translateY(0); /* Start from initial position */
+    opacity: 1; /* Initially fully opaque */
+}
+
+.dlt-btn:hover{
+    opacity: 0.9; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
+}
+
 .title {
     display: flex;
     align-items: center;
@@ -78,14 +131,17 @@ h2{
     padding: 15px 10px;
     border-bottom: 2px solid #999;
 }
+
 table {
     padding: 10px;
 }
+
 th,
 td {
     text-align: left;
     padding: 8px;
 }
+
 .side-menu {
     position: fixed;
     background: #f1f1f1;
@@ -94,6 +150,7 @@ td {
     display: flex;
     flex-direction: column;
 }
+
 .side-menu .brand-name {
 
     display: flex;
@@ -106,6 +163,7 @@ td {
     align-items: center;
     justify-content: center; */
 }
+
 .side-menu li {
     font-size: 20px;
     padding: 15px 40px 10px 45px;
@@ -285,6 +343,9 @@ td {
 @media screen and (max-width: 1050px) {
     .side-menu li {
         font-size: 18px;
+    }
+    .container .header {
+        font-size: 10px; 
     }
 }
 @media screen and (max-width: 940px) {
