@@ -62,6 +62,7 @@ th,
 td {
     text-align: center;
     padding: 8px;
+    font-size: 17px;
 }
 .side-menu {
     position: fixed;
