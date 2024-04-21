@@ -27,9 +27,35 @@ h2 {
 h2{
     padding-left: 0%;
 }
-h3 {
-    color: #999;
+
+.side-menu .brand-name img{
+    margin-right: 10px;
 }
+
+
+.side-menu .brand-name p {
+    color: #009688;
+    font-weight: bold;
+    font-size: 2rem; /* Adjust the font size according to your h1 tag */
+    font-family: Arial;
+    text-align: center; /* Center the text */
+    margin-left: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/* 
+.side-menu .brand-name .logo {
+    margin-right: 100px; 
+} */
+
+.side-menu .brand-name .logo img {
+    width: 100px; /* Adjust the width of the logo as needed */
+    height: auto; /* Maintain the aspect ratio */
+    margin-left: 40px; /* Add some margin to the left */
+    transform: scale(1.4);
+}
+
+
 
 .btn {
     background: #009688;
@@ -60,29 +86,49 @@ td {
 }
 .side-menu {
     position: fixed;
-    background: #009688;
+    background: #f1f1f1;
     width: 20vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 .side-menu .brand-name {
-    height: 10vh;
+
     display: flex;
     align-items: center;
-    justify-content: center;
+    transition: transform 0.3s;
+    margin-right: 40px;
+
+    /* height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
 }
 .side-menu li {
-    font-size: 24px;
-    padding: 10px 40px;
-    color: white;
+    font-size: 20px;
+    padding: 15px 40px 10px 45px;
+    color: #333;
     display: flex;
     align-items: center;
+    font-weight: bold;
 }
+
+
 .side-menu li:hover {
-    background: white;
+    background: rgba(0, 150, 136, 0.3);;
     color: #009688;
+    transform: translateX(10px);
+    cursor: pointer;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
 }
+
+.side-menu li img {
+    margin-right: 10px; /* Adjust the margin to move the icons to the left */
+    width: 30px; /* Adjust the width of the images as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .container {
     position: absolute;
     right: 0;
