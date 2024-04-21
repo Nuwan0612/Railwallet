@@ -373,7 +373,7 @@
       }
     }
 
-    // Recharge wallet
+    // *Recharge wallet*
     public function walletRecharge($id){
       $this->db->query("SELECT transaction_id 
       FROM topupdetails 
@@ -386,8 +386,10 @@
       return $result;
     }
 
+    // *Update wallet amount*
     public function updateAmount($data){
       $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
+      $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) VALUES (:uid,'recharge',:amount);");
       $this->db->bind(':uid', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);
       if($this->db->execute()){
@@ -397,5 +399,52 @@
       }
     }
 
+    // *Fine Details*
+    public function viewFineDetails($id){
+      $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *Booking details*
+    public function viewBookingDetail($id){
+      $this->db->query("SELECT * FROM `booking` WHERE userId=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *Journey details*
+    public function viewJourneyDetail($id){
+      $this->db->query("SELECT * FROM `journey` WHERE passenger_id=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *Recharge details*
+    public function viewRechargeDetails($id){
+      $this->db->query("SELECT * FROM `topupdetails` WHERE user_id=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *View transaction history*
+    public function viewTransactionHistory($id){
+      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:id ORDER BY `transactions`.`date` DESC LIMIT 5;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *View all transaction history*
+    public function viewAllTransactionHistory($id){
+      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:id ORDER BY `transactions`.`date` DESC;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
 
   }

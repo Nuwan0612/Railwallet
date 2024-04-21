@@ -1,6 +1,6 @@
 <?php
   class Passengers extends Controller{
-
+  
     public function __construct() {
       if(!isLoggedIn()){
         redirect('users/login');
@@ -18,10 +18,26 @@
 
     }
 
+    // *Wallet dashboard*
     public function wallet(){
-      $this->view('user/wallet');
+
+      // *Transaction History*
+      $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
+      $data = ['transactions'=>$result];
+      
+      $this->view('user/wallet',$data);
     }
 
+    // *Transaction history dashboard*
+    public function transactionHistory(){
+      $result = $this->passengerModel->viewAllTransactionHistory($_SESSION["user_id"]);
+      $data = ['transactions'=>$result];
+
+      $this->view('user/transaction-history',$data);
+    }
+
+
+    // *Transaction Dashboard*
     public function transaction(){
       $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
 
@@ -32,13 +48,26 @@
         }
         $data = ["transactions"=>$result];
         $this->view('user/transaction',$data);
-      // $this->view('user/transaction');
+      
     }
 
-    public function failTransaction(){
+    // *Fail transaction dashboard*
+    // public function failTransaction(){
 
-      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
-      $this->view('user/fail');
+    //   $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+    //   $this->view('user/fail');
+    // }
+
+    // *Fine Details*
+    public function fineDetails(){
+      $result = $this->passengerModel->viewFineDetails($_SESSION["user_id"]);
+      $data=['fines'=>$result];
+      $this->view('user/fine-details',$data);
+    }
+
+    // *Ticket dashboard*
+    public function ticket(){
+      $this->view('user/ticket');
     }
 
     public function shedule_list(){
@@ -207,9 +236,7 @@
      
      }
 
-    public function ticket(){
-      $this->view('user/ticket');
-    }
+    
 
     //veiw feedback
     public function Feedbacks(){
