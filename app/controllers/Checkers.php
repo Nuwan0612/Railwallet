@@ -5,12 +5,7 @@
       if(!isLoggedIn()){
         redirect('users/login');
       }
-
       $this->checkerModel = $this->model('Checker');
-    }
-
-    public function dashboard(){
-      $this->view('checker/checker');
     }
 
     // View fine details
@@ -67,16 +62,19 @@
       $this->view('checker/schedule',$data);
     }
 
+    //opening page
     public function qrScan(){
       $this->view('checker/scanQR');
     }
 
+    //cancel ticket
     public function cancelTicket($id){
       if($this->checkerModel->cancelTicket($id)){
         $this->qrScan();
       }  
     }
 
+    //issue fine
     public function issueFine(){
       $passenger_id = $this->checkerModel->getPassengerIdFromJourney($_GET['id']);
       $data = [
@@ -90,16 +88,19 @@
       $addFine = $this->checkerModel->addFine($data);
       $wallet = $this->checkerModel->getWalletBalnce($data['passenger_id']);
 
-      if( ($wallet->balance - $data['amount']) >= 0 ){
-        $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
-        $this->checkerModel->updatefinePayment($data['journey_id']);
+      if($addFine){
+        if( ($wallet->balance - $data['amount']) >= 0 ){
+          $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
+          $this->checkerModel->updatefinePayment($data['journey_id']);
+        }  
       }
-;
+      
       if($addFine && $this->checkerModel->cancelTicket($_GET['id'])){
         $this->qrScan();
       }
     }
 
+    //validate ticket
     public function validateTicket($id){
       $details = $this->checkerModel->getPassengerJourneyDetails($id);
       
@@ -122,9 +123,11 @@
         'date' => $details->startDate,
         'status' => $status
       ];
+
       $this->view('checker/validateTicket', $data);
     }
 
+    //caheck avilability
     public function checkavailabiltyOfJourney(){
 
       $inputJSON = file_get_contents('php://input');
@@ -137,6 +140,48 @@
       }
 
       header('Content-Type: application/json');
+      echo json_encode($responseData);
+    }
+
+    //Issue fine with user Id
+    public function isuueFineWithUserId(){
+      $data = [
+        'details' => $_GET['details'],
+        'amount' => $_GET['amount'],
+        'passenger' => $_GET['passenger'],
+        'checker' => $_SESSION['user_id']
+      ];
+
+      $wallet = $this->checkerModel->getWalletBalnce($data['passenger']);
+      $fine = $this->checkerModel->isuueWithUserId($data);
+
+      if($fine){
+        if( ($wallet->balance - $data['amount']) >= 0 ){
+          $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
+          $fineId = $this->checkerModel->getLatestFine($data['passenger']);
+          $this->checkerModel->updatefinePaymentWhenNoJourney($fineId->fine_id);
+        }
+      }
+      
+      if($fine){
+        redirect('checkers/qrScan');
+      } else {
+        die('Somenthing went wrong');
+      }
+    }
+
+    //Check validity of user when issue fine
+    public function checkValidityOfUser(){
+      $inputJson = file_get_contents('php://input');
+      $requestData = json_decode($inputJson, true);
+
+      $responseData = false;
+
+      if($this->checkerModel->checkValidityOfUser($requestData['passenger_id'])){
+        $responseData = true;
+      }
+
+      header('Content-type: application/json');
       echo json_encode($responseData);
     }
   }

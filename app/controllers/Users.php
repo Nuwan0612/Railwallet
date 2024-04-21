@@ -15,14 +15,16 @@
 
         // Init data
         $data =[
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'nic' => trim($_POST['nic']),
           'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['password']),
           'confirm_password' => trim($_POST['confirm_password']),
           'type' => 'user',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -66,8 +68,12 @@
 
        
         // Validate Name
-        if(empty($data['name'])){
-          $data['name_err'] = 'Please enter name';
+        if(empty($data['fname'])){
+          $data['fname_err'] = 'Please enter first name';
+        }
+
+        if(empty($data['lname'])){
+          $data['lname_err'] = 'Please enter last name';
         }
 
         // Validate Phone
@@ -96,7 +102,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['password_err']) && empty($data['confirm_password_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
           // Validated
           
           // Hash Password
@@ -116,13 +122,15 @@
       } else {
         // Init data
         $data =[
-          'name' => '',
+          'fname' => '',
+          'lname' => '',
           'nic' => '',
           'phone' => '',
           'email' => '',
           'password' => '',
           'confirm_password' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -213,7 +221,8 @@
       $_SESSION['user_email'] = $user->email;
       $_SESSION['user_nic'] = $user->nic;
       $_SESSION['user_phone'] = $user->phone;
-      $_SESSION['user_name'] = $user->name;
+      $_SESSION['user_fname'] = $user->fname;
+      $_SESSION['user_lname'] = $user->lname;
       $_SESSION['user_image'] = $user->userImage;
 
       if($user->type == 'admin'){
@@ -221,7 +230,7 @@
       } else if($user->type == 'user'){
         redirect('passengers/wallet');
       } else if($user->type == 'checker'){
-        redirect('checkers/dashboard');
+        redirect('checkers/qrScan');
       } else if($user->type == 'supporter'){
         redirect('supporters/dashboard');
       } else {
@@ -235,7 +244,8 @@
       unset($_SESSION['user_email']);
       unset($_SESSION['user_nic']);
       unset($_SESSION['user_phone']);
-      unset($_SESSION['user_name']);
+      unset($_SESSION['user_fname']);
+      unset($_SESSION['user_lname']);
       unset($_SESSION['user_image']);
       session_destroy();
       redirect('pages/index');
