@@ -47,6 +47,9 @@
                             shedules.departureDate,
                             shedules.arrivalTime,
                             shedules.departureTime, 
+                            shedules.way,
+                            shedules.departureDate,
+                            shedules.trainID,
                             trains.name AS train_name,
                             trains.type AS train_type,
                             MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
@@ -82,30 +85,21 @@
       $results = $this->db->resultSet();
       return $results;
     }
-
+    // ## Get  dTime and Atime
+    public Function viewDtimeAtimeByScheduleId($id){
+      $this->db->query('SELECT departureTime,arrivalTime FROM `shedules` WHERE sheduleID=:shId');
+      $this->db->bind(':shId',$id);
+      $result=$this->db->Single(); 
+      return $result;
+    }
 
     // get available train seats in a train shedule
 
     public function bookingDetailsByScheduleId($data){
-      $this->db->query('SELECT 
-        firstClassBooked,
-        secondClassBooked,
-        thirdClassBooked,
-        departureDate,
-        departureTime,
-        arrivalTime,
-        firstCapacity,
-        secondCapacity,
-        thirdCapacity
-      FROM 
-          shedules
-      JOIN
-          trains ON trains.trainID = shedules.trainID
-      WHERE 
-        sheduleID = :scheduleID
-      
-      ');
-      $this->db->bind(':scheduleID', $data['shID']);
+      $this->db->query('SELECT a.firstClassBooked,a.secondClassBooked,a.thirdClassBooked, t.firstCapacity ,t.secondCapacity,t.thirdCapacity,a.id FROM `avlbleseats` a JOIN trains t ON t.trainID=a.trainID WHERE a.way=:way AND a.trainID=:tId AND a.date=:date ;');
+      $this->db->bind(':tId', $data['tID']);
+      $this->db->bind(':way', $data['way']);
+      $this->db->bind(':date', $data['dDate']);
 
       $result = $this->db->Single();
       return $result;
@@ -114,14 +108,14 @@
     //update booked counts
 
     public function updateSeatsByScheduleId($data){
-      $this->db->query('UPDATE shedules SET 
+      $this->db->query('UPDATE avlbleseats SET 
       firstClassBooked=firstClassBooked+:fcount,
       secondClassBooked=secondClassBooked+:scount,
       thirdClassBooked=thirdClassBooked+:tcount
-  WHERE 
-      sheduleID =:scheduleID ');
+    WHERE 
+      id =:avlbleId ');
 
-      $this->db->bind(':scheduleID', $data['sheduleId']);
+      $this->db->bind(':avlbleId', $data['avlbleId']);
       $this->db->bind(':fcount', $data['1count']);
       $this->db->bind(':scount', $data['2count']);
       $this->db->bind(':tcount', $data['3count']);
@@ -175,7 +169,7 @@
     // ## Viw ticketId according to sheduleId and Class
 
     public function viewTicketId($data){
-      $this->db->query("SELECT `ticketPriceID` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
+      $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
       $this->db->bind(':class', $data['class']);
       $this->db->bind(':depSta', $data['dStation']);
       $this->db->bind(':arrSta', $data['aStation']);
@@ -266,6 +260,27 @@
       $result = $this->db->single();
       return $result;
     }
+// ## update transaction table
+    public function addingTransaction($data){
+      $this->db->query("INSERT INTO transactions( user_id, reason,amount) VALUES (:uid,'Booking',:amount);");
+    
+      $this->db->bind(':uid', $data['user_id']);
+      $this->db->bind(':amount', $data['amount']);
+
+      $this->db->execute();
+     
+
+    }
+
+// ## take recent booking tr_id
+
+public function addingTrId($data){
+  $this->db->query("SELECT tr_id FROM `transactions` WHERE user_id=:uid AND reason='Booking' LIMIT 1;");
+  $this->db->bind(':uid', $data['user_id']);
+
+  $result= $this->db->Single();
+  return $result;
+}
 
     //get user details
     public function getUserDetails($id){
