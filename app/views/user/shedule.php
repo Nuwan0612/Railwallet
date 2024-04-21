@@ -39,9 +39,6 @@
                 <div class="search-bar-inner-container-shedule3">
                     <div class="search-bar-shedule">
                         <input type="text" id="search-date" placeholder="Date" name="date" onfocus="(this.type = 'date')" onblur="(this.type='text')">
-                        <button class="search-button" onclick="#">
-
-                        </button>
                     </div>
                 </div>
 
@@ -94,7 +91,7 @@
                             <span class="third-class-price"><?= $schedule->third_class_price ?></span>
                         </div>
                         <div class="book-button">
-                        <a href="<?php echo URLROOT ?>passengers/getTrainDetails"><button class="book-now-button" >Book Now</button></a>
+                        <button class="book-now-button" type="submit">Book Now</button>
                         </div>
                     </div>
                 </form>
