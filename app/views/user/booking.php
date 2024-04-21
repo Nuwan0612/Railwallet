@@ -39,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="stop_stations">
-                                    <button>Search Shedules</button>
+                                <a href="<?php echo URLROOT;?>passengers/shedule"><button>Search Shedules</button></a>
                                 </div>
                             </div>
                             
@@ -69,7 +69,8 @@
                                 </div>
                                 <div class="btn-main">
                                     <div class="btn5">
-                                    <button type="submit"><span class="button-text">Book Now</span></button>     
+                                    <button type="submit">Book Now</button>   
+                                    <span class="button-text"></span>
                                     </div>
                                 </div>
                                 

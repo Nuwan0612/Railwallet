@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>css/checker/fine.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>css/checker/schedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/qrScanner.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/checker/ticket.css">
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>

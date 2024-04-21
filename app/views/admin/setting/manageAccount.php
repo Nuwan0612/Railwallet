@@ -3,7 +3,7 @@
 <div class="setting-container">
   <div class="inner-container">
 
-    <h1 align="center">User Details</h1>
+    <h1 align="center">Admin Details</h1>
     <center><div style="width: 90%;"><hr></div></center>
 
     <form action="<?php echo URLROOT; ?>admins/setting" method="POST" enctype="multipart/form-data">

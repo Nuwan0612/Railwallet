@@ -29,9 +29,41 @@
 
     // View schedule details
     public function schedules(){
-      $result = $this->checkerModel->viewSchedule($_GET['id']);
+      $result = $this->checkerModel->viewSchedule();
       $data = ["schedules"=>$result];
 
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by schedule id
+    public function searchSchedulesByScheduleId($id){
+      $result = $this->checkerModel->viewSchedulesByScheduleId($id);
+      // print_r( $result);
+      $data = ['schedules'=>$result];
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by departure station
+    public function searchSchedulesByDepartureStation($id){
+      $result = $this->checkerModel->viewSchedulesByDepartureStation($id);
+
+      $data = ['schedules'=>$result];
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by arrival station
+    public function searchSchedulesByArrivalStation($id){
+      $result = $this->checkerModel->viewSchedulesByArrivalStation($id);
+
+      $data = ['schedules'=>$result];
+      $this->view('checker/schedule',$data);
+    }
+
+    // Search schedules by date
+    public function searchSchedulesByDate($id){
+      $result = $this->checkerModel->viewSchedulesByDate($id);
+
+      $data = ['schedules'=>$result];
       $this->view('checker/schedule',$data);
     }
 
@@ -68,8 +100,29 @@
       }
     }
 
-    public function validateTicket($Id){   
-      $this->view('checker/validateTicket');
+    public function validateTicket($id){
+      $details = $this->checkerModel->getPassengerJourneyDetails($id);
+      
+      $status = '';
+
+      if(!$details->completed && !$details->canceled){
+        $status = "On Journey";
+      } else if($details->canceled) {
+        $status = "Canceled";
+      } else if($details->completed) {
+        $status = "Completed";
+      }
+
+      $data = [
+        'name' => $details->userName,
+        'depStation' => $details->depStation,
+        'arrStation' => $details->arrStation,
+        'class' => $details->className,
+        'price' => $details->price,
+        'date' => $details->startDate,
+        'status' => $status
+      ];
+      $this->view('checker/validateTicket', $data);
     }
 
     public function checkavailabiltyOfJourney(){
