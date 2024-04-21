@@ -247,7 +247,9 @@
 
     public function getuserfeedback($id){
       $this->db->query("SELECT 
-                          us.name,
+                          us.fname,
+                          us.lname,
+                          us.userImage,
                           us.email,
                           us.id,
                           fb.*

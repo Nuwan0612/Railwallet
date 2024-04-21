@@ -8,9 +8,10 @@
     }
 
     public function editChecker($data){
-      $this->db->query('UPDATE users SET name = :name, nic = :nic, phone = :phone, email = :email, password = :password WHERE id = :id');
+      $this->db->query('UPDATE users SET fname = :fname, lname = :lname, nic = :nic, phone = :phone, email = :email, password = :password WHERE id = :id');
 
-      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':fname', $data['fname']);
+      $this->db->bind(':lname', $data['lname']);
       $this->db->bind(':id', $data['id']);
       $this->db->bind(':nic', $data['nic']);
       $this->db->bind(':phone', $data['phone']);

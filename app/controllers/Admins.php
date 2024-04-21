@@ -642,13 +642,15 @@
 
         // Init data
         $data =[
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'nic' => trim($_POST['nic']),
           'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['nic']),
           'type' => 'checker',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -690,8 +692,12 @@
 
 
         // Validate Name
-        if(empty($data['name'])){
-          $data['name_err'] = 'Please enter name';
+        if(empty($data['fname'])){
+          $data['fname_err'] = 'Please enter first name';
+        }
+
+        if(empty($data['lname'])){
+          $data['lname_err'] = 'Please enter last name';
         }
 
         // Validate Phone
@@ -704,7 +710,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
           // Validated
           
           // Hash Password
@@ -724,11 +730,13 @@
       } else {
         // Init data
         $data =[
-          'name' => '',
+          'fname' => '',
+          'lname' => '',
           'nic' => '',
           'phone' => '',
           'email' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -794,13 +802,15 @@
         // Init data
         $data =[
           'id' => $id,
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'nic' => trim($_POST['nic']),
           'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['nic']),
           'type' => 'checker',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -827,8 +837,12 @@
         }
 
         // Validate Name
-        if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+        if(empty($data['fname'])){
+          $data['fname_err'] = 'Pleae enter first name';
+        }
+
+        if(empty($data['lname'])){
+          $data['lname_err'] = 'Pleae enter last name';
         }
 
         // Validate Phone
@@ -837,7 +851,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
           // Validated
           
           // Hash Password
@@ -860,11 +874,13 @@
         // Init data
         $data =[
           'id' => $id,
-          'name' => $checker->name,
+          'fname' => $checker->fname,
+          'lname' => $checker->lname,
           'nic' => $checker->nic,
           'phone' => $checker->phone,
           'email' => $checker->email,
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -891,13 +907,15 @@
 
       // Init data
       $data =[
-        'name' => trim($_POST['name']),
+        'fname' => trim($_POST['fname']),
+        'lname' => trim($_POST['lname']),
         'nic' => trim($_POST['nic']),
         'phone' => trim($_POST['phone']),
         'email' => trim($_POST['email']),
         'password' => trim($_POST['nic']),
         'type' => 'supporter',
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -939,8 +957,12 @@
 
 
       // Validate Name
-      if(empty($data['name'])){
-        $data['name_err'] = 'Please enter name';
+      if(empty($data['fname'])){
+        $data['fname_err'] = 'Please enter first name';
+      }
+
+      if(empty($data['lname'])){
+        $data['lname_err'] = 'Please enter last name';
       }
 
       // Validate Phone
@@ -953,7 +975,7 @@
       }
 
       // Make sure errors are empty
-      if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+      if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
         // Validated
         
         // Hash Password
@@ -973,11 +995,13 @@
     } else {
       // Init data
       $data =[
-        'name' => '',
+        'fname' => '',
+        'lname' => '',
         'nic' => '',
         'phone' => '',
         'email' => '',
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -1042,13 +1066,15 @@
       // Init data
       $data =[
         'id' => $id,
-        'name' => trim($_POST['name']),
+        'fname' => trim($_POST['fname']),
+        'lname' => trim($_POST['lname']),
         'nic' => trim($_POST['nic']),
         'phone' => trim($_POST['phone']),
         'email' => trim($_POST['email']),
         'password' => trim($_POST['nic']),
         'type' => 'supporter',
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -1075,8 +1101,12 @@
       }
 
       // Validate Name
-      if(empty($data['name'])){
-        $data['name_err'] = 'Pleae enter name';
+      if(empty($data['fname'])){
+        $data['fname_err'] = 'Pleae enter first name';
+      }
+
+      if(empty($data['lname'])){
+        $data['name_err'] = 'Pleae enter last name';
       }
 
       // Validate Phone
@@ -1085,7 +1115,7 @@
       }
 
       // Make sure errors are empty
-      if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+      if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
         // Validated
         
         // Hash Password
@@ -1108,11 +1138,13 @@
       // Init data
       $data =[
         'id' => $id,
-        'name' => $supporter->name,
+        'fname' => $supporter->fname,
+        'lname' => $supporter->lname,
         'nic' => $supporter->nic,
         'phone' => $supporter->phone,
         'email' => $supporter->email,
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',

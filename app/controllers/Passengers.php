@@ -136,7 +136,6 @@
       }
     }
 
-
     public function ticket(){
       $this->view('user/ticket');
     }
@@ -145,9 +144,6 @@
     public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
-      // echo '<pre>';
-      // var_dump($data);
-      // echo '</pre>';
       $this->view('user/feedback/feedback',$data);
     }
 

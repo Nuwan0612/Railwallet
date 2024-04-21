@@ -16,10 +16,10 @@
             <div class="profile">
 
               <div class="profile-img">
-                <img src="<?php echo URLROOT?>/pics/man.png">
+                <img src="<?php echo URLROOT?>/pics/userPics/<?php echo $feedback->userImage ?>">
               </div>
               <div class="name-user">
-                <strong><?php echo $feedback->name; ?></strong>
+                <strong><?php echo $feedback->fname.' '.$feedback->lname; ?></strong>
                 <span><?php echo $feedback->email; ?></span>
               </div>
 
