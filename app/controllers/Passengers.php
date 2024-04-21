@@ -209,17 +209,14 @@
       redirect('passengers/viewTicketsByUserId');
     }
 
-<<<<<<< HEAD
-    public function ticket(){
-      $this->view('user/ticket');
-=======
+
     public function getUserTicektsBySheduleID($data){
       $tickets=$this->passengerModel->getTicketsBySheduleId($data);
         
         $data=['tickets'=>$tickets
       ];
       $this->view('user/ticket',$data);
->>>>>>> origin/liveChat
+
     }
 
     // ## View Tickets By Userid
