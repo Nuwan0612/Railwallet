@@ -252,6 +252,7 @@
     // *Update wallet amount*
     public function updateAmount($data){
       $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
+      $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) VALUES (:uid,'recharge',:amount);");
       $this->db->bind(':uid', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);
       if($this->db->execute()){

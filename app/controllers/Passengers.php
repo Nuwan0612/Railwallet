@@ -1,6 +1,6 @@
 <?php
   class Passengers extends Controller{
-
+  
     public function __construct() {
       if(!isLoggedIn()){
         redirect('users/login');
@@ -52,11 +52,11 @@
     }
 
     // *Fail transaction dashboard*
-    public function failTransaction(){
+    // public function failTransaction(){
 
-      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
-      $this->view('user/fail');
-    }
+    //   $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+    //   $this->view('user/fail');
+    // }
 
     // *Fine Details*
     public function fineDetails(){
