@@ -211,12 +211,14 @@
       $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
       $data = [
         'id' => $admin->id,
-        'name' => $admin->name,
+        'fname' => $admin->fname,
+        'lname' => $admin->lname,
         'nic' => $admin->nic,
         'phone' => $admin->phone,
         'email' => $admin->email,
         'image' => $admin->userImage,
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'email_err' => '',
         'phone_err' => '',
         'oldPassword_err' => '',
@@ -239,7 +241,8 @@
         $data = [
           'id' => $_SESSION['user_id'],
           'nic' => $_SESSION['user_nic'],
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'email' => trim($_POST['email']),
           'phone' => trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
@@ -247,7 +250,8 @@
           'confirmPassword' => trim($_POST['confirmPassword']),
           'img' => $admin->userImage,
           'id_err' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'email_err' => '',
           'phone_err' => '',
           'oldPassword_err' => '',
@@ -260,8 +264,12 @@
           'confirmPassword_err_value' => ''
         ];
 
-        if(empty($data['name'])){
-          $data['name'] = $admin->name;
+        if(empty($data['fname'])){
+          $data['fname'] = $admin->fname;
+        } 
+
+        if(empty($data['lname'])){
+          $data['lname'] = $admin->lname;
         } 
 
         if(empty($data['phone'])){
@@ -333,7 +341,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
             
           
           // Hash Password
@@ -346,7 +354,8 @@
             }
           }
 
-          $_SESSION['user_name'] = $data['name'];
+          $_SESSION['user_fname'] = $data['fname'];
+          $_SESSION['user_lname'] = $data['lname'];
           
           //Update Admin details
           if($this->adminModel->editAdminDetails($data)){
@@ -361,7 +370,8 @@
           $data['oldPassword_err_value'] = $data['oldPassword'];
           $data['newPassword_err_value'] = $data['newPassword'];
           $data['confirmPassword_err_value'] = $data['confirmPassword'];
-          $data['name'] = $admin->name;
+          $data['fname'] = $admin->fname;
+          $data['lname'] = $admin->lname;
           $data['email'] = $admin->email;
           $data['phone'] = $admin->phone;
 
@@ -378,7 +388,8 @@
 
         $data = [
           'id' => $user->id,
-          'name' => $user->name,
+          'fname' => $user->fname,
+          'lname' => $user->lname,
           'nic' => $user->nic,
           'phone' => $user->phone,
           'email' => $user->email,

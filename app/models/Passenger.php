@@ -85,7 +85,6 @@
 
 
     // get available train seats in a train shedule
-
     public function bookingDetailsByScheduleId($data){
       $this->db->query('SELECT 
         firstClassBooked,
@@ -111,7 +110,6 @@
     }
     
     //update booked counts
-
     public function updateSeatsByScheduleId($data){
       $this->db->query('UPDATE shedules SET 
         firstClassBooked=firstClassBooked+:fcount,
@@ -277,8 +275,9 @@
 
     //edit user details
     public function editPassengerDetails($data){
-      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword, userImage = :img WHERE id = :id');
-      $this->db->bind(':name', $data['name']);
+      $this->db->query('UPDATE users SET fname = :fname, lname = :lname, email = :email, phone = :phone, password = :newPassword, userImage = :img WHERE id = :id');
+      $this->db->bind(':fname', $data['fname']);
+      $this->db->bind(':lname', $data['lname']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
       $this->db->bind(':img', $data['img']);
@@ -399,6 +398,14 @@
       }
     }
 
+
+    public function getNoCompletedFines($id){
+      $this->db->query('SELECT * FROM fines WHERE passenger_id = :id AND payment_status = 0');
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
     // *Fine Details*
     public function viewFineDetails($id){
       $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
@@ -446,5 +453,6 @@
       $result=$this->db->resultSet();
       return $result;
     }
+
 
   }

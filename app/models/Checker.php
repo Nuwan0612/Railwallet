@@ -183,7 +183,7 @@
                       );
 
       $this->db->bind(':id', $id);
-      $result = $this->db->resultSet();
+      $result = $this->db->single();
       return $result;
     }
 
@@ -201,5 +201,45 @@
       $this->db->bind(':id', $id);
       $result = $this->db->resultSet();
       return $result;
+    }
+
+
+    public function isuueWithUserId($data){
+      $this->db->query("INSERT INTO fines (passenger_id, checker_id, journey_id, fine_amount, fine_reason, payment_date) VALUES (:passenger, :checker, NULL, :amount, :details, NULL)");
+
+      $this->db->bind(':passenger', $data['passenger']);
+      $this->db->bind(':checker', $data['checker']);
+      $this->db->bind(':amount',$data['amount']);
+      $this->db->bind(':details', $data['details']);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function checkValidityOfUser($id){
+      $this->db->query("SELECT * FROM users WHERE id = :id");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function getLatestFine($id){
+      $this->db->query("SELECT fine_id FROM fines WHERE passenger_id = :id ORDER BY fine_id DESC LIMIT 1");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function updatefinePaymentWhenNoJourney($id){
+      $this->db->query("UPDATE fines SET payment_status = 1, payment_date = NOW() WHERE fine_id = :id");
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
     }
   }

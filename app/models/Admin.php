@@ -16,8 +16,9 @@
 
     public function editAdminDetails($data){
       
-      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword, userImage = :img  WHERE id = :id');
-      $this->db->bind(':name', $data['name']);
+      $this->db->query('UPDATE users SET fname = :fname, lname= :lname, email = :email, phone = :phone, password = :newPassword, userImage = :img  WHERE id = :id');
+      $this->db->bind(':fname', $data['fname']);
+      $this->db->bind(':lname', $data['lname']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
       $this->db->bind(':newPassword', $data['newPassword']);

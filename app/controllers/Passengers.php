@@ -299,12 +299,14 @@
       
       $data = [
         'id' => $user->id,
-        'name' => $user->name,
+        'fname' => $user->fname,
+        'lname' => $user->lname,
         'nic' => $user->nic,
         'phone' => $user->phone,
         'email' => $user->email,
         'image' => $user->userImage,
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'email_err' => '',
         'phone_err' => '',
         'oldPassword_err' => '',
@@ -327,7 +329,8 @@
         $data = [
           'id' => $_SESSION['user_id'],
           'nic' => $_SESSION['user_nic'],
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'email' => trim($_POST['email']),
           'phone' => trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
@@ -335,7 +338,8 @@
           'confirmPassword' => trim($_POST['confirmPassword']),
           'img' => $user->userImage,
           'id_err' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'email_err' => '',
           'phone_err' => '',
           'oldPassword_err' => '',
@@ -348,8 +352,11 @@
           'confirmPassword_err_value' => ''
         ];
 
-        if(empty($data['name'])){
-          $data['name'] = $user->name;
+        if(empty($data['fname'])){
+          $data['fname'] = $user->fname;
+        } 
+        if(empty($data['lname'])){
+          $data['lname'] = $user->lname;
         } 
 
         if(empty($data['phone'])){
@@ -421,7 +428,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
             
           
           // Hash Password
@@ -434,7 +441,8 @@
             }
           }
 
-          $_SESSION['user_name'] = $data['name'];
+          $_SESSION['user_fname'] = $data['fname'];
+          $_SESSION['user_lname'] = $data['lname'];
           
           //Update Admin details
           if($this->passengerModel->editPassengerDetails($data)){
@@ -449,7 +457,8 @@
           $data['oldPassword_err_value'] = $data['oldPassword'];
           $data['newPassword_err_value'] = $data['newPassword'];
           $data['confirmPassword_err_value'] = $data['confirmPassword'];
-          $data['name'] = $user->name;
+          $data['fname'] = $user->fname;
+          $data['lname'] = $user->lname;
           $data['email'] = $user->email;
           $data['phone'] = $user->phone;
 
@@ -462,7 +471,8 @@
 
         $data = [
           'id' => $user->id,
-          'name' => $user->name,
+          'fname' => $user->fname,
+          'lname' => $user->lname,
           'nic' => $user->nic,
           'phone' => $user->phone,
           'email' => $user->email,
@@ -478,12 +488,15 @@
 
     //Scan qrcode
       public function qrScan() {
+        $notCompletedFine = $this->passengerModel->getNoCompletedFines($_SESSION['user_id']);
         $stations = $this->adminModel->getStation();
         $classes = $this->adminModel->getClasses();
         $data = [
           'stations' => $stations,
-          'classes' => $classes
+          'classes' => $classes,
+          'fines'=> $notCompletedFine
         ];
+
         $this->view('user/scanQR',$data);
       }
 
@@ -627,6 +640,10 @@
         redirect("passengers/wallet");
       }
       
+    }
+
+    public function fines(){
+      echo 123;
     }
     
   }
