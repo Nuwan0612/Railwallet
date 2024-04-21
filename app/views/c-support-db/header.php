@@ -11,7 +11,7 @@
 
 <div class="side-menu">
         <div class="brand-name">
-            <h3>C_Support-K.V.Dias</h3>
+            <h3><?php echo SITENAME; ?></h3>
         </div>
         <ul>
             <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>public/pics/db.png" >&nbsp;<span>Dashboard</span></li></a>
@@ -36,7 +36,8 @@
                     
                     <img src="<?php echo URLROOT;?>public/pics/notification.png" alt="">
                     <div class="img-case">
-                    <img src="<?php echo URLROOT;?>public/pics/man.png" alt="">
+                    <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
+                    <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image'] ?>" alt="">
                     </div>
                 </div>
             </div>

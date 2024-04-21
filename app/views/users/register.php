@@ -10,10 +10,16 @@
       <div class="loginform">
         <h1>Register</h1>
         <form action="<?php echo URLROOT; ?>users/register" method ="post">
-          <div class="tbox <?php echo !empty($data['name_err']) ? 'error' : ''; ?>">  
-            <i class="fa fa-user"></i><input type="text" name="name" placeholder="Name" value="<?php echo $data['name']; ?>">
-            <div class="error-message"><?php echo $data['name_err'];?></div>
+          <div class="tbox <?php echo !empty($data['fname_err']) ? 'error' : ''; ?>">  
+            <i class="fa fa-user"></i><input type="text" name="fname" placeholder="First name" value="<?php echo $data['fname']; ?>">
+            <div class="error-message"><?php echo $data['fname_err'];?></div>
           </div>
+
+          <div class="tbox <?php echo !empty($data['lname_err']) ? 'error' : ''; ?>">  
+            <i class="fa fa-user"></i><input type="text" name="lname" placeholder="Last name" value="<?php echo $data['lname']; ?>">
+            <div class="error-message"><?php echo $data['lname_err'];?></div>
+          </div>
+
 
           <div class="tbox <?php echo !empty($data['nic_err']) ? 'error' : ''; ?>">  
           <i class="fa fa-address-card"></i></i><input type="text" name="nic" placeholder="NIC Number" value="<?php echo $data['nic']; ?>">

@@ -83,21 +83,6 @@
       </li>
     </a>
 
-    <script>
-  document.querySelectorAll('.side-menu li').forEach(item => {
-    item.addEventListener('click', () => {
-      // Remove 'active' class from all list items
-      document.querySelectorAll('.side-menu li').forEach(item => {
-        item.classList.remove('active');
-      });
-      // Add 'active' class to the clicked list item
-      item.classList.add('active');
-    });
-  });
-</script>
-
-  
-
     <!-- <a class="links" href="<?php echo URLROOT;?>admins/routes"><li><img src="<?php echo URLROOT;?>/img/routes.png" alt=""><span>Train Routes</span></li></a> -->
  
   </ul>

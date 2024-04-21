@@ -4,7 +4,7 @@
     </div> -->
     <div class="brand-name">
         <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
-        <p>RailWallet</p>
+        <p><?php echo SITENAME?></p>
     </div>
 
     <ul>
@@ -31,8 +31,8 @@
             <div class="user">
                 
             <!-- <img src="<?php echo URLROOT;?>public/pics/notification.png" > -->
-            <p>Welcome Checker</p>
-            <img src="<?php echo URLROOT;?>public/pics/man.png" >
+            <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
+            <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" >
             <div class="img-case">
                 <!-- <img src="<?php echo URLROOT;?>public/pics/man.png" > -->
                 <i class='bx bxs-bell-ring' ></i>
