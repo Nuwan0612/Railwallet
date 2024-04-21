@@ -1,6 +1,6 @@
 <?php
   class Passengers extends Controller{
-
+  
     public function __construct() {
       if(!isLoggedIn()){
         redirect('users/login');
@@ -18,10 +18,26 @@
 
     }
 
+    // *Wallet dashboard*
     public function wallet(){
-      $this->view('user/wallet');
+
+      // *Transaction History*
+      $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
+      $data = ['transactions'=>$result];
+      
+      $this->view('user/wallet',$data);
     }
 
+    // *Transaction history dashboard*
+    public function transactionHistory(){
+      $result = $this->passengerModel->viewAllTransactionHistory($_SESSION["user_id"]);
+      $data = ['transactions'=>$result];
+
+      $this->view('user/transaction-history',$data);
+    }
+
+
+    // *Transaction Dashboard*
     public function transaction(){
       $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
 
@@ -32,13 +48,26 @@
         }
         $data = ["transactions"=>$result];
         $this->view('user/transaction',$data);
-      // $this->view('user/transaction');
+      
     }
 
-    public function failTransaction(){
+    // *Fail transaction dashboard*
+    // public function failTransaction(){
 
-      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
-      $this->view('user/fail');
+    //   $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+    //   $this->view('user/fail');
+    // }
+
+    // *Fine Details*
+    public function fineDetails(){
+      $result = $this->passengerModel->viewFineDetails($_SESSION["user_id"]);
+      $data=['fines'=>$result];
+      $this->view('user/fine-details',$data);
+    }
+
+    // *Ticket dashboard*
+    public function ticket(){
+      $this->view('user/ticket');
     }
 
     public function shedule_list(){
@@ -64,10 +93,14 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+        $from = isset($_POST['fromStation']) ? trim($_POST['fromStation']) : '';
+        $to = isset($_POST['toStation']) ? trim($_POST['toStation']) : '';
+        $date = isset($_POST['date']) ? trim($_POST['date']) : '';
+
         $data = [
-          'from' => trim($_POST['fromStation']),
-          'to' => trim($_POST['toStation']),
-          'date' => trim($_POST['date']),
+          'from' => $from,
+          'to' => $to,
+          'date' => $date,
           'stations'=>'',
         ];
         $stations=$this->adminModel->getStation();
@@ -122,24 +155,88 @@
         $data=[
           // 'shid'=>trim($_POST['schedule_id']),
           
-          'fcount'=>trim($_POST['fClassCount']),
-          'scount'=>trim($_POST['sClassCount']),
-          'tcount'=>trim($_POST['tClassCount']),
-          'sheduleId'=>trim($_POST['sheduleId'])
+          '1count'=>trim($_POST['fClassCount']),
+          '2count'=>trim($_POST['sClassCount']),
+          '3count'=>trim($_POST['tClassCount']),
+          'sheduleId'=>trim($_POST['sheduleId']),
+          'userId' => $_SESSION['user_id'],
+          'paymentId' => 'P0001'
           
         ];
-         $this->passengerModel->updateSeatsByScheduleId($data);
-        // $this->view('user/booking',$data);
-         //die($data['sheduleId']);
+          $this->passengerModel->updateSeatsByScheduleId($data);
+          $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
+          $data0=['depStation'=>$result->departureStationID,
+                  'arrStation'=>$result->arrivalStationID];
+
+        // Loop to prepare booking details based on the counts
+        for ($i = 1; $i <= 3; $i++) {  // Assuming classes are represented as 1, 2, and 3
+            $countKey = "{$i}count";
+            $class = $i;
+            $count = $data[$countKey];
+
+            for ($j = 0; $j < $count; $j++) {
+   
+                $data2=[
+                    'scheduleId' => $data['sheduleId'],
+                    'dStation'=>$data0['depStation'],
+                    'aStation'=>$data0['arrStation'],
+                    'class' => $class,
+                    'user_id' => $data['userId'],
+                    'paymentId' => $data['paymentId']
+                ];
+
+                $data3=$this->passengerModel->viewTicketId($data2);
+                $data4=[
+                  'scheduleId' => $data['sheduleId'],
+                  'user_id' => $data['userId'],
+                  'paymentId' => $data['paymentId'],
+                  'ticketId'=>$data3->ticketPriceID
+              ];
+
+              $this->passengerModel->addBookingId($data4);
+                $result= $this->passengerModel->viewBookingId();
+                $bId=$result->bookingId;
+                $qrId=$this->genarateQR($bId);
+                // echo $bId;
+              $data5=['bId'=>$bId,
+                      'qrId'=>$qrId];
+              $this->passengerModel->insertQrForBookingId($data5); 
+
+              }
+          } 
         
-      
       }
+      redirect('passengers/viewTicketsByUserId');
     }
 
-
-    public function ticket(){
-      $this->view('user/ticket');
+    public function getUserTicektsBySheduleID($data){
+      $tickets=$this->passengerModel->getTicketsBySheduleId($data);
+        
+        $data=['tickets'=>$tickets
+      ];
+      $this->view('user/ticket',$data);
     }
+
+    // ## View Tickets By Userid
+
+    public function viewTicketsByUserId(){
+      $userId =$_SESSION['user_id'];
+      $result=$this->passengerModel->viewAllTicketsByUser($userId);
+      $data=['tickets'=>$result];
+      $this->view('user/travelHis',$data);
+    }
+
+     // ## View Tickets By BookingId
+    
+     public function viewTicketByBookingId($bookingId){
+        $result=$this->passengerModel->viewTicketByBookingId($bookingId);
+        $data=['ticket'=>$result];
+
+        $this->view('user/ticket',$data);
+     
+     }
+
+    
 
     //veiw feedback
     public function Feedbacks(){

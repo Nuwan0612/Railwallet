@@ -42,58 +42,29 @@
                         <div class="wallet-title">
                         <i class='bx bx-history'></i>
                             <h2>Transaction History</h2>
-                            <a href="#" class="btn">View All</a>
+                            <a href="<?php echo URLROOT;?>passengers/transactionHistory" class="btn">View All</a>
                         </div>
                         <table>
+                            <thead>
                             <tr>
                                 <th>Transaction ID</th>
                                 <th>Date</th>
-                                <th>Time</th>
-                                <th>Description</th>
+                                <!-- <th>Time</th> -->
+                                <th>Reason</th>
                                 <th>Amount</th>
                             </tr>
+                            </thead>
+                            <tbody>
+                            <?php $rowNumber = 1; foreach($data['transactions'] as $transaction):?>
                             <tr>
-                                <td>1</td>
-                                <td>2024/01/01</td>
-                                <td>8.00 AM</td>
-                                <td>Payment to xyz Shop</td>
-                                <td><span class="debit-amount">-100$</span></td>
+                                <td><?php echo $rowNumber; ?></td>
+                                <td><?php echo $transaction->date; ?></td>
+                                <!-- <td>8.00 AM</td> -->
+                                <td><?php echo $transaction->reason; ?></td>
+                                <td><?php echo $transaction->amount; ?></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2024/01/03</td>
-                                <td>10.00 AM</td>
-                                <td>Payment to abc Shop</td>
-                                <td><span class="debit-amount">-150$</span></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>2024/01/10</td>
-                                <td>10.30 AM</td>
-                                <td>Credit from abc ltd</td>
-                                <td><span class="credit-amount">+300$</span></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>2024/01/15</td>
-                                <td>9.00 AM</td>
-                                <td>Transfer from John Doe</td>
-                                <td><span class="credit-amount">+100$</span></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>2024/01/21</td>
-                                <td>5.00 PM</td>
-                                <td>Transfer from John Doe</td>
-                                <td><span class="credit-amount">+100$</span></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>2024/01/28</td>
-                                <td>6.00 PM</td>
-                                <td>Transfer from John Doe</td>
-                                <td><span class="credit-amount">+100$</span></td>
-                            </tr>
+                            <?php $rowNumber++; endforeach; ?>
+                            </tbody>
                         </table>
                     </div>
                     <div class="chart">
