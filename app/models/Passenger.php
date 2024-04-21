@@ -23,8 +23,10 @@
     //Get feedbacks
     public function getFeedbacks(){
       $this->db->query("SELECT 
-                          us.name,
+                          us.fname,
+                          us.lname,
                           us.email,
+                          us.userImage,
                           us.id,
                           fb.*
                         FROM 
