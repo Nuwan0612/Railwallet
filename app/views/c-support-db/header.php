@@ -17,13 +17,13 @@
             <p><?php echo SITENAME; ?></p>
         </div>
         <ul>
-            <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>img/dashboard.png" >&nbsp;<span>Dashboard</span></li></a>
-            <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>img/user.png">&nbsp;<span>Users</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>img/dashboard.png" >&nbsp;<span>Dashboard</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>img/user.png">&nbsp;<span>Users</span></li></a>
             <!-- <a href="checker.html"><li><img src="<?php echo URLROOT;?>public/pics/qr-code.png" >&nbsp;<span>Checkers</span></li></a> -->
-            <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
-            <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>img/calendar.png" >&nbsp;<span>Shedule</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>img/calendar.png" >&nbsp;<span>Shedule</span></li></a>
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
-            <a href="#"><li><img src="<?php echo URLROOT;?>img/settings.png" >&nbsp;<span>Settings</span></li></a>
+        <a href="#"><li><img src="<?php echo URLROOT;?>img/settings.png" >&nbsp;<span>Settings</span></li></a>
         </ul>
     </div>
     <div class="container">
@@ -36,7 +36,6 @@
                 <a href="<?php echo URLROOT;?>users/logout"><h3> Log Out</h3></a>
                 <!-- <a href="#"><h3> Fine Details</h3></a> -->
                 <div class="user">
-                    
                     <img src="<?php echo URLROOT;?>public/pics/notification.png" alt="">
                     <div class="img-case">
                     <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
@@ -44,4 +43,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
+
+        
+
+
+
+    
