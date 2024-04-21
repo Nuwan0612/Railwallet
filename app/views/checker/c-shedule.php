@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/checker/header.php';?>
+<?php require APPROOT . '/views/checker/includes/header.php';?>
         <div class="content">
 
             <div class="content-2">
@@ -81,4 +81,4 @@
             </div>
         </div>
     </div>
-    <?php require APPROOT . '/views/checker/footer.php';?>
+    <?php require APPROOT . '/views/checker/includes/footer.php';?>

@@ -1,11 +1,11 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
         <div class="wallet-container">
             <div class="content">
-            <div class="wallet-heading">
+            <!-- <div class="wallet-heading">
                 <h1>My Wallet</h1>
-                <!-- <a href="<?php echo URLROOT; ?>passengers/addFeedback"><button>Give Feedback</button></a> -->
+                <a href="<?php echo URLROOT; ?>passengers/addFeedback"><button>Give Feedback</button></a>
                 <a href="<?php echo URLROOT;?>passengers/transaction" class="btn"><li><span>Topup</span></li></a>
-            </div>
+            </div> -->
                 <div class="cards">
                     <div class="card">
                         <div class="i">
@@ -25,6 +25,7 @@
                             <h2>Spent</h2>
                         </div>
                     </div>
+                    <a href="<?php echo URLROOT;?>passengers/transaction">
                     <div class="card">
                     <div class="i">
                     <i class='bx bxs-bank'></i>
@@ -34,10 +35,11 @@
                             <h2>Balance</h2>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="content-2">
                     <div class="recent-payments">
-                        <div class="title">
+                        <div class="wallet-title">
                         <i class='bx bx-history'></i>
                             <h2>Transaction History</h2>
                             <a href="#" class="btn">View All</a>
@@ -95,7 +97,7 @@
                         </table>
                     </div>
                     <div class="chart">
-                        <div class="title">
+                        <div class="wallet-title">
                         <i class='bx bx-line-chart'></i>
                             <h2>Chart</h2>
                         </div>

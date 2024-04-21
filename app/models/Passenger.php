@@ -96,10 +96,25 @@
     // get available train seats in a train shedule
 
     public function bookingDetailsByScheduleId($data){
-      $this->db->query('SELECT a.firstClassBooked,a.secondClassBooked,a.thirdClassBooked, t.firstCapacity ,t.secondCapacity,t.thirdCapacity,a.id FROM `avlbleseats` a JOIN trains t ON t.trainID=a.trainID WHERE a.way=:way AND a.trainID=:tId AND a.date=:date ;');
-      $this->db->bind(':tId', $data['tID']);
-      $this->db->bind(':way', $data['way']);
-      $this->db->bind(':date', $data['dDate']);
+      $this->db->query('SELECT 
+        firstClassBooked,
+        secondClassBooked,
+        thirdClassBooked,
+        departureDate,
+        departureTime,
+        arrivalTime,
+        firstCapacity,
+        secondCapacity,
+        thirdCapacity
+      FROM 
+          shedules
+      JOIN
+          trains ON trains.trainID = shedules.trainID
+      WHERE 
+        sheduleID = :scheduleID
+      
+      ');
+      $this->db->bind(':scheduleID', $data['shID']);
 
       $result = $this->db->Single();
       return $result;
@@ -108,12 +123,12 @@
     //update booked counts
 
     public function updateSeatsByScheduleId($data){
-      $this->db->query('UPDATE avlbleseats SET 
+      $this->db->query('UPDATE shedules SET 
       firstClassBooked=firstClassBooked+:fcount,
       secondClassBooked=secondClassBooked+:scount,
       thirdClassBooked=thirdClassBooked+:tcount
-    WHERE 
-      id =:avlbleId ');
+  WHERE 
+      sheduleID =:scheduleID ');
 
       $this->db->bind(':avlbleId', $data['avlbleId']);
       $this->db->bind(':fcount', $data['1count']);
@@ -293,10 +308,11 @@ public function addingTrId($data){
 
     //edit user details
     public function editPassengerDetails($data){
-      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword WHERE id = :id');
+      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword, userImage = :img WHERE id = :id');
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
+      $this->db->bind(':img', $data['img']);
       $this->db->bind(':newPassword', $data['newPassword']);
       $this->db->bind(':id', $data['id']);
 
@@ -381,6 +397,30 @@ public function addingTrId($data){
       $this->db->bind(':qr', $qr);
       $this->db->bind(':id', $id);
 
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // Recharge wallet
+    public function walletRecharge($id){
+      $this->db->query("SELECT transaction_id 
+      FROM topupdetails 
+      WHERE user_id = :id
+      ORDER BY transaction_id DESC 
+      LIMIT 1;
+      ");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function updateAmount($data){
+      $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
+      $this->db->bind(':uid', $data["uid"]);
+      $this->db->bind(':amount', $data["amount"]);
       if($this->db->execute()){
         return true;
       } else {

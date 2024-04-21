@@ -21,9 +21,7 @@ function updateName(selectedli, type, staionOrClass) {
 	}
 
 	document.querySelector('.warning').innerHTML = "";
-	document.getElementById('end-journey-btn').style.display = 'none';
-  document.getElementById('start-journey-btn').style.display = 'none';
-
+	reomveButtons();
 	if(departureStation && arrivalStation && trainClass){
 		checkTicketAvailability();	
 	}
@@ -122,14 +120,12 @@ function onScanSuccess(decodeText, decodeResult, departureStation, arrivalStatio
 			document.querySelector('.warning').innerHTML = "";
 			document.getElementById('start-journey-btn').style.display = 'inline-block';
 			document.getElementById('end-journey-btn').style.display = 'none';
-			document.getElementById('cancel-journey-btn').style.display = 'none';
 		}
 	} else if (decodeText == arrivalStation) {
 		if(ticket){
 			document.querySelector('.warning').innerHTML = "";
 			document.getElementById('end-journey-btn').style.display = 'inline-block';
 			document.getElementById('start-journey-btn').style.display = 'none';
-			document.getElementById('cancel-journey-btn').style.display = 'none';
 		}	
 	} else {
 		document.querySelector('.warning').innerHTML = "Selected Station Does not match";
@@ -167,7 +163,6 @@ function startJourney() {
 			if(response.unfinished) {
 				document.querySelector('.warning').innerHTML = `There is a unfinished journey from ${response.unfinished.depStationName} to ${response.unfinished.arrStationName} with ${response.unfinished.ticketClass.className} class ticket.`;
 				document.getElementById('start-journey-btn').style.display = 'none';
-				document.getElementById('cancel-journey-btn').style.display = 'inline-block';
 			} else if (response.success) {
 				document.querySelector('.warning').style.color = 'var(--green)';
 				document.querySelector('.warning').innerHTML = 'Have a safe Journey';
@@ -197,10 +192,15 @@ function endJourney(){
 			"ticket": ticket
 		}),
 		success: function(response) {
+
 			if (response.success){
 				document.querySelector('.warning').style.color = 'var(--green)';
 				document.querySelector('.warning').innerHTML = 'You have completed the journey successfully';
 				reomveButtons()
+			} else if(!response.startJourney) {
+				document.querySelector('.warning').innerHTML = 'Please Start a Journey first';
+				reomveButtons()
+				console.log(response.startJourney)
 			} else if(response.unfinished){
 				document.querySelector('.warning').innerHTML = `There is a unfinished journey from ${response.unfinished.depStationName} to ${response.unfinished.arrStationName} with ${response.unfinished.ticketClass.className} class ticket.`;
 			}
@@ -214,5 +214,4 @@ function endJourney(){
 function reomveButtons() {
 	document.getElementById('start-journey-btn').style.display = 'none';
 	document.getElementById('end-journey-btn').style.display = 'none';
-	document.getElementById('cancel-journey-btn').style.display = 'none';
 }
