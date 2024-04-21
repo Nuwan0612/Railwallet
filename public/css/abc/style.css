@@ -435,6 +435,7 @@
     font-size: 1.25em;
     border-radius: 5px;
     margin-right: 10px;
+    margin-bottom: 5px; 
 }
 .chat-container .tab input:checked ~ label h2
 {
@@ -451,7 +452,7 @@
 
 .chat-container .tab:nth-child(4) label h2
 {
-    background: linear-gradient(135deg, #009688, #009688);
+    background: linear-gradient(135deg, #009688, #009688); 
 }
 .chat-container .tab:nth-child(5) label h2
 {
