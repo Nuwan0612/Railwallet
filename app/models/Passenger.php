@@ -26,6 +26,7 @@
     public function getWalletBalnce($id){
       $this->db->query("SELECT * FROM wallet WHERE passenger_id = :id");
       $this->db->bind(':id',$id);
+      
       $result = $this->db->single();
       return $result;
     }
