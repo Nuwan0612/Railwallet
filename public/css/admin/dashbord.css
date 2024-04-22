@@ -45,11 +45,7 @@
   /* background-color: #00d7c2; New background color on hover */
   transform: scale(1.05); /* Scale effect on hover */
   background-color: rgba(0, 150, 136, 0.3); 
-  transform: translateY(-5px); /* Lift up effect */
-}
-
-.container .content .cards .db-link .card:hover h3 {
-  color: #009688; /* New text color on hover */
+  transform: translateY(-2px); /* Lift up effect */
 }
 
 .container .content .cards .card p
@@ -57,16 +53,9 @@
   color: #333;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 30px;
   text-align: center;
 }
-
-.container .content .cards .db-link .card:hover p
-{
-  color: #009688;
-
-}
-
 
 
 /* .container .content .content-2{

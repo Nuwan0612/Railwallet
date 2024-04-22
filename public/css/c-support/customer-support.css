@@ -3,6 +3,8 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    margin-right: 10px;
 }
 body {
     min-height: 100vh;
@@ -20,29 +22,108 @@ li img{
 img{
     max-width: 40px;
 }
+
 h1,
+h3 {
+    color: #333;
+    margin-left: 15px;
+}
+
 h2 {
     color: #444;
 }
 h2{
     padding-left: 0%;
 }
-h3 {
-    color: #999;
+
+.side-menu .brand-name img{
+    margin-right: 3px;
 }
 
-.btn {
-    background: #009688;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-}
-.btn:hover {
+
+.side-menu .brand-name p {
     color: #009688;
-    background: white;
-    padding: 3px 8px;
-    border: 2px solid #009688;
+    font-weight: bold;
+    font-size: 2rem; /* Adjust the font size according to your h1 tag */
+    font-family: Arial;
+    text-align: center; /* Center the text */
+    margin-left: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
+/* 
+.side-menu .brand-name .logo {
+    margin-right: 100px; 
+} */
+
+.side-menu .brand-name .logo img {
+    width: 100px; /* Adjust the width of the logo as needed */
+    height: auto; /* Maintain the aspect ratio */
+    margin-left: 30px; /* Add some margin to the left */
+    transform: scale(1.4);
+}
+
+
+
+.btn {
+
+    background: #009688;
+    color: #fff;
+    font-size: small;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+    transform: translateY(0); /* Start from initial position */
+    opacity: 1; /* Initially fully opaque */
+}
+
+.btn:hover {
+
+    opacity: 0.9; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
+}
+
+.update-btn {
+    background: #333;
+    color: #fff;
+    font-size: small;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+    transform: translateY(0); /* Start from initial position */
+    opacity: 1; /* Initially fully opaque */
+}
+
+.update-btn:hover{
+    opacity: 0.9; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
+}
+
+.dlt-btn {
+    background: rgb(208, 46, 46);
+    color: #fff;
+    font-size: small;
+    padding: 8px 12px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
+    transform: translateY(0); /* Start from initial position */
+    opacity: 1; /* Initially fully opaque */
+}
+
+.dlt-btn:hover{
+    opacity: 0.9; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
+}
+
 .title {
     display: flex;
     align-items: center;
@@ -50,39 +131,65 @@ h3 {
     padding: 15px 10px;
     border-bottom: 2px solid #999;
 }
+
 table {
     padding: 10px;
 }
+
 th,
 td {
     text-align: left;
     padding: 8px;
 }
+
 .side-menu {
     position: fixed;
-    background: #009688;
+    background: #f1f1f1;
     width: 20vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
+
 .side-menu .brand-name {
-    height: 10vh;
+
     display: flex;
     align-items: center;
-    justify-content: center;
+    transition: transform 0.3s;
+    margin-right: 40px;
+
+    /* height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
 }
+
 .side-menu li {
-    font-size: 24px;
-    padding: 10px 40px;
-    color: white;
+    font-size: 20px;
+    padding: 15px 40px 10px 45px;
+    color: #333;
     display: flex;
     align-items: center;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    position: relative;
 }
+
 .side-menu li:hover {
-    background: white;
+    background: rgba(0, 150, 136, 0.3);;
     color: #009688;
+    transform: translateX(10px);
+    cursor: pointer;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
+
+.side-menu li img {
+    margin-right: 10px; /* Adjust the margin to move the icons to the left */
+    width: 30px; /* Adjust the width of the images as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .container {
     position: absolute;
     right: 0;
@@ -96,7 +203,7 @@ td {
     right: 0;
     width: 80vw;
     height: 10vh;
-    background: #ffff;
+    background: #f1f1f1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,14 +218,19 @@ td {
 .container .header .nav  h3{
 
     padding: 10px 40px;
-    color: #009688;;
+    color: #333;;
     display: flex;
     align-items: center;
 
 }
 .container .header .nav h3:hover{
-    background: #333;
+    background:  rgba(0, 150, 136, 0.3);;
     color: #009688;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
 }
 .container .header .nav .search input[type=text] {
     border: none;
@@ -157,14 +269,20 @@ td {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 50px;
+    margin-left: 78px;
 }
+
+/* .container .header .nav .user .img-case img {
+    margin-right: 100px; 
+} */
+
 .container .content {
     position: relative;
     margin-top: 10vh;
     min-height: 90vh;
-    background: #f1f1f1;
+    background: #fff;
 }
 .container .content .cards {
     padding: 20px 15px;
@@ -176,13 +294,23 @@ td {
 .container .content .cards .card {
     width: 250px;
     height: 150px;
-    background: white;
+    background: #fff;
     margin: 20px 10px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    transition: all 0.3s ease; /* Transition effect */
 }
+
+.container .content .cards .card:hover{
+    /* background-color: #00d7c2; New background color on hover */
+    transform: scale(1.05); /* Scale effect on hover */
+    background-color: rgba(0, 150, 136, 0.3); 
+    transform: translateY(-2px); /* Lift up effect */
+  }
+
 .container .content .content-2 {
     min-height: 60vh;
     display: flex;
@@ -216,17 +344,30 @@ td {
     .side-menu li {
         font-size: 18px;
     }
+    .container .header {
+        font-size: 10px; 
+    }
 }
 @media screen and (max-width: 940px) {
     .side-menu li span {
         display: none;
     }
+
+    .container .header {
+        font-size: 5px; 
+    }
+
+    .side-menu li {
+        font-size: 10px;
+    }
+
+
     .side-menu {
         align-items: center;
     }
     .side-menu li img {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
     }
     .side-menu li:hover {
         background:#009688;
@@ -234,6 +375,10 @@ td {
         border: 2px solid white;
     }
 }
+
+
+
+
 @media screen and (max-width:536px) {
     .brand-name h1 {
         font-size: 16px;
@@ -241,9 +386,12 @@ td {
     .container .content .cards {
         justify-content: center;
     }
+    .side-menu li {
+        font-size: 5px;
+    }
     .side-menu li img {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
     }
     .container .content .content-2 .recent-payments table th:nth-child(2),
     .container .content .content-2 .recent-payments table td:nth-child(2) {

@@ -19,48 +19,48 @@
                             <td>Viranga Dias</td>
                             <td>200012300838</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Remove</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Remove</a></td>
                         </tr>
                         <tr>
                             <td>C001</td>
                             <td>Viranga Dias</td>
                             <td>200012300838</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Remove</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Remove</a></td>
                         </tr>
                         <tr>
                             <td>C001</td>
                             <td>Viranga Dias</td>
                             <td>200012300838</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Remove</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Remove</a></td>
                         </tr>
                         <tr>
                             <td>C001</td>
                             <td>Viranga Dias</td>
                             <td>200012300838</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Remove</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Remove</a></td>
                         </tr>
                         <tr>
                             <td>C001</td>
                             <td>Viranga Dias</td>
                             <td>200012300838</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Remove</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Remove</a></td>
                         </tr>
                         <tr>
                             <td>C001</td>
                             <td>Viranga Dias</td>
                             <td>200012300838</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Remove</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Remove</a></td>
                         </tr>
                     </table>
                 </div>

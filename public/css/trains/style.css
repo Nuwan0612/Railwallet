@@ -194,7 +194,7 @@ input[type="date"] {
 
 .edit-btn:hover {
   opacity: 0.9; /* Reduce opacity when popping up */
-  transform: translateY(-1px); /* lift up */
+  transform: translateY(-0.4px); /* lift up */
 }
 
 .delete-btn{
@@ -204,7 +204,11 @@ input[type="date"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
 
+.delete-btn:hover {
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-0.4px); /* lift up */
 }
 
 td{
@@ -242,7 +246,3 @@ td{
   opacity: 1; /* Initially fully opaque */
 }
 
-.delete-btn:hover {
-  opacity: 0.9; /* Reduce opacity when popping up */
-  transform: translateY(-1px); /* lift up */
-}
