@@ -57,6 +57,9 @@
                          <input type="hidden" name="schedule_id" value="<?= $schedule->sheduleID ?>">
                          <input type="hidden" name="train_name" value="<?= $schedule->train_name ?>">
                          <input type="hidden" name="train_type" value="<?= $schedule->train_type ?>">
+                         <input type="hidden" name="way" value="<?= $schedule->way ?>">
+                         <input type="hidden" name="dDate" value="<?= $schedule->departureDate ?>">
+                         <input type="hidden" name="tId" value="<?= $schedule->trainID ?>">
                          <input type="hidden" name="departure_station" value="<?= $schedule->departure_station_name ?>">
                          <input type="hidden" name="arrival_station" value="<?= $schedule->arrival_station_name ?>">
                     
