@@ -16,13 +16,22 @@
                   </div>
                   <div class="ticket-content">
                       <div class="ticket-display">
-                        <p><strong>Passenger Name: </strong><?php echo $data['name']?></p>
+                        <p><strong>Passenger Name: </strong><?php echo $data['fname'].' '.$data['lname']?></p>
                         <p><strong>From:</strong> <?php echo $data['depStation']?></p>
                         <p><strong>To:</strong> <?php echo $data['arrStation']?></p>
                         <p><strong>Date:</strong> <?php echo $data['date']?></p>
                         <p><strong>Class:</strong> <?php echo $data['class']?></p>
                         <p><strong>Price:</strong> <?php echo $data['price']?></p>
-                        <p><strong>Status:</strong> <?php echo $data['status']?></p>
+                        <p><strong>Status:</strong> <?php 
+                          if($data['status'] === 'Canceled'){
+                            echo "<span style='color: red; font-weight: bold'>Canceled</span>";
+                          } else if($data['status'] === 'Completed'){
+                            echo "<span style='color: green; font-weight: bold'>Completed</span>";
+                          } else {
+                            echo "<span>On Journey</span>";
+                          }
+                          
+                        ?></p>
                       </div>
                   </div>
                   <div class="footer">

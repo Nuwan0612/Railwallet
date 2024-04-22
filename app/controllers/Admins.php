@@ -399,7 +399,6 @@
           'oldPassword_err' => '',
           'newPassword_err' => '',
           'confirmPassword_err' => '',
-  
         ];
         $this->view('admin/setting/manageAccount',$data);
       }

@@ -3,9 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    margin-right: 10px;
-
+    /* font-weight: bold; */
 }
 body {
     min-height: 100vh;
@@ -20,9 +18,9 @@ li {
 li img{
     max-width: 40px;
 }
-img{
+/* img{
     max-width: 40px;
-}
+} */
 
 h1,
 h3 {
@@ -58,13 +56,11 @@ h2{
 } */
 
 .side-menu .brand-name .logo img {
-    width: 100px; /* Adjust the width of the logo as needed */
+    width: 40px; /* Adjust the width of the logo as needed */
     height: auto; /* Maintain the aspect ratio */
     margin-left: 30px; /* Add some margin to the left */
     transform: scale(1.4);
 }
-
-
 
 .btn {
 
@@ -271,9 +267,10 @@ td {
     position: absolute;
     top: 0;
     left: 0;
-    width: 150px;
+    width: 50px;
     height: 50px;
-    margin-left: 78px;
+    border-radius: 50%;
+    /* margin-left: 78px; */
 }
 
 /* .container .header .nav .user .img-case img {
@@ -317,6 +314,10 @@ td {
     justify-content: space-around;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0,0.19);
     transition: all 0.3s ease; /* Transition effect */
+  }
+
+  .container .content .cards .card img{
+    width: 40px;
   }
 
   .container .content .cards .card:hover{

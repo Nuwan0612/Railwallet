@@ -115,7 +115,8 @@
       }
 
       $data = [
-        'name' => $details->userName,
+        'fname' => $details->firstName,
+        'lname' => $details->lastName,
         'depStation' => $details->depStation,
         'arrStation' => $details->arrStation,
         'class' => $details->className,
