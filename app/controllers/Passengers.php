@@ -24,6 +24,7 @@
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      // echo $_SESSION["user_id"];
       $data = [
         'transactions'=>$result,
         'balance' => $walletBalance
