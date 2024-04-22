@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/customer-support.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/users.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/feedbacks.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/account.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title><?php echo SITENAME; ?></title>
 </head>
 <body>
@@ -21,25 +26,20 @@
         <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>img/user.png">&nbsp;<span>Users</span></li></a>
             <!-- <a href="checker.html"><li><img src="<?php echo URLROOT;?>public/pics/qr-code.png" >&nbsp;<span>Checkers</span></li></a> -->
         <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
-        <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>img/calendar.png" >&nbsp;<span>Shedule</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>img/calendar.png" >&nbsp;<span>Schedule</span></li></a>
+        <a href="<?php echo URLROOT?>users/logout"><li><img src="<?php echo URLROOT;?>img/turn-off.png" >&nbsp;<span>Logout</span></li></a>
             <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
-        <a href="#"><li><img src="<?php echo URLROOT;?>img/settings.png" >&nbsp;<span>Settings</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/settings"><li><img src="<?php echo URLROOT;?>img/settings.png" >&nbsp;<span>Settings</span></li></a>
         </ul>
     </div>
     <div class="container">
         <div class="header">
             <div class="nav">
-
-                <a href="#"><h3> Complaints</h3></a>
-                <a href="#"><h3> Booking Reqs</h3></a>
-                <a href="#"><h3> Live Chat</h3></a>
-                <a href="<?php echo URLROOT;?>users/logout"><h3> Log Out</h3></a>
-                <!-- <a href="#"><h3> Fine Details</h3></a> -->
+                
                 <div class="user">
-                    <img src="<?php echo URLROOT;?>img/notification.png" alt="">
+                    <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname']?></p>
                     <div class="img-case">
-                    <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
-                    <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image'] ?>" alt="">
+                        <img src="<?php echo URLROOT?>pics/userPics/<?php echo $_SESSION['user_image']; ?>">
                     </div>
                 </div>
             </div>

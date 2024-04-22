@@ -84,7 +84,6 @@
     }
 
     public function shedule_list(){
-     
       $this->view('user/shedule_list');
     }
 
@@ -522,7 +521,7 @@
             $data['newPassword'] = password_hash($data['newPassword'], PASSWORD_DEFAULT);
           } else {
             if(empty($data['newPassword'])){
-              $user = $this->adminModel->User();
+              $user = $this->adminModel->User($_SESSION['user_id']);
               $data['newPassword'] = $user->password;
             }
           }
@@ -547,6 +546,7 @@
           $data['lname'] = $user->lname;
           $data['email'] = $user->email;
           $data['phone'] = $user->phone;
+          $data['image'] = $user->userImage;
 
           // Load view with errors
           $this->view('user/setting', $data);
@@ -726,10 +726,6 @@
         redirect("passengers/wallet");
       }
       
-    }
-
-    public function fines(){
-      echo 123;
     }
     
   }

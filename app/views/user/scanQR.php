@@ -109,7 +109,7 @@
     let fine = <?php echo json_encode($data['fines'])?>;
     if(fine){
       alert('There is a fine associated with this account that requires your attention and completion.')
-      window.location.href = `<?php echo URLROOT?>passengers/fines`;
+      window.location.href = `<?php echo URLROOT?>passengers/fineDetails`;
     } 
   </script>
     

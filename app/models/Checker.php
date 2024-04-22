@@ -138,22 +138,24 @@
 
     // *View schedule details*
     public function viewSchedule(){
-
-      $this->db->query("SELECT s.sheduleID, 
-                                s.trainID, 
-                                s.departureStationID, 
-                                dep.name AS dName, 
-                                s.departureDate, 
-                                s.departureTime, 
-                                s.arrivalStationID, 
-                                arr.name AS aName, 
-                                s.arrivalDate, 
-                                s.arrivalTime 
-                          FROM shedules s 
-                          INNER JOIN stations dep 
-                          ON s.departureStationID = dep.stationID 
-                          INNER JOIN stations arr 
-                          ON s.arrivalStationID = arr.stationID;");
+      // $this->db->query("SELECT * FROM `shedules`;");
+      $this->db->query("SELECT 
+                          s.sheduleID, 
+                          s.trainID, 
+                          s.departureStationID, 
+                          dep.name AS dName, 
+                          s.departureDate, 
+                          s.departureTime, 
+                          s.arrivalStationID, 
+                          arr.name AS aName, 
+                          s.arrivalDate, 
+                          s.arrivalTime 
+                        FROM 
+                          shedules s 
+                        INNER JOIN 
+                          stations dep ON s.departureStationID = dep.stationID 
+                        INNER JOIN 
+                          stations arr ON s.arrivalStationID = arr.stationID;");
 
       $result = $this->db->resultSet();
       return $result;
@@ -210,7 +212,8 @@
 
     public function getPassengerJourneyDetails($id){
       $this->db->query("SELECT  
-                          u.name AS userName, 
+                          u.fname AS firstName,
+                          u.lname AS lastName, 
                           st1.name AS depStation, 
                           st2.name AS arrStation, 
                           tc.className, 
@@ -286,7 +289,6 @@
       $result = $this->db->resultSet();
       return $result;
     }
-
 
     public function isuueWithUserId($data){
       $this->db->query("INSERT INTO fines (passenger_id, checker_id, journey_id, fine_amount, fine_reason, payment_date) VALUES (:passenger, :checker, NULL, :amount, :details, NULL)");
