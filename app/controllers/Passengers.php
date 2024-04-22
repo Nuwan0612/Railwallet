@@ -218,7 +218,7 @@
 
       // echo $data['1count'];
 
-      $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+$tPrice->price*(int)$data['3count'];
+      $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
         
       if($total<=$walletBalance->balance){
