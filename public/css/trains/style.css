@@ -195,10 +195,11 @@ input[type="date"] {
 .edit-btn:hover {
   opacity: 0.9; /* Reduce opacity when popping up */
   transform: translateY(-0.4px); /* lift up */
+
 }
 
 .delete-btn{
-  background: rgb(208, 46, 46);
+  background: rgb(201, 51, 51);
   color: #fff;
   padding: 8px 12px;
   border: none;
@@ -244,5 +245,10 @@ td{
   transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
   transform: translateY(0); /* Start from initial position */
   opacity: 1; /* Initially fully opaque */
+}
+
+.delete-btn:hover {
+  opacity: 0.92; /* Reduce opacity when popping up */
+  /* transform: translateY(-1px);  */
 }
 

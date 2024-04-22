@@ -16,7 +16,7 @@ h1{
 
 h3{
   text-align: center;
-  color: #333;
+  color: #999;
   font-weight: bold;
 }
 
@@ -88,6 +88,7 @@ h3{
 .side-menu li.active::after { 
   background-color: rgba(0, 150, 136, 0.3);
 }
+
 
 .side-menu ul img {
   width: 30px;
