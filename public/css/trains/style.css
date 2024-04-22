@@ -194,17 +194,22 @@ input[type="date"] {
 
 .edit-btn:hover {
   opacity: 0.9; /* Reduce opacity when popping up */
-  transform: translateY(-1px); /* lift up */
+  transform: translateY(-0.4px); /* lift up */
+
 }
 
 .delete-btn{
-  background: rgb(208, 46, 46);
+  background: rgb(201, 51, 51);
   color: #fff;
   padding: 8px 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
 
+.delete-btn:hover {
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-0.4px); /* lift up */
 }
 
 td{
@@ -243,6 +248,7 @@ td{
 }
 
 .delete-btn:hover {
-  opacity: 0.9; /* Reduce opacity when popping up */
-  transform: translateY(-1px); /* lift up */
+  opacity: 0.92; /* Reduce opacity when popping up */
+  /* transform: translateY(-1px);  */
 }
+

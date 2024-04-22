@@ -23,10 +23,12 @@
             </div>
         <!--##ChatBox##-->
 
+        <!-- <button class="container-toggler" onclick="toggleChatContainer()"> -->
+
         <div class="outer-container">
-            <button class="container-toggler" style="z-index: 1000;">
+            <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;">
                 <!-- <span class="material-symbols-outlined">+</span> -->
-                <img src="<?php echo URLROOT;?>/img/messenger_image.png" alt="">
+                <img src="<?php echo URLROOT;?>/img/live-chat.png" alt="">
                 <!-- <img src="image.png" alt="Icon"> -->
                 <span class="material-symbols-outlined"></span>
                 
@@ -289,8 +291,19 @@
         }
 
     }
-
-
 </script>
+
+
+<script>
+    function toggleChatContainer() {
+    const containerToggler = document.querySelector('.container-toggler');
+    const chatContainer = document.querySelector('.chat-container');
+    
+    containerToggler.classList.toggle('clicked');
+    chatContainer.classList.toggle('opened');
+}
+</script>
+
+
 
 <?php require APPROOT . '/views/Home/inc/footer.php';?>

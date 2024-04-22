@@ -30,6 +30,7 @@
             <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out-circle' ></i><span>Logout</span></li></a>
         </ul>
     </div>
+
     <div class="user-container">
         <div class="user-header">
             <div class="user-nav">
