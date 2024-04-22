@@ -45,6 +45,9 @@
                             
                             <form class="bookingTickets" action="<?php echo URLROOT?>passengers/bookingTickets" method="POST">
                             <input type="text" name="sheduleId" hidden value="<?php echo $data['shId']?>">
+                            <input type="text" name="way" hidden value="<?php echo $data['way']?>">
+                            <input type="text" name="tID" hidden value="<?php echo $data['tID']?>">
+                            <input type="hidden" name="avlbleId"  value="<?php echo $data['avlbleId']?>">
                             <div class="tickets">
                                 <div class="box-class">
                         
@@ -56,15 +59,16 @@
                                     </div>
                                     <div class="inputs">
                                         <div class="f_class">
-                                            <input type="text" id="first" name="fClassCount" placeholder=" <?php echo $data['firstBooked'];?>/<?php echo $data['fCapacity'];?>">
+                                            <input type="text" id="first" name="fClassCount" placeholder=" Available=<?php echo $data['fFree'];?>">
                                         </div>
                                         <div class="s_class">
-                                            <input type="text" id="second" name="sClassCount" placeholder=" <?php echo $data['secondBooked'];?>/<?php echo $data['sCapacity'];?>">
+                                            <input type="text" id="second" name="sClassCount" placeholder=" Available= <?php echo $data['sFree'];?>">
                                         </div>
                                         <div class="t_class">
-                                            <input type="text" id="third" name="tClassCount" placeholder=" <?php echo $data['thirdBooked'];?>/<?php echo $data['tCapacity'];?>">
+                                            <input type="text" id="third" name="tClassCount" placeholder=" Available=<?php echo $data['tFree'];?>">
                                         </div>
                                     </div> 
+                                    <input type="hidden" name="dDate" value="<?= $data['dDate'] ?>">
                                      
                                 </div>
                                 <div class="btn-main">

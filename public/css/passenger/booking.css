@@ -204,7 +204,7 @@
 }
 
 .f_class input[type="text"],.s_class input[type="text"],.t_class input[type="text"]{
-    width:80px;
+    width:80%;
     border-radius: 5px;
 }
 .classes{
