@@ -24,9 +24,6 @@
                         <p><strong>Price:</strong> <?php echo $data['price']?></p>
                         <p><strong>Status:</strong> <?php echo $data['status']?></p>
                       </div>
-                      <div class="ticket-qr">
-                          <i class='bx bx-qr'></i>
-                      </div>
                   </div>
                   <div class="footer">
                       <p>Thank you!</p>

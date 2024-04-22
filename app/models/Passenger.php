@@ -5,6 +5,32 @@
     public function __construct() {
       $this->db = new Database;
     }
+    
+    //get Recent fine
+    public function getRecentFines($id) {
+      $this->db->query("SELECT fine_amount FROM fines WHERE passenger_id = :id ORDER BY fine_id DESC LIMIT 1");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    //get total fines
+    public function getTotalFines($id){
+      $this->db->query("SELECT SUM(fine_amount) AS totalFine FROM fines WHERE passenger_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    } 
+
+    //get wallet balance
+    public function getWalletBalnce($id){
+      $this->db->query("SELECT * FROM wallet WHERE passenger_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+
     //Add feedback
     public function addFeedback($data) {
       $this->db->query('INSERT INTO feedbacks (userID, feedback, rating) VALUES (:user_id, :feedback, :rating)');
@@ -22,8 +48,10 @@
     //Get feedbacks
     public function getFeedbacks(){
       $this->db->query("SELECT 
-                          us.name,
+                          us.fname,
+                          us.lname,
                           us.email,
+                          us.userImage,
                           us.id,
                           fb.*
                         FROM 
@@ -93,7 +121,6 @@
     }
 
     // get available train seats in a train shedule
-
     public function bookingDetailsByScheduleId($data){
       $this->db->query('SELECT a.firstClassBooked, a.secondClassBooked, a.thirdClassBooked, a.date,a.id, t.firstCapacity, t.secondCapacity, t.thirdCapacity 
       FROM avlbleseats a 
@@ -109,7 +136,6 @@
     }
     
     //update booked counts
-
     public function updateSeatsByScheduleId($data){
       $this->db->query('UPDATE avlbleseats 
       SET firstClassBooked=firstClassBooked+:fcount, 
@@ -297,8 +323,9 @@ public function addingTrId($data){
 
     //edit user details
     public function editPassengerDetails($data){
-      $this->db->query('UPDATE users SET name = :name, email = :email, phone = :phone, password = :newPassword, userImage = :img WHERE id = :id');
-      $this->db->bind(':name', $data['name']);
+      $this->db->query('UPDATE users SET fname = :fname, lname = :lname, email = :email, phone = :phone, password = :newPassword, userImage = :img WHERE id = :id');
+      $this->db->bind(':fname', $data['fname']);
+      $this->db->bind(':lname', $data['lname']);
       $this->db->bind(':email', $data['email']);
       $this->db->bind(':phone', $data['phone']);
       $this->db->bind(':img', $data['img']);
@@ -393,7 +420,7 @@ public function addingTrId($data){
       }
     }
 
-    // Recharge wallet
+    // *Recharge wallet*
     public function walletRecharge($id){
       $this->db->query("SELECT transaction_id 
       FROM topupdetails 
@@ -406,8 +433,10 @@ public function addingTrId($data){
       return $result;
     }
 
+    // *Update wallet amount*
     public function updateAmount($data){
       $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
+      $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) VALUES (:uid,'recharge',:amount);");
       $this->db->bind(':uid', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);
       if($this->db->execute()){
@@ -415,6 +444,62 @@ public function addingTrId($data){
       } else {
         return false;
       }
+    }
+
+
+    public function getNoCompletedFines($id){
+      $this->db->query('SELECT * FROM fines WHERE passenger_id = :id AND payment_status = 0');
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    // *Fine Details*
+    public function viewFineDetails($id){
+      $this->db->query("SELECT *, DATE(fine_date) AS fineDate FROM `fines` WHERE passenger_id=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *Booking details*
+    public function viewBookingDetail($id){
+      $this->db->query("SELECT * FROM `booking` WHERE userId=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *Journey details*
+    public function viewJourneyDetail($id){
+      $this->db->query("SELECT * FROM `journey` WHERE passenger_id=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *Recharge details*
+    public function viewRechargeDetails($id){
+      $this->db->query("SELECT * FROM `topupdetails` WHERE user_id=:id;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *View transaction history*
+    public function viewTransactionHistory($id){
+      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:id ORDER BY `transactions`.`date` DESC LIMIT 5;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
+    }
+
+    // *View all transaction history*
+    public function viewAllTransactionHistory($id){
+      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:id ORDER BY `transactions`.`date` DESC;");
+      $this->db->bind(':id', $id);
+      $result=$this->db->resultSet();
+      return $result;
     }
 
 

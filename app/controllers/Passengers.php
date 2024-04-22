@@ -1,6 +1,6 @@
 <?php
   class Passengers extends Controller{
-
+  
     public function __construct() {
       if(!isLoggedIn()){
         redirect('users/login');
@@ -18,10 +18,30 @@
 
     }
 
+    // *Wallet dashboard*
     public function wallet(){
-      $this->view('user/wallet');
+
+      // *Transaction History*
+      $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $data = [
+        'transactions'=>$result,
+        'balance' => $walletBalance
+      ];
+      
+      $this->view('user/wallet',$data);
     }
 
+    // *Transaction history dashboard*
+    public function transactionHistory(){
+      $result = $this->passengerModel->viewAllTransactionHistory($_SESSION["user_id"]);
+      $data = ['transactions'=>$result];
+
+      $this->view('user/transaction-history',$data);
+    }
+
+
+    // *Transaction Dashboard*
     public function transaction(){
       $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
 
@@ -32,13 +52,34 @@
         }
         $data = ["transactions"=>$result];
         $this->view('user/transaction',$data);
-      // $this->view('user/transaction');
+      
     }
 
-    public function failTransaction(){
+    // *Fail transaction dashboard*
+    // public function failTransaction(){
 
-      $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
-      $this->view('user/fail');
+    //   $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
+    //   $this->view('user/fail');
+    // }
+
+    // *Fine Details*
+    public function fineDetails(){
+      $result = $this->passengerModel->viewFineDetails($_SESSION["user_id"]);
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $totalFines = $this->passengerModel->getTotalFines($_SESSION["user_id"]);
+      $recentFine = $this->passengerModel->getRecentFines($_SESSION["user_id"]);
+      $data=[
+        'fines'=>$result,
+        'balance' => $walletBalance,
+        'total-fines' => $totalFines,
+        'recent' => $recentFine
+      ];
+      $this->view('user/fine-details',$data);
+    }
+
+    // *Ticket dashboard*
+    public function ticket(){
+      $this->view('user/ticket');
     }
 
     public function shedule_list(){
@@ -260,17 +301,12 @@
      
      }
 
-    public function ticket(){
-      $this->view('user/ticket');
-    }
+    
 
     //veiw feedback
     public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
-      // echo '<pre>';
-      // var_dump($data);
-      // echo '</pre>';
       $this->view('user/feedback/feedback',$data);
     }
 
@@ -325,12 +361,14 @@
       
       $data = [
         'id' => $user->id,
-        'name' => $user->name,
+        'fname' => $user->fname,
+        'lname' => $user->lname,
         'nic' => $user->nic,
         'phone' => $user->phone,
         'email' => $user->email,
         'image' => $user->userImage,
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'email_err' => '',
         'phone_err' => '',
         'oldPassword_err' => '',
@@ -353,7 +391,8 @@
         $data = [
           'id' => $_SESSION['user_id'],
           'nic' => $_SESSION['user_nic'],
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'email' => trim($_POST['email']),
           'phone' => trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
@@ -361,7 +400,8 @@
           'confirmPassword' => trim($_POST['confirmPassword']),
           'img' => $user->userImage,
           'id_err' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'email_err' => '',
           'phone_err' => '',
           'oldPassword_err' => '',
@@ -374,8 +414,11 @@
           'confirmPassword_err_value' => ''
         ];
 
-        if(empty($data['name'])){
-          $data['name'] = $user->name;
+        if(empty($data['fname'])){
+          $data['fname'] = $user->fname;
+        } 
+        if(empty($data['lname'])){
+          $data['lname'] = $user->lname;
         } 
 
         if(empty($data['phone'])){
@@ -447,7 +490,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
             
           
           // Hash Password
@@ -460,7 +503,8 @@
             }
           }
 
-          $_SESSION['user_name'] = $data['name'];
+          $_SESSION['user_fname'] = $data['fname'];
+          $_SESSION['user_lname'] = $data['lname'];
           
           //Update Admin details
           if($this->passengerModel->editPassengerDetails($data)){
@@ -475,7 +519,8 @@
           $data['oldPassword_err_value'] = $data['oldPassword'];
           $data['newPassword_err_value'] = $data['newPassword'];
           $data['confirmPassword_err_value'] = $data['confirmPassword'];
-          $data['name'] = $user->name;
+          $data['fname'] = $user->fname;
+          $data['lname'] = $user->lname;
           $data['email'] = $user->email;
           $data['phone'] = $user->phone;
 
@@ -488,7 +533,8 @@
 
         $data = [
           'id' => $user->id,
-          'name' => $user->name,
+          'fname' => $user->fname,
+          'lname' => $user->lname,
           'nic' => $user->nic,
           'phone' => $user->phone,
           'email' => $user->email,
@@ -504,12 +550,15 @@
 
     //Scan qrcode
       public function qrScan() {
+        $notCompletedFine = $this->passengerModel->getNoCompletedFines($_SESSION['user_id']);
         $stations = $this->adminModel->getStation();
         $classes = $this->adminModel->getClasses();
         $data = [
           'stations' => $stations,
-          'classes' => $classes
+          'classes' => $classes,
+          'fines'=> $notCompletedFine
         ];
+
         $this->view('user/scanQR',$data);
       }
 
@@ -653,6 +702,10 @@
         redirect("passengers/wallet");
       }
       
+    }
+
+    public function fines(){
+      echo 123;
     }
     
   }

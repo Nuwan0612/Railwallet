@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
     outline: none;
     border:none;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
     transition: all .2s linear;
 }
 /* body {
@@ -62,6 +62,7 @@ th,
 td {
     text-align: center;
     padding: 8px;
+    font-size: 17px;
 }
 .side-menu {
     position: fixed;
@@ -215,6 +216,20 @@ td {
     font-size: 19px;
     font-weight: bold;
     margin-left: -800px;
+}
+
+.user-container .qr-content{
+position: relative;
+margin-top: 10vh;
+min-height: 90vh;
+}
+
+.user-container .content  .qr-scanner-details{
+padding: 10px 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
 }
 
 /* ### wallet css ###*/

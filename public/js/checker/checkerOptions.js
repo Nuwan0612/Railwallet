@@ -25,3 +25,35 @@ function issueFine(){
   }
   
 }
+
+function issueFineWithUserId(){
+  const fineDetails = document.getElementById('fine-detail')
+  const fineAmount = document.getElementById('fine-amount-user')
+  const userId = document.getElementById('user-id')
+
+  if(!fineDetails.value || !fineAmount.value || !userId.value){
+    document.querySelector('.warning').innerHTML = 'Please enter details'
+  } else {
+    $.ajax({
+      type: 'POST',
+      url: 'http://localhost/railwallet/checkers/checkValidityOfUser',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        'passenger_id': userId.value
+      }),
+      success: function(response){
+        if(response){
+          document.querySelector('.warning').innerHTML = ''
+          window.location.href = `http://localhost/railwallet/checkers/isuueFineWithUserId?details=${fineDetails.value}&amount=${fineAmount.value}&passenger=${userId.value}`
+        } else {
+          document.querySelector('.warning').innerHTML = 'Not a vlaid passenger id'
+        }
+      },
+      error: function(xhr, status, error){
+        console.error(xhr.responseText)
+      }
+    })
+    
+  }
+  
+}

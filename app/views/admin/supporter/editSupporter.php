@@ -7,10 +7,16 @@
   <div class="add-train-form">
     <form class="emp-train-form" action="<?php echo URLROOT; ?>admins/editSupporter/<?php echo $data['id']; ?>" method ="post">
 
-      <label for="name" class="labels">Name:</label> 
-      <div  class="tbox <?php echo !empty($data['name_err']) ? 'error' : ''; ?>">
-        <input type="text" name="name" placeholder="Name" value="<?php echo $data['name']; ?>">
-        <div class="error-message"><?php echo $data['name_err'];?></div>
+      <label for="fname" class="labels">First name:</label> 
+      <div  class="tbox <?php echo !empty($data['fname_err']) ? 'error' : ''; ?>">
+        <input type="text" name="fname" placeholder="First name" value="<?php echo $data['fname']; ?>">
+        <div class="error-message"><?php echo $data['fname_err'];?></div>
+      </div>
+
+      <label for="lname" class="labels">Last name:</label> 
+      <div  class="tbox <?php echo !empty($data['lname_err']) ? 'error' : ''; ?>">
+        <input type="text" name="lname" placeholder="Last name" value="<?php echo $data['lname']; ?>">
+        <div class="error-message"><?php echo $data['lname_err'];?></div>
       </div>
 
       <label for="nic" class="labels">NIC Number:</label> 
