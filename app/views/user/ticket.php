@@ -15,7 +15,7 @@
                 </div>
                 <div class="ticket-content">
                     <div class="ticket-display">
-                        <p><strong>Passenger Name:</strong> <?php echo $ticket->userName; ?></p>
+                        <p><strong>Passenger Name:</strong> <?php echo $ticket->fname; ?> <?php echo $ticket->lname; ?></p>
                         <p><strong>Train Number:</strong> <?php echo $ticket->name; ?></p>
                         <p><strong>From:</strong><?php echo $ticket->depStation; ?></p>
                         <p><strong>To:</strong><?php echo $ticket->arrStation ?></p>

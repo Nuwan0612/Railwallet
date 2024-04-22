@@ -5,7 +5,7 @@
       if(!isLoggedIn()){
         redirect('users/login');
       }
-
+      
       $this->passengerModel = $this->model('Passenger');
 
       $this->sheduleModel=$this->model('Shedule');
@@ -93,9 +93,12 @@
         $data=[
           'tID'=>trim($_POST['tId']),
           'way'=>trim($_POST['way']),
-          'dDate'=>trim($_POST['dDate'])
+          'dDate'=>trim($_POST['dDate']),
+          'shID'=>trim($_POST['schedule_id'])
         ];
+        // echo $data['shID'];
         $time=$this->passengerModel->viewDtimeAtimeByScheduleId(trim($_POST['schedule_id']));
+
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
 
         // print_r($trainDetails);
@@ -166,9 +169,7 @@
 
         if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount) {
           $this->passengerModel->updateSeatsByScheduleId($data);
-      } else {
-          echo 'Not Booked'; // or any other status message you want
-      } 
+
           $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
           $data0=['depStation'=>$result->departureStationID,
                   'arrStation'=>$result->arrivalStationID];
@@ -212,21 +213,24 @@
                   'amount'=> $amount
               ];
 
-              $this->passengerModel->addBookingId($data4);
-                $result= $this->passengerModel->viewBookingId();
-                $bId=$result->bookingId;
-                $qrId=$this->genarateQR($bId);
-                // echo $bId;
-              $data5=['bId'=>$bId,
-                      'qrId'=>$qrId];
-              $this->passengerModel->insertQrForBookingId($data5); 
+              // echo $data4['paymentId'];
 
-              }
-          } 
-        
-      }
-      redirect('passengers/viewTicketsByUserId');
-      
+                $this->passengerModel->addBookingId($data4);
+                  $result= $this->passengerModel->viewBookingId();
+                  $bId=$result->bookingId;
+                  $qrId=$this->genarateQR($bId);
+                  // echo $bId;
+                $data5=['bId'=>$bId,
+                        'qrId'=>$qrId];
+                $this->passengerModel->insertQrForBookingId($data5); 
+
+                }
+            } 
+        redirect('passengers/viewTicketsByUserId');
+      } else {
+          echo 'Not Booked'; // or any other status message you want
+      }       
+    }     
     }
 
     public function getUserTicektsBySheduleID($data){
