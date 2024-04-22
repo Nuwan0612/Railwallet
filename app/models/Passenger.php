@@ -6,6 +6,30 @@
       $this->db = new Database;
     }
 
+    //get Recent fine
+    public function getRecentFines($id) {
+      $this->db->query("SELECT fine_amount FROM fines WHERE passenger_id = :id ORDER BY fine_id DESC LIMIT 1");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    //get total fines
+    public function getTotalFines($id){
+      $this->db->query("SELECT SUM(fine_amount) AS totalFine FROM fines WHERE passenger_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    } 
+
+    //get wallet balance
+    public function getWalletBalnce($id){
+      $this->db->query("SELECT * FROM wallet WHERE passenger_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
     //Add feedback
     public function addFeedback($data) {
       $this->db->query('INSERT INTO feedbacks (userID, feedback, rating) VALUES (:user_id, :feedback, :rating)');
@@ -410,7 +434,7 @@
 
     // *Fine Details*
     public function viewFineDetails($id){
-      $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
+      $this->db->query("SELECT *, DATE(fine_date) AS fineDate FROM `fines` WHERE passenger_id=:id;");
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;

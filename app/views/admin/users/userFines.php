@@ -36,7 +36,13 @@
               <td><?php echo $details->fine_amount; ?></td>
               <td><?php echo $details->fine_reason; ?></td>
               <td><?php echo $details->fine_date; ?></td>
-              <td><?php echo $details->payment_status; ?></td>
+              <?php 
+                if($details->payment_status){
+                  echo "<td style='color: #009688; font-weight: bold'>Paid</td>";
+                } else {
+                  echo "<td style='color: red; font-weight: bold'>Not paid</td>";
+                }
+              ?>
               <td><?php echo $details->payment_date; ?></td>
             </tr>
             <?php $rowNumber++; endforeach; ?>
