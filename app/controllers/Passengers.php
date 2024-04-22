@@ -23,7 +23,11 @@
 
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
-      $data = ['transactions'=>$result];
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $data = [
+        'transactions'=>$result,
+        'balance' => $walletBalance
+      ];
       
       $this->view('user/wallet',$data);
     }
@@ -61,7 +65,15 @@
     // *Fine Details*
     public function fineDetails(){
       $result = $this->passengerModel->viewFineDetails($_SESSION["user_id"]);
-      $data=['fines'=>$result];
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $totalFines = $this->passengerModel->getTotalFines($_SESSION["user_id"]);
+      $recentFine = $this->passengerModel->getRecentFines($_SESSION["user_id"]);
+      $data=[
+        'fines'=>$result,
+        'balance' => $walletBalance,
+        'total-fines' => $totalFines,
+        'recent' => $recentFine
+      ];
       $this->view('user/fine-details',$data);
     }
 
@@ -209,14 +221,12 @@
       redirect('passengers/viewTicketsByUserId');
     }
 
-
     public function getUserTicektsBySheduleID($data){
       $tickets=$this->passengerModel->getTicketsBySheduleId($data);
         
         $data=['tickets'=>$tickets
       ];
       $this->view('user/ticket',$data);
-
     }
 
     // ## View Tickets By Userid
