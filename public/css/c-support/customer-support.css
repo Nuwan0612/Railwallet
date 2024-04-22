@@ -352,12 +352,22 @@ td {
     .side-menu li span {
         display: none;
     }
+
+    .container .header {
+        font-size: 5px; 
+    }
+
+    .side-menu li {
+        font-size: 10px;
+    }
+
+
     .side-menu {
         align-items: center;
     }
     .side-menu li img {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
     }
     .side-menu li:hover {
         background:#009688;
@@ -376,9 +386,12 @@ td {
     .container .content .cards {
         justify-content: center;
     }
+    .side-menu li {
+        font-size: 5px;
+    }
     .side-menu li img {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
     }
     .container .content .content-2 .recent-payments table th:nth-child(2),
     .container .content .content-2 .recent-payments table td:nth-child(2) {
