@@ -287,7 +287,7 @@
             });
 
             question.style.display = "block";
-            question.parentNode.style.background = "green";
+            question.parentNode.style.background = "rgba(0, 160, 136, 0.3)";
         }
 
     }
