@@ -471,7 +471,7 @@
 .chat-container .tab label h3
 {
     position: relative;
-    font-weight: 500;
+    font-weight: 600;
     color: #333;
     z-index: 10;
 }
