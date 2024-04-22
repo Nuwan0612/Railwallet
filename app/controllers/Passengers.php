@@ -5,7 +5,7 @@
       if(!isLoggedIn()){
         redirect('users/login');
       }
-
+      
       $this->passengerModel = $this->model('Passenger');
 
       $this->sheduleModel=$this->model('Shedule');
@@ -23,7 +23,11 @@
 
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
-      $data = ['transactions'=>$result];
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $data = [
+        'transactions'=>$result,
+        'balance' => $walletBalance
+      ];
       
       $this->view('user/wallet',$data);
     }
@@ -61,7 +65,15 @@
     // *Fine Details*
     public function fineDetails(){
       $result = $this->passengerModel->viewFineDetails($_SESSION["user_id"]);
-      $data=['fines'=>$result];
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $totalFines = $this->passengerModel->getTotalFines($_SESSION["user_id"]);
+      $recentFine = $this->passengerModel->getRecentFines($_SESSION["user_id"]);
+      $data=[
+        'fines'=>$result,
+        'balance' => $walletBalance,
+        'total-fines' => $totalFines,
+        'recent' => $recentFine
+      ];
       $this->view('user/fine-details',$data);
     }
 
@@ -120,21 +132,34 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         
         $data=[
-          'shID'=>trim($_POST['schedule_id']) 
+          'tID'=>trim($_POST['tId']),
+          'way'=>trim($_POST['way']),
+          'dDate'=>trim($_POST['dDate']),
+          'shID'=>trim($_POST['schedule_id'])
         ];
-        
+        // echo $data['shID'];
+        $time=$this->passengerModel->viewDtimeAtimeByScheduleId(trim($_POST['schedule_id']));
+
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
+
+        // print_r($trainDetails);
+
+        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+
+        // echo $trainDetails->id;
         
         $data=[
-          'firstBooked'=>$trainDetails->firstClassBooked,
-          'secondBooked'=>$trainDetails->secondClassBooked,
-          'thirdBooked'=>$trainDetails->thirdClassBooked,
-          'fCapacity'=>$trainDetails->firstCapacity,
-          'sCapacity'=>$trainDetails->secondCapacity,
-          'tCapacity'=>$trainDetails->thirdCapacity,
-          'dDate'=>$trainDetails->departureDate,
-          'dTime'=>$trainDetails->departureTime,
-          'aTime'=>$trainDetails->arrivalTime,
+          'fFree'=>$fFree,
+          'sFree'=>$sFree,
+          'tFree'=>$tFree,
+          'avlbleId'=>$trainDetails->id,
+          'dDate'=>trim($_POST['dDate']),
+          'tID'=>trim($_POST['tId']),
+          'way'=>trim($_POST['way']),
+          'dTime'=>$time->departureTime,
+          'aTime'=>$time->arrivalTime,
           'trainName'=>trim($_POST['train_name']),
           'trainType'=>trim($_POST['train_type']),
           'departureStation'=>trim($_POST['departure_station']),
@@ -143,7 +168,7 @@
         ];
 
         $this->view('user/booking',$data);
-        // die($data['arrivalStation']);
+        // // die($data['arrivalStation']);
         
       };
       
@@ -152,18 +177,40 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+        $fcount=trim($_POST['fClassCount']);
+        $scount=trim($_POST['sClassCount']);
+        $tcount=trim($_POST['tClassCount']);
+        $avlbleId=trim($_POST['avlbleId']);
+        $way=trim($_POST['way']);
+        $tID=trim($_POST['tID']);
+
+        // echo  $avlbleId;
+
         $data=[
-          // 'shid'=>trim($_POST['schedule_id']),
-          
-          '1count'=>trim($_POST['fClassCount']),
-          '2count'=>trim($_POST['sClassCount']),
-          '3count'=>trim($_POST['tClassCount']),
+          // 'shid'=>trim($_POST['schedule_id']), 
+          'avlbleId'=>$avlbleId, 
+          'tID'=> $tID,
+          'way'=> $way,
+          '1count'=>$fcount,
+          '2count'=>$scount,
+          '3count'=>$tcount,
           'sheduleId'=>trim($_POST['sheduleId']),
+          'dDate'=>trim($_POST['dDate']),
           'userId' => $_SESSION['user_id'],
-          'paymentId' => 'P0001'
+          // 'paymentId' => 'P0001'
           
         ];
+
+      //  print_r ($data);
+
+        $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
+        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+
+        if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount) {
           $this->passengerModel->updateSeatsByScheduleId($data);
+
           $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
           $data0=['depStation'=>$result->departureStationID,
                   'arrStation'=>$result->arrivalStationID];
@@ -182,33 +229,50 @@
                     'aStation'=>$data0['arrStation'],
                     'class' => $class,
                     'user_id' => $data['userId'],
-                    'paymentId' => $data['paymentId']
+                    // 'paymentId' => $data['paymentId']
                 ];
 
                 $data3=$this->passengerModel->viewTicketId($data2);
+                $amount=$data3->price;
+                $data2=[
+                  'scheduleId' => $data['sheduleId'],
+                  'dStation'=>$data0['depStation'],
+                  'aStation'=>$data0['arrStation'],
+                  'class' => $class,
+                  'user_id' => $data['userId'],
+                  'amount'=> $amount
+                  // 'paymentId' => $data['paymentId']
+              ];
+                $transaction=$this->passengerModel->addingTransaction($data2);
+                $result=$this->passengerModel->addingTrId($data2);  
+
                 $data4=[
                   'scheduleId' => $data['sheduleId'],
                   'user_id' => $data['userId'],
-                  'paymentId' => $data['paymentId'],
-                  'ticketId'=>$data3->ticketPriceID
+                  'paymentId' => $result->tr_id,
+                  'ticketId'=>$data3->ticketPriceID,
+                  'amount'=> $amount
               ];
 
-              $this->passengerModel->addBookingId($data4);
-                $result= $this->passengerModel->viewBookingId();
-                $bId=$result->bookingId;
-                $qrId=$this->genarateQR($bId);
-                // echo $bId;
-              $data5=['bId'=>$bId,
-                      'qrId'=>$qrId];
-              $this->passengerModel->insertQrForBookingId($data5); 
+              // echo $data4['paymentId'];
 
-              }
-          } 
-        
-      }
-      redirect('passengers/viewTicketsByUserId');
+                $this->passengerModel->addBookingId($data4);
+                  $result= $this->passengerModel->viewBookingId();
+                  $bId=$result->bookingId;
+                  $qrId=$this->genarateQR($bId);
+                  // echo $bId;
+                $data5=['bId'=>$bId,
+                        'qrId'=>$qrId];
+                $this->passengerModel->insertQrForBookingId($data5); 
+
+                }
+            } 
+        redirect('passengers/viewTicketsByUserId');
+      } else {
+          echo 'Not Booked'; // or any other status message you want
+      }       
+    }     
     }
-
 
     public function getUserTicektsBySheduleID($data){
       $tickets=$this->passengerModel->getTicketsBySheduleId($data);
@@ -216,7 +280,6 @@
         $data=['tickets'=>$tickets
       ];
       $this->view('user/ticket',$data);
-
     }
 
     // ## View Tickets By Userid

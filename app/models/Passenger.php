@@ -5,6 +5,31 @@
     public function __construct() {
       $this->db = new Database;
     }
+    
+    //get Recent fine
+    public function getRecentFines($id) {
+      $this->db->query("SELECT fine_amount FROM fines WHERE passenger_id = :id ORDER BY fine_id DESC LIMIT 1");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    //get total fines
+    public function getTotalFines($id){
+      $this->db->query("SELECT SUM(fine_amount) AS totalFine FROM fines WHERE passenger_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    } 
+
+    //get wallet balance
+    public function getWalletBalnce($id){
+      $this->db->query("SELECT * FROM wallet WHERE passenger_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
 
     //Add feedback
     public function addFeedback($data) {
@@ -49,6 +74,9 @@
                             shedules.departureDate,
                             shedules.arrivalTime,
                             shedules.departureTime, 
+                            shedules.way,
+                            shedules.departureDate,
+                            shedules.trainID,
                             trains.name AS train_name,
                             trains.type AS train_type,
                             MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
@@ -84,28 +112,24 @@
       $results = $this->db->resultSet();
       return $results;
     }
-
+    // ## Get  dTime and Atime
+    public Function viewDtimeAtimeByScheduleId($id){
+      $this->db->query('SELECT departureTime,arrivalTime FROM `shedules` WHERE sheduleID=:shId');
+      $this->db->bind(':shId',$id);
+      $result=$this->db->Single(); 
+      return $result;
+    }
 
     // get available train seats in a train shedule
     public function bookingDetailsByScheduleId($data){
-      $this->db->query('SELECT 
-        firstClassBooked,
-        secondClassBooked,
-        thirdClassBooked,
-        departureDate,
-        departureTime,
-        arrivalTime,
-        firstCapacity,
-        secondCapacity,
-        thirdCapacity
-      FROM 
-          shedules
-      JOIN
-          trains ON trains.trainID = shedules.trainID
-      WHERE 
-        sheduleID = :scheduleID
+      $this->db->query('SELECT a.firstClassBooked, a.secondClassBooked, a.thirdClassBooked, a.date,a.id, t.firstCapacity, t.secondCapacity, t.thirdCapacity 
+      FROM avlbleseats a 
+      JOIN trains t ON t.trainID = a.trainID 
+      WHERE a.trainID =:tId AND date=:date AND way=:way;
       ');
-      $this->db->bind(':scheduleID', $data['shID']);
+      $this->db->bind(':tId', $data['tID']);
+      $this->db->bind(':date', $data['dDate']);
+      $this->db->bind(':way', $data['way']);
 
       $result = $this->db->Single();
       return $result;
@@ -113,24 +137,24 @@
     
     //update booked counts
     public function updateSeatsByScheduleId($data){
-      $this->db->query('UPDATE shedules SET 
-        firstClassBooked=firstClassBooked+:fcount,
-        secondClassBooked=secondClassBooked+:scount,
-        thirdClassBooked=thirdClassBooked+:tcount
-      WHERE 
-        sheduleID =:scheduleID ');
+      $this->db->query('UPDATE avlbleseats 
+      SET firstClassBooked=firstClassBooked+:fcount, 
+          secondClassBooked=secondClassBooked+:scount, 
+          thirdClassBooked=thirdClassBooked+:tcount 
+          WHERE id=:avlbleId;
+      ');
 
-      $this->db->bind(':scheduleID', $data['sheduleId']);
       $this->db->bind(':fcount', $data['1count']);
       $this->db->bind(':scount', $data['2count']);
       $this->db->bind(':tcount', $data['3count']);
+      $this->db->bind(':avlbleId', $data['avlbleId']);
 
       $this->db->execute();
     }
     // ## View All Tickets of a User
 
     public function viewAllTicketsByUser($id){
-      $this->db->query("SELECT u.name AS userName,b.bookingTime,t.name,s.departureDate,s.departureTime,b.bookingId,tp.classID ,
+      $this->db->query("SELECT u.fname,u.lname,b.bookingTime,t.name,s.departureDate,s.departureTime,b.bookingId,tp.classID ,
       st1.name AS depStation,
       st2.name AS arrStation 
       FROM `booking` AS b 
@@ -174,7 +198,7 @@
     // ## Viw ticketId according to sheduleId and Class
 
     public function viewTicketId($data){
-      $this->db->query("SELECT `ticketPriceID` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
+      $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
       $this->db->bind(':class', $data['class']);
       $this->db->bind(':depSta', $data['dStation']);
       $this->db->bind(':arrSta', $data['aStation']);
@@ -242,7 +266,7 @@
     // ## view ticket by using id
 
     public function viewTicketByBookingId($id){
-      $this->db->query('SELECT u.name AS userName,t.name,b.qrId,s.departureDate,s.departureTime,s.arrivalTime,tp.classID,tp.price,
+      $this->db->query('SELECT u.fname,u.lname,t.name,b.qrId,s.departureDate,s.departureTime,s.arrivalTime,tp.classID,tp.price,
        CASE 
            WHEN tp.classID = 1 THEN "1st Class"
            WHEN tp.classID = 2 THEN "2nd Class"
@@ -265,6 +289,28 @@
       $result = $this->db->single();
       return $result;
     }
+// ## update transaction table
+    public function addingTransaction($data){
+      $this->db->query("INSERT INTO transactions( user_id, reason,amount) VALUES (:uid,'Booking',:amount);");
+    
+      $this->db->bind(':uid', $data['user_id']);
+      $this->db->bind(':amount', $data['amount']);
+
+      $this->db->execute();
+     
+
+    }
+
+// ## take recent booking tr_id
+
+public function addingTrId($data){
+  $this->db->query("SELECT * FROM `transactions` WHERE user_id=:uid AND reason='Booking' ORDER BY `transactions`.`date` DESC LIMIT 1;
+  ");
+  $this->db->bind(':uid', $data['user_id']);
+
+  $result= $this->db->Single();
+  return $result;
+}
 
     //get user details
     public function getUserDetails($id){
@@ -410,7 +456,7 @@
 
     // *Fine Details*
     public function viewFineDetails($id){
-      $this->db->query("SELECT * FROM `fines` WHERE passenger_id=:id;");
+      $this->db->query("SELECT *, DATE(fine_date) AS fineDate FROM `fines` WHERE passenger_id=:id;");
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;

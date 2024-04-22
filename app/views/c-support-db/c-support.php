@@ -7,7 +7,7 @@
                         <h3>Chats For Today</h3>
                     </div>
                     <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/customer-service.png" alt="">
+                    <img src="<?php echo URLROOT;?>img/customer-service.png" alt="">
                     </div>
                 </div>
                 <div class="card">
@@ -16,7 +16,7 @@
                         <h3>Average Rating</h3>
                     </div>
                     <div class="icon-case">
-                    <img src="<?php echo URLROOT;?>public/pics/feedback.png" alt="">
+                    <img src="<?php echo URLROOT;?>img/feedback.png" alt="">
                     </div>
                 </div>
                 <div class="card">
