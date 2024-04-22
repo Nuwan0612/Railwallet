@@ -202,6 +202,26 @@
         ];
 
       //  print_r ($data);
+      $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
+      $class1=['dId'=>$result->departureStationID,
+                'aId'=>$result->arrivalStationID,
+                'cId'=>1];
+      $class2=['dId'=>$result->departureStationID,
+                'aId'=>$result->arrivalStationID,
+                'cId'=>2];
+      $class3=['dId'=>$result->departureStationID,
+                'aId'=>$result->arrivalStationID,
+                'cId'=>3];
+      $fPrice=$this->passengerModel->ticketPricesByClass($class1);
+      $sPrice=$this->passengerModel->ticketPricesByClass($class2);
+      $tPrice=$this->passengerModel->ticketPricesByClass($class3);
+
+      // echo $data['1count'];
+
+      $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+$tPrice->price*(int)$data['3count'];
+      $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+        
+      if($total<=$walletBalance->balance){
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
         $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
@@ -271,7 +291,10 @@
       } else {
           echo 'Not Booked'; // or any other status message you want
       }       
-    }     
+    }else{
+      echo 'Recharge Wallet';
+    }
+  }
     }
 
     public function getUserTicektsBySheduleID($data){

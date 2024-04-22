@@ -207,6 +207,28 @@
       return $results;
 
     }
+    // ## Take ticket prices
+    public function ticketPricesByShedule(){
+      $this->db->query("SELECT `departureStationID`,`arrivalStationID` FROM `shedules` WHERE sheduleID=:shId ");
+       $this->db->bind(':shId', $data['sheduleId']);
+    }
+
+    // ## Take Ticket Prices By class
+    public function ticketPricesByClass($data){
+      $this->db->query("SELECT price 
+      FROM `ticketprices` 
+      WHERE departureStationID=:dId
+      AND arrivalStationID=:aId 
+      AND classID=:cId;
+      ");
+       $this->db->bind(':dId', $data['dId']);
+       $this->db->bind(':aId', $data['aId']);
+       $this->db->bind(':cId', $data['cId']);
+
+       $results=$this->db->single();
+       return $results;
+
+    }
 
 
     // ## View Two End station according to stationId
