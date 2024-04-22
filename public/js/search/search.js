@@ -55,7 +55,52 @@ function searchSheduleByID() {
   window.location.href = `http://localhost/railwallet/admins/searchSheduleByID?id=${id}`;   
 }
 
-function searchDepartureStation(){
+// Search fines by checker id
+function searchFines() {
+  const id = document.getElementById('search-fines').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchFinesByUserId/${id}`;   
+}
+
+// Search schedule by schedule id
+function searchByScheduleID() {
+  const id = document.getElementById('search-shedule-by-SID').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByScheduleId/${id}`;   
+}
+
+// Search schedule by departure station
+function searchByDepartureStation() {
+  const id = document.getElementById('search-departureStation').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByDepartureStation/${id}`;   
+}
+
+// Search schedule by arrival station
+function searchByArrivalStation() {
+  const id = document.getElementById('search-arrivalStation').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByArrivalStation/${id}`;   
+}
+
+// Search schedule by date
+function searchByDate() {
+  const id = document.getElementById('search-by-date').value;
+  if (id.trim() === "") {
+    return;
+  }  
+  window.location.href = `http://localhost/railwallet/checkers/searchSchedulesByDate/${id}`;   
+}
+
+function searchDepartureStation() {
   const departueStation = document.getElementById('search-departure-station').value;
   const arrivalStation = document.getElementById('search-arrival-station').value;
   const date = document.getElementById('search-date').value;
@@ -73,4 +118,25 @@ function searchDepartureStation(){
     alert('Please enter date')
   }
   window.location.href = `http://localhost/railwallet/admins/searchSheduleByStation?departuerStation=${departueStation}&arrivalStation=${arrivalStation}&date=${date}`;
+}
+
+function searchTravelDetails() {
+  const searchQuery = document.getElementById('search-travel-details').value;
+  if(searchQuery.trim() === ""){
+    return;
+  }
+
+  let id = '';
+
+  const url = window.location.href;
+  const segments = url.split('=')
+  const urlSegments = window.location.pathname.split('/')
+  
+  if(segments.length > 1) {
+    id = segments[2]
+  } else {
+    id = urlSegments[urlSegments.length -1];
+  }
+
+  window.location.href = `http://localhost/railwallet/admins/searchTravelDetails?date=${searchQuery}&id=${id}`; 
 }

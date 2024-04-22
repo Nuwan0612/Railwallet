@@ -1,0 +1,46 @@
+/* .wallet-container .content .content-2 {
+    min-height: 60vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.wallet-container .content .content-2 .recent-payments{
+    min-height: 50vh;
+    flex: 5;
+    background: white;
+    margin: 0 25px 25px 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.debit-amount{
+    color: red;
+    float: right;
+}
+.credit-amount{
+    color: green;
+    float: right;
+} */
+
+.travel-content{
+    display: flex;
+    justify-content: center;
+    margin-top:80px;
+
+}
+.table-details{
+    overflow-y: scroll;
+    height:75vh;
+}
+
+.travel-content button {
+    padding: 10px 20px;
+    background-color: #009688;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

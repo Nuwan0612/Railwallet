@@ -7,9 +7,11 @@
     }
 
     public function addStation($data){
-      $this->db->query('INSERT INTO stations (stationID, name, qr) VALUES(:stationID, :name, :qrCodePath)
+      $this->db->query('INSERT INTO stations (stationID, name, qr, latitude, longitude) VALUES(:stationID, :name, :qrCodePath, :latitude, :longitude)
       ');
 
+      $this->db->bind(':latitude',$data['latitude']);
+      $this->db->bind(':longitude',$data['longitude']);
       $this->db->bind(':stationID', $data['stationID']);
       $this->db->bind(':name', $data['name']);
       $this->db->bind(':qrCodePath', $data['qrCodePath']);
@@ -65,6 +67,14 @@
       } else {
         return false;
       }
+    }
+
+    public function getStationLatAndLng($depID,$arrID){
+      $this->db->query('SELECT * FROM stations WHERE stationID = :depID OR stationID = :arrID');
+      $this->db->bind(':depID', $depID);
+      $this->db->bind(':arrID', $arrID);
+      $results = $this->db->resultSet();
+      return $results;
     }
 
 // Find Station by Id when edit 

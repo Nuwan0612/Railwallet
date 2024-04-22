@@ -36,8 +36,9 @@
                 <th>Phone</th>
                 <th>Status</th>
                 <th>Feedbacks</th>
-                <th>Complains</th> 
+                <th>Fines</th> 
                 <th>Travel History</th>
+                <th>Bookings</th>
                 <th>Option</th>  
               </tr>
             </thead>
@@ -46,14 +47,19 @@
             <?php $rowNumber = 1; foreach($data['users'] as $user):?>
             <tr>
               <td><?php echo $rowNumber; ?></td>
-              <td><?php echo $user->name; ?></td>
+              <td><?php echo $user->fname.' '.$user->lname; ?></td>
               <td><?php echo $user->nic; ?></td>
               <td><?php echo $user->phone; ?></td>
               <td><?php echo $user->status; ?></td>
               <td class="options">
                 <a href="<?php echo URLROOT; ?>admins/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               </td>
-              <td></td>
+              <td>
+              <a href="<?php echo URLROOT; ?>admins/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>
+              <td class="options">
+                <a href="<?php echo URLROOT; ?>admins/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>
               <td></td>
               <td>
                 <div class="options">

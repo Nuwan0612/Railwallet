@@ -1,16 +1,13 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
 
-<div class="container-main">
-        <div class="container">
-
-            <div class="pand"></div>
-
-            <div style="display: none;">
+<div class="container-main2">
+        <div class="container4">
+        
                 <div class="card_box">
                     <div class="card">
                         <div class="title">
                             <div class="train_name">
-                                <u><b>Gaalu Kumari</b></u> 
+                                <u><b><?php echo $data['trainName'];?></b></u> 
                             </div>
                             <!-- <div class="title_stations">
                                 <div class="start_station"><b> Hikkaduwa</b></div>
@@ -23,57 +20,62 @@
                         <div class="card_body">
                             <div class="card_text">
                                 <div class="speed">
-                                    Express
+                                <?php echo $data['trainType'];?>
                                 </div>
                                 <div class="staion">
                                     <div class="s_station">
-                                       <b>Hikkaduwa</b> 
+                                       <b> <?php echo $data['departureStation'];?></b> 
                                     </div>
                                     <div class="e_station">
-                                       <b>Pettah</b> 
+                                       <b> <?php echo $data['arrivalStation'];?></b> 
                                     </div>
                                 </div>
                                     <div class="time">
                                     <div class="s_time">
-                                        8.00 A.M
+                                    <?php echo $data['dTime'];?>
                                     </div>
                                     <div class="e_time">
-                                        10.00 P.M.
+                                    <?php echo $data['aTime'];?>
                                     </div>
                                 </div>
                                 <div class="stop_stations">
-                                    <button>Stop Stations</button>
+                                <a href="<?php echo URLROOT;?>passengers/shedule"><button>Search Shedules</button></a>
                                 </div>
                             </div>
                             
+                            <form class="bookingTickets" action="<?php echo URLROOT?>passengers/bookingTickets" method="POST">
+                            <input type="text" name="sheduleId" hidden value="<?php echo $data['shId']?>">
                             <div class="tickets">
                                 <div class="box-class">
+                        
                                 <div class="classes">
-                                    <div class="text">
+                                    <div class="text-box">
                                        <div class="f_text"> First Class:<br></div>
                                         <div class="s_text">Second Class:<br></div>
                                         <div class="t_text">Third Class:<br></div>
                                     </div>
                                     <div class="inputs">
                                         <div class="f_class">
-                                            <input type="text" id="first">
+                                            <input type="text" id="first" name="fClassCount" placeholder=" <?php echo $data['firstBooked'];?>/<?php echo $data['fCapacity'];?>">
                                         </div>
                                         <div class="s_class">
-                                            <input type="text" id="seond">
+                                            <input type="text" id="second" name="sClassCount" placeholder=" <?php echo $data['secondBooked'];?>/<?php echo $data['sCapacity'];?>">
                                         </div>
                                         <div class="t_class">
-                                            <input type="text" id="third">
+                                            <input type="text" id="third" name="tClassCount" placeholder=" <?php echo $data['thirdBooked'];?>/<?php echo $data['tCapacity'];?>">
                                         </div>
                                     </div> 
                                      
                                 </div>
                                 <div class="btn-main">
-                                    <div class="btn">
-                                        <button>Book Now</button>     
+                                    <div class="btn5">
+                                    <button type="submit">Book Now</button>   
+                                    <span class="button-text"></span>
                                     </div>
                                 </div>
                                 
                             </div>
+                            </form>
                             </div>
                        </div>
                     </div>

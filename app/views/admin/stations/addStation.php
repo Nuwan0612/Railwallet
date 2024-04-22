@@ -17,6 +17,16 @@
         <div class="error-message"><?php echo $data['name_err'];?></div>
       </div>
 
+      <div class="tbox <?php echo !empty($data['latitude_err']) ? 'error' : ''; ?>">
+        <input type="text" name="latitude" placeholder="Latitude" value="<?php echo $data['latitude']; ?>">
+        <div class="error-message"><?php echo $data['latitude_err'];?></div>
+      </div>
+
+      <div class="tbox <?php echo !empty($data['longitude_err']) ? 'error' : ''; ?>">
+        <input type="text" name="longitude" placeholder="Longitude" value="<?php echo $data['longitude']; ?>">
+        <div class="error-message"><?php echo $data['longitude_err'];?></div>
+      </div>
+
       <div>
         <input class="sbtn" type="submit" value="Submit">
       </div>

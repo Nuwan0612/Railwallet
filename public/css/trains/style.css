@@ -50,7 +50,7 @@
 .search-bar-outer-container{
   display: grid;
   grid-template-columns: 1fr 100px;
-  margin-top: 25px; 
+  margin-top: 5px; 
   /* align-items: center;
   justify-content: center;  */
 }
@@ -145,7 +145,7 @@ input[type="date"] {
   max-height: 500px; 
   overflow-y: auto;
   position: relative;
-  margin-top: 35px;
+  margin-top: 5px;
 }
 
 
@@ -193,8 +193,9 @@ input[type="date"] {
 }
 
 .edit-btn:hover {
-  opacity: 0.92; /* Reduce opacity when popping up */
-  /* transform: translateY(-1px);  */
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-0.4px); /* lift up */
+
 }
 
 .delete-btn{
@@ -202,10 +203,45 @@ input[type="date"] {
   color: #fff;
   padding: 8px 12px;
   border: none;
-  margin-left: 10px;
-  margin-right: 1px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.delete-btn:hover {
+  opacity: 0.9; /* Reduce opacity when popping up */
+  transform: translateY(-0.4px); /* lift up */
+}
+
+td{
+  text-align: center;
+}
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 30%;
+  left: 20%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+
   transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition properties */
   transform: translateY(0); /* Start from initial position */
   opacity: 1; /* Initially fully opaque */
@@ -215,3 +251,4 @@ input[type="date"] {
   opacity: 0.92; /* Reduce opacity when popping up */
   /* transform: translateY(-1px);  */
 }
+

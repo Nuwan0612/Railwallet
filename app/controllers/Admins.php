@@ -189,6 +189,9 @@
       $data = [
         'tickets' => $tickets
       ];
+      // echo '<pre>';
+      // var_dump($tickets);
+      // echo '</pre>';
       $this->view('admin/tickets/tickets', $data);
     }
 
@@ -208,11 +211,14 @@
       $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
       $data = [
         'id' => $admin->id,
-        'name' => $admin->name,
+        'fname' => $admin->fname,
+        'lname' => $admin->lname,
         'nic' => $admin->nic,
         'phone' => $admin->phone,
         'email' => $admin->email,
-        'name_err' => '',
+        'image' => $admin->userImage,
+        'fname_err' => '',
+        'lname_err' => '',
         'email_err' => '',
         'phone_err' => '',
         'oldPassword_err' => '',
@@ -230,17 +236,22 @@
         // Sanitize POST data
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+        $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
+
         $data = [
           'id' => $_SESSION['user_id'],
           'nic' => $_SESSION['user_nic'],
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'email' => trim($_POST['email']),
           'phone' => trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
           'newPassword' => trim($_POST['newPassword']),
           'confirmPassword' => trim($_POST['confirmPassword']),
+          'img' => $admin->userImage,
           'id_err' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'email_err' => '',
           'phone_err' => '',
           'oldPassword_err' => '',
@@ -253,10 +264,12 @@
           'confirmPassword_err_value' => ''
         ];
 
-        $admin = $this->adminModel->getAdmin($_SESSION['user_id']);
+        if(empty($data['fname'])){
+          $data['fname'] = $admin->fname;
+        } 
 
-        if(empty($data['name'])){
-          $data['name'] = $admin->name;
+        if(empty($data['lname'])){
+          $data['lname'] = $admin->lname;
         } 
 
         if(empty($data['phone'])){
@@ -275,7 +288,6 @@
           }
         }
         
-
         if(!empty($data['oldPassword']) || !empty($data['newPassword']) || !empty($data['confirmPassword'])){
 
           if(!$this->userModel->checkPassword($_SESSION['user_id'],$data['oldPassword'])){
@@ -299,8 +311,37 @@
           }   
         }
 
+        if (!empty($_FILES['image']['name'])) {
+          if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+              $uploadDir = PICTURE.'pics/userPics/';
+              $userDir = $uploadDir . $_SESSION['user_id'] . '/';
+              $tempName = $_FILES['image']['tmp_name'];
+              $originalName = $_FILES['image']['name'];
+              $imageFileType = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+
+              if (!file_exists($userDir)) {
+                mkdir($userDir, 0777, true); // Create directory recursively
+              }
+              
+              // Generate unique filename
+              $uniqueFileName = uniqid('', true) . '.' . $imageFileType;
+              $uploadPath = $userDir . $uniqueFileName;
+
+              // Move uploaded file to new location
+              if (move_uploaded_file($tempName, $uploadPath)) {
+                  // File upload successful, update database with image path
+                  $data['img'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
+                  $_SESSION['user_image'] = $_SESSION['user_id'] . '/' . $uniqueFileName; 
+              } else {
+                  $data['img_err'] = 'Failed to move uploaded file.';
+              }
+          } else {
+              $data['img_err'] = 'File upload error: ' . $_FILES['image']['error'];
+          }
+        }
+
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['phone_err']) && empty($data['newPassword_err']) && empty($data['confirmPassword_err']) && empty($data['oldPassword_err'])){
             
           
           // Hash Password
@@ -312,6 +353,9 @@
               $data['newPassword'] = $user->password;
             }
           }
+
+          $_SESSION['user_fname'] = $data['fname'];
+          $_SESSION['user_lname'] = $data['lname'];
           
           //Update Admin details
           if($this->adminModel->editAdminDetails($data)){
@@ -326,7 +370,8 @@
           $data['oldPassword_err_value'] = $data['oldPassword'];
           $data['newPassword_err_value'] = $data['newPassword'];
           $data['confirmPassword_err_value'] = $data['confirmPassword'];
-          $data['name'] = $admin->name;
+          $data['fname'] = $admin->fname;
+          $data['lname'] = $admin->lname;
           $data['email'] = $admin->email;
           $data['phone'] = $admin->phone;
 
@@ -343,7 +388,8 @@
 
         $data = [
           'id' => $user->id,
-          'name' => $user->name,
+          'fname' => $user->fname,
+          'lname' => $user->lname,
           'nic' => $user->nic,
           'phone' => $user->phone,
           'email' => $user->email,
@@ -596,13 +642,15 @@
 
         // Init data
         $data =[
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'nic' => trim($_POST['nic']),
           'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['nic']),
           'type' => 'checker',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -644,8 +692,12 @@
 
 
         // Validate Name
-        if(empty($data['name'])){
-          $data['name_err'] = 'Please enter name';
+        if(empty($data['fname'])){
+          $data['fname_err'] = 'Please enter first name';
+        }
+
+        if(empty($data['lname'])){
+          $data['lname_err'] = 'Please enter last name';
         }
 
         // Validate Phone
@@ -658,7 +710,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
           // Validated
           
           // Hash Password
@@ -678,11 +730,13 @@
       } else {
         // Init data
         $data =[
-          'name' => '',
+          'fname' => '',
+          'lname' => '',
           'nic' => '',
           'phone' => '',
           'email' => '',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -748,13 +802,15 @@
         // Init data
         $data =[
           'id' => $id,
-          'name' => trim($_POST['name']),
+          'fname' => trim($_POST['fname']),
+          'lname' => trim($_POST['lname']),
           'nic' => trim($_POST['nic']),
           'phone' => trim($_POST['phone']),
           'email' => trim($_POST['email']),
           'password' => trim($_POST['nic']),
           'type' => 'checker',
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -781,8 +837,12 @@
         }
 
         // Validate Name
-        if(empty($data['name'])){
-          $data['name_err'] = 'Pleae enter name';
+        if(empty($data['fname'])){
+          $data['fname_err'] = 'Pleae enter first name';
+        }
+
+        if(empty($data['lname'])){
+          $data['lname_err'] = 'Pleae enter last name';
         }
 
         // Validate Phone
@@ -791,7 +851,7 @@
         }
 
         // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+        if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
           // Validated
           
           // Hash Password
@@ -814,11 +874,13 @@
         // Init data
         $data =[
           'id' => $id,
-          'name' => $checker->name,
+          'fname' => $checker->fname,
+          'lname' => $checker->lname,
           'nic' => $checker->nic,
           'phone' => $checker->phone,
           'email' => $checker->email,
-          'name_err' => '',
+          'fname_err' => '',
+          'lname_err' => '',
           'nic_err' => '',
           'phone_err' => '',
           'email_err' => '',
@@ -845,13 +907,15 @@
 
       // Init data
       $data =[
-        'name' => trim($_POST['name']),
+        'fname' => trim($_POST['fname']),
+        'lname' => trim($_POST['lname']),
         'nic' => trim($_POST['nic']),
         'phone' => trim($_POST['phone']),
         'email' => trim($_POST['email']),
         'password' => trim($_POST['nic']),
         'type' => 'supporter',
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -893,8 +957,12 @@
 
 
       // Validate Name
-      if(empty($data['name'])){
-        $data['name_err'] = 'Please enter name';
+      if(empty($data['fname'])){
+        $data['fname_err'] = 'Please enter first name';
+      }
+
+      if(empty($data['lname'])){
+        $data['lname_err'] = 'Please enter last name';
       }
 
       // Validate Phone
@@ -907,7 +975,7 @@
       }
 
       // Make sure errors are empty
-      if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+      if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
         // Validated
         
         // Hash Password
@@ -927,11 +995,13 @@
     } else {
       // Init data
       $data =[
-        'name' => '',
+        'fname' => '',
+        'lname' => '',
         'nic' => '',
         'phone' => '',
         'email' => '',
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -996,13 +1066,15 @@
       // Init data
       $data =[
         'id' => $id,
-        'name' => trim($_POST['name']),
+        'fname' => trim($_POST['fname']),
+        'lname' => trim($_POST['lname']),
         'nic' => trim($_POST['nic']),
         'phone' => trim($_POST['phone']),
         'email' => trim($_POST['email']),
         'password' => trim($_POST['nic']),
         'type' => 'supporter',
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -1029,8 +1101,12 @@
       }
 
       // Validate Name
-      if(empty($data['name'])){
-        $data['name_err'] = 'Pleae enter name';
+      if(empty($data['fname'])){
+        $data['fname_err'] = 'Pleae enter first name';
+      }
+
+      if(empty($data['lname'])){
+        $data['name_err'] = 'Pleae enter last name';
       }
 
       // Validate Phone
@@ -1039,7 +1115,7 @@
       }
 
       // Make sure errors are empty
-      if(empty($data['email_err']) && empty($data['name_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
+      if(empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['nic_err']) && empty($data['phone_err'])){
         // Validated
         
         // Hash Password
@@ -1062,11 +1138,13 @@
       // Init data
       $data =[
         'id' => $id,
-        'name' => $supporter->name,
+        'fname' => $supporter->fname,
+        'lname' => $supporter->lname,
         'nic' => $supporter->nic,
         'phone' => $supporter->phone,
         'email' => $supporter->email,
-        'name_err' => '',
+        'fname_err' => '',
+        'lname_err' => '',
         'nic_err' => '',
         'phone_err' => '',
         'email_err' => '',
@@ -1094,6 +1172,10 @@
       $data =[
         'stationID' => trim($_POST['stationID']),
         'name' => trim($_POST['name']),
+        'latitude' => trim($_POST['latitude']),
+        'longitude' => trim($_POST['longitude']),
+        'latitude_err' => '',
+        'longitude_err' => '',
         'qrCodePath' => '',
         'stationID_err' => '',
         'name_err' => '',
@@ -1109,6 +1191,16 @@
         }
       }
 
+      //Validate Latitude
+      if(empty($data['latitude'])){
+        $data['latitude_err'] = 'Please enter station latitude';
+      }
+
+      //validate Longitude
+      if(empty($data['longitude'])){
+        $data['longitude_err'] = 'Please enter station longitude';
+      }
+
       //Validate Station ID
       if(empty($data['stationID'])){
         $data['stationID_err'] = 'Please enter station ID';
@@ -1120,14 +1212,15 @@
       }
     
       // Make sure errors are empty
-      if(empty($data['name_err']) && empty($data['stationID_err'])){
-
+      if(empty($data['name_err']) && empty($data['stationID_err']) && empty($data['longitude_err']) && empty($data['latitude_err'])){
+       
         //Generate QR
+        
         if($qr = $this->genarateQR($data['stationID'])){
           $data['qrCodePath'] = $qr;
         }
 
-        //Register User
+        // Add Station
         if($this->stationModel->addStation($data)){
           redirect('admins/stations');
         } else {
@@ -1142,8 +1235,12 @@
        // Init data
        $data =[
         'stationID' => '',
+        'latitude' => '',
+        'longitude' => '',
         'name' => '',
         'qrCodePath' => '',
+        'latitude_err' => '',
+        'longitude_err' => '',
         'stationID_err' => '',
         'name_err' => '',
       ];
@@ -1258,9 +1355,7 @@
       $data =[
         'stations' => $stations,
       ];
-    }
-   
-    
+    }  
 
     if(!$stations){
       $this->view('admin/stations/stations',$data);
@@ -1270,6 +1365,13 @@
       $this->view('admin/stations/hideStation',$data);
     }
        
+  }
+
+/*-----------------------------------------------------view Station Location-----------------------------------------------*/
+  public function viewStationLocation($id){
+    $details = $this->adminModel->findStationByStationID($id);
+    $data = ['details' => $details[0]];
+    $this->view('admin/stations/viewLocation',$data);
   }
 
 /*=====================================================================================================================================
@@ -1702,14 +1804,14 @@
       // Init data
       $data =[
         'ticketID' => trim($_POST['ticketID']),
-        'DepartureStationID' => trim($_POST['DepartureStationID']),
-        'ArrivalStationID' => trim($_POST['ArrivalStationID']),
+        'Station_1_ID' => trim($_POST['Station_1_ID']),
+        'Station_2_ID' => trim($_POST['Station_2_ID']),
         'ClassID' => trim($_POST['ClassID']),
         'price' => trim($_POST['price']),
         'qrCode' => '',
         'ticketID_err' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
+        'Station_1_ID_err' => '',
+        'Station_2_ID_err' => '',
         'ClassID_err' => '',
         'price_err' => ''
       ];
@@ -1724,28 +1826,28 @@
       }
 
       //Check the Station ID are the same
-      if($data['DepartureStationID'] == $data['ArrivalStationID']){
-        $data['DepartureStationID_err'] = 'Arrival Station and Departure station can not be the same';
-        $data['ArrivalStationID_err'] = 'Arrival Station and Departure station can not be the same';
+      if($data['Station_1_ID'] == $data['Station_2_ID']){
+        $data['Station_1_ID_err'] = 'Station_1 and station_2 can not be the same';
+        $data['Station_2_ID_err'] = 'Station_1 and station_2 can not be the same';
       }
 
       //Validate Departure Station ID 
-      if(empty($data['DepartureStationID'])){
-        $data['DepartureStationID_err'] = 'Please enter Departure Station ID';
+      if(empty($data['Station_1_ID'])){
+        $data['Station_1_ID_err'] = 'Please enter Station_1 ID';
       } else {
         // Check Station
-        if(!$this->adminModel->findStationByStationID($data['DepartureStationID'])){
-          $data['DepartureStationID_err'] = 'Station is not registered in the system';
+        if(!$this->adminModel->findStationByStationID($data['Station_1_ID'])){
+          $data['Station_1_ID_err'] = 'Station is not registered in the system';
         }
       }
 
       //Validate Arival Station ID
-      if(empty($data['ArrivalStationID'])){
-        $data['ArrivalStationID_err'] = 'Please enter station ID';
+      if(empty($data['Station_2_ID'])){
+        $data['Station_2_ID_err'] = 'Please enter Station_2 ID';
       } else {
         // Check Station
-        if(!$this->adminModel->findStationByStationID($data['ArrivalStationID'])){
-          $data['ArrivalStationID_err'] = 'Station is not registered in the system';
+        if(!$this->adminModel->findStationByStationID($data['Station_2_ID'])){
+          $data['Station_2_ID_err'] = 'Station is not registered in the system';
         }
       }
 
@@ -1769,7 +1871,7 @@
 
     
       //Make sure errors are empty
-      if(empty($data['ticketID_err']) && empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
+      if(empty($data['ticketID_err']) && empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['Station_2_ID_err']) && empty($data['Station_1_ID_err'])){
 
         //Generate QR
         if($qr = $this->genarateQR($data['ticketID'])){
@@ -1792,15 +1894,15 @@
       // Init data
       $data =[
         'ticketID' => '',
-        'DepartureStationID' => '',
-        'ArrivalStationID' => '',
+        'Station_1_ID' => '',
+        'Station_2_ID' => '',
         'ClassID' => '',
         'price' => '',
         'qrCode' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
-        'ClassID_err' => '',
         'ticketID_err' => '',
+        'Station_1_ID_err' => '',
+        'Station_2_ID_err' => '',
+        'ClassID_err' => '',
         'price_err' => ''
       ];
 
@@ -1815,47 +1917,21 @@
     
       // Sanitize POST data
       $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      $ticket = $this->ticketModel->getTicketByID($ticketTD);
 
       // Init data
       $data =[
         'ticketID' => $ticketTD,
-        'DepartureStationID' => trim($_POST['DepartureStationID']),
-        'ArrivalStationID' => trim($_POST['ArrivalStationID']),
+        'Station_1_name' => $ticket->station_1_name,
+        'Station_2_name' => $ticket->station_2_name,
         'ClassID' => trim($_POST['ClassID']),
         'price' => trim($_POST['price']),
         'qrCode' => '',
         'ticketID_err' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
         'ClassID_err' => '',
         'price_err' => ''
       ];
 
-      //Validate Departure Station ID 
-      if(empty($data['DepartureStationID'])){
-        $data['DepartureStationID_err'] = 'Please enter Departure Station ID';
-      } else {
-        // Check Station
-        if(!$this->adminModel->findStationByStationID($data['DepartureStationID'])){
-          $data['DepartureStationID_err'] = 'Station is not registered in the system';
-        }
-      }
-
-      //Check the Station ID are the same
-      if($data['DepartureStationID'] == $data['ArrivalStationID']){
-        $data['DepartureStationID_err'] = 'Arrival Station and Departure station can not be the same';
-        $data['ArrivalStationID_err'] = 'Arrival Station and Departure station can not be the same';
-      }
-
-      //Validate Arival Station ID
-      if(empty($data['ArrivalStationID'])){
-        $data['ArrivalStationID_err'] = 'Please enter station ID';
-      } else {
-        // Check Station
-        if(!$this->adminModel->findStationByStationID($data['ArrivalStationID'])){
-          $data['ArrivalStationID_err'] = 'Station is not registered in the system';
-        }
-      }
 
       //Validate Class
       if(empty($data['ClassID'])){
@@ -1868,13 +1944,13 @@
 
       //Validate ticket price
       if(empty($data['price'])){
-        $data['price_err'] = 'Ticket price can not be empty';
-      } else if($data['price'] <= 0){
-        $data['price_err'] = 'Ticket price can not be negative or zero';
+        $data['price_err'] = 'Ticket price can not be empty or zero';
+      } else if($data['price'] < 0){
+        $data['price_err'] = 'Ticket price can not be negative';
       }
     
       // Make sure errors are empty
-      if(empty($data['price_err']) && empty($data['ClassID_err']) && empty($data['ArrivalStationID_err']) && empty($data['DepartureStationID_err'])){
+      if(empty($data['price_err']) && empty($data['ClassID_err'])){
 
         //Add Tickets
         if($this->ticketModel->updateTicket($data)){
@@ -1892,13 +1968,11 @@
 
       $data =[
         'ticketID' => $ticketTD,
-        'DepartureStationID' => $ticket->departureStationID,
-        'ArrivalStationID' => $ticket->arrivalStationID,
+        'Station_1_name' => $ticket->station_1_name,
+        'Station_2_name' => $ticket->station_2_name,
         'ClassID' => $ticket->classID,
         'price' => $ticket->price,
         'qrCode' => '',
-        'DepartureStationID_err' => '',
-        'ArrivalStationID_err' => '',
         'ClassID_err' => '',
         'ticketID_err' => '',
         'price_err' => ''
@@ -1968,6 +2042,29 @@
     $data = ['feedback' => $userFeedback];
     $this->view('admin/users/userFeedback',$data);
      
+  }
+
+/*-----------------------------------------------------Travel Details-------------------------------------------------------*/
+
+  public function getuserTravelDetails($id){
+    $results = $this->adminModel->getuserTravelDetails($id);
+    $data = ['userTravelDetails' => $results];
+    $this->view('admin/users/userTravelDetails',$data);
+    
+  }
+
+/*-----------------------------------------------------Search Travel Details------------------------------------------------*/
+  public function searchTravelDetails(){
+    $result = $this->adminModel->searchTravelDetails($_GET['date'],$_GET['id']);
+    $data = ['userTravelDetails' => $result];
+    $this->view('admin/users/userTravelDetails',$data);
+  }
+
+/*-----------------------------------------------------User Fine Details--------------------------------------------------*/
+  public function getuserFineDetails($id){
+    $results = $this->adminModel->getuserFineDetails($id);
+    $data = ['userFineDetails' => $results];
+    $this->view('admin/users/userFines',$data);
   }
 
 }

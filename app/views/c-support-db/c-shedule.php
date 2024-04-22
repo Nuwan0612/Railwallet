@@ -24,8 +24,8 @@
                             <td>Pettah</td>
                             <td>Hikkaduwa</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Delete</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Delete</a></td>
                         </tr>
                         <tr>
                             <td>2023/10/29</td>
@@ -35,8 +35,8 @@
                             <td>Pettah</td>
                             <td>Hikkaduwa</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Delete</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Delete</a></td>
                         </tr>
                         <tr>
                             <td>2023/10/29</td>
@@ -46,8 +46,8 @@
                             <td>Pettah</td>
                             <td>Hikkaduwa</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Delete</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Delete</a></td>
                         </tr>
                         <tr>
                             <td>2023/10/29</td>
@@ -57,8 +57,8 @@
                             <td>Pettah</td>
                             <td>Hikkaduwa</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Delete</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Delete</a></td>
                         </tr>
                         <tr>
                             <td>2023/10/29</td>
@@ -68,8 +68,8 @@
                             <td>Pettah</td>
                             <td>Hikkaduwa</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Delete</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Delete</a></td>
                         </tr>
                         <tr>
                             <td>2023/10/29</td>
@@ -79,8 +79,8 @@
                             <td>Pettah</td>
                             <td>Hikkaduwa</td>
                             <td><a href="#" class="btn">View</a></td>
-                            <td><a href="#" class="btn">Update</a></td>
-                            <td><a href="#" class="btn">Delete</a></td>
+                            <td><a href="#" class="update-btn">Update</a></td>
+                            <td><a href="#" class="dlt-btn">Delete</a></td>
                         </tr>
                     </table>
                 </div>

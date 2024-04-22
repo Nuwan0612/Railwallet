@@ -46,7 +46,7 @@
             <tr>
               <td><?php echo $rowNumber; ?></td>
               <td><?php echo $checker->id; ?></td>
-              <td><?php echo $checker->name; ?></td>
+              <td><?php echo $checker->fname.' '.$checker->lname; ?></td>
               <td><?php echo $checker->nic; ?></td>
               <td><?php echo $checker->phone; ?></td>
               <td><?php echo $checker->email; ?></td>

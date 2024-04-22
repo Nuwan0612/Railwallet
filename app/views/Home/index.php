@@ -1,4 +1,7 @@
 <?php require APPROOT . '/views/Home/inc/header.php';?>
+
+<link rel="stylesheet" href="<?php echo URLROOT; ?>/css/abc/style.css">
+
 <div class="banner" id="Home">
             <div class="navbar">
                 <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo">
@@ -18,6 +21,118 @@
                 <button type="button" class="log-in" onclick="redirectToLogin()"><span></span>Login</button>
                 </div>
             </div>
+        <!--##ChatBox##-->
+
+        <!-- <button class="container-toggler" onclick="toggleChatContainer()"> -->
+
+        <div class="outer-container">
+            <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;">
+                <!-- <span class="material-symbols-outlined">+</span> -->
+                <img src="<?php echo URLROOT;?>/img/live-chat.png" alt="">
+                <!-- <img src="image.png" alt="Icon"> -->
+                <span class="material-symbols-outlined"></span>
+                
+            </button>
+    
+            <div class="chat-container" style="z-index: 1000;">
+                <div class="title">
+                        <p>Chat With Us</p>
+                </div>
+    
+                <div class="Chat">
+                    <header id="live-chat-header">
+                        <h1>Live Chat</h1>
+                    </header>
+                </div>
+                <header id="faqs-header">
+                <h1>FAQs?</h1>
+                <span class="close-btn material-symbols-outlined">close</span>
+            </header>
+
+                <div class="tab">
+
+                    <div onclick="displayAnswer('ans1')">
+                        <label>
+                            <h2>01</h2>
+                            <h3>How do I create an account on RailWallet?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none;" id="ans1">Creating an account on RailWallet is simple! 
+                    Just click on the "Sign Up" button and follow the instructions to 
+                    set up your account with your email address and password.
+                    </div>
+                    
+                </div>
+
+                <div class="tab">
+
+                    <div onclick="displayAnswer('ans2')">
+                        <label>
+                            <h2>02</h2>
+                            <h3>Can I top up my RailWallet using cash?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none;" id="ans2">Currently, RailWallet supports online top-ups
+                         through various payment methods. We do not support cash top-ups 
+                         at this time for security reasons.
+                    </div>
+
+                    <!-- <input type="radio" name="acc" id="acc1">
+                    <label for="acc1">
+                        
+                    </label> -->
+                    
+                </div>
+
+                <div class="tab">
+
+                    <div onclick="displayAnswer('ans3')">
+                        <label>
+                            <h2>03</h2>
+                            <h3>How do I reserve a seat using RailWallet?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none;" id="ans3">Once you've logged into your RailWallet account, 
+                        navigate to the "Seat Reservation" section, select your desired 
+                        train and seat, and follow the prompts to complete your reservation.
+                    </div>
+
+                    <!-- <input type="radio" name="acc" id="acc1">
+                    <label for="acc1">
+                        
+                    </label> -->
+                    
+                </div>
+
+                <div class="tab">
+
+                    <div onclick="displayAnswer('ans4')">
+                        <label>
+                            <h2>04</h2>
+                            <h3>What should I do if my train is delayed?</h3>
+                        </label>
+                    </div>
+
+                    <div class="answer-box" style="display: none;" id="ans4">In case of train delays, you will receive 
+                        notifications via email or SMS provided during registration. 
+                        You can also check the updated train schedule on our website 
+                        for real-time information.
+                    </div>
+
+                    <!-- <input type="radio" name="acc" id="acc1">
+                    <label for="acc1">
+                        
+                    </label> -->
+                    
+                </div>
+
+            </div>   
+        </div>
+
+
         </div>
 
         <!--##AboutUs Section##-->
@@ -142,5 +257,53 @@
         </div>
     </div>
 </section>
+
+<script>
+    const containerToggler = document.querySelector(".container-toggler");
+    const containerCloseBtn = document.querySelector(".close-btn");
+    const outerContainer = document.querySelector(".outer-container");
+
+    containerCloseBtn.addEventListener("click", () => outerContainer.classList.remove("show-container"));
+    containerToggler.addEventListener("click", () => outerContainer.classList.toggle("show-container"));
+
+
+    function displayAnswer(answer) {
+
+        var question = document.getElementById(answer);
+        const boxes = document.querySelectorAll('.answer-box');
+
+        if (question.style.display == "block")
+        {
+            boxes.forEach(function(box) {
+                box.parentNode.style.background = '';
+            });
+            question.style.display = "none";
+        }
+        else
+        {
+            boxes.forEach(function(box) {
+                box.style.display = 'none';
+                box.parentNode.style.background = '';
+            });
+
+            question.style.display = "block";
+            question.parentNode.style.background = "green";
+        }
+
+    }
+</script>
+
+
+<script>
+    function toggleChatContainer() {
+    const containerToggler = document.querySelector('.container-toggler');
+    const chatContainer = document.querySelector('.chat-container');
+    
+    containerToggler.classList.toggle('clicked');
+    chatContainer.classList.toggle('opened');
+}
+</script>
+
+
 
 <?php require APPROOT . '/views/Home/inc/footer.php';?>
