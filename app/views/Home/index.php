@@ -288,6 +288,9 @@
 
             question.style.display = "block";
             question.parentNode.style.background = "rgba(0, 160, 136, 0.3)";
+            // question.style.fontWeight = "bold"; 
+            question.style.lineHeight = "1.5"; // Increasing spacing between lines
+            question.style.marginTop = "10px";
         }
 
     }
