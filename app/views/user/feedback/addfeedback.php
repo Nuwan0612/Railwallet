@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
 
-<div class="feedback">
+<div class="content">
 
   <div class="wrapper">
     <h3 class='rate-us'>Rate US</h3>

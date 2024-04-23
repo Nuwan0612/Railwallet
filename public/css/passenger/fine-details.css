@@ -21,18 +21,8 @@ td {
     text-align: center;
     padding: 8px;
 }
-.user-fine-container {
-    position: relative;
-    margin-top: 10vh;
-    min-height: 100vh;
-    overflow-y: auto;
-    height: calc(100vh - 15vh);
-}
-.user-fine-container .content {
-    position: relative;
-    background: white;
-}
-.user-fine-container .content .cards {
+
+.container .content .cards {
     padding: 10px 10px;
     display: flex;
     align-items: center;
@@ -40,7 +30,7 @@ td {
     flex-wrap: wrap;
     /* margin-top: 10px; */
 }
-.user-fine-container .content .cards .card {
+.container .content .cards .card {
     width: 250px;
     height: 150px;
     background: white;
@@ -51,25 +41,25 @@ td {
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.user-fine-container .content .cards .card:hover{
+.container .content .cards .card:hover{
     background-color: rgba(0, 150, 136, 0.3);
 }
-.user-fine-container .content .cards .card .i{
+.container .content .cards .card .i{
     font-size: 50px;
     margin-left: -20px;
 }
-.user-fine-container .content .cards .card .box{
+.container .content .cards .card .box{
     margin-bottom: 30px;
     margin-left: 40px;
 }
-.user-fine-container .content-2 {
+.container .content .content-2 {
     min-height: 60vh;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
 }
-.user-fine-container .content-2 .recent-payments{
+.container .content .content-2 .recent-payments{
     min-height: 50vh;
     flex: 5;
     background: white;
@@ -79,18 +69,18 @@ td {
     flex-direction: column;
     border-radius: 10px;
 }
-.user-fine-container .content-2 .recent-payments .wallet-title{
+.container .content .content-2 .recent-payments .title{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 15px 8px;
     border-bottom: 2px solid #999;
 }
-.user-fine-container .content-2 .recent-payments .wallet-title i{
+.container .content .content-2 .recent-payments .title i{
     font-size: 30px;
     margin-right: 20px;
 }
-.user-fine-container .content-2 .recent-payments .table-details{
+.container .content .content-2 .recent-payments .table-details{
     overflow-y: scroll;
     height:40vh;
     display: flex;

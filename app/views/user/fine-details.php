@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
-    <div class="user-fine-container">
+    <div class="container">
         <div class="content">
             <div class="cards">
                 <div class="card">
@@ -32,10 +32,10 @@
                 </div>
                     </a>
             </div>
-        </div>
+        
         <div class="content-2">
             <div class="recent-payments">
-                <div class="wallet-title">
+                <div class="title">
                     <i class='bx bx-history'></i>
                     <h2>Fine History</h2>
                     <!-- <a href="#" class="btn">View All</a> -->
@@ -71,6 +71,7 @@
                 </table>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 <?php require APPROOT . '/views/user/includes/footer.php';?>

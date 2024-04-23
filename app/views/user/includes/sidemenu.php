@@ -31,9 +31,9 @@
         </ul>
     </div>
 
-    <div class="user-container">
-        <div class="user-header">
-            <div class="user-nav">
+    <div class="container">
+        <div class="header">
+            <div class="nav">
 
                 <!-- <a href="<?php echo URLROOT;?>passengers/qrScan"><h3> QR Scanner</h3></a>
                 <a href="#"><h3> View Ticket</h3></a>
@@ -49,7 +49,7 @@
                     <div class="img-case">
                         <!-- <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" alt=""> -->
                     </div>
-
+                
                     <div class="img-name"><p><?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p></div>
                 </div>
             </div>

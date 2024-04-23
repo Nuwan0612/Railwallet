@@ -3,16 +3,17 @@
   <div class="setting-outer-container">
     <div class="inner-container">
 
-      <h1 align="center">User Details</h1>
-      <center><div style="width: 90%;"><hr></div></center>
+      <!-- <h1 align="center">User Details</h1>
+      <center><div style="width: 90%;"><hr></div></center> -->
 
-      <form action="<?php echo URLROOT; ?>passengers/editUser" method="POST" enctype="multipart/form-data">
+      <h1>User Details</h1>
+
+      <form class="user-details" action="<?php echo URLROOT; ?>passengers/editUser" method="POST" enctype="multipart/form-data">
         <div class="body-container">
           <div class="left">
             <div class="image">
               <img src="<?php echo URLROOT?>pics/userPics/<?php echo $data["image"]; ?>">
             </div>
-            
             
             <div class="select-image-file">
               <input type="file" name="image" accept=".jpg, .jpeg, .png" id="image-select">
