@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
-        <div class="wallet-container">
+        <div class="container">
             <div class="content">
             <!-- <div class="wallet-heading">
                 <h1>My Wallet</h1>
@@ -31,7 +31,7 @@
                             <i class='bx bxs-bank'></i>
                             </div>
                             <div class="box">
-                                <h1>Rs. <?php echo $data['balance']->balance?></h1>
+                                <h1>Rs. <?php  echo $data['balance']->balance?></h1>
                                 <h2>Balance</h2>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/user/includes/header.php'; ?>
 
-<div class="ticket-body">
+<div class="content">
     <?php $ticket=$data['ticket'] ?>
         <div class="ticket-all">
         <div class="ticket-wrapper">
