@@ -47,7 +47,7 @@
                 <!-- <img src="<?php echo URLROOT;?>public/pics/notification.png" alt=""> -->
                 <div class="notify"><i class='bx bxs-bell-ring'></i></div>
                     <div class="img-case">
-                        <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" alt="">
+                        <!-- <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" alt=""> -->
                     </div>
                 
                     <div class="img-name"><p><?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p></div>
