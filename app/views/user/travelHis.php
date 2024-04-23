@@ -1,8 +1,5 @@
 <?php require APPROOT . '/views/user/includes/header.php'; ?>
-
-
-
-                    
+              
                     <div class="travel-content">
                     <div class="travel-details">
                         <div class="title">
@@ -13,6 +10,7 @@
                         <div class="table-details">
                                 
                         <table>
+                            <thead>
                             <tr>
                                 <th>Booking ID</th>
                                 <th>Booking Time</th>
@@ -22,6 +20,8 @@
                                 <th>Arrival Station</th>
                                 <th>Arrival Time</th> 
                             </tr>
+                        </thead>
+                        <tbody>
                             <?php foreach ($data['tickets'] as $tickets): ?>                             
                             <tr>
                             <input type="hidden" name="booking_id" value="<?= $tickets->bookingId ?>">
@@ -35,7 +35,7 @@
                                 
                                 <?php endforeach; ?>
                             </tr>
-                            
+                        </tbody>   
                         </table>
                         </div>
                         

@@ -36,6 +36,11 @@
     height:75vh;
 }
 
+/* .table-details tbody{
+    overflow-y: scroll;
+    height:35vh;
+} */
+
 .travel-content button {
     padding: 10px 20px;
     background-color: #009688;

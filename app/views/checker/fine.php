@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/checker/includes/header.php';?>
 
 <div class="deatails">
-    <div class="fine-container">
+    <div class="container">
       <div class="search-bar-outer-container">
         <div class="search-bar-inner-container">
           <div class="search-bar">

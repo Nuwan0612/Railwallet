@@ -20,9 +20,9 @@
     </ul>
 </div>
 
-<div class="checker-container">
-    <div class="checker-header">
-        <div class="checker-nav">
+<div class="container">
+    <div class="header">
+        <div class="nav">
             <!-- <a href="<?php echo URLROOT; ?>checkers/qrScan"><h3>QR Scanner</h3></a>
             <a href="#"><h3> Add Fines</h3></a>
             <a href="#"><h3> Issue Ticket</h3></a>
@@ -31,6 +31,7 @@
             <div class="user">
                 
             <!-- <img src="<?php echo URLROOT;?>public/pics/notification.png" > -->
+            
             <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
             <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" >
             <div class="img-case">
