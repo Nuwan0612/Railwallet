@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/customer-support.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/users.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/feedbacks.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/c-support/chat.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/account.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,23 +16,22 @@
 <body>
 
 <div class="side-menu">
-        <div class="brand-name">
-        <div class="logo">
-            <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo" width="55" height="55">
-        </div>
-            <p><?php echo SITENAME; ?></p>
-        </div>
-        <ul>
+    <div class="brand-name">
+    <div class="logo">
+        <img src="<?php echo URLROOT;?>public/css/index/logo1.png" class="logo" width="55" height="55">
+    </div>
+        <p><?php echo SITENAME; ?></p>
+    </div>
+    <ul>
         <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>img/dashboard.png" >&nbsp;<span>Dashboard</span></li></a>
         <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>img/user.png">&nbsp;<span>Users</span></li></a>
-            <!-- <a href="checker.html"><li><img src="<?php echo URLROOT;?>public/pics/qr-code.png" >&nbsp;<span>Checkers</span></li></a> -->
         <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
         <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>img/calendar.png" >&nbsp;<span>Schedule</span></li></a>
+        <a href="<?php echo URLROOT?>supporters/support"><li><img src="<?php echo URLROOT;?>img/customer-service.png" >&nbsp;<span>Support</span></li></a>
         <a href="<?php echo URLROOT?>users/logout"><li><img src="<?php echo URLROOT;?>img/turn-off.png" >&nbsp;<span>Logout</span></li></a>
-            <!--<a href="#"> <li><img src="help-web-button.png" alt="">&nbsp; <span>Help</span></li> -->
         <a href="<?php echo URLROOT?>supporters/settings"><li><img src="<?php echo URLROOT;?>img/settings.png" >&nbsp;<span>Settings</span></li></a>
-        </ul>
-    </div>
+    </ul>
+</div>
     <div class="container">
         <div class="header">
             <div class="nav">

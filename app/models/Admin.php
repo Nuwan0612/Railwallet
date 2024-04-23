@@ -181,6 +181,16 @@
       return $results;
     }
 
+    public function createAgentTableRow($id){
+      $this->db->query("INSERT INTO supprot_agents (supporter_id) VALUES (:id)");
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   /*----------------------------------------------------------Stations---------------------------------------------------*/ 
     public function getStation(){
       $this->db->query("SELECT * FROM stations WHERE status = 1;");

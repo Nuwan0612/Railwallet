@@ -192,6 +192,10 @@
       
     }
 
+    public function support(){
+      $this->view('c-support-db/liveChat');
+    }
+
     public function users(){
       $users = $this->adminModel->getUser();
       $data = [
