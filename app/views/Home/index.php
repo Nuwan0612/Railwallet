@@ -140,14 +140,16 @@
         <div class="ChatBox">
          <header>
              <span class="back-arrow">
-                <img id="back-arrow-img" src="back_arrow_icon.png" alt="Back">
+             <img src="<?php echo URLROOT;?>/img/back_arrow_icon.png" alt="">
+                <!-- <img id="back-arrow-img" src="back_arrow_icon.png" alt="Back"> -->
             </span>
                 <p>Welcome to Live Chat!</p>
         </header>
             <ul class="livechat">
             <li class="chat incoming">
             <span class="material-symbols-outlined">
-                <img src="live_chat_image.png" alt="Icon">
+            <img src="<?php echo URLROOT;?>/img/live_chat_image.png" alt="">
+                <!-- <img src="live_chat_image.png" alt="Icon"> -->
             </span>
             <p>Hi there 👋🏼 <br> How can I help you today?</p>
             </li>
@@ -158,7 +160,8 @@
             <div class="chat-input">
                 <textarea placeholder="Enter a message..." required></textarea>
                 <span id="send-btn" class="material-symbols-outlined">
-                <img src="send_image.png" alt="Icon">
+                <img src="<?php echo URLROOT;?>/img/send_image.png" alt="">
+                <!-- <img src="send_image.png" alt="Icon"> -->
                 </span>
             </div>
         </div>
