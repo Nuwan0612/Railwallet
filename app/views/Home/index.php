@@ -21,7 +21,10 @@
                 <button type="button" class="log-in" onclick="redirectToLogin()"><span></span>Login</button>
                 </div>
             </div>
-        <!--##ChatBox##-->
+
+    <!--##ChatBox Section##-->
+
+            <!--##FAQ page##-->
 
         <!-- <button class="container-toggler" onclick="toggleChatContainer()"> -->
 
@@ -130,6 +133,34 @@
                 </div>
 
             </div>   
+        </div>
+
+            <!--##livechat page##-->
+
+        <div class="ChatBox">
+         <header>
+             <span class="back-arrow">
+                <img id="back-arrow-img" src="back_arrow_icon.png" alt="Back">
+            </span>
+                <p>Welcome to Live Chat!</p>
+        </header>
+            <ul class="livechat">
+            <li class="chat incoming">
+            <span class="material-symbols-outlined">
+                <img src="live_chat_image.png" alt="Icon">
+            </span>
+            <p>Hi there 👋🏼 <br> How can I help you today?</p>
+            </li>
+            <li class="chat outgoing">
+                <p>khytgdev hdwue ugdw hduw.</p>
+            </li>
+            </ul>
+            <div class="chat-input">
+                <textarea placeholder="Enter a message..." required></textarea>
+                <span id="send-btn" class="material-symbols-outlined">
+                <img src="send_image.png" alt="Icon">
+                </span>
+            </div>
         </div>
 
 
@@ -258,6 +289,9 @@
     </div>
 </section>
 
+
+<!--## faq content script part ##-->
+
 <script>
     const containerToggler = document.querySelector(".container-toggler");
     const containerCloseBtn = document.querySelector(".close-btn");
@@ -296,6 +330,7 @@
     }
 </script>
 
+    <!--## ChatToggler functioning  ##-->
 
 <script>
     function toggleChatContainer() {
@@ -305,6 +340,25 @@
     containerToggler.classList.toggle('clicked');
     chatContainer.classList.toggle('opened');
 }
+</script>
+
+    <!--## LiveChat Page Loading ##-->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var liveChatHeader = document.getElementById("live-chat-header");
+    liveChatHeader.addEventListener("click", function() {
+        window.location.href = "live-chat.html";
+    });
+});
+
+
+
+const ChatBoxToggler = document.querySelector(".ChatBox-toggler");
+const ChatBoxCloseBtn= document.querySelector(".close-btn");
+
+ChatBoxCloseBtn.addEventListener("click", () => document.body.classList.remove("show-ChatBox"));
+ChatBoxToggler.addEventListener("click", () => document.body.classList.toggle("show-ChatBox"));
 </script>
 
 
