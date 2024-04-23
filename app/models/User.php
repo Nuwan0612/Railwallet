@@ -134,4 +134,24 @@
       }
     }
 
+    public function activeTheAgent($id){
+      $this->db->query("UPDATE supprot_agents SET active = 1 WHERE supporter_id = :id");
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function deactiveTheAgent($id){
+      $this->db->query("UPDATE supprot_agents SET active = 0 WHERE supporter_id = :id");
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   }
