@@ -11,30 +11,13 @@
   min-height: 90vh;
 }
 
-.content .setting-outer-container .inner-container form {
-  padding:20px;
-  width:800px;
-  background: #fff;
-  margin: 10px 80px;
-  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.3);
-  height: 75vh;
-  display: flex;
-  justify-content: center;
-  border-radius: .5px;
-}
-
 .content .setting-outer-container .inner-container{
-  width:1000px;
+  width: 90%;
   background: white;
-  box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.05);
- border: none;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+  border-radius: 10px;
   padding: 10px;
-  height: 85vh;
-  border-radius: .75rem;
-  /* margin-top: 120px;
-  margin-left: 180px;
-  
-  text-align: center; */
 }
 
 .content .setting-outer-container .inner-container h1{
@@ -59,13 +42,18 @@
   margin-bottom: 10px;
 }
 
+.setting-outer-container .inner-container form{
+    padding:0;
+    width: 100%;
+    background: #fff;
+    margin: 0;
+    box-shadow: none;
+}
 
 .body-container{
   display: grid;
   grid-template-columns: 40% 1fr;
-  margin: 10px;
-  width: 700px;
-
+  margin-top: 10px;
 }
 
 .left{
@@ -74,12 +62,11 @@
   align-items: center;
   justify-content: center;
   border-right: 1px solid black;
-  height: 65vh;
 }
 
 .image{
-  width: 10rem;
-  height: 10rem;
+  width: 15rem;
+  height: 15rem;
   border: 1px solid black;
   padding: 5px; 
   margin-bottom: 10px;
@@ -94,7 +81,6 @@
   display: flex;
   flex-direction: column;
   padding: 0 30px;
-  height: 65vh;
 }
 
 label {
@@ -110,18 +96,23 @@ input {
   box-sizing: border-box;
 }
 
-.update-btn {
+.inner-container .right .up-outer{
+  width: 100px;
+}
+
+.inner-container .right div .update-btn {
   padding: 10px 20px;
   background-color: #009688;
   color: white;
   border: none;
-  border-radius: .5px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .update-btn:hover {
-  color: #130f40;
-    background: #ccc;
+  background-color: #00796b !important;
+  color: white !important
 }
 
 .tbox.error textarea {

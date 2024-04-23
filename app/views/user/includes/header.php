@@ -13,7 +13,7 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/booking.css"> -->
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/user-db/shedule_list.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/shedule.css">
-    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/account.css">
+    <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/account.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/search_shedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/booking.css">
 
