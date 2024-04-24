@@ -29,7 +29,9 @@
     <!-- <button class="container-toggler" onclick="toggleChatContainer()"> -->
 
     <div class="outer-container">
+        
         <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;">
+
             <!-- <span class="material-symbols-outlined">+</span> -->
             <img src="<?php echo URLROOT; ?>/img/live-chat.png" alt="">
             <!-- <img src="image.png" alt="Icon"> -->
@@ -42,7 +44,9 @@
             <div id="faq-box" style="display: block;">
 
                 <div class="title">
+                    
                     <p>Chat With Us</p>
+                   
                 </div>
 
                 <div class="Chat">
@@ -128,14 +132,13 @@
 
             <!--##livechat page##-->
             <!-- <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;"> -->
-
             <div id="chat-box" style="display: none;">
                 <header>
                     <div class="" onclick="backtofaq();">
-                        <img src="<?php echo URLROOT; ?>img/back_arrow_icon.png" alt="">
+                        <img class="backarrow" src="<?php echo URLROOT; ?>img/back_arrow_icon.png" alt="">
                         <!-- <img id="back-arrow-img" src="back_arrow_icon.png" alt="Back"> -->
                     </div>
-                    <p>Welcome to Live Chat!</p>
+                    <p class="LiveChatHeader">Welcome to Live Chat!</p>
                 </header>
                 <ul class="livechat">
                     <li class="chat incoming">
@@ -157,7 +160,7 @@
                     </span>
                 </div>
             </div>
-
+      
         </div>
 
     </div>
