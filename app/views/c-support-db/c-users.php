@@ -34,6 +34,7 @@
                         <th>Feedbacks</th>
                         <th>Fines</th> 
                         <th>Travel History</th>
+                        <th>Chat History</th>
                         <th>Bookings</th>
                         </tr>
                     </thead>
@@ -53,6 +54,9 @@
                             </td>
                             <td class="options">
                                 <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                            </td>
+                            <td>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
                             <td></td>
                         </tr>

@@ -11,6 +11,7 @@
       $this->supporterModel = $this->model('Supporter');
       $this->passengerModel = $this->model('Passenger');
       $this->userModel = $this->model('User');
+      $this->chatModel = $this->model('Chat');
     }
 
     public function dashboard(){
@@ -295,6 +296,18 @@
       } else if($result[0]->sheduleValidity == 0){
         $this->view('c-support-db/hideShedules',$data);
       }  
+    }
+
+    public function clearChat(){
+      if($this->chatModel->clearChat($_SESSION['user_id'])){
+        redirect('supporters/support');
+      }   
+    }
+
+    public function getuserChatHistory($id){
+      $chats = $this->chatModel->getChats($_SESSION['user_id'], $id);
+      $data = ['messages' => $chats, 'passenger_id' => $id, 'sender_id'=>$_SESSION['user_id']];
+      $this->view('c-support-db/chatHistory', $data);
     }
 
   }

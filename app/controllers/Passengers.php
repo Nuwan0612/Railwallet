@@ -727,5 +727,9 @@
       }
       
     }
+
+    public function chat(){   
+      $this->view('user/chat');
+    }
     
   }
