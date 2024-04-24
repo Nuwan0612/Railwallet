@@ -48,5 +48,78 @@
         return false;
       }
     }
+
+    public function getAvailableShedules(){
+      $this->db->query("SELECT 
+                          sc.*, 
+                          stdep.name AS depStation, 
+                          starr.name AS arrStation 
+                        FROM 
+                          shedules sc 
+                        JOIN 
+                          stations stdep ON sc.departureStationID = stdep.stationID
+                        JOIN
+                          stations starr ON sc.arrivalStationID = starr.stationID
+                        WHERE
+                        sheduleValidity	= 1
+                      ");
+
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    public function deactivatedShedules(){
+      $this->db->query("SELECT 
+                          sc.*, 
+                          stdep.name AS depStation, 
+                          starr.name AS arrStation 
+                        FROM 
+                          shedules sc 
+                        JOIN 
+                          stations stdep ON sc.departureStationID = stdep.stationID
+                        JOIN
+                          stations starr ON sc.arrivalStationID = starr.stationID
+                        WHERE
+                        sheduleValidity	= 0
+                      ");
+
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    public function getSchedules($dep, $arr, $date){
+      $this->db->query("SELECT 
+                          sc.*, 
+                          stdep.name AS depStation, 
+                          starr.name AS arrStation 
+                        FROM 
+                          shedules sc 
+                        JOIN 
+                          stations stdep ON sc.departureStationID = stdep.stationID
+                        JOIN
+                          stations starr ON sc.arrivalStationID = starr.stationID
+                        WHERE
+                          sheduleValidity	= 1 AND sc.departureStationID = :dep AND sc.arrivalStationID = :arr AND sc.departureDate = :dapDate
+                        ");
+        $this->db->bind(':arr',$arr);
+        $this->db->bind(':dep',$dep);
+        $this->db->bind(':dapDate',$date);
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
+    public function getUserData($id){
+      $this->db->query("SELECT * FROM users WHERE id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function getSupporter($id){
+      $this->db->query("SELECT password FROM users WHERE id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
     
   }

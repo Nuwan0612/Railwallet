@@ -8,14 +8,14 @@
     margin: 0;
 } */
 
-.ticket-body {
+/* .content {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     height: 80%;
     margin-top: 150px;
     margin-bottom: 100px;
     overflow-y: scroll;
-}
+} */
 
 .ticket-all {
     display: block; /* Make it display as block */
@@ -39,6 +39,7 @@
     width: 800px;
     height: 400px;
     overflow: hidden;
+    margin-top: 50px;
 }
 
 .picture {

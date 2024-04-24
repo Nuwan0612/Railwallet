@@ -6,7 +6,7 @@
 
       <div class="head">
         <div class="title">Train Schedules</div>
-        <a href="<?php echo URLROOT; ?>admins/addTrainShedule"><button class="add-train">Add Shedule</button></a>
+        <a href="<?php echo URLROOT; ?>admins/addTrainShedule"><button class="add-train">Add Schedule</button></a>
       </div>
 
       <div class="search-bar-outer-container-shedule">

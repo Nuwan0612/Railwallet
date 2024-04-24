@@ -1,12 +1,13 @@
-<?php require APPROOT . '/views/user/includes/header.php';?>
+<?php require APPROOT . '/views/c-support-db/header.php';?>
+
 <div class="content">
   <div class="setting-outer-container">
     <div class="inner-container">
 
-      <h1>User Details</h1>
+      <h1><center>User Details</center></h1>
       <center><div style="width: 90%;"><hr></div></center>
 
-      <form action="<?php echo URLROOT; ?>passengers/editUser" method="POST" enctype="multipart/form-data">
+      <form action="<?php echo URLROOT; ?>supporters/settings" method="POST" enctype="multipart/form-data">
         <div class="body-container">
           <div class="left">
             <div class="image">
@@ -70,7 +71,6 @@
                 <div class="error-message"><?php echo $data['phone_err'];?></div>
               </div>                 
             </div>
-
             <div class="form-group">
               <label for="email">Email:</label>
               <div class="tbox <?php echo !empty($data['email_err']) ? 'error' : ''; ?>">
@@ -78,7 +78,6 @@
                 <div class="error-message"><?php echo $data['email_err'];?></div>
               </div>                 
             </div>
-
             <div class="form-group">
               <label for="oldPassword">Old Password:</label>
               <div class="tbox <?php echo !empty($data['oldPassword_err']) ? 'error' : ''; ?>">
@@ -86,7 +85,6 @@
                 <div class="error-message"><?php echo $data['oldPassword_err'];?></div>
               </div>                 
             </div>
-
             <div class="form-group">
               <label for="newPassword">New Password:</label>
               <div class="tbox <?php echo !empty($data['newPassword_err']) ? 'error' : ''; ?>">
@@ -94,7 +92,6 @@
                 <div class="error-message"><?php echo $data['newPassword_err'];?></div>
               </div>
             </div>
-
             <div class="form-group">
               <label for="confirmPassword">Confirm Password:</label>
               <div class="tbox <?php echo !empty($data['confirmPassword_err']) ? 'error' : ''; ?>">
@@ -103,10 +100,11 @@
               </div>                 
             </div>
             
-            <div class='up-outer'>
+            <div>
               <button type="submit" class="update-btn">Update</button>
             </div>
-               
+            
+            
           </div>
         </div>
       </form>
@@ -114,4 +112,5 @@
     </div>
   </div>
 </div>
-<?php require APPROOT . '/views/user/includes/footer.php';?>
+
+<?php require APPROOT . '/views/c-support-db/footer.php';?>

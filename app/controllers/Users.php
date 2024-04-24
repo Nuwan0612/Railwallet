@@ -224,22 +224,35 @@
       $_SESSION['user_fname'] = $user->fname;
       $_SESSION['user_lname'] = $user->lname;
       $_SESSION['user_image'] = $user->userImage;
+      $_SESSION['user_type'] = $user->type;
 
-      if($user->type == 'admin'){
-        redirect('admins/dashboard');
-      } else if($user->type == 'user'){
-        redirect('passengers/wallet');
-      } else if($user->type == 'checker'){
-        redirect('checkers/qrScan');
-      } else if($user->type == 'supporter'){
-        redirect('supporters/dashboard');
+      if($_SESSION['user_type'] == 'supporter'){
+        if($this->userModel->activeTheAgent($user->id)){
+          redirect('supporters/dashboard');         
+        } else {
+          redirect('users/login');
+        }
       } else {
-        redirect('users/login');
+        if($user->type == 'admin'){
+          redirect('admins/dashboard');
+        } else if($user->type == 'user'){
+          redirect('passengers/wallet');
+        } else if($user->type == 'checker'){
+          redirect('checkers/qrScan');
+        } else {
+          redirect('users/login');
+        }
       }
-      
+
     }
 
     public function logout(){
+
+      if($_SESSION['user_type'] == 'supporter'){
+        $this->userModel->deactiveTheAgent($_SESSION['user_id']);
+      }
+
+      unset($_SESSION['user_type']);
       unset($_SESSION['user_id']);
       unset($_SESSION['user_email']);
       unset($_SESSION['user_nic']);

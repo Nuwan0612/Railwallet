@@ -55,9 +55,10 @@
       return $results;
     }
 
-    public function User(){
-      $this->db->query("SELECT * FROM users WHERE type = 'user';
+    public function User($id){
+      $this->db->query("SELECT * FROM users WHERE id = :id;
       ");
+      $this->db->bind(':id', $id);
       $result = $this->db->single();
       return $result;
     }
@@ -178,6 +179,16 @@
       $this->db->bind(':nic', $nic);
       $results = $this->db->resultSet();
       return $results;
+    }
+
+    public function createAgentTableRow($id){
+      $this->db->query("INSERT INTO supprot_agents (supporter_id) VALUES (:id)");
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
     }
 
   /*----------------------------------------------------------Stations---------------------------------------------------*/ 

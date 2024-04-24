@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
-<div class="transaction-container">
-
+<div class="container">
+    <div class="content">
     <form action="https://sandbox.payhere.lk/pay/checkout" method="POST" id="payhere-payment-form">
         <h3 class="transaction-title">Payment Details:</h3>
         <div class="row">
@@ -9,7 +9,7 @@
                 <!-- <h3 class="transaction-title">User Details</h3> -->
                 <div class="inputBox">
                     <span>full name :</span>
-                    <input type="text" value="<?php echo $_SESSION["user_name"]?>">
+                    <input type="text" value="<?php echo $_SESSION["user_fname"]?>">
                 </div>
                 <!-- <div class="inputBox">
                     <span>email :</span>
@@ -41,10 +41,10 @@
                 <input type="hidden" id="returnUrl" name="return_url" value="">
                 <input type="hidden" name="cancel_url" value="<?php echo URLROOT?>/passengers/failTransaction/">
                 <input type="hidden" name="notify_url" value="http://localhost:8888/payhere">
-                <input type="hidden" name="first_name" value="Keshali">
-                <input type="hidden" name="last_name" value="Dhananjana">
-                <input type="hidden" name="email" value="keshali@gmail.com">
-                <input type="hidden" name="phone" value="0717737663">
+                <input type="hidden" name="first_name" value="<?php echo $_SESSION["user_fname"]?>">
+                <input type="hidden" name="last_name" value="<?php echo $_SESSION["user_lname"]?>">
+                <input type="hidden" name="email" value="<?php echo $_SESSION["user_email"]?>">
+                <input type="hidden" name="phone" value="<?php echo $_SESSION["user_phone"]?>">
                 <input type="hidden" name="address" value="Colombo">
                 <input type="hidden" name="city" value="Galle">
                 <input type="hidden" name="country" value="Sri Lanka">
@@ -86,7 +86,7 @@
 
         <button type="submit" onclick="calculateChecksum()">Pay Here</button>
     </form>
-    
+    </div>
 </div>
 <script>
     // Function to update hidden amount field with decimal value

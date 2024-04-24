@@ -399,7 +399,6 @@
           'oldPassword_err' => '',
           'newPassword_err' => '',
           'confirmPassword_err' => '',
-  
         ];
         $this->view('admin/setting/manageAccount',$data);
       }
@@ -983,7 +982,10 @@
 
         //Register User
         if($this->userModel->register($data)){
-          redirect('admins/supporters');
+          $supporter = $this->adminModel->getSupporterById($data['nic']);
+          if($this->adminModel->createAgentTableRow($supporter[0]->id)){
+            redirect('admins/supporters');
+          }
         } else {
           die('something went wrong');
         }

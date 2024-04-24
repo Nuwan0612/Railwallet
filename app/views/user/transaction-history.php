@@ -1,7 +1,8 @@
 <?php require APPROOT . '/views/user/includes/header.php'; ?>
-    <div class="transaction-history-container">
+    <div class="container">
         <div class="content">
             <div class="transaction-history">
+                <div class="table-container">
                 <div class="transaction-title">
                     <i class='bx bx-history'></i>
                     <h2>Transaction History</h2>
@@ -28,6 +29,7 @@
                         <?php $rowNumber++; endforeach; ?>
                     </tbody>
                 </table>
+                </div>
                 </div>
             </div>
         </div>

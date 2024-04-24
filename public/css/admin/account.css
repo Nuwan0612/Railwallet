@@ -31,6 +31,7 @@
   margin-bottom: 10px;
 }
 
+
 .body-container{
   display: grid;
   grid-template-columns: 40% 1fr;
