@@ -498,6 +498,9 @@ public function bookingTickets(){
 
             }
         } 
+        $data=['uId'=>$data4['user_id'],
+        'newBalance'=>$newBalance];
+ $this->passengerModel->updateBalance($data) ; 
     redirect('supporters/dashboard');
   } else {
       echo 'Enter Valid Number of Seats '; // or any other status message you want
