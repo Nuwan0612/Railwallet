@@ -113,7 +113,8 @@
           'from' => $from,
           'to' => $to,
           'date' => $date,
-          'stations'=>'',
+          'stations'=>''
+          
         ];
         $stations=$this->adminModel->getStation();
         $schedules = $this->passengerModel->searchSchedule($data);
@@ -289,7 +290,7 @@
             } 
         redirect('passengers/viewTicketsByUserId');
       } else {
-          echo 'Not Booked'; // or any other status message you want
+          echo 'Enter Valid Number of Seats '; // or any other status message you want
       }       
     }else{
       echo 'Recharge Wallet';
@@ -323,8 +324,6 @@
         $this->view('user/ticket',$data);
      
      }
-
-    
 
     //veiw feedback
     public function Feedbacks(){

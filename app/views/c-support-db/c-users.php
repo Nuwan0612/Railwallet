@@ -35,6 +35,8 @@
                         <th>Fines</th> 
                         <th>Travel History</th>
                         <th>Bookings</th>
+                        <th>Add Bookings</th>
+
                         </tr>
                     </thead>
                 
@@ -54,7 +56,12 @@
                             <td class="options">
                                 <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
-                            <td></td>
+                            <td>
+                            <a href="#"><button class="edit-btn">View</button></a>
+                            </td>
+                            <td class="options">
+                                <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id?>"><button class="edit-btn">Add</button></a>
+                            </td>
                         </tr>
                         <?php $rowNumber++; endforeach; ?>
                     </tbody>
