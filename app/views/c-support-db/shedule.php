@@ -1,4 +1,4 @@
-<?php require APPROOT . '/views/user/includes/header.php';?>
+<?php require APPROOT . '/views/c-support-db/header.php';?>
 <div class="deatails">
     <div class="all-trains">
         <div class="head">
@@ -6,7 +6,9 @@
         </div>
 
         <div class="search-bar-outer-container-shedule">
-            <form class="wrapper_shedule" action="<?php echo URLROOT?>passengers/searchSchedule" method="post">
+            <form class="wrapper_shedule" action="<?php echo URLROOT?>supporters/searchSchedule" method="post">
+            <input type="hidden" name="uId" value="<?= $data['uId']; ?>">
+
                 <div class="search-bar-inner-container-shedule1">
                 
                 <select class="result-box1" id="fromStation" name="fromStation">
@@ -51,10 +53,11 @@
         <div class="detail-body">
             <div class="card-box"> 
                     <?php foreach ($data['schedules'] as $schedule): ?>
-                        <form class="cards" action="<?php echo URLROOT?>passengers/getTrainDetails" method="POST">
+                        <form class="cards" action="<?php echo URLROOT?>supporters/getTrainDetails" method="POST">
                         <div class="card1">
                          <!-- input type eka hidden kerl apit yawanna oon id eka yawenawa -->
                          <input type="hidden" name="schedule_id" value="<?= $schedule->sheduleID ?>">
+                         <input type="hidden" name="uId" value="<?= $data['uId'] ?>">
                          <input type="hidden" name="train_name" value="<?= $schedule->train_name ?>">
                          <input type="hidden" name="train_type" value="<?= $schedule->train_type ?>">
                          <input type="hidden" name="way" value="<?= $schedule->way ?>">
@@ -103,4 +106,4 @@
         </div>  
     </div>
 </div>
-<?php require APPROOT . '/views/user/includes/footer.php';?>   
+<?php require APPROOT . '/views/c-support-db/footer.php';?>
