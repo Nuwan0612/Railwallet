@@ -6,6 +6,7 @@
         redirect('users/login');
       }
       $this->checkerModel = $this->model('Checker');
+      $this->passengerModel = $this->model('Passenger');
     }
 
     // *View fine details*
@@ -91,12 +92,14 @@
       if($addFine){
         if( ($wallet->balance - $data['amount']) >= 0 ){
           $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
-          $this->checkerModel->updatefinePayment($data['journey_id']);
+          $this->checkerModel->updateTrasaction($data['passenger_id'], 'Fine', $data['amount']);
+          $tr_id = $this->passengerModel->getTransactionId($data['passenger_id']);
+          $this->checkerModel->updatefinePayment($data['journey_id'], $tr_id->tr_id);
         }  
       }
       
-      if($addFine && $this->checkerModel->cancelTicket($_GET['id'])){
-        $this->qrScan();
+      if($addFine && $this->checkerModel->fineTicket($_GET['id'])){
+        redirect('checkers/qrScan');
       }
     }
 
@@ -159,8 +162,10 @@
       if($fine){
         if( ($wallet->balance - $data['amount']) >= 0 ){
           $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
+          $this->checkerModel->updateTrasaction($data['passenger'], 'No ticket', $data['amount']);
+          $tr_id = $this->passengerModel->getTransactionId($data['passenger']);
           $fineId = $this->checkerModel->getLatestFine($data['passenger']);
-          $this->checkerModel->updatefinePaymentWhenNoJourney($fineId->fine_id);
+          $this->checkerModel->updatefinePaymentWhenNoJourney($fineId->fine_id, $tr_id->tr_id);
         }
       }
       

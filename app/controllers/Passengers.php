@@ -173,6 +173,7 @@
       };
       
     }
+
     public function bookingTickets(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -291,10 +292,10 @@
       } else {
           echo 'Not Booked'; // or any other status message you want
       }       
-    }else{
-      echo 'Recharge Wallet';
-    }
-  }
+        }else{
+          echo 'Recharge Wallet';
+        }
+      }
     }
 
     public function getUserTicektsBySheduleID($data){
@@ -324,15 +325,13 @@
      
      }
 
-    
-
     //veiw feedback
     public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
       $this->view('user/feedback/feedback',$data);
     }
-
+    
     //add feedback
     public function addFeedback(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -650,10 +649,20 @@
       } else {
         if($this->passengerModel->addJourney($data)){
           $current = $this->passengerModel->getCurrentJourney($data['passenger_id']);
-          if($this->passengerModel->addJourneyQrCode($this->genarateQR($current->id),$current->id) && $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id)){
-            $responseData = array(
-              'success' => true
-            );
+                   
+          if($current){
+            $wallet = $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id);
+            $transaction = $this->passengerModel->updateTrasaction($current->ticket_id,$current->passenger_id, 'Journey');
+            $tr_id = $this->passengerModel->getTransactionId($current->passenger_id);
+
+            if($wallet && $transaction && $tr_id){
+
+              if($this->passengerModel->addJourneyQrAndTransaction($this->genarateQR($current->id),$current->id, $tr_id->tr_id)){
+                $responseData = array(
+                  'success' => true
+                );
+              }  
+            } 
           }
         }
       }

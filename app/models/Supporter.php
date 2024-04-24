@@ -121,5 +121,12 @@
       $result = $this->db->single();
       return $result;
     }
+
+    public function getNotification($id){
+      $this->db->query("SELECT passenger_id FROM supprot_agents WHERE supporter_id = :id");
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
+    }
     
   }

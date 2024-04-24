@@ -417,3 +417,16 @@ td {
         display: none;
     }
 }
+
+.notification-support{
+    display: none !important;
+    margin-left: 60px;
+    font-size: 15px;
+    color:#009688;
+}
+
+.notification-support-active{
+    margin-left: 60px;
+    font-size: 15px;
+    color:#009688;
+}
