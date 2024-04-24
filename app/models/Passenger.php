@@ -6,6 +6,7 @@
       $this->db = new Database;
     }
     
+    
     //get Recent fine
     public function getRecentFines($id) {
       $this->db->query("SELECT fine_amount FROM fines WHERE passenger_id = :id ORDER BY fine_id DESC LIMIT 1");

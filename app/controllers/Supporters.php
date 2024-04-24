@@ -431,6 +431,7 @@ public function bookingTickets(){
 
   $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']);
   $walletBalance = $this->passengerModel->getWalletBalnce($data['userId']);
+  $newBalance = ($walletBalance->balance - $total);
     
   if($total<=$walletBalance->balance){
 
