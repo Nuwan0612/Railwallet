@@ -527,4 +527,20 @@ public function bookingTickets(){
       $this->view('c-support-db/chatHistory', $data);
     }
 
+    public function notifySupporter(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+      
+      $Data = $this->supporterModel->getNotification($_SESSION['user_id']);
+
+      if($Data->passenger_id){
+        $responseData = true;
+      } else {
+        $responseData = false;
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+    }
+
   }

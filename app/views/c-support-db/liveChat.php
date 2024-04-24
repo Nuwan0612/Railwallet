@@ -27,5 +27,5 @@
 </div>
 
 <script src="<?php echo URLROOT; ?>public/js/chat/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <?php require APPROOT . '/views/c-support-db/footer.php';?>
