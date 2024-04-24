@@ -163,21 +163,22 @@
 
     // *Search schedules by schedule id*
     public function viewSchedulesByScheduleId($id){
-      $this->db->query("SELECT s.sheduleID, 
-                                s.trainID, 
-                                s.departureStationID, 
-                                dep.name AS dName, 
-                                s.departureDate, 
-                                s.departureTime, 
-                                s.arrivalStationID, 
-                                arr.name AS aName, 
-                                s.arrivalDate, 
-                                s.arrivalTime 
+      $this->db->query("SELECT 
+                              s.sheduleID, 
+                              s.trainID, 
+                              s.departureStationID, 
+                              dep.name AS dName, 
+                              s.departureDate, 
+                              s.departureTime, 
+                              s.arrivalStationID, 
+                              arr.name AS aName, 
+                              s.arrivalDate, 
+                              s.arrivalTime 
                           FROM shedules s 
-                          INNER JOIN stations dep 
-                          ON s.departureStationID = dep.stationID 
-                          INNER JOIN stations arr 
-                          ON s.arrivalStationID = arr.stationID 
+                            INNER JOIN stations dep 
+                              ON s.departureStationID = dep.stationID 
+                            INNER JOIN stations arr 
+                              ON s.arrivalStationID = arr.stationID 
                           WHERE sheduleID=:id;");
 
       $this->db->bind(':id', $id);
@@ -188,21 +189,22 @@
 
     // *Search schedules by departure station*
     public function viewSchedulesByDepartureStation($id){
-      $this->db->query("SELECT s.sheduleID, 
-                                s.trainID, 
-                                s.departureStationID, 
-                                dep.name AS dName, 
-                                s.departureDate, 
-                                s.departureTime, 
-                                s.arrivalStationID, 
-                                arr.name AS aName, 
-                                s.arrivalDate, 
-                                s.arrivalTime 
+      $this->db->query("SELECT 
+                              s.sheduleID, 
+                              s.trainID, 
+                              s.departureStationID, 
+                              dep.name AS dName, 
+                              s.departureDate, 
+                              s.departureTime, 
+                              s.arrivalStationID, 
+                              arr.name AS aName, 
+                              s.arrivalDate, 
+                              s.arrivalTime 
                             FROM shedules s 
-                            INNER JOIN stations dep 
-                            ON s.departureStationID = dep.stationID 
-                            INNER JOIN stations arr 
-                            ON s.arrivalStationID = arr.stationID 
+                              INNER JOIN stations dep 
+                                ON s.departureStationID = dep.stationID 
+                              INNER JOIN stations arr 
+                                ON s.arrivalStationID = arr.stationID 
                             WHERE dep.name=:id;");
 
       $this->db->bind(':id', $id);
@@ -222,7 +224,7 @@
                           j.completed, 
                           j.canceled 
                         FROM 
-                          journey j 
+                          journey j
                         JOIN 
                           users u ON j.passenger_id = u.id 
                         JOIN 
@@ -244,21 +246,22 @@
 
     // *Search schedules by arrival station*
     public function viewSchedulesByArrivalStation($id){
-      $this->db->query("SELECT s.sheduleID, 
-                                s.trainID, 
-                                s.departureStationID, 
-                                dep.name AS dName, 
-                                s.departureDate, 
-                                s.departureTime, 
-                                s.arrivalStationID, 
-                                arr.name AS aName, 
-                                s.arrivalDate, 
-                                s.arrivalTime 
+      $this->db->query("SELECT 
+                              s.sheduleID, 
+                              s.trainID, 
+                              s.departureStationID, 
+                              dep.name AS dName, 
+                              s.departureDate, 
+                              s.departureTime, 
+                              s.arrivalStationID, 
+                              arr.name AS aName, 
+                              s.arrivalDate, 
+                              s.arrivalTime 
                             FROM shedules s 
-                            INNER JOIN stations dep 
-                            ON s.departureStationID = dep.stationID 
-                            INNER JOIN stations arr 
-                            ON s.arrivalStationID = arr.stationID 
+                              INNER JOIN stations dep 
+                                ON s.departureStationID = dep.stationID 
+                              INNER JOIN stations arr 
+                                ON s.arrivalStationID = arr.stationID 
                             WHERE arr.name=:id;");
 
       $this->db->bind(':id', $id);
@@ -268,21 +271,22 @@
 
     // *Search schedules by date*
     public function viewSchedulesByDate($id){
-      $this->db->query("SELECT s.sheduleID, 
-                                s.trainID, 
-                                s.departureStationID, 
-                                dep.name AS dName, 
-                                s.departureDate, 
-                                s.departureTime, 
-                                s.arrivalStationID, 
-                                arr.name AS aName, 
-                                s.arrivalDate, 
-                                s.arrivalTime 
+      $this->db->query("SELECT 
+                              s.sheduleID, 
+                              s.trainID, 
+                              s.departureStationID, 
+                              dep.name AS dName, 
+                              s.departureDate, 
+                              s.departureTime, 
+                              s.arrivalStationID, 
+                              arr.name AS aName, 
+                              s.arrivalDate, 
+                              s.arrivalTime 
                           FROM shedules s 
-                          INNER JOIN stations dep 
-                          ON s.departureStationID = dep.stationID 
-                          INNER JOIN stations arr 
-                          ON s.arrivalStationID = arr.stationID 
+                            INNER JOIN stations dep 
+                              ON s.departureStationID = dep.stationID 
+                            INNER JOIN stations arr 
+                              ON s.arrivalStationID = arr.stationID 
                           WHERE departureDate=:id;");
 
       $this->db->bind(':id', $id);

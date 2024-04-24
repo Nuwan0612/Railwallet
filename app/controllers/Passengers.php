@@ -24,6 +24,8 @@
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      
+      
       // echo $_SESSION["user_id"];
       $data = [
         'transactions'=>$result,
@@ -39,6 +41,23 @@
       $data = ['transactions'=>$result];
 
       $this->view('user/transaction-history',$data);
+    }
+
+    // *Update wallet transactions*
+    public function updateTransaction($details){
+      $data = ["uid"=>$_SESSION["user_id"],
+                "amount"=>$details];
+
+      $result = $this->passengerModel->updateWalletBalance($data);
+      // $result = $this->passengerModel->updateAmount($data);
+      
+
+      $result = $this->passengerModel->updateTransaction($data);
+      
+      if ($result){
+        redirect("passengers/wallet");
+      }
+      
     }
 
 
@@ -718,14 +737,6 @@
 
     }
 
-    public function updateTransaction($details){
-      $data = ["uid"=>$_SESSION["user_id"],
-                "amount"=>$details];
-      $result = $this->passengerModel->updateAmount($data);
-      if ($result){
-        redirect("passengers/wallet");
-      }
-      
-    }
+    
     
   }

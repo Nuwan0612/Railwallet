@@ -38,7 +38,7 @@
       $this->view('checker/schedule',$data);
     }
 
-    // Search schedules by departure station
+    // *Search schedules by departure station*
     public function searchSchedulesByDepartureStation($id){
       $result = $this->checkerModel->viewSchedulesByDepartureStation($id);
 
@@ -46,7 +46,7 @@
       $this->view('checker/schedule',$data);
     }
 
-    // Search schedules by arrival station
+    // *Search schedules by arrival station*
     public function searchSchedulesByArrivalStation($id){
       $result = $this->checkerModel->viewSchedulesByArrivalStation($id);
 
@@ -54,7 +54,7 @@
       $this->view('checker/schedule',$data);
     }
 
-    // Search schedules by date
+    // *Search schedules by date*
     public function searchSchedulesByDate($id){
       $result = $this->checkerModel->viewSchedulesByDate($id);
 

@@ -24,6 +24,32 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/transaction.css"> -->
 
     <title><?php echo SITENAME; ?></title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Date', 'Topup', 'Expenses'],
+                    ['January', 1000, 500]
+                    ['February', 2000, 500],
+                    ['March', 1000, 1000],
+                    ['April', 4000, 2500]
+                ]);
+
+                var options = {
+                    title: 'My Wallet',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                chart.draw(data, options);
+            }
+        </script>
 </head>
 <body>
 
