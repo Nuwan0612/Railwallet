@@ -27,6 +27,7 @@
     public function getWalletBalnce($id){
       $this->db->query("SELECT * FROM wallet WHERE passenger_id = :id");
       $this->db->bind(':id',$id);
+      
       $result = $this->db->single();
       return $result;
     }
@@ -334,6 +335,16 @@ public function addingTrId($data){
   $result= $this->db->Single();
   return $result;
 }
+## Update wallet after Booking
+
+public function updateBalance($data){
+  $this->db->query("UPDATE `wallet` SET `balance`=:b WHERE `passenger_id`=:uid;");
+  $this->db->bind(':uid', $data['uId']);
+  $this->db->bind(':b', $data['newBalance']);
+
+  $this->db->execute();
+}
+
 
     //get user details
     public function getUserDetails($id){

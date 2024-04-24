@@ -219,9 +219,11 @@
 
       // echo $data['1count'];
 
-      $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']);
+      $total=(float)(($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']));
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
-        
+       
+      $newBalance = ($walletBalance->balance - $total);
+      // echo $newBalance;
       if($total<=$walletBalance->balance){
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
@@ -288,6 +290,9 @@
 
                 }
             } 
+            $data=['uId'=>$_SESSION['user_id'],
+                   'newBalance'=>$newBalance];
+            $this->passengerModel->updateBalance($data) ;  
         redirect('passengers/viewTicketsByUserId');
       } else {
           echo 'Enter Valid Number of Seats '; // or any other status message you want
@@ -725,6 +730,10 @@
         redirect("passengers/wallet");
       }
       
+    }
+
+    public function chat(){   
+      $this->view('user/chat');
     }
     
   }

@@ -16,7 +16,7 @@
     <!-- <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/admin/account.css"> -->
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/search_shedule.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/booking.css">
-
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/chat.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/setting.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/ticket.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/fine-details.css">
