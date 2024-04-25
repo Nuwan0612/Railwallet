@@ -331,7 +331,7 @@ public function addingTrId($data){
   $result= $this->db->Single();
   return $result;
 }
-## Update wallet after Booking
+// ## Update wallet after Booking
 
 public function updateBalance($data){
   $this->db->query("UPDATE `wallet` SET `balance`=:b WHERE `passenger_id`=:uid;");
@@ -340,6 +340,12 @@ public function updateBalance($data){
 
   $this->db->execute();
 }
+
+// ## insert into wallet balance
+
+
+
+
 
 
     //get user details
