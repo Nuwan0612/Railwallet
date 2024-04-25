@@ -513,6 +513,11 @@ public function bookingTickets(){
 }
 }
 
+// ## View Bookings by UserId
+
+public function getuserBookings(){
+  
+}
 
 
     public function clearChat(){

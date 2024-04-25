@@ -57,10 +57,10 @@
                                 <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
                             <td>
-                            <a href="#"><button class="edit-btn">View</button></a>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
                             <td>
-                                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                            <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
                             <td class="options">
                                 <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id?>"><button class="edit-btn">Add</button></a>

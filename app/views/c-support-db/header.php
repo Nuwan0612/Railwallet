@@ -31,8 +31,8 @@
         <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
         <a href="<?php echo URLROOT?>supporters/shedules"><li><img src="<?php echo URLROOT;?>img/calendar.png" >&nbsp;<span>Schedule</span></li></a>
         <a href="<?php echo URLROOT?>supporters/support"><li><img src="<?php echo URLROOT;?>img/customer-service.png" >&nbsp;<span>Support</span></li></a>
-        <a href="<?php echo URLROOT?>users/logout"><li><img src="<?php echo URLROOT;?>img/turn-off.png" >&nbsp;<span>Logout</span></li></a>
         <a href="<?php echo URLROOT?>supporters/settings"><li><img src="<?php echo URLROOT;?>img/settings.png" >&nbsp;<span>Settings</span></li></a>
+        <a href="<?php echo URLROOT?>users/logout"><li><img src="<?php echo URLROOT;?>img/turn-off.png" >&nbsp;<span>Logout</span></li></a>
     </ul>
 </div>
     <div class="container">
