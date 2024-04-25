@@ -121,5 +121,11 @@
       $result = $this->db->single();
       return $result;
     }
+
+    // ##
+
+    public function getuserBookings($id){
+      
+    }
     
   }

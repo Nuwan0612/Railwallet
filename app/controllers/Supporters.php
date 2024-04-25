@@ -516,8 +516,13 @@ public function bookingTickets(){
 // ## View Bookings by UserId
 
 public function getuserBookings(){
+    $results = $this->adminModel->getuserBookings($id);
+    $data = ['userTravelDetails' => $results];
+    $this->view('c-support-db/userTravelDetails',$data);
+  }
+
   
-}
+
 
 
     public function clearChat(){
@@ -531,5 +536,6 @@ public function getuserBookings(){
       $data = ['messages' => $chats, 'passenger_id' => $id, 'sender_id'=>$_SESSION['user_id']];
       $this->view('c-support-db/chatHistory', $data);
     }
+
 
   }
