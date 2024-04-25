@@ -26,9 +26,10 @@
 } */
 
 .travel-content{
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top:80px;
+    padding: 40px;
 
 }
 .table-details{

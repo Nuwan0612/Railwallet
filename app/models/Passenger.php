@@ -242,7 +242,6 @@
     }
 
     // ## Adding BookingId
-
     public function addBookingId($data2){
       $this->db->query("INSERT INTO `booking`(`sheduleId`, `ticketPriceID`, `userId`, `paymentId`) 
       VALUES 
@@ -310,7 +309,8 @@
       $result = $this->db->single();
       return $result;
     }
-// ## update transaction table
+
+    // ## update transaction table
     public function addingTransaction($data){
       $this->db->query("INSERT INTO transactions( user_id, reason,amount) VALUES (:uid,'Booking',:amount);");
     
@@ -322,34 +322,34 @@
 
     }
 
-// ## take recent booking tr_id
-public function addingTrId($data){
-  $this->db->query("SELECT * FROM `transactions` WHERE user_id=:uid AND reason='Booking' ORDER BY `transactions`.`date` DESC LIMIT 1;
-  ");
-  $this->db->bind(':uid', $data['user_id']);
+    // ## take recent booking tr_id
+    public function addingTrId($data){
+      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:uid AND reason='Booking' ORDER BY `transactions`.`date` DESC LIMIT 1;
+      ");
+      $this->db->bind(':uid', $data['user_id']);
 
-  $result= $this->db->Single();
-  return $result;
-}
-// ## Update wallet after Booking
+      $result= $this->db->Single();
+      return $result;
+    }
 
-public function updateBalance($id1,$id2){
-  $this->db->query("UPDATE `wallet` SET `balance`=:b WHERE `passenger_id`=:uid;");
-  $this->db->bind(':uid', $id1);
-  $this->db->bind(':b',$id2);
+    // ## Update wallet after Booking
+    public function updateBalance($id1,$id2){
+      $this->db->query("UPDATE `wallet` SET `balance`=:b WHERE `passenger_id`=:uid;");
+      $this->db->bind(':uid', $id1);
+      $this->db->bind(':b',$id2);
 
-  $this->db->execute();
-}
+      $this->db->execute();
+    }
 
-// ## insert into  balance table
-public function addBalanceTable($id1,$id2,$id3){
-  $this->db->query("INSERT INTO `balance`( `passenger_id`, `transaction_id`, `balance`) VALUES (:uId,:tr,:balance);");
-  $this->db->bind(':uId', $id1);
-  $this->db->bind(':tr', $id2);
-  $this->db->bind(':balance', $id3);
+    // ## insert into  balance table
+    public function addBalanceTable($id1,$id2,$id3){
+      $this->db->query("INSERT INTO `balance`( `passenger_id`, `transaction_id`, `balance`) VALUES (:uId,:tr,:balance);");
+      $this->db->bind(':uId', $id1);
+      $this->db->bind(':tr', $id2);
+      $this->db->bind(':balance', $id3);
 
-  $this->db->execute();
-}
+      $this->db->execute();
+    }
 
     //get user details
     public function getUserDetails($id){
