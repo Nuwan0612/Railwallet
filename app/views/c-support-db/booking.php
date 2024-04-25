@@ -1,8 +1,7 @@
 <?php require APPROOT . '/views/c-support-db/header.php';?>
 
-<div class="container-main2">
-        <div class="container4">
-        
+<!-- <div class="container-main2"> -->
+        <!-- <div class="container4"> -->
                 <div class="card_box">
                     <div class="card">
                         <div class="title">
@@ -39,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="stop_stations">
-                                <a href="<?php echo URLROOT;?>supporters/shedule"><button>Search Shedules</button></a>
+                                <a href="<?php echo URLROOT;?>supporters/shedule"><button class="sSchedules"> Search Shedules</button></a>
                                 </div>
                             </div>
                             
@@ -87,7 +86,7 @@
                        </div>
                     </div>
             </div>        
-    </div>
-</div>
+    <!-- </div> -->
+<!-- </div> -->
 
 <?php require APPROOT . '/views/c-support-db/footer.php';?>

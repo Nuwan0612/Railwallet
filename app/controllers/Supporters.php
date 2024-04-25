@@ -428,7 +428,7 @@ public function bookingTickets(){
   $sPrice=$this->passengerModel->ticketPricesByClass($class2);
   $tPrice=$this->passengerModel->ticketPricesByClass($class3);
 
-  // echo $data['1count'];
+  // echo $data['userId'];
 
   $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']);
   $walletBalance = $this->passengerModel->getWalletBalnce($data['userId']);
