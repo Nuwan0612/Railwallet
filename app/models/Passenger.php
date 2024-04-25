@@ -6,6 +6,7 @@
       $this->db = new Database;
     }
     
+    
     //get Recent fine
     public function getRecentFines($id) {
       $this->db->query("SELECT fine_amount FROM fines WHERE passenger_id = :id ORDER BY fine_id DESC LIMIT 1");
@@ -26,10 +27,10 @@
     public function getWalletBalnce($id){
       $this->db->query("SELECT * FROM wallet WHERE passenger_id = :id");
       $this->db->bind(':id',$id);
+      
       $result = $this->db->single();
       return $result;
     }
-
 
     //Add feedback
     public function addFeedback($data) {
@@ -260,7 +261,6 @@
     }
 
     // ## get booking tickets by userId
-
     public function getTicketsBySheduleId($data){
       $this->db->query("SELECT u.name AS userName,t.name,s.departureDate,s.departureTime,s.arrivalTime,b.class,st1.name AS depStation,st2.name AS arrStation
       FROM `booking` AS b 
@@ -286,7 +286,6 @@
     // }
 
     // ## view ticket by using id
-
     public function viewTicketByBookingId($id){
       $this->db->query('SELECT u.fname,u.lname,t.name,b.qrId,s.departureDate,s.departureTime,s.arrivalTime,tp.classID,tp.price,
        CASE 
@@ -324,7 +323,6 @@
     }
 
 // ## take recent booking tr_id
-
 public function addingTrId($data){
   $this->db->query("SELECT * FROM `transactions` WHERE user_id=:uid AND reason='Booking' ORDER BY `transactions`.`date` DESC LIMIT 1;
   ");
@@ -333,6 +331,22 @@ public function addingTrId($data){
   $result= $this->db->Single();
   return $result;
 }
+// ## Update wallet after Booking
+
+public function updateBalance($data){
+  $this->db->query("UPDATE `wallet` SET `balance`=:b WHERE `passenger_id`=:uid;");
+  $this->db->bind(':uid', $data['uId']);
+  $this->db->bind(':b', $data['newBalance']);
+
+  $this->db->execute();
+}
+
+// ## insert into wallet balance
+
+
+
+
+
 
     //get user details
     public function getUserDetails($id){
@@ -430,8 +444,9 @@ public function addingTrId($data){
     }
 
     //Add QR code to journey
-    public function addJourneyQrCode($qr,$id){
-      $this->db->query("UPDATE journey SET qr_code = :qr WHERE id = :id");
+    public function addJourneyQrAndTransaction($qr,$id,$tr){
+      $this->db->query("UPDATE journey SET qr_code = :qr, tr_id = :tr WHERE id = :id");
+      $this->db->bind(':tr', $tr);
       $this->db->bind(':qr', $qr);
       $this->db->bind(':id', $id);
 
@@ -512,8 +527,6 @@ public function addingTrId($data){
       }
     }
 
-    
-
     public function getNoCompletedFines($id){
       $this->db->query('SELECT * FROM fines WHERE passenger_id = :id AND payment_status = 0');
       $this->db->bind(':id', $id);
@@ -591,5 +604,30 @@ public function addingTrId($data){
       return $result;
     }
 
+    public function updateTrasaction($ticket, $u_id, $reason){
+      $this->db->query("INSERT INTO transactions (user_id, reason, amount) VALUES (:u_id, :reason, (SELECT price FROM ticketprices WHERE ticketPriceID = :ticket))");
+      $this->db->bind(':ticket', $ticket);
+      $this->db->bind(':reason', $reason);
+      $this->db->bind(':u_id', $u_id);
 
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function getTransactionId($id){
+      $this->db->query("SELECT tr_id FROM transactions WHERE user_id = :user ORDER BY tr_id DESC LIMIT 1");
+      $this->db->bind(':user', $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function getTotalSpends($id){
+      $this->db->query("SELECT SUM(amount) AS totalSpent FROM transactions WHERE user_id = :id");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
   }

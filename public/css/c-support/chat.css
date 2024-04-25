@@ -17,7 +17,7 @@
 .chat-area header{
   display: flex;
   align-items: center;
-  padding: 1px 30px;
+  padding: 15px 30px;
 }
 
 :is(.chat-box)::-webkit-scrollbar{
@@ -33,6 +33,22 @@
 .chat-area header span{
   font-size: 17px;
   font-weight: 500;
+}
+
+.chat-area header .broom{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+
+.chat-area header .broom i{
+  font-size: 25px;
+  color: black;
+}
+
+.chat-area .chat-history-box{
+  height: 500px;
 }
 
 .chat-box{
@@ -59,12 +75,12 @@
   display: flex;
 }
 
-.outgoing .details{
+.outgoing .sup-details{
   margin-left: auto;
   max-width: calc(100% - 130px);
 }
 
-.outgoing .details p{
+.outgoing .sup-details p{
   background: #333;
   color: #fff;
   border-radius: 18px 18px 0 18px;
@@ -80,13 +96,13 @@
   width: 35px;
 }
 
-.incoming .details{
+.incoming .sup-details{
   margin-left: 10px;
   margin-right: auto;
   max-width: calc(100% - 130px);
 }
 
-.incoming .details p{
+.incoming .sup-details p{
   background: #fff;
   color: #333;
   border-radius: 18px 18px 18px 0;
