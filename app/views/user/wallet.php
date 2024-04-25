@@ -8,20 +8,11 @@
             </div> -->
                 <div class="cards">
                     <div class="card">
-                        <div class="i">
-                        <i class='bx bxs-dollar-circle' ></i>
-                        </div>
-                        <div class="box">
-                            <h1>$500</h1>
-                            <h2>Amount</h2>
-                        </div>
-                    </div>
-                    <div class="card">
                     <div class="i">
                     <i class='bx bxs-credit-card' ></i>
                     </div>
                         <div class="box">
-                            <h1>$1000</h1>
+                            <h1>Rs. <?php echo $data['spents']->totalSpent?></h1>
                             <h2>Spent</h2>
                         </div>
                     </div>

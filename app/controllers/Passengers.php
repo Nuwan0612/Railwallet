@@ -24,10 +24,12 @@
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $spents = $this->passengerModel->getTotalSpends($_SESSION["user_id"]);
       // echo $_SESSION["user_id"];
       $data = [
         'transactions'=>$result,
-        'balance' => $walletBalance
+        'balance' => $walletBalance,
+        'spents' => $spents
       ];
       
       $this->view('user/wallet',$data);
@@ -40,7 +42,6 @@
 
       $this->view('user/transaction-history',$data);
     }
-
 
     // *Transaction Dashboard*
     public function transaction(){
