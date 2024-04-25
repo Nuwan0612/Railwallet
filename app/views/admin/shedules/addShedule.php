@@ -18,20 +18,33 @@
         <div class="error-message"><?php echo $data['trainID_err'];?></div>
       </div>
 
-      <div class="tbox <?php echo !empty($data['departureStationID_err']) ? 'error' : ''; ?>">
-        <input type="text" name="departureStationID" placeholder="Departure Station ID" value="<?php echo $data['departureStationID']; ?>">
-        <div class="error-message"><?php echo $data['departureStationID_err'];?></div>
-      </div>
+      <div class="schedule-outer-container">
+        <div class="schedule-left-container">
 
-      <div  class="tbox <?php echo !empty($data['departureDate_err']) ? 'error' : ''; ?>">
-        <input type="text" name="departureDate" placeholder="Departure Date" onfocus="(this.type = 'date')" onblur="(this.type='text')" value="<?php echo $data['departureDate']; ?>">
-        <div class="error-message"><?php echo $data['departureDate_err'];?></div>
-      </div>
+          <div class="tbox <?php echo !empty($data['departureStationID_err']) ? 'error' : ''; ?>">
+            <input type="text" name="departureStationID" placeholder="Departure Station ID" value="<?php echo $data['departureStationID']; ?>">
+            <div class="error-message"><?php echo $data['departureStationID_err'];?></div>
+          </div>
 
-      <div  class="tbox <?php echo !empty($data['departureTime_err']) ? 'error' : ''; ?>">
-        <input type="text" name="departureTime" placeholder="Departure Time" onfocus="(this.type = 'time')" onblur="(this.type='text')" value="<?php echo $data['departureTime']; ?>">
-        <div class="error-message"><?php echo $data['departureTime_err'];?></div>
+
+          <div  class="tbox <?php echo !empty($data['departureDate_err']) ? 'error' : ''; ?>">
+            <input type="text" name="departureDate" placeholder="Departure Date" onfocus="(this.type = 'date')" onblur="(this.type='text')" value="<?php echo $data['departureDate']; ?>">
+            <div class="error-message"><?php echo $data['departureDate_err'];?></div>
+          </div>
+
+          <div  class="tbox <?php echo !empty($data['departureTime_err']) ? 'error' : ''; ?>">
+            <input type="text" name="departureTime" placeholder="Departure Time" onfocus="(this.type = 'time')" onblur="(this.type='text')" value="<?php echo $data['departureTime']; ?>">
+          <div class="error-message"><?php echo $data['departureTime_err'];?></div>
+          </div>
+
+        </div>
+        <div class="schedule-right-container">
+
+        </div>
       </div>
+      
+
+      
 
       <div class="tbox <?php echo !empty($data['arrivalStationID_err']) ? 'error' : ''; ?>">
         <input type="text" name="arrivalStationID" placeholder="Arrival Station ID" value="<?php echo $data['arrivalStationID']; ?>">

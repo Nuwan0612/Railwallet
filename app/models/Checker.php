@@ -107,9 +107,10 @@
       }
     }
     
-    public function updatefinePayment($id){
-      $this->db->query("UPDATE fines SET payment_status = 1, payment_date = NOW() WHERE journey_id = :id");
+    public function updatefinePayment($id,$tr_id){
+      $this->db->query("UPDATE fines SET payment_status = 1, end_time = NOW(), payment_date = NOW(), tr_id = :tr_id WHERE journey_id = :id");
       $this->db->bind(':id', $id);
+      $this->db->bind(':tr_id', $tr_id);
       if($this->db->execute()){
         return true;
       } else {
@@ -184,7 +185,6 @@
       $result = $this->db->resultSet();
       return $result;
     }
-
 
     // *Search schedules by departure station*
     public function viewSchedulesByDepartureStation($id){
@@ -319,8 +319,32 @@
       return $result;
     }
 
-    public function updatefinePaymentWhenNoJourney($id){
-      $this->db->query("UPDATE fines SET payment_status = 1, payment_date = NOW() WHERE fine_id = :id");
+    public function updatefinePaymentWhenNoJourney($id, $tr_id){
+      $this->db->query("UPDATE fines SET payment_status = 1, tr_id = :tr_id, payment_date = NOW() WHERE fine_id = :id");
+      $this->db->bind(':tr_id', $tr_id);
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function updateTrasaction($u_id, $reason, $amount){
+      $this->db->query("INSERT INTO transactions (user_id, reason, amount) VALUES (:u_id, :reason, :amount)");
+      $this->db->bind(':u_id', $u_id);
+      $this->db->bind(':reason', $reason);
+      $this->db->bind(':amount', $amount);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function fineTicket($id){
+      $this->db->query("UPDATE journey SET completed = 1, canceled = 1 WHERE id = :id");
       $this->db->bind(':id', $id);
       if($this->db->execute()){
         return true;
