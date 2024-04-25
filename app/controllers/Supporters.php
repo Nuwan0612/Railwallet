@@ -517,13 +517,9 @@ public function bookingTickets(){
 
 public function getuserBookings(){
     $results = $this->adminModel->getuserBookings($id);
-    $data = ['userTravelDetails' => $results];
+    $data = ['userBookings' => $results];
     $this->view('c-support-db/userTravelDetails',$data);
   }
-
-  
-
-
 
     public function clearChat(){
       if($this->chatModel->clearChat($_SESSION['user_id'])){

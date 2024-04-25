@@ -125,7 +125,11 @@
     // ##
 
     public function getuserBookings($id){
+      $this->db->query("SELECT * FROM `booking` WHERE userId=:uId;");
+      $this->db->bind(':uId',$id);
       
+      $result=$this->db->resultSet();
+      return $result;
     }
     
   }
