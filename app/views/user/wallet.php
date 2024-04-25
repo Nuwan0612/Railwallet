@@ -73,10 +73,67 @@
                             <h2>Chart</h2>
                         </div>
                         <div class="line-chart">
-                            <div id="curve_chart" style="width: 500px; height: 300px"></div>
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <?php
+
+$chartData = $data['chart'];
+
+$chartDataJSON = json_encode($chartData);
+?>
+
+        <script>
+
+const chartData = <?php echo $chartDataJSON; ?>;
+
+let date = [];
+let balance = [];
+
+// Log the data to the console
+chartData.forEach(ele => {
+    date.push(ele.date);
+    balance.push(ele.balance);
+})
+    
+console.log(date);
+console.log(balance);
+
+  const ctx = document.getElementById('myChart');
+
+const data = {
+  labels: date,
+  datasets: [{
+    label: 'My First Dataset',
+    data: balance,
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }]
+};
+
+const config = {
+  type: 'line',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+};
+
+// Create a new chart instance
+const myChart = new Chart(ctx, config);
+
+
+</script>
 <?php require APPROOT . '/views/user/includes/footer.php';?>

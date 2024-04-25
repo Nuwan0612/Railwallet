@@ -24,14 +24,16 @@
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
-      
+      $result1 = $this->passengerModel->viewChart($_SESSION["user_id"]);
       
       // echo $_SESSION["user_id"];
       $data = [
         'transactions'=>$result,
-        'balance' => $walletBalance
+        'balance' => $walletBalance,
+        'chart'=>$result1
       ];
-      
+      //print_r($data['chart']);
+
       $this->view('user/wallet',$data);
     }
 
@@ -48,12 +50,17 @@
       $data = ["uid"=>$_SESSION["user_id"],
                 "amount"=>$details];
 
+      // chart
+      // $result1 = $this->passengerModel->viewChart($_SESSION["user_id"]);
+      // $data = ['chart'=>$result1];
+      // print_r($result1);
+    
       $result = $this->passengerModel->updateWalletBalance($data);
-      // $result = $this->passengerModel->updateAmount($data);
-      
 
       $result = $this->passengerModel->updateTransaction($data);
-      
+
+      //$result = $this->passengerModel->updateBalanceChart($data);
+
       if ($result){
         redirect("passengers/wallet");
       }

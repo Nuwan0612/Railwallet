@@ -208,7 +208,7 @@
 
     }
     // ## Take ticket prices
-    public function ticketPricesByShedule(){
+    public function ticketPricesByShedule($data){
       $this->db->query("SELECT `departureStationID`,`arrivalStationID` FROM `shedules` WHERE sheduleID=:shId ");
        $this->db->bind(':shId', $data['sheduleId']);
     }
@@ -455,9 +455,22 @@ public function addingTrId($data){
       return $result;
     }
 
-    // *Update wallet balance
+
+    // *Update chart*
+    public function viewChart($id){
+      $this->db->query("SELECT * FROM `balance` 
+                          WHERE passenger_id=:id;");
+
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // *Update wallet balance*
     public function updateWalletBalance($data){
-      $this->db->query("UPDATE `wallet` SET `balance`= `balance` + :amount WHERE passenger_id=:id;");
+      $this->db->query("UPDATE `wallet` 
+                          SET `balance`= `balance` + :amount 
+                          WHERE passenger_id=:id;");
 
       $this->db->bind(':id', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);

@@ -371,10 +371,16 @@ flex-wrap: wrap;
     flex-direction: column;
     border-radius: 10px;
 }
+
+.content .content-2 .chart .line-chart{
+    width: 500px;
+}
+
 .content .content-2 .chart .wallet-title{
     display: flex;
     justify-content: center;
 }
+
 .content .content-2 .chart .wallet-title i{
     font-size: 30px;
     margin-right: 30px;
