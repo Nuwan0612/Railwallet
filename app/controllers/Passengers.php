@@ -31,7 +31,7 @@
       $data = [
         'transactions'=>$result,
         'balance' => $walletBalance,
-        'chart'=>$result1
+        'chart'=>$result1,
         'spents' => $spents
       ];
       //print_r($data['chart']);
@@ -295,9 +295,13 @@
                   'amount'=> $amount
                   // 'paymentId' => $data['paymentId']
               ];
-                $transaction=$this->passengerModel->addingTransaction($data2);
+                $transaction=$this->passengerModel->addingTransaction($data2);  
                 $result=$this->passengerModel->addingTrId($data2);  
-
+                $x=$this->passengerModel->getWalletBalnce($data2['user_id']);
+                $cBalance=$x->balance-$amount; 
+                $this->passengerModel->updateBalance($data2['user_id'],$cBalance);  
+                $this->passengerModel->addBalanceTable($data2['user_id'],$result->tr_id,$cBalance,);
+                
                 $data4=[
                   'scheduleId' => $data['sheduleId'],
                   'user_id' => $data['userId'],
@@ -316,12 +320,11 @@
                 $data5=['bId'=>$bId,
                         'qrId'=>$qrId];
                 $this->passengerModel->insertQrForBookingId($data5); 
-
                 }
             } 
-            $data=['uId'=>$_SESSION['user_id'],
-                   'newBalance'=>$newBalance];
-            $this->passengerModel->updateBalance($data) ;  
+            // $data=['uId'=>$_SESSION['user_id'],
+            //        'newBalance'=>$newBalance];
+            // $this->passengerModel->updateBalance($data) ;  
         redirect('passengers/viewTicketsByUserId');
       } else {
           echo 'Enter Valid Number of Seats '; // or any other status message you want
@@ -761,7 +764,7 @@
 
     }
 
-    public function updateTransaction($details){
+    public function updateTransactions($details){
       $data = ["uid"=>$_SESSION["user_id"],
                 "amount"=>$details];
       $result = $this->passengerModel->updateAmount($data);
