@@ -7,6 +7,23 @@
       $this->db = new Database;
     }
 
+    public function getFaq(){
+      $this->db->query("SELECT * FROM faq");
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    public function insertfaq($data){
+      $this->db->query("INSERT INTO faq (Question,Answer) VALUES (:question, :answer)" );
+      $this->db->bind(':question',$data['question']);
+      $this->db->bind(':answer',$data['answer']);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+    
     public function getAvailableAgents(){
       $this->db->query("SELECT * FROM supprot_agents WHERE active = 1 AND busy = 0 ORDER BY number_of_chats ASC LIMIT 1");
       $result = $this->db->single();
@@ -31,6 +48,18 @@
       }
     }
 
+    public function editfaq($data){
+      $this->db->query('UPDATE faq SET Question = :question, Answer = :answer WHERE Q_ID= :id');
+      $this->db->bind(':id',$data['id']);
+      $this->db->bind(':question',$data['question']);
+      $this->db->bind(':answer',$data['answer']);
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
     public function addMessage($data){
       $this->db->query("INSERT INTO messages (sender_id, receiver_id, msg) VALUES (:sender, :receiver, :msg)");
       $this->db->bind(':sender', $data['sender']);
@@ -40,8 +69,17 @@
       if($this->db->execute()){
         return true;
       } else {
+
         return false;
       }
+    }
+
+
+    public function takeFaq($id){
+      $this->db->query('SELECT * FROM faq WHERE Q_ID=:id');
+      $this->db->bind(':id',$id);
+      $result = $this->db->single();
+      return $result;
     }
 
     public function getChats($sender, $receiver){
@@ -95,7 +133,19 @@
         return false;
       }
     }
-
   }
+
+  public function deletefaq($id){
+    $this->db->query('DELETE FROM faq WHERE Q_ID = :id');
+    $this->db->bind(':id', $id);
+    
+    if($this->db->execute()){
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+}
 
 ?>

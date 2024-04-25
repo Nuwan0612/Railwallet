@@ -3,7 +3,10 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    /* font-weight: bold; */
+    font-size: 18px;
+    /* border-radius: 8px;
+    margin-bottom: 10px; */
+
 }
 body {
     min-height: 100vh;
@@ -40,15 +43,17 @@ h2{
 }
 
 
+
+
 .side-menu .brand-name p {
     color: #009688;
     font-weight: bold;
-    font-size: 2rem; /* Adjust the font size according to your h1 tag */
+    font-size: 32px; /* Adjust the font size according to your h1 tag */
     font-family: Arial;
     text-align: center; /* Center the text */
-    margin-left: 5px;
+    margin-left: 15px;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 /* 
 .side-menu .brand-name .logo {
@@ -60,6 +65,7 @@ h2{
     height: auto; /* Maintain the aspect ratio */
     margin-left: 30px; /* Add some margin to the left */
     transform: scale(1.4);
+    margin-top: 3px;
 }
 
 .btn {
@@ -210,7 +216,7 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -10px 10px -10px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 .container .header .nav {

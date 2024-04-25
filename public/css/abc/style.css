@@ -394,6 +394,14 @@ header p{
     transform: translateY(-50%);
 }
 
+/* .faq-block {
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
+    
+} */
+
 .chat-container .tab
 {
 

@@ -22,6 +22,7 @@
         </div>
     </div>
 
+
     <!--##ChatBox Section##-->
 
     <!--##FAQ page##-->
@@ -60,75 +61,57 @@
                     <span class="close-btn material-symbols-outlined">close</span>
                 </header>
 
-                <div class="tab">
+    <!--##ChatBox Section##-->
 
-                    <div onclick="displayAnswer('ans1')">
-                        <label>
-                            <h2>01</h2>
-                            <h3>How do I create an account on RailWallet?</h3>
-                        </label>
-                    </div>
+    <!--##FAQ page##-->
 
-                    <div class="answer-box" style="display: none;" id="ans1">Creating an account on RailWallet is
-                        simple!
-                        Just click on the "Sign Up" button and follow the instructions to
-                        set up your account with your email address and password.
-                    </div>
+    <div class="outer-container">
+        
+        <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;">
 
+
+            <!-- <span class="material-symbols-outlined">+</span> -->
+            <img src="<?php echo URLROOT; ?>/img/live-chat.png" alt="">
+            <!-- <img src="image.png" alt="Icon"> -->
+            <span class="material-symbols-outlined"></span>
+
+        </button>
+
+        <div class="chat-container" style="z-index: 1000;">
+            <div id="faq-box" style="display: block;">
+
+                <div class="title">
+                    
+                    <p>Chat With Us</p>
+                   
                 </div>
 
-                <div class="tab">
-
-                    <div onclick="displayAnswer('ans2')">
-                        <label>
-                            <h2>02</h2>
-                            <h3>Can I top up my RailWallet using cash?</h3>
-                        </label>
-                    </div>
-
-                    <div class="answer-box" style="display: none;" id="ans2">Currently, RailWallet supports online
-                        top-ups
-                        through various payment methods. We do not support cash top-ups
-                        at this time for security reasons.
-                    </div>
-
+                <div class="Chat">
+                    <header id="live-chat-header">
+                        <h1>Live Chat</h1>
+                    </header>
                 </div>
 
-                <div class="tab">
+                <header id="faqs-header">
+                    <h1>FAQs?</h1>
+                    <span class="close-btn material-symbols-outlined">close</span>
+                </header>
 
-                    <div onclick="displayAnswer('ans3')">
-                        <label>
-                            <h2>03</h2>
-                            <h3>How do I reserve a seat using RailWallet?</h3>
-                        </label>
+                <?php $qNumber = 1; foreach($data['messages'] as $faq): ?>
+                    <div class="tab">
+
+                        <div onclick="displayAnswer(<?php echo $faq->Q_ID?>)">
+                            <label>
+                                <h2><?php echo $qNumber?></h2>
+                                <h3><?php echo $faq->Question?></h3>
+                            </label>
+                        </div>
+
+                        <div class="answer-box" style="display: none;" id="<?php echo $faq->Q_ID; ?>"><?php echo $faq->Answer?></div>
                     </div>
-
-                    <div class="answer-box" style="display: none;" id="ans3">Once you've logged into your RailWallet
-                        account,
-                        navigate to the "Seat Reservation" section, select your desired
-                        train and seat, and follow the prompts to complete your reservation.
-                    </div>
-
-                </div>
-
-                <div class="tab">
-
-                    <div onclick="displayAnswer('ans4')">
-                        <label>
-                            <h2>04</h2>
-                            <h3>What should I do if my train is delayed?</h3>
-                        </label>
-                    </div>
-
-                    <div class="answer-box" style="display: none;" id="ans4">In case of train delays, you will receive
-                        notifications via email or SMS provided during registration.
-                        You can also check the updated train schedule on our website
-                        for real-time information.
-                    </div>
-
-                </div>
-
+                <?php $qNumber++; endforeach; ?>            
             </div>
+
 
             <!--##livechat page##-->
             <!-- <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;"> -->
@@ -179,7 +162,6 @@
             <p>Welcome to "Online Rail Wallet" – your trusted partner in modernizing train travel.
                 <br>We're to provide a hassle-free and user-friendly train travel experience. Join us in this
                 journey to make your trips simple and cashless. <br>
-
         </div>
         <div class="aboutimage">
             <img src="<?php echo URLROOT; ?>public/css/index/ab1.jpg">
