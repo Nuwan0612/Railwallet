@@ -551,4 +551,11 @@ public function updateBalance($data){
       $result = $this->db->single();
       return $result;
     }
+
+    public function getTotalSpends($id){
+      $this->db->query("SELECT SUM(amount) AS totalSpent FROM transactions WHERE user_id = :id");
+      $this->db->bind(':id', $id);
+      $result = $this->db->single();
+      return $result;
+    }
   }
