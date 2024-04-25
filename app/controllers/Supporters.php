@@ -11,12 +11,114 @@
       $this->supporterModel = $this->model('Supporter');
       $this->passengerModel = $this->model('Passenger');
       $this->userModel = $this->model('User');
+      $this->chatModel = $this->model('Chat');
+
     }
 
     public function dashboard(){
       $this->view('c-support-db/c-support');
     }
 
+    public function faqs(){
+      $result=$this->chatModel->getFaq();
+      $data=['faqDetails'=> $result];
+      $this->view('c-support-db/display-faq',$data);
+    }
+
+    // <!--ADD FAQ--!>
+    public function addfaq(){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'question' => trim($_POST ['question']),
+          'answer' => trim($_POST ['answer']),
+          'question_err'=>'',
+          'answer_err'=>''
+        ];
+
+        if(empty($data['question'])){
+          $data['question_err']='Please enter the question';
+        }
+        if(empty($data['answer'])){
+          $data['answer_err']='Please enter the answer';
+        }
+
+        // print_r($data);
+
+        if(empty($data['question_err']) && empty($data['answer_err'])){
+          if($this->chatModel->insertfaq($data)){
+            redirect('supporters/faqs');
+          } else {
+            die('Something Went Wrong');
+          }
+        } else {
+          $this->view('c-support-db/faq-form',$data);
+        }
+      } else {
+        $data = [
+          'question' => '',
+          'answer' => '',
+          'question_err'=>'',
+          'answer_err'=>''
+        ];
+        $this->view('c-support-db/faq-form',$data);
+      }
+      
+    }
+
+ // <!--EDIT FAQ--!>
+
+    public function editfaq($id){
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'id'=> $id,
+          'question'=> trim($_POST ['question']),
+          'answer' => trim($_POST ['answer']),
+          'question_err' => '',
+          'answer_err' => ''
+        ];
+        if(empty($data['question_err']) && (empty($data['answer_err']))) {
+          if($this->chatModel->editfaq($data)){
+            redirect('supporters/faqs');
+          } else {
+            die('Something went wrong');
+          } 
+          } else {
+            $this->view('c-support-db/edit-faq-form',$data);
+          }
+      } else {
+        $result = $this->chatModel->takeFaq($id);
+
+        $data=[
+          'id'=> $id,
+          'question'=> $result->Question,
+          'answer'=> $result->Answer,
+          'answer_err'=>'',
+          'question_err'=>''
+        ];
+        $this->view('c-support-db/edit-faq-form',$data);
+    }
+
+  }
+
+// <!--DELETE FAQ-->
+    public function deletefaq($id){
+
+      if($this->chatModel->deletefaq($id)){
+        redirect('supporters/faqs');
+      } else {
+        die('Something went wrong');
+      } 
+  
+    }
+
+
+  
     public function settings() {
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
 

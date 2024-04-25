@@ -118,3 +118,30 @@
   cursor: pointer;
   border-radius: 0 5px 5px 0;
 }
+
+.content .faq-outer-container{
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .faq-outer-container .faq-question{
+  padding: 10px;
+  background-color: #009688;
+  display: flex;
+}
+
+.content .faq-outer-container .question-content{
+  border-radius: 10px;
+}
+
+.content .faq-outer-container .faq-answer{
+  padding: 10px;
+  background-color: #009688;
+  display: flex;
+}
+
+.content .faq-outer-container .answer-content{
+  border-radius: 10px;
+}
