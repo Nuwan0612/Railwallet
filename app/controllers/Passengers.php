@@ -24,14 +24,18 @@
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $result1 = $this->passengerModel->viewChart($_SESSION["user_id"]); 
       $spents = $this->passengerModel->getTotalSpends($_SESSION["user_id"]);
+
       // echo $_SESSION["user_id"];
       $data = [
         'transactions'=>$result,
         'balance' => $walletBalance,
+        'chart'=>$result1
         'spents' => $spents
       ];
-      
+      //print_r($data['chart']);
+
       $this->view('user/wallet',$data);
     }
 
@@ -41,6 +45,29 @@
       $data = ['transactions'=>$result];
 
       $this->view('user/transaction-history',$data);
+    }
+
+
+    // *Update wallet transactions*
+    public function updateTransaction($details){
+      $data = ["uid"=>$_SESSION["user_id"],
+                "amount"=>$details];
+
+      // chart
+      // $result1 = $this->passengerModel->viewChart($_SESSION["user_id"]);
+      // $data = ['chart'=>$result1];
+      // print_r($result1);
+    
+      $result = $this->passengerModel->updateWalletBalance($data);
+
+      $result = $this->passengerModel->updateTransaction($data);
+
+      //$result = $this->passengerModel->updateBalanceChart($data);
+
+      if ($result){
+        redirect("passengers/wallet");
+      }
+      
     }
 
     // *Transaction Dashboard*
@@ -747,5 +774,6 @@
     public function chat(){   
       $this->view('user/chat');
     }
+
     
   }

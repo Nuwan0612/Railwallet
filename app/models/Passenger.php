@@ -209,7 +209,7 @@
 
     }
     // ## Take ticket prices
-    public function ticketPricesByShedule(){
+    public function ticketPricesByShedule($data){
       $this->db->query("SELECT `departureStationID`,`arrivalStationID` FROM `shedules` WHERE sheduleID=:shId ");
        $this->db->bind(':shId', $data['sheduleId']);
     }
@@ -460,22 +460,66 @@ public function updateBalance($data){
     // *Recharge wallet*
     public function walletRecharge($id){
       $this->db->query("SELECT transaction_id 
-      FROM topupdetails 
-      WHERE user_id = :id
-      ORDER BY transaction_id DESC 
-      LIMIT 1;
-      ");
+                          FROM topupdetails 
+                          WHERE user_id = :id
+                          ORDER BY transaction_id DESC 
+                          LIMIT 1;");
+
       $this->db->bind(':id', $id);
       $result = $this->db->single();
       return $result;
     }
 
-    // *Update wallet amount*
-    public function updateAmount($data){
-      $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) VALUES (:uid,:amount);");
-      $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) VALUES (:uid,'recharge',:amount);");
+
+    // *Update chart*
+    public function viewChart($id){
+      $this->db->query("SELECT * FROM `balance` 
+                          WHERE passenger_id=:id;");
+
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    // *Update wallet balance*
+    public function updateWalletBalance($data){
+      $this->db->query("UPDATE `wallet` 
+                          SET `balance`= `balance` + :amount 
+                          WHERE passenger_id=:id;");
+
+      $this->db->bind(':id', $data["uid"]);
+      $this->db->bind(':amount', $data["amount"]);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // *Update wallet transaction*
+    public function updateTransaction($data){
+       $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) 
+                          VALUES (:uid,'recharge',:amount);");
+
       $this->db->bind(':uid', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // *Update wallet amount*
+    public function updateAmount($data){
+      $this->db->query("INSERT INTO `topupdetails`( `user_id`, `amount`) 
+                          VALUES (:uid,:amount);");
+
+      $this->db->bind(':uid', $data["uid"]);
+      $this->db->bind(':amount', $data["amount"]);
+
       if($this->db->execute()){
         return true;
       } else {
@@ -492,7 +536,11 @@ public function updateBalance($data){
 
     // *Fine Details*
     public function viewFineDetails($id){
-      $this->db->query("SELECT *, DATE(fine_date) AS fineDate FROM `fines` WHERE passenger_id=:id;");
+      $this->db->query("SELECT *, 
+                          DATE(fine_date) AS fineDate 
+                          FROM `fines` 
+                          WHERE passenger_id=:id;");
+
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;
@@ -500,7 +548,10 @@ public function updateBalance($data){
 
     // *Booking details*
     public function viewBookingDetail($id){
-      $this->db->query("SELECT * FROM `booking` WHERE userId=:id;");
+      $this->db->query("SELECT * 
+                          FROM `booking` 
+                          WHERE userId=:id;");
+
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;
@@ -508,7 +559,10 @@ public function updateBalance($data){
 
     // *Journey details*
     public function viewJourneyDetail($id){
-      $this->db->query("SELECT * FROM `journey` WHERE passenger_id=:id;");
+      $this->db->query("SELECT * 
+                          FROM `journey` 
+                          WHERE passenger_id=:id;");
+
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;
@@ -516,7 +570,10 @@ public function updateBalance($data){
 
     // *Recharge details*
     public function viewRechargeDetails($id){
-      $this->db->query("SELECT * FROM `topupdetails` WHERE user_id=:id;");
+      $this->db->query("SELECT * 
+                          FROM `topupdetails` 
+                          WHERE user_id=:id;");
+
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;
@@ -524,7 +581,12 @@ public function updateBalance($data){
 
     // *View transaction history*
     public function viewTransactionHistory($id){
-      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:id ORDER BY `transactions`.`date` DESC LIMIT 5;");
+      $this->db->query("SELECT * 
+                          FROM `transactions` 
+                          WHERE user_id=:id 
+                          ORDER BY `transactions`.`date` DESC 
+                          LIMIT 5;");
+
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;
@@ -532,7 +594,11 @@ public function updateBalance($data){
 
     // *View all transaction history*
     public function viewAllTransactionHistory($id){
-      $this->db->query("SELECT * FROM `transactions` WHERE user_id=:id ORDER BY `transactions`.`date` DESC;");
+      $this->db->query("SELECT * 
+                          FROM `transactions` 
+                          WHERE user_id=:id 
+                          ORDER BY `transactions`.`date` DESC;");
+
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();
       return $result;
