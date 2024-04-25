@@ -546,4 +546,10 @@ public function addingTrId($data){
       $result = $this->db->single();
       return $result;
     }
+
+    public function getQRImage(){
+      $this->db->query("SELECT qr_code FROM journey WHERE completed = 0 AND canceled = 0");
+      $result = $this->db->single();
+      return $result;
+    }
   }

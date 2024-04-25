@@ -150,3 +150,16 @@ textarea {
   margin-top: 8px; 
   margin-bottom: 12px;
 }
+
+.qr-outer-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+ 
+}
+
+.qr-outer-container img{
+  width: 500px;
+  height: 500px;
+}
