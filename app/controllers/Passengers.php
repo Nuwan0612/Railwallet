@@ -108,7 +108,12 @@
 
     // *Ticket dashboard*
     public function ticket(){
-      $this->view('user/ticket');
+      $data = ['qrImage' => ''];
+
+      if($qr = $this->passengerModel->getQRImage()){
+        $data['qrImage'] = $qr->qr_code;
+      }
+      $this->view('user/viewQR', $data);
     }
 
     public function shedule_list(){
