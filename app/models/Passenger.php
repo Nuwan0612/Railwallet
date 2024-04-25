@@ -333,20 +333,23 @@ public function addingTrId($data){
 }
 // ## Update wallet after Booking
 
-public function updateBalance($data){
+public function updateBalance($id1,$id2){
   $this->db->query("UPDATE `wallet` SET `balance`=:b WHERE `passenger_id`=:uid;");
-  $this->db->bind(':uid', $data['uId']);
-  $this->db->bind(':b', $data['newBalance']);
+  $this->db->bind(':uid', $id1);
+  $this->db->bind(':b',$id2);
 
   $this->db->execute();
 }
 
-// ## insert into wallet balance
+// ## insert into  balance table
+public function addBalanceTable($id1,$id2,$id3){
+  $this->db->query("INSERT INTO `balance`( `passenger_id`, `transaction_id`, `balance`) VALUES (:uId,:tr,:balance);");
+  $this->db->bind(':uId', $id1);
+  $this->db->bind(':tr', $id2);
+  $this->db->bind(':balance', $id3);
 
-
-
-
-
+  $this->db->execute();
+}
 
     //get user details
     public function getUserDetails($id){
