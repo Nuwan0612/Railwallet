@@ -515,10 +515,10 @@ public function bookingTickets(){
 
 // ## View Bookings by UserId
 
-public function getuserBookings(){
-    $results = $this->adminModel->getuserBookings($id);
+public function getuserBookings($id){
+    $results = $this->supporterModel->getuserBookings($id);
     $data = ['userBookings' => $results];
-    $this->view('c-support-db/userTravelDetails',$data);
+    $this->view('c-support-db/bookings',$data);
   }
 
     public function clearChat(){
