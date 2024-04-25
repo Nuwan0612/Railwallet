@@ -6,6 +6,7 @@
         redirect('users/login');
       }
       $this->checkerModel = $this->model('Checker');
+      $this->passengerModel = $this->model('Passenger');
     }
 
     // *View fine details*
@@ -38,7 +39,7 @@
       $this->view('checker/schedule',$data);
     }
 
-    // Search schedules by departure station
+    // *Search schedules by departure station*
     public function searchSchedulesByDepartureStation($id){
       $result = $this->checkerModel->viewSchedulesByDepartureStation($id);
 
@@ -46,7 +47,7 @@
       $this->view('checker/schedule',$data);
     }
 
-    // Search schedules by arrival station
+    // *Search schedules by arrival station*
     public function searchSchedulesByArrivalStation($id){
       $result = $this->checkerModel->viewSchedulesByArrivalStation($id);
 
@@ -54,7 +55,7 @@
       $this->view('checker/schedule',$data);
     }
 
-    // Search schedules by date
+    // *Search schedules by date*
     public function searchSchedulesByDate($id){
       $result = $this->checkerModel->viewSchedulesByDate($id);
 
@@ -91,12 +92,14 @@
       if($addFine){
         if( ($wallet->balance - $data['amount']) >= 0 ){
           $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
-          $this->checkerModel->updatefinePayment($data['journey_id']);
+          $this->checkerModel->updateTrasaction($data['passenger_id'], 'Fine', $data['amount']);
+          $tr_id = $this->passengerModel->getTransactionId($data['passenger_id']);
+          $this->checkerModel->updatefinePayment($data['journey_id'], $tr_id->tr_id);
         }  
       }
       
-      if($addFine && $this->checkerModel->cancelTicket($_GET['id'])){
-        $this->qrScan();
+      if($addFine && $this->checkerModel->fineTicket($_GET['id'])){
+        redirect('checkers/qrScan');
       }
     }
 
@@ -159,8 +162,10 @@
       if($fine){
         if( ($wallet->balance - $data['amount']) >= 0 ){
           $this->checkerModel->reduceAmountfromWallet($wallet->id, $data['amount']);
+          $this->checkerModel->updateTrasaction($data['passenger'], 'No ticket', $data['amount']);
+          $tr_id = $this->passengerModel->getTransactionId($data['passenger']);
           $fineId = $this->checkerModel->getLatestFine($data['passenger']);
-          $this->checkerModel->updatefinePaymentWhenNoJourney($fineId->fine_id);
+          $this->checkerModel->updatefinePaymentWhenNoJourney($fineId->fine_id, $tr_id->tr_id);
         }
       }
       

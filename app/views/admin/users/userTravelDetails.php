@@ -65,7 +65,9 @@
               <td><?php echo $details->end_time; ?></td>
               <td><img class="qrCode" src="<?php echo URLROOT;?>/qrCodes/<?php echo $details->qr_code; ?>" alt=""></td>
               <?php 
-                if($details->completed == 1){
+                if($details->completed == 1 && $details-> canceled == 1){
+                  echo "<td style='color: red; font-weight: bold'>Fined</td>";
+                } else if($details->completed == 1){
                   echo "<td style='color: #009688; font-weight: bold'>Completed</td>";
                 } else if($details-> canceled == 1) {
                   echo "<td style='color: red; font-weight: bold'>Canceled</td>";

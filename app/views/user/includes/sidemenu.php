@@ -25,7 +25,7 @@
             <a href="<?php echo URLROOT;?>passengers/fineDetails"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
 
             <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><i class='bx bxs-like' ></i><span>Feedback</span></li></a>
-            <a href="#"><li><i class='bx bx-support' ></i><span>Customer Support</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/chat"><li><i class='bx bx-support' ></i><span>Customer Support</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/settings"><li><i class='bx bxs-cog'></i><span>Settings</span></li></a>
             <a href="<?php echo URLROOT;?>users/logout"><li><i class='bx bx-log-out-circle' ></i><span>Logout</span></li></a>
         </ul>

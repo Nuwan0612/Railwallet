@@ -24,12 +24,18 @@
       // *Transaction History*
       $result = $this->passengerModel->viewTransactionHistory($_SESSION["user_id"]);
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+      $result1 = $this->passengerModel->viewChart($_SESSION["user_id"]); 
+      $spents = $this->passengerModel->getTotalSpends($_SESSION["user_id"]);
+
       // echo $_SESSION["user_id"];
       $data = [
         'transactions'=>$result,
-        'balance' => $walletBalance
+        'balance' => $walletBalance,
+        'chart'=>$result1,
+        'spents' => $spents
       ];
-      
+      //print_r($data['chart']);
+
       $this->view('user/wallet',$data);
     }
 
@@ -41,6 +47,28 @@
       $this->view('user/transaction-history',$data);
     }
 
+
+    // *Update wallet transactions*
+    public function updateTransaction($details){
+      $data = ["uid"=>$_SESSION["user_id"],
+                "amount"=>$details];
+
+      // chart
+      // $result1 = $this->passengerModel->viewChart($_SESSION["user_id"]);
+      // $data = ['chart'=>$result1];
+      // print_r($result1);
+    
+      $result = $this->passengerModel->updateWalletBalance($data);
+
+      $result = $this->passengerModel->updateTransaction($data);
+
+      //$result = $this->passengerModel->updateBalanceChart($data);
+
+      if ($result){
+        redirect("passengers/wallet");
+      }
+      
+    }
 
     // *Transaction Dashboard*
     public function transaction(){
@@ -113,7 +141,8 @@
           'from' => $from,
           'to' => $to,
           'date' => $date,
-          'stations'=>'',
+          'stations'=>''
+          
         ];
         $stations=$this->adminModel->getStation();
         $schedules = $this->passengerModel->searchSchedule($data);
@@ -173,6 +202,7 @@
       };
       
     }
+
     public function bookingTickets(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -218,9 +248,11 @@
 
       // echo $data['1count'];
 
-      $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']);
+      $total=(float)(($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']));
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
-        
+       
+      $newBalance = ($walletBalance->balance - $total);
+      // echo $newBalance;
       if($total<=$walletBalance->balance){
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
@@ -263,9 +295,13 @@
                   'amount'=> $amount
                   // 'paymentId' => $data['paymentId']
               ];
-                $transaction=$this->passengerModel->addingTransaction($data2);
+                $transaction=$this->passengerModel->addingTransaction($data2);  
                 $result=$this->passengerModel->addingTrId($data2);  
-
+                $x=$this->passengerModel->getWalletBalnce($data2['user_id']);
+                $cBalance=$x->balance-$amount; 
+                $this->passengerModel->updateBalance($data2['user_id'],$cBalance);  
+                $this->passengerModel->addBalanceTable($data2['user_id'],$result->tr_id,$cBalance,);
+                
                 $data4=[
                   'scheduleId' => $data['sheduleId'],
                   'user_id' => $data['userId'],
@@ -284,17 +320,19 @@
                 $data5=['bId'=>$bId,
                         'qrId'=>$qrId];
                 $this->passengerModel->insertQrForBookingId($data5); 
-
                 }
             } 
+            // $data=['uId'=>$_SESSION['user_id'],
+            //        'newBalance'=>$newBalance];
+            // $this->passengerModel->updateBalance($data) ;  
         redirect('passengers/viewTicketsByUserId');
       } else {
-          echo 'Not Booked'; // or any other status message you want
+          echo 'Enter Valid Number of Seats '; // or any other status message you want
       }       
-    }else{
-      echo 'Recharge Wallet';
-    }
-  }
+        }else{
+          echo 'Recharge Wallet';
+        }
+      }
     }
 
     public function getUserTicektsBySheduleID($data){
@@ -324,15 +362,13 @@
      
      }
 
-    
-
     //veiw feedback
     public function Feedbacks(){
       $feedback = $this->passengerModel->getFeedbacks();
       $data = ['feedback' => $feedback];
       $this->view('user/feedback/feedback',$data);
     }
-
+    
     //add feedback
     public function addFeedback(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -650,10 +686,20 @@
       } else {
         if($this->passengerModel->addJourney($data)){
           $current = $this->passengerModel->getCurrentJourney($data['passenger_id']);
-          if($this->passengerModel->addJourneyQrCode($this->genarateQR($current->id),$current->id) && $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id)){
-            $responseData = array(
-              'success' => true
-            );
+                   
+          if($current){
+            $wallet = $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id);
+            $transaction = $this->passengerModel->updateTrasaction($current->ticket_id,$current->passenger_id, 'Journey');
+            $tr_id = $this->passengerModel->getTransactionId($current->passenger_id);
+
+            if($wallet && $transaction && $tr_id){
+
+              if($this->passengerModel->addJourneyQrAndTransaction($this->genarateQR($current->id),$current->id, $tr_id->tr_id)){
+                $responseData = array(
+                  'success' => true
+                );
+              }  
+            } 
           }
         }
       }
@@ -718,7 +764,7 @@
 
     }
 
-    public function updateTransaction($details){
+    public function updateTransactions($details){
       $data = ["uid"=>$_SESSION["user_id"],
                 "amount"=>$details];
       $result = $this->passengerModel->updateAmount($data);
@@ -727,5 +773,10 @@
       }
       
     }
+
+    public function chat(){   
+      $this->view('user/chat');
+    }
+
     
   }

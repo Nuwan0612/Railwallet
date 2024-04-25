@@ -31,7 +31,7 @@ td {
     /* margin-top: 10px; */
 }
 .container .content .cards .card {
-    width: 250px;
+    width: 280px;
     height: 150px;
     background: white;
     margin: 30px 60px;
@@ -50,7 +50,7 @@ td {
 }
 .container .content .cards .card .box{
     margin-bottom: 30px;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 .container .content .content-2 {
     min-height: 60vh;

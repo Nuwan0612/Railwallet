@@ -2,6 +2,7 @@
   class Users extends Controller {
     public function __construct(){
       $this->userModel = $this->model('User');
+      $this->chatModel = $this->model('Chat');
     }
 
 /*-----------------------------------------------------Register User-----------------------------------------------------------*/
@@ -250,6 +251,9 @@
 
       if($_SESSION['user_type'] == 'supporter'){
         $this->userModel->deactiveTheAgent($_SESSION['user_id']);
+        $this->chatModel->clearChat($_SESSION['user_id']);
+      } else if($_SESSION['user_type'] == 'user'){
+        $this->chatModel->clearChatWhenUserLogout($_SESSION['user_id']);
       }
 
       unset($_SESSION['user_type']);
