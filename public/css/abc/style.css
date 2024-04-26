@@ -415,6 +415,15 @@ header p{
     
 }
 
+.chat-container .tab .qnum{
+    padding: 3px;
+    margin: -4px;
+}
+
+.chat-container .tab .que {
+    padding: 5px;
+}
+
 .chat-container .tab input
 {
     appearance: none;

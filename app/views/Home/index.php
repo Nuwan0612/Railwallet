@@ -65,8 +65,12 @@
 
                         <div onclick="displayAnswer(<?php echo $faq->Q_ID?>)">
                             <label>
-                                <h2><?php echo $qNumber?></h2>
-                                <h3><?php echo $faq->Question?></h3>
+                                <div class="qnum">
+                                     <h2><?php echo $qNumber?></h2>
+                                </div>
+                                <div class="que">
+                                     <h3><?php echo $faq->Question?></h3>
+                                </div>
                             </label>
                         </div>
 
