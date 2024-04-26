@@ -123,51 +123,51 @@
       }
     }
     
-//search shedule - PASSENGER
-public function searchTrainShedule($data){
-  // Selecting fields from 'shedules' table and 'trains' table
-  $this->db->query('SELECT 
-  stations_departure.name AS departure_station_name,
-  stations_arrival.name AS arrival_station_name,
-  shedules.departureDate,
-  shedules.arrivalDate,
-  shedules.arrivalTime,
-  shedules.departureTime,
-  trains.name AS train_name,
-  trains.type AS train_type,
-  MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
-  MAX(CASE WHEN ticketprices.classID = 2 THEN ticketprices.price ELSE NULL END) AS second_class_price,
-  MAX(CASE WHEN ticketprices.classID = 3 THEN ticketprices.price ELSE NULL END) AS third_class_price
-FROM 
-  shedules
-JOIN 
-  stations AS stations_departure ON shedules.departureStationID = stations_departure.stationID
-JOIN 
-  stations AS stations_arrival ON shedules.arrivalStationID = stations_arrival.stationID
-JOIN 
-  trains ON shedules.trainID = trains.trainID
-JOIN
-  ticketprices ON ticketprices.departureStationID = shedules.departureStationID AND ticketprices.arrivalStationID = shedules.arrivalStationID
-WHERE 
-  shedules.departureStationID = :departureStationID;
-  AND shedules.arrivalStationID = :arrivalStationID;
-  AND shedules.departureDate = :date;
-GROUP BY
-  stations_departure.name,
-  stations_arrival.name,
-  shedules.departureDate,
-  shedules.arrivalTime,
-  shedules.departureTime,
-  trains.name,
-  trains.type;');
+    //search shedule - PASSENGER
+    public function searchTrainShedule($data){
+      // Selecting fields from 'shedules' table and 'trains' table
+      $this->db->query('SELECT 
+      stations_departure.name AS departure_station_name,
+      stations_arrival.name AS arrival_station_name,
+      shedules.departureDate,
+      shedules.arrivalDate,
+      shedules.arrivalTime,
+      shedules.departureTime,
+      trains.name AS train_name,
+      trains.type AS train_type,
+      MAX(CASE WHEN ticketprices.classID = 1 THEN ticketprices.price ELSE NULL END) AS first_class_price,
+      MAX(CASE WHEN ticketprices.classID = 2 THEN ticketprices.price ELSE NULL END) AS second_class_price,
+      MAX(CASE WHEN ticketprices.classID = 3 THEN ticketprices.price ELSE NULL END) AS third_class_price
+      FROM 
+        shedules
+      JOIN 
+        stations AS stations_departure ON shedules.departureStationID = stations_departure.stationID
+      JOIN 
+        stations AS stations_arrival ON shedules.arrivalStationID = stations_arrival.stationID
+      JOIN 
+        trains ON shedules.trainID = trains.trainID
+      JOIN
+        ticketprices ON ticketprices.departureStationID = shedules.departureStationID AND ticketprices.arrivalStationID = shedules.arrivalStationID
+      WHERE 
+        shedules.departureStationID = :departureStationID;
+        AND shedules.arrivalStationID = :arrivalStationID;
+        AND shedules.departureDate = :date;
+      GROUP BY
+        stations_departure.name,
+        stations_arrival.name,
+        shedules.departureDate,
+        shedules.arrivalTime,
+        shedules.departureTime,
+        trains.name,
+        trains.type;');
 
-  // Binding parameters
-  $this->db->bind(':date', $data['date']);
-  $this->db->bind(':departureStationID', $data['from']);
-  $this->db->bind(':arrivalStationID', $data['to']);
+      // Binding parameters
+      $this->db->bind(':date', $data['date']);
+      $this->db->bind(':departureStationID', $data['from']);
+      $this->db->bind(':arrivalStationID', $data['to']);
 
-  return $mergedResults;
-}
+      return $mergedResults;
+    }
 
 
   }

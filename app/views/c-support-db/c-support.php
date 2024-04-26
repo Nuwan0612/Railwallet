@@ -10,7 +10,7 @@
                     <img src="<?php echo URLROOT;?>img/customer-service.png" alt="">
                     </div>
                 </div>
-                <div class="card">
+                <!-- <div class="card">
                     <div class="box">
                         <h1>4.2</h1>
                         <h3>Average Rating</h3>
@@ -18,7 +18,7 @@
                     <div class="icon-case">
                     <img src="<?php echo URLROOT;?>img/feedback.png" alt="">
                     </div>
-                </div>
+                </div> -->
                 <div class="card">
                     <div class="box">
                         <h1>2023/08/29</h1>

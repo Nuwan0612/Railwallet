@@ -152,6 +152,7 @@ textarea {
 }
 
 
+
 @media (max-width: 1285px) {
   .wrapper {
     padding: 2rem;
@@ -277,4 +278,17 @@ textarea {
     width:250px;
     margin: 1px 1px;
   }
+
+.qr-outer-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+ 
+}
+
+.qr-outer-container img{
+  width: 500px;
+  height: 500px;
+
 }

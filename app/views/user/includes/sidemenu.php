@@ -21,7 +21,7 @@
             <a href="<?php echo URLROOT;?>passengers/viewTicketsByUserId"><li><i class='bx bx-search-alt'></i><span>Travel History</span></li></a>
 <!--             <a href="#"><li><i class='bx bx-money-withdraw' ></i><span>Fines</span></li></a> -->
             <a href="<?php echo URLROOT;?>passengers/qrScan"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
-            <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bxs-file-find'></i><span>View Ticket</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bxs-file-find'></i><span>View QR</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/fineDetails"><li><i class='bx bx-money' ></i><span>Fines</span></li></a>
 
             <a href="<?php echo URLROOT;?>passengers/Feedbacks"><li><i class='bx bxs-like' ></i><span>Feedback</span></li></a>
@@ -34,23 +34,17 @@
     <div class="container">
         <div class="header">
             <div class="nav">
-
-                <!-- <a href="<?php echo URLROOT;?>passengers/qrScan"><h3> QR Scanner</h3></a>
-                <a href="#"><h3> View Ticket</h3></a>
-                <a href="#"><h3> Shedule</h3></a>
-                <a href="#"><h3>Fines Details </h3></a>
-                <a href="<?php echo URLROOT;?>users/logout"><h3> Log Out</h3></a>
-
-                <a href="#"><h3> Fine Details</h3></a> -->
                 <div class="user">
-
-                <!-- <img src="<?php echo URLROOT;?>public/pics/notification.png" alt=""> -->
-                <div class="notify"><i class='bx bxs-bell-ring'></i></div>
                     <div class="img-case">
                         <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" alt="">
                     </div>
-                
                     <div class="img-name"><p><?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p></div>
                 </div>
+
+                <div class="notify">
+                    <i class="fa-solid fa-circle notifi" ></i>
+                    <i class='fa-regular fa-bell bell'></i>
+                </div>
+
             </div>
         </div>

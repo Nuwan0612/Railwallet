@@ -13,6 +13,7 @@
 
         </ul>
     </div>
+
     <div class="content">
         <h1>Easy Travel With RailWallet</h1><br>
         <p>Let's get started with signing up. If you already have an account,<br>Let's explore RailWallet.</p>
@@ -29,8 +30,15 @@
     <!-- <button class="container-toggler" onclick="toggleChatContainer()"> -->
 
     <div class="outer-container">
+
+        <!--##ChatBox Section##-->
+
+        <!--##FAQ page##-->
+
+    <!-- <div class="outer-container"> -->
         
         <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;">
+
 
             <!-- <span class="material-symbols-outlined">+</span> -->
             <img src="<?php echo URLROOT; ?>/img/live-chat.png" alt="">
@@ -40,7 +48,6 @@
         </button>
 
         <div class="chat-container" style="z-index: 1000;">
-
             <div id="faq-box" style="display: block;">
 
                 <div class="title">
@@ -60,107 +67,24 @@
                     <span class="close-btn material-symbols-outlined">close</span>
                 </header>
 
-                <div class="tab">
+                <?php $qNumber = 1; foreach($data['messages'] as $faq): ?>
+                    <div class="tab">
 
-                    <div onclick="displayAnswer('ans1')">
-                        <label>
-                            <h2>01</h2>
-                            <h3>How do I create an account on RailWallet?</h3>
-                        </label>
+                        <div onclick="displayAnswer(<?php echo $faq->Q_ID?>)">
+                            <label>
+                                <div class="qnum">
+                                     <h2><?php echo $qNumber?></h2>
+                                </div>
+                                <div class="que">
+                                     <h3><?php echo $faq->Question?></h3>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="answer-box" style="display: none;" id="<?php echo $faq->Q_ID; ?>"><?php echo $faq->Answer?></div>
                     </div>
-
-                    <div class="answer-box" style="display: none;" id="ans1">Creating an account on RailWallet is
-                        simple!
-                        Just click on the "Sign Up" button and follow the instructions to
-                        set up your account with your email address and password.
-                    </div>
-
-                </div>
-
-                <div class="tab">
-
-                    <div onclick="displayAnswer('ans2')">
-                        <label>
-                            <h2>02</h2>
-                            <h3>Can I top up my RailWallet using cash?</h3>
-                        </label>
-                    </div>
-
-                    <div class="answer-box" style="display: none;" id="ans2">Currently, RailWallet supports online
-                        top-ups
-                        through various payment methods. We do not support cash top-ups
-                        at this time for security reasons.
-                    </div>
-
-                </div>
-
-                <div class="tab">
-
-                    <div onclick="displayAnswer('ans3')">
-                        <label>
-                            <h2>03</h2>
-                            <h3>How do I reserve a seat using RailWallet?</h3>
-                        </label>
-                    </div>
-
-                    <div class="answer-box" style="display: none;" id="ans3">Once you've logged into your RailWallet
-                        account,
-                        navigate to the "Seat Reservation" section, select your desired
-                        train and seat, and follow the prompts to complete your reservation.
-                    </div>
-
-                </div>
-
-                <div class="tab">
-
-                    <div onclick="displayAnswer('ans4')">
-                        <label>
-                            <h2>04</h2>
-                            <h3>What should I do if my train is delayed?</h3>
-                        </label>
-                    </div>
-
-                    <div class="answer-box" style="display: none;" id="ans4">In case of train delays, you will receive
-                        notifications via email or SMS provided during registration.
-                        You can also check the updated train schedule on our website
-                        for real-time information.
-                    </div>
-
-                </div>
-
+                <?php $qNumber++; endforeach; ?>            
             </div>
-
-            <!--##livechat page##-->
-            <!-- <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;"> -->
-            <div id="chat-box" style="display: none;">
-                <header>
-                    <div class="" onclick="backtofaq();">
-                        <img class="backarrow" src="<?php echo URLROOT; ?>img/back_arrow_icon.png" alt="">
-                        <!-- <img id="back-arrow-img" src="back_arrow_icon.png" alt="Back"> -->
-                    </div>
-                    <p class="LiveChatHeader">Welcome to Live Chat!</p>
-                </header>
-                <ul class="livechat">
-                    <li class="chat incoming">
-                        <span class="material-symbols-outlined">
-                            <img src="<?php echo URLROOT; ?>/img/live_chat_image.png" alt="">
-                            <!-- <img src="live_chat_image.png" alt="Icon"> -->
-                        </span>
-                        <p>Hi there 👋🏼 <br> How can I help you today?</p>
-                    </li>
-                    <li class="chat outgoing">
-                        <p>khytgdev hdwue ugdw hduw.</p>
-                    </li>
-                </ul>
-                <div class="chat-input">
-                    <textarea placeholder="Enter a message..." required></textarea>
-                    <span id="send-btn" class="material-symbols-outlined">
-                        <img src="<?php echo URLROOT; ?>/img/send_image.png" alt="">
-                        <!-- <img src="send_image.png" alt="Icon"> -->
-                    </span>
-                </div>
-            </div>
-      
         </div>
 
     </div>
@@ -168,7 +92,6 @@
 </div>
 
 <!--##AboutUs Section##-->
-
 <section class="hero" id="about-section">
     <div class="heading">
         <h1>About Us</h1>
@@ -179,7 +102,6 @@
             <p>Welcome to "Online Rail Wallet" – your trusted partner in modernizing train travel.
                 <br>We're to provide a hassle-free and user-friendly train travel experience. Join us in this
                 journey to make your trips simple and cashless. <br>
-
         </div>
         <div class="aboutimage">
             <img src="<?php echo URLROOT; ?>public/css/index/ab1.jpg">
@@ -187,7 +109,6 @@
 </section>
 
 <!--###Feedback Section###-->
-
 <section class="Feedback" id="feedback-section">
     <div class="feedbackbg">
 
@@ -295,7 +216,6 @@
 
 
 <!--## faq content script part ##-->
-
 <script>
     const containerToggler = document.querySelector(".container-toggler");
     const containerCloseBtn = document.querySelector(".close-btn");
@@ -333,7 +253,6 @@
 </script>
 
 <!--## ChatToggler functioning  ##-->
-
 <script>
     function toggleChatContainer() {
 
@@ -352,7 +271,6 @@
 </script>
 
 <!--## LiveChat Page Loading ##-->
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         var liveChatHeader = document.getElementById("live-chat-header");

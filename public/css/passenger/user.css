@@ -477,44 +477,6 @@ flex-wrap: wrap;
     color: #130f40;
   }
 
-/* @media screen and (max-width: 1050px) {
-    .side-menu li {
-        font-size: 18px;
-    }
-}
-@media screen and (max-width: 940px) {
-    .side-menu li span {
-        display: none;
-    }
-    .side-menu {
-        align-items: center;
-    }
-    .side-menu li img {
-        width: 40px;
-        height: 40px;
-    }
-    .side-menu li:hover {
-        background:#009688;
-        padding: 8px 38px;
-        border: 2px solid white;
-    }
-}
-@media screen and (max-width:536px) {
-    .brand-name h1 {
-        font-size: 16px;
-    }
-    .container .content .cards {
-        justify-content: center;
-    }
-    .side-menu li img {
-        width: 30px;
-        height: 30px;
-    }
-    .container .content .content-2 .recent-payments table th:nth-child(2),
-    .container .content .content-2 .recent-payments table td:nth-child(2) {
-        display: none;
-    }
-} */
 
 @media (max-width: 1285px) {
     .content{

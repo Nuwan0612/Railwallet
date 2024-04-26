@@ -306,9 +306,9 @@ td {
         height: 40px;
     }
     .side-menu li:hover {
-        background:#009688;
+        /* background:#009688; */
         padding: 8px 38px;
-        border: 2px solid white;
+        /* border: 2px solid white; */
     }
 
     .container .header .nav h3 {

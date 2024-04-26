@@ -156,6 +156,7 @@ input[type="date"] {
   color: #fff;
   padding: 8px 12px;
   border: none;
+  font-size: medium;
   margin-right: 5px;
   border-radius: 5px;
   cursor: pointer;
@@ -173,10 +174,11 @@ input[type="date"] {
 .delete-btn{
   background: rgb(201, 51, 51);
   color: #fff;
-  padding: 8px 12px;
+  padding: 5px 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: medium;
 }
 
 .delete-btn:hover {
