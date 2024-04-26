@@ -8,15 +8,15 @@
             <div class="col">
                 <!-- <h3 class="transaction-title">User Details</h3> -->
                 <div class="inputBox">
-                    <span>full name :</span>
-                    <input type="text" value="<?php echo $_SESSION["user_fname"]?>">
+                    <span>Full name :</span>
+                    <input type="text" value="<?php echo $_SESSION["user_fname"].' '.$_SESSION["user_lname"]?>">
                 </div>
                 <!-- <div class="inputBox">
                     <span>email :</span>
                     <input type="email" placeholder="kavindu@gmail.com">
                 </div> -->
                 <div class="inputBox">
-                    <span>phone number :</span>
+                    <span>Phone number :</span>
 
                     <input type="tel" value="<?php echo $_SESSION["user_phone"]?>">
                 </div>
@@ -29,7 +29,7 @@
             </div>
             <div class="col">
                 <div class="inputBox">
-                    <span>email :</span>
+                    <span>Email :</span>
                     <input type="email" value="<?php echo $_SESSION["user_email"]?>">
                 </div>
                 <div class="inputBox">

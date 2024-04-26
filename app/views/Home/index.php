@@ -22,6 +22,7 @@
         </div>
     </div>
 
+
     <!--##ChatBox Section##-->
 
     <!--##FAQ page##-->
@@ -60,6 +61,42 @@
                     <span class="close-btn material-symbols-outlined">close</span>
                 </header>
 
+    <!--##ChatBox Section##-->
+
+    <!--##FAQ page##-->
+
+    <div class="outer-container">
+        
+        <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;">
+
+
+            <!-- <span class="material-symbols-outlined">+</span> -->
+            <img src="<?php echo URLROOT; ?>/img/live-chat.png" alt="">
+            <!-- <img src="image.png" alt="Icon"> -->
+            <span class="material-symbols-outlined"></span>
+
+        </button>
+
+        <div class="chat-container" style="z-index: 1000;">
+            <div id="faq-box" style="display: block;">
+
+                <div class="title">
+                    
+                    <p>Chat With Us</p>
+                   
+                </div>
+
+                <div class="Chat">
+                    <header id="live-chat-header">
+                        <h1>Live Chat</h1>
+                    </header>
+                </div>
+
+                <header id="faqs-header">
+                    <h1>FAQs?</h1>
+                    <span class="close-btn material-symbols-outlined">close</span>
+                </header>
+
                 <?php $qNumber = 1; foreach($data['messages'] as $faq): ?>
                     <div class="tab">
 
@@ -75,12 +112,10 @@
                         </div>
 
                         <div class="answer-box" style="display: none;" id="<?php echo $faq->Q_ID; ?>"><?php echo $faq->Answer?></div>
-
                     </div>
-                <?php $qNumber++; endforeach; ?>
-
-            
+                <?php $qNumber++; endforeach; ?>            
             </div>
+
 
             <!--##livechat page##-->
             <!-- <button class="container-toggler" onclick="toggleChatContainer()" style="z-index: 1000;"> -->
@@ -131,7 +166,6 @@
             <p>Welcome to "Online Rail Wallet" – your trusted partner in modernizing train travel.
                 <br>We're to provide a hassle-free and user-friendly train travel experience. Join us in this
                 journey to make your trips simple and cashless. <br>
-
         </div>
         <div class="aboutimage">
             <img src="<?php echo URLROOT; ?>public/css/index/ab1.jpg">

@@ -129,6 +129,11 @@ h2{
     opacity: 1; /* Initially fully opaque */
 }
 
+.title .btn{
+    width: 75px;
+    margin-left: 68px;
+}
+
 .btn:hover {
 
     opacity: 0.9; /* Reduce opacity when popping up */
@@ -468,4 +473,17 @@ td {
     .container .content .content-2 .recent-payments table td:nth-child(2) {
         display: none;
     }
+}
+
+.notification-support{
+    display: none !important;
+    margin-left: 60px;
+    font-size: 15px;
+    color:#009688;
+}
+
+.notification-support-active{
+    margin-left: 60px;
+    font-size: 15px;
+    color:#009688;
 }

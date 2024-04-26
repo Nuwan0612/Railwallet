@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/user/includes/header.php'; ?>
     <div class="container">
         <div class="content">
+            <div class="history-outer-container">
             <div class="transaction-history">
                 <div class="table-container">
                 <div class="transaction-title">
@@ -31,6 +32,7 @@
                 </table>
                 </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

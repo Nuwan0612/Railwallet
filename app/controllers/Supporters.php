@@ -12,7 +12,6 @@
       $this->passengerModel = $this->model('Passenger');
       $this->userModel = $this->model('User');
       $this->chatModel = $this->model('Chat');
-
     }
 
     public function dashboard(){
@@ -397,6 +396,257 @@
       } else if($result[0]->sheduleValidity == 0){
         $this->view('c-support-db/hideShedules',$data);
       }  
+    }
+// ## Add Booking
+
+public function addBooking($id){
+  $stations=$this->adminModel->getStation();
+  // $schedules = $this->passengerModel->searchSchedule($data);
+  
+  $data=[
+    'stations'=>$stations,
+    'schedules' => [],
+    'uId'=>$id
+  ];
+
+  $this->view('c-support-db/shedule',$data);
+}
+
+public function searchSchedule(){
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+    $from = isset($_POST['fromStation']) ? trim($_POST['fromStation']) : '';
+    $to = isset($_POST['toStation']) ? trim($_POST['toStation']) : '';
+    $date = isset($_POST['date']) ? trim($_POST['date']) : '';
+
+    $data = [
+      'from' => $from,
+      'to' => $to,
+      'date' => $date,
+      'stations'=>''
+      
+    ];
+    $stations=$this->adminModel->getStation();
+    $schedules = $this->passengerModel->searchSchedule($data);
+    $data = ['stations'=>$stations,
+            'schedules' => $schedules,
+            'uId'=>trim($_POST['uId'])];
+
+    $this->view('c-support-db/shedule',$data);
+    
+  }
+}
+
+public function getTrainDetails(){
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+    
+    $data=[
+      'tID'=>trim($_POST['tId']),
+      'way'=>trim($_POST['way']),
+      'dDate'=>trim($_POST['dDate']),
+      'shID'=>trim($_POST['schedule_id'])
+    ];
+    // echo $data['shID'];
+    $time=$this->passengerModel->viewDtimeAtimeByScheduleId(trim($_POST['schedule_id']));
+
+    $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
+
+    // print_r($trainDetails);
+
+    $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+    $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+    $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+
+    // echo $trainDetails->id;
+    
+    $data=[
+      'fFree'=>$fFree,
+      'sFree'=>$sFree,
+      'tFree'=>$tFree,
+      'avlbleId'=>$trainDetails->id,
+      'dDate'=>trim($_POST['dDate']),
+      'tID'=>trim($_POST['tId']),
+      'way'=>trim($_POST['way']),
+      'dTime'=>$time->departureTime,
+      'aTime'=>$time->arrivalTime,
+      'trainName'=>trim($_POST['train_name']),
+      'trainType'=>trim($_POST['train_type']),
+      'departureStation'=>trim($_POST['departure_station']),
+      'arrivalStation'=>trim($_POST['arrival_station']),
+      'shId'=>trim($_POST['schedule_id']) ,
+      'uId'=>trim($_POST['uId'])
+    ];
+
+    $this->view('c-support-db/booking',$data);
+    // // die($data['arrivalStation']);
+    
+  };
+}
+
+public function bookingTickets(){
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+    $fcount=trim($_POST['fClassCount']);
+    $scount=trim($_POST['sClassCount']);
+    $tcount=trim($_POST['tClassCount']);
+    $avlbleId=trim($_POST['avlbleId']);
+    $way=trim($_POST['way']);
+    $tID=trim($_POST['tID']);
+
+    // echo  $avlbleId;
+
+    $data=[
+      // 'shid'=>trim($_POST['schedule_id']), 
+      'avlbleId'=>$avlbleId, 
+      'tID'=> $tID,
+      'way'=> $way,
+      '1count'=>$fcount,
+      '2count'=>$scount,
+      '3count'=>$tcount,
+      'sheduleId'=>trim($_POST['sheduleId']),
+      'dDate'=>trim($_POST['dDate']),
+      'userId' => trim($_POST['uId']),
+      // 'paymentId' => 'P0001'
+      
+    ];
+
+  //  print_r ($data);
+  $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
+  $class1=['dId'=>$result->departureStationID,
+            'aId'=>$result->arrivalStationID,
+            'cId'=>1];
+  $class2=['dId'=>$result->departureStationID,
+            'aId'=>$result->arrivalStationID,
+            'cId'=>2];
+  $class3=['dId'=>$result->departureStationID,
+            'aId'=>$result->arrivalStationID,
+            'cId'=>3];
+  $fPrice=$this->passengerModel->ticketPricesByClass($class1);
+  $sPrice=$this->passengerModel->ticketPricesByClass($class2);
+  $tPrice=$this->passengerModel->ticketPricesByClass($class3);
+
+  // echo $data['userId'];
+
+  $total=($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']);
+  $walletBalance = $this->passengerModel->getWalletBalnce($data['userId']);
+  $newBalance = ($walletBalance->balance - $total);
+    
+  if($total<=$walletBalance->balance){
+
+    $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
+    $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+    $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+    $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+
+    if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount) {
+      $this->passengerModel->updateSeatsByScheduleId($data);
+
+      $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
+      $data0=['depStation'=>$result->departureStationID,
+              'arrStation'=>$result->arrivalStationID];
+
+    // Loop to prepare booking details based on the counts
+    for ($i = 1; $i <= 3; $i++) {  // Assuming classes are represented as 1, 2, and 3
+        $countKey = "{$i}count";
+        $class = $i;
+        $count = $data[$countKey];
+
+        for ($j = 0; $j < $count; $j++) {
+
+            $data2=[
+                'scheduleId' => $data['sheduleId'],
+                'dStation'=>$data0['depStation'],
+                'aStation'=>$data0['arrStation'],
+                'class' => $class,
+                'user_id' => $data['userId'],
+                // 'paymentId' => $data['paymentId']
+            ];
+
+            $data3=$this->passengerModel->viewTicketId($data2);
+            $amount=$data3->price;
+            $data2=[
+              'scheduleId' => $data['sheduleId'],
+              'dStation'=>$data0['depStation'],
+              'aStation'=>$data0['arrStation'],
+              'class' => $class,
+              'user_id' => $data['userId'],
+              'amount'=> $amount
+              // 'paymentId' => $data['paymentId']
+          ];
+            $transaction=$this->passengerModel->addingTransaction($data2);
+            $result=$this->passengerModel->addingTrId($data2);  
+
+            $data4=[
+              'scheduleId' => $data['sheduleId'],
+              'user_id' => $data['userId'],
+              'paymentId' => $result->tr_id,
+              'ticketId'=>$data3->ticketPriceID,
+              'amount'=> $amount
+          ];
+
+          // echo $data4['paymentId'];
+
+            $this->passengerModel->addBookingId($data4);
+              $result= $this->passengerModel->viewBookingId();
+              $bId=$result->bookingId;
+              $qrId=$this->genarateQR($bId);
+              // echo $bId;
+            $data5=['bId'=>$bId,
+                    'qrId'=>$qrId];
+            $this->passengerModel->insertQrForBookingId($data5); 
+
+            }
+        } 
+        $data=['uId'=>$data4['user_id'],
+        'newBalance'=>$newBalance];
+ $this->passengerModel->updateBalance($data) ; 
+    redirect('supporters/dashboard');
+  } else {
+      echo 'Enter Valid Number of Seats '; // or any other status message you want
+  }       
+}else{
+  echo 'User wallet balance is not sufficient ';
+}
+}
+}
+
+// ## View Bookings by UserId
+
+public function getuserBookings($id){
+    $results = $this->supporterModel->getuserBookings($id);
+    $data = ['userBookings' => $results];
+    $this->view('c-support-db/bookings',$data);
+  }
+
+    public function clearChat(){
+      if($this->chatModel->clearChat($_SESSION['user_id'])){
+        redirect('supporters/support');
+      }   
+    }
+
+    public function getuserChatHistory($id){
+      $chats = $this->chatModel->getChats($_SESSION['user_id'], $id);
+      $data = ['messages' => $chats, 'passenger_id' => $id, 'sender_id'=>$_SESSION['user_id']];
+      $this->view('c-support-db/chatHistory', $data);
+    }
+
+    public function notifySupporter(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+      
+      $Data = $this->supporterModel->getNotification($_SESSION['user_id']);
+
+      if($Data->passenger_id){
+        $responseData = true;
+      } else {
+        $responseData = false;
+      }
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
     }
 
   }

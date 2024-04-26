@@ -20,8 +20,7 @@
                 <a class="links" href="<?php echo URLROOT;?>supporters/deactivateUsers"><button class="delete-btn">Blocked Users</button></a>
             </div>
         </div>
-
-
+        
         <div class="detail-body">
             <div class="table-container">
                 <table>
@@ -34,7 +33,10 @@
                         <th>Feedbacks</th>
                         <th>Fines</th> 
                         <th>Travel History</th>
+                        <th>Chat History</th>
                         <th>Bookings</th>
+                        <th>Add Bookings</th>
+
                         </tr>
                     </thead>
                 
@@ -54,7 +56,15 @@
                             <td class="options">
                                 <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
-                            <td></td>
+                            <td>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                            </td>
+                            <td>
+                            <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                            </td>
+                            <td class="options">
+                                <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id?>"><button class="edit-btn">Add</button></a>
+                            </td>
                         </tr>
                         <?php $rowNumber++; endforeach; ?>
                     </tbody>

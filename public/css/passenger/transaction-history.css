@@ -7,12 +7,16 @@ td {
     padding: 8px;
 }
 
+.content .history-outer-container{
+    padding: 20px;
+}
+
 .content .transaction-history{
-    min-height: 50vh;
+    min-height: 40vh;
     /* flex: 5; */
     background: white;
     /* margin: 70px 25px 25px 25px; */
-    margin: 30px;
+    margin: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     justify-content: center;
