@@ -168,7 +168,7 @@ a{
 }
 
 
-@media (max-width: 1060px) {
+/* @media (max-width: 1060px) {
   .testimonial-box {
     width: 45%;
     padding: 10;
@@ -193,7 +193,7 @@ a{
   .reviews {
     margin-top: 10px;
   }
-}
+} */
 
 .testimonial-box .foot{
   display: flex;

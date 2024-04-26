@@ -20,7 +20,7 @@
                         <h2>Total Fines</h2>
                     </div>
                 </div>
-                    <a href="<?php echo URLROOT;?>passengers/transaction">
+                    <!-- <a href="<?php echo URLROOT;?>passengers/transaction">
                 <div class="card">
                     <div class="i">
                         <i class='bx bxs-bank'></i>
@@ -30,11 +30,11 @@
                         <h2>Balance</h2>
                     </div>
                 </div>
-                    </a>
+                    </a> -->
             </div>
         
         <div class="content-2">
-            <div class="recent-payments">
+            <div class="recent-fines">
                 <div class="title">
                     <i class='bx bx-history'></i>
                     <h2>Fine History</h2>
