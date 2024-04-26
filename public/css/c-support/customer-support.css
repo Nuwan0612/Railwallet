@@ -38,12 +38,58 @@ h2{
     padding-left: 0%;
 }
 
-.side-menu .brand-name img{
-    margin-right: 3px;
+.faq-outer-container .tbox textarea{
+   margin-top: 20px;
+   border-radius: 10px;
+}
+
+.faq-outer-container .tbox .error-message{
+    font-size: 15px;
+}
+
+.tbox textarea {
+    padding-left: 10px; /* Adjust the padding value to move the cursor to the right */
+    padding-top: 10px;
+    font-size: 16px;
 }
 
 
+.faq-outer-container .faq-question{
+    border-radius: 10px;
+}
 
+.faq-outer-container .faq-answer{
+    border-radius: 10px;
+}
+
+.faq-outer-container input{
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+
+.tabledetails td{
+    font-size: 15px;
+    padding: 15px;
+}
+
+.tabledetails .options .delete-btn {
+    padding: 8px 12px; /* Adjust padding for height and width */
+    font-size: 16px; /* Adjust font size as needed */
+    /* You can also adjust other properties like width if necessary */
+}
+
+.tabledetails .options .edit-btn {
+    padding: 8px 12px; /* Adjust padding for height and width */
+    font-size: 16px; /* Adjust font size as needed */
+    /* You can also adjust other properties like width if necessary */
+}
+
+.side-menu .brand-name img{
+    margin-right: 3px;
+}
 
 .side-menu .brand-name p {
     color: #009688;
@@ -64,7 +110,7 @@ h2{
     width: 40px; /* Adjust the width of the logo as needed */
     height: auto; /* Maintain the aspect ratio */
     margin-left: 30px; /* Add some margin to the left */
-    transform: scale(1.4);
+    transform: sale(1.4);
     margin-top: 3px;
 }
 

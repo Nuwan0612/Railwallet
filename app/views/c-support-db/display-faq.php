@@ -10,6 +10,7 @@
 
       <div class="detail-body" style="margin-top: 25px">
         <div class="table-container">
+        <div class="tabledetails">
           <table>
             <thead>
               <tr>
@@ -20,6 +21,7 @@
               </tr>
             </thead>
             
+           
             <tbody>
               <?php foreach($data['faqDetails'] as $details):?>
               <tr>
@@ -36,6 +38,7 @@
               <?php endforeach; ?>
             </tbody>
           </table>
+       </div>
         </div>
       </div>  
     </div>
