@@ -130,6 +130,7 @@
       $this->db->bind(':uId',$id);
       
       $result=$this->db->resultSet();
+    }
 
     public function getNotification($id){
       $this->db->query("SELECT passenger_id FROM supprot_agents WHERE supporter_id = :id");
@@ -138,5 +139,5 @@
 
       return $result;
     }
-    
+  
   }

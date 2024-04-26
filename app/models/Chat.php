@@ -133,7 +133,7 @@
         return false;
       }
     }
-  }
+  
 
   public function deletefaq($id){
     $this->db->query('DELETE FROM faq WHERE Q_ID = :id');
@@ -146,6 +146,6 @@
     }
   }
 
-}
+  }
 
 ?>
