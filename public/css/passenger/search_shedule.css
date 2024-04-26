@@ -222,3 +222,29 @@ input[type="date"] {
   border-radius: 10px;
   cursor: pointer;
 }
+
+
+@media screen and (max-width: 1000px) {
+  .search-bar-inner-container-shedule1,
+  .search-bar-inner-container-shedule2,
+  .search-bar-inner-container-shedule3 {
+    margin-left: 0;
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .result-box1,
+  .result-box2 {
+    width: 150px;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .all-trains {
+    margin-top: 90px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

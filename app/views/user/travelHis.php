@@ -43,5 +43,5 @@
                         
                     </div>  
                  </div>
-                    
+                            </div>
  <?php require APPROOT . '/views/user/includes/footer.php';?>  
