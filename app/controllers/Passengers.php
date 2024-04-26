@@ -31,7 +31,7 @@
       $data = [
         'transactions'=>$result,
         'balance' => $walletBalance,
-        'chart'=>$result1
+        'chart'=>$result1,
         'spents' => $spents
       ];
       //print_r($data['chart']);
@@ -60,11 +60,16 @@
     
       $result = $this->passengerModel->updateWalletBalance($data);
 
-      $result = $this->passengerModel->updateTransaction($data);
+      $result1 = $this->passengerModel->updateTransaction($data);
 
-      //$result = $this->passengerModel->updateBalanceChart($data);
+      $result2 = $this->passengerModel->viewTr($_SESSION["user_id"]);
+      $result3= $this->passengerModel->viewWalletBalnce($_SESSION["user_id"]);
+      $data=['trId'=>$result2->tr_id,
+              'uId'=>$_SESSION["user_id"],
+              'balance'=>$result3->balance];
+      $this->passengerModel->insertBalanceTable($data);
 
-      if ($result){
+      if ($result&&$result1){
         redirect("passengers/wallet");
       }
       
@@ -761,7 +766,7 @@
 
     }
 
-    public function updateTransaction($details){
+    public function updateTransactions($details){
       $data = ["uid"=>$_SESSION["user_id"],
                 "amount"=>$details];
       $result = $this->passengerModel->updateAmount($data);

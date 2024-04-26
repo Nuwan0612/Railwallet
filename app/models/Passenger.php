@@ -481,6 +481,47 @@ public function updateBalance($data){
       return $result;
     }
 
+    // *View recent trId
+    public function viewTr($id){
+      $this->db->query("SELECT * FROM `transactions` 
+                          WHERE user_id=:uid 
+                            AND reason='recharge' 
+                          ORDER BY `transactions`.`date` DESC 
+                          LIMIT 1;");
+
+      $this->db->bind(':uid', $id);
+    
+      $result= $this->db->Single();
+      return $result;
+    }
+
+    //*View recent wallet blance */
+    public function viewWalletBalnce($id){
+      $this->db->query("SELECT * FROM wallet 
+                          WHERE passenger_id = :id");
+
+      $this->db->bind(':id',$id);
+      
+      $result = $this->db->single();
+      return $result;
+    }
+
+    // *Insert into balce wallet
+    public function insertBalanceTable($data){
+      $this->db->query("INSERT INTO `balance`(`passenger_id`, `transaction_id`, `balance`) 
+                          VALUES (:uid,:trid,:balance);");
+
+      $this->db->bind(':uid',$data['uId']);
+      $this->db->bind(':trid',$data['trId']);
+      $this->db->bind(':balance',$data['balance']);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     // *Update wallet balance*
     public function updateWalletBalance($data){
       $this->db->query("UPDATE `wallet` 
@@ -528,7 +569,10 @@ public function updateBalance($data){
     }
 
     public function getNoCompletedFines($id){
-      $this->db->query('SELECT * FROM fines WHERE passenger_id = :id AND payment_status = 0');
+      $this->db->query('SELECT * FROM fines 
+                          WHERE passenger_id = :id 
+                            AND payment_status = 0');
+                            
       $this->db->bind(':id', $id);
       $result = $this->db->single();
       return $result;

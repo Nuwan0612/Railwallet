@@ -7,6 +7,7 @@
                 <a href="<?php echo URLROOT;?>passengers/transaction" class="btn"><li><span>Topup</span></li></a>
             </div> -->
                 <div class="cards">
+                    <a href="#">
                     <div class="card">
                     <div class="i">
                     <i class='bx bxs-credit-card' ></i>
@@ -16,6 +17,7 @@
                             <h2>Spent</h2>
                         </div>
                     </div>
+                    </a>
                     <a href="<?php echo URLROOT;?>passengers/transaction">
                         <div class="card">
                             <div class="i">
@@ -76,55 +78,55 @@
 
         <?php
 
-$chartData = $data['chart'];
+            $chartData = $data['chart'];
 
-$chartDataJSON = json_encode($chartData);
-?>
+            $chartDataJSON = json_encode($chartData);
+        ?>
 
         <script>
 
-const chartData = <?php echo $chartDataJSON; ?>;
+            const chartData = <?php echo $chartDataJSON; ?>;
 
-let date = [];
-let balance = [];
+            let date = [];
+            let balance = [];
 
-// Log the data to the console
-chartData.forEach(ele => {
-    date.push(ele.date);
-    balance.push(ele.balance);
-})
+        // Log the data to the console
+        chartData.forEach(ele => {
+            date.push(ele.date);
+            balance.push(ele.balance);
+        })
     
-console.log(date);
-console.log(balance);
+        console.log(date);
+        console.log(balance);
 
-  const ctx = document.getElementById('myChart');
+        const ctx = document.getElementById('myChart');
 
-const data = {
-  labels: date,
-  datasets: [{
-    label: 'My First Dataset',
-    data: balance,
-    fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1
-  }]
-};
+        const data = {
+            labels: date,
+            datasets: [{
+                label: 'My First Dataset',
+                data: balance,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
 
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-};
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
 
-// Create a new chart instance
-const myChart = new Chart(ctx, config);
+        // Create a new chart instance
+        const myChart = new Chart(ctx, config);
 
+        </script>
 
-</script>
 <?php require APPROOT . '/views/user/includes/footer.php';?>

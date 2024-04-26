@@ -224,6 +224,8 @@ td {
     margin-top: 10vh;
     min-height: 90vh;
     background: white;
+    /* height: 400px;
+    overflow-y: auto; */
   }
 
 .container .qr-content{
@@ -362,10 +364,10 @@ flex-wrap: wrap;
 }
 
 .content .content-2 .chart{
-    flex: 2;
+    flex: 5;
     background: white;
     min-height: 50vh;
-    margin: 0 25px;
+    margin: 0 25px 25px 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     display: flex;
     flex-direction: column;
@@ -475,7 +477,7 @@ flex-wrap: wrap;
     color: #130f40;
   }
 
-@media screen and (max-width: 1050px) {
+/* @media screen and (max-width: 1050px) {
     .side-menu li {
         font-size: 18px;
     }
@@ -512,4 +514,113 @@ flex-wrap: wrap;
     .container .content .content-2 .recent-payments table td:nth-child(2) {
         display: none;
     }
+} */
+
+@media (max-width: 1285px) {
+    .content{
+        position: relative;
+        margin-top: 10vh;
+        min-height: 90vh;
+        background: white;
+        height: 400px;
+        overflow-y: auto;
+      }
 }
+
+@media (max-width: 1250px) {
+
+    .content .content-2{
+        padding: 10px;
+    }
+}
+
+@media (max-width: 1030px) {
+    .cards {
+      margin-left: 250px;
+    }
+
+    .side-menu li {
+        font-size: 18px;
+    }
+
+    .container .header .nav .user .img-case img {
+        width: 80%;
+        height: 80%;
+        border-radius: 50%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .cards {
+        margin-left: 150px;
+      }
+  }
+
+  @media (max-width: 900px) {
+    .cards {
+        margin-left: 100px;
+      }
+  }
+
+  @media (max-width: 1030px) {
+    .cards {
+        width: 45%;
+        padding: 10;
+      }
+  }
+  
+  @media (max-width: 940px) {
+    .cards {
+        width: 45%;
+        padding: 10;
+      }
+
+    .side-menu li span {
+        display: none;
+    }
+
+    .side-menu {
+        align-items: center;
+    }
+
+    .side-menu li img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .side-menu li:hover {
+        background:#009688;
+        padding: 8px 38px;
+        border: 2px solid white;
+    }
+
+    .brand-name p {
+        display: none;
+    }
+  
+    .testimonials-heading h1 {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .content .content-2 .chart{
+        width: 200px;
+    }
+  }
+
+  @media (max-width: 420px) {
+
+  }
+  
+  @media (max-width: 340px) {
+
+    .container .content .cards {
+        justify-content: center;
+    }
+    .side-menu li img {
+        width: 30px;
+        height: 30px;
+    }
+  }
+
