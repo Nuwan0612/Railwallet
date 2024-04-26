@@ -113,6 +113,7 @@
       $results = $this->db->resultSet();
       return $results;
     }
+
     // ## Get  dTime and Atime
     public Function viewDtimeAtimeByScheduleId($id){
       $this->db->query('SELECT departureTime,arrivalTime FROM `shedules` WHERE sheduleID=:shId');
@@ -152,8 +153,8 @@
 
       $this->db->execute();
     }
-    // ## View All Tickets of a User
 
+    // ## View All Tickets of a User
     public function viewAllTicketsByUser($id){
       $this->db->query("SELECT u.fname,u.lname,b.bookingTime,t.name,s.departureDate,s.departureTime,b.bookingId,tp.classID ,
       st1.name AS depStation,
@@ -173,8 +174,8 @@
       return $results;
 
     }
-    // ##Take lastly insert bookingId
 
+    // ##Take lastly insert bookingId
     public function viewBookingId(){
       $this->db->query("SELECT bookingId FROM `booking` 
       ORDER BY `bookingId` DESC 
@@ -186,7 +187,6 @@
     }
 
     //## Insert QR for bookingid(update)
-
     public function insertQrForBookingId($data){
       $this->db->query("UPDATE `booking` SET `qrId`=:qrid WHERE `bookingId`=:bid ");
 
@@ -197,7 +197,6 @@
     }
 
     // ## Viw ticketId according to sheduleId and Class
-
     public function viewTicketId($data){
       $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
       $this->db->bind(':class', $data['class']);
@@ -208,6 +207,7 @@
       return $results;
 
     }
+
     // ## Take ticket prices
     public function ticketPricesByShedule($data){
       $this->db->query("SELECT `departureStationID`,`arrivalStationID` FROM `shedules` WHERE sheduleID=:shId ");
@@ -230,7 +230,6 @@
        return $results;
 
     }
-
 
     // ## View Two End station according to stationId
     public function viewTwoEndStationBySheduleId($data){
@@ -635,8 +634,38 @@
     }
 
     public function getQRImage(){
-      $this->db->query("SELECT qr_code FROM journey WHERE completed = 0 AND canceled = 0");
+      $this->db->query("SELECT qr_code FROM journey ORDER BY id DESC LIMIT 1");
       $result = $this->db->single();
       return $result;
+    }
+
+    public function upateBalanceTable($passId, $walletBal, $trId){
+      $this->db->query("INSERT INTO balance (passenger_id, transaction_id, balance) VALUES (:passId, :balance, :trId)");
+      $this->db->bind(':passId', $passId);
+      $this->db->bind(':balance', $walletBal);
+      $this->db->bind(':trId', $trId);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function getNotifications($id){
+      $this->db->query("SELECT * FROM notification WHERE user_id = :id");
+      $this->db->bind(':id', $id);
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    public function setToread($id){
+      $this->db->query("UPDATE notification SET seen = 1 WHERE user_id = :id");
+      $this->db->bind(':id', $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
     }
   }

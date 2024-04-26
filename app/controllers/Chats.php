@@ -10,7 +10,6 @@
       $this->chatModel = $this->model('Chat');
     }
 
-
     public function ContactWithAgent(){
       $inputJSON = file_get_contents('php://input');
       $requestData = json_decode($inputJSON, true);
@@ -55,8 +54,11 @@
     public function getMessages($id){
       $details = $this->chatModel->getMessages($id);
 
-      $message = $this->chatModel->getChats($details->supporter_id, $details->passenger_id);
-
+      if($details) {
+        $message = $this->chatModel->getChats($details->supporter_id, $details->passenger_id);
+      } else {
+        $message = false;
+      }
 
       header('Content-Type: application/json');
       echo json_encode($message);

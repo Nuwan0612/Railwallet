@@ -2,7 +2,7 @@
 
 <div class="content">
     <div class="qr-outer-container">
-        <img src="<?php echo URLROOT?>public/qrCodes/<?php $data['qrImage']?>">
+        <img src="<?php echo URLROOT?>public/qrCodes/<?php echo $data['qrImage']?>">
     </div>
 </div>
 

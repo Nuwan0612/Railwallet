@@ -7,14 +7,10 @@
       }
       
       $this->passengerModel = $this->model('Passenger');
-
       $this->sheduleModel=$this->model('Shedule');
-
       $this->adminModel = $this->model('Admin');
       $this->userModel = $this->model('User');
-
       $this->stationModel = $this->model('Station');
-
 
     }
 
@@ -160,7 +156,6 @@
     }
 
     // ## Booking Seats ## 
-
     public function getTrainDetails(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -349,7 +344,6 @@
     }
 
     // ## View Tickets By Userid
-
     public function viewTicketsByUserId(){
       $userId =$_SESSION['user_id'];
       $result=$this->passengerModel->viewAllTicketsByUser($userId);
@@ -357,8 +351,7 @@
       $this->view('user/travelHis',$data);
     }
 
-     // ## View Tickets By BookingId
-    
+     // ## View Tickets By BookingId  
      public function viewTicketByBookingId($bookingId){
         $result=$this->passengerModel->viewTicketByBookingId($bookingId);
         $data=['ticket'=>$result];
@@ -688,14 +681,19 @@
         $responseData = array(
           'unfinished' => $data
         );
+
       } else {
+
         if($this->passengerModel->addJourney($data)){
           $current = $this->passengerModel->getCurrentJourney($data['passenger_id']);
                    
           if($current){
             $wallet = $this->passengerModel->updateWallet($current->ticket_id, $current->passenger_id);
-            $transaction = $this->passengerModel->updateTrasaction($current->ticket_id,$current->passenger_id, 'Journey');
+            $transaction = $this->passengerModel->updateTrasaction($current->ticket_id, $current->passenger_id, 'Journey');
             $tr_id = $this->passengerModel->getTransactionId($current->passenger_id);
+
+            $walletBalance = $this->passengerModel->getWalletBlance($current->passenger_id);
+            $this->passengerModel->upateBalanceTable($current->passenger_id, $walletBalance->balance, $tr_id->tr_id);
 
             if($wallet && $transaction && $tr_id){
 
@@ -783,5 +781,29 @@
       $this->view('user/chat');
     }
 
+    public function notifications(){
+      $inputJSON = file_get_contents('php://input');
+
+      $responseData = $this->passengerModel->getNotifications($_SESSION['user_id']);
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+    }
+
+    public function setToRead(){
+      $inputJSON = file_get_contents('php://input');
+      $requestData = json_decode($inputJSON, true);
+
+      $responseData = false;
+
+      
+      if($this->passengerModel->setToread($_SESSION['user_id'])){
+        $responseData = true;
+      }
+     
+
+      header('Content-Type: application/json');
+      echo json_encode($responseData);
+    }
     
   }
