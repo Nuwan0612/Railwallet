@@ -8,10 +8,8 @@
                     </div>   
                 </div>
                 
-                <div class="notification-body-outer">
-                    
-                </div>
-                
+                <div class="notification-body-outer">        
+                </div>    
             </div>
 
             <div class="cards">

@@ -1,6 +1,16 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
 
 <div class="feedback-content">
+  <div class="notification-outer-container" style="z-index: 1000">
+    <div class="notification-header">
+      <div class="notification-header-inner">
+        Notifications
+      </div>   
+    </div>
+
+    <div class="notification-body-outer">        
+    </div>    
+  </div>
   <div class="testimonials">
 
     <div class="testimonials-heading">
