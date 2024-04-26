@@ -88,9 +88,14 @@ td {
 }
 
 
-
-  @media (max-width: 520px) {
+  @media (max-width: 550px) {
     .content .content-2{
         padding: 0;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .container .content .content-2 .recent-fines{
+        margin: 0 5px 5px 5px;
     }
   }

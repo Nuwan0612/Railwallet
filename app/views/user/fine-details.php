@@ -2,6 +2,7 @@
     <div class="container">
         <div class="content">
             <div class="cards">
+                <a href="#">
                 <div class="card">
                     <div class="i">
                         <i class='bx bxs-dollar-circle' ></i>
@@ -11,6 +12,9 @@
                         <h2>Recent Fine</h2>
                     </div>
                 </div>
+                </a>
+
+                <a href="#">
                 <div class="card">
                     <div class="i">
                         <i class='bx bx-money-withdraw'></i>
@@ -20,6 +24,7 @@
                         <h2>Total Fines</h2>
                     </div>
                 </div>
+                </a>
                     <!-- <a href="<?php echo URLROOT;?>passengers/transaction">
                 <div class="card">
                     <div class="i">
