@@ -129,3 +129,68 @@ input {
   border: none ;
   width: 195px;
 }
+
+
+@media (max-width: 940px) {
+
+  .image{
+    width: 10rem;
+    height: 10rem;
+    padding: 5px; 
+    margin-bottom: 10px;
+  }
+
+  .content .setting-outer-container .inner-container .body-container td {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 780px) {
+
+  .image{
+    width: 10rem;
+    height: 10rem;
+    padding: 5px; 
+    margin-bottom: 10px;
+  }
+
+  .content .setting-outer-container .inner-container .body-container td {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 680px) {
+  .left{
+    border-right: none;
+  }
+
+  .right {
+    padding: 0 10px 0 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .setting-outer-container {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .body-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .left{
+    flex: 1;
+    margin-right: 5px;
+  }
+  .right {
+    flex: 1;
+    margin-left: 5px;
+  }
+  .setting-outer-container {
+    width: fit-content;
+    padding: 20px;
+  }
+}

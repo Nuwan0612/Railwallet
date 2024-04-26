@@ -56,11 +56,16 @@
     
       $result = $this->passengerModel->updateWalletBalance($data);
 
-      $result = $this->passengerModel->updateTransaction($data);
+      $result1 = $this->passengerModel->updateTransaction($data);
 
-      //$result = $this->passengerModel->updateBalanceChart($data);
+      $result2 = $this->passengerModel->viewTr($_SESSION["user_id"]);
+      $result3= $this->passengerModel->viewWalletBalnce($_SESSION["user_id"]);
+      $data=['trId'=>$result2->tr_id,
+              'uId'=>$_SESSION["user_id"],
+              'balance'=>$result3->balance];
+      $this->passengerModel->insertBalanceTable($data);
 
-      if ($result){
+      if ($result&&$result1){
         redirect("passengers/wallet");
       }
       
@@ -208,6 +213,7 @@
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $fcount=trim($_POST['fClassCount']);
+       // echo $fcount;
         $scount=trim($_POST['sClassCount']);
         $tcount=trim($_POST['tClassCount']);
         $avlbleId=trim($_POST['avlbleId']);
@@ -253,6 +259,9 @@
        
       $newBalance = ($walletBalance->balance - $total);
       // echo $newBalance;
+      if(empty($fcount) && empty($scount) && empty($tcount) ){
+        $message = 'Please enter valid seat numbers';
+    } else {
       if($total<=$walletBalance->balance){
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
@@ -260,7 +269,7 @@
         $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
         $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
 
-        if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount) {
+        if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount && ($fcount!=0 || $scount!=0 ||$tcount!=0)) {
           $this->passengerModel->updateSeatsByScheduleId($data);
 
           $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
@@ -325,14 +334,23 @@
             // $data=['uId'=>$_SESSION['user_id'],
             //        'newBalance'=>$newBalance];
             // $this->passengerModel->updateBalance($data) ;  
-        redirect('passengers/viewTicketsByUserId');
+            $message = 'Booking Successfully Added';
+            
+             
       } else {
-          echo 'Enter Valid Number of Seats '; // or any other status message you want
+         $message = 'Please enter valid seat numbers'; // or any other status message you want
       }       
         }else{
-          echo 'Recharge Wallet';
+          $message = 'Recharge Your Wallet';
         }
       }
+      }
+      $data=[
+      
+        'message'=>$message];
+
+        // Define the success message
+        $this->view('user/booking', $data);
     }
 
     public function getUserTicektsBySheduleID($data){
