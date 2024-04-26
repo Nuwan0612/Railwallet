@@ -476,8 +476,12 @@ public function bookingTickets(){
               'amount'=> $amount
               // 'paymentId' => $data['paymentId']
           ];
-            $transaction=$this->passengerModel->addingTransaction($data2);
-            $result=$this->passengerModel->addingTrId($data2);  
+          $transaction=$this->passengerModel->addingTransaction($data2);  
+          $result=$this->passengerModel->addingTrId($data2);  
+          $x=$this->passengerModel->getWalletBalnce($data2['user_id']);
+          $cBalance=$x->balance-$amount; 
+          $this->passengerModel->updateBalance($data2['user_id'],$cBalance);  
+          $this->passengerModel->addBalanceTable($data2['user_id'],$result->tr_id,$cBalance,);  
 
             $data4=[
               'scheduleId' => $data['sheduleId'],
@@ -500,9 +504,9 @@ public function bookingTickets(){
 
             }
         } 
-        $data=['uId'=>$data4['user_id'],
-        'newBalance'=>$newBalance];
- $this->passengerModel->updateBalance($data) ; 
+//         $data=['uId'=>$data4['user_id'],
+//         'newBalance'=>$newBalance];
+//  $this->passengerModel->updateBalance($data) ; 
     redirect('supporters/dashboard');
   } else {
       echo 'Enter Valid Number of Seats '; // or any other status message you want
