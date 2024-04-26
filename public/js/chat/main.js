@@ -7,25 +7,28 @@ setInterval(() => {
     let chatBox = document.querySelector('.chat-box')
     let chatContent = '';
 
-    messeges.forEach((ele) => {
-      if(ele.sender_id == sender){
-        chatContent += `
-        <div class="chat outgoing">
-          <div class="user-details sup-details">
-            <p>${ele.msg}</p>
-          </div>
-        </div>`
-      } else {
-        chatContent += `
-        <div class="chat incoming">
-          <img src="http://localhost/railwallet/pics/userPics/man.png" alt="">
-          <div class="user-details sup-details">
-            <p>${ele.msg}</p>
-          </div>
-        </div>`
-      }
-    })
-    chatBox.innerHTML = chatContent
+    if(messeges){
+      messeges.forEach((ele) => {
+        if(ele.sender_id == sender){
+          chatContent += `
+          <div class="chat outgoing">
+            <div class="user-details sup-details">
+              <p>${ele.msg}</p>
+            </div>
+          </div>`
+        } else {
+          chatContent += `
+          <div class="chat incoming">
+            <img src="http://localhost/railwallet/pics/userPics/man.png" alt="">
+            <div class="user-details sup-details">
+              <p>${ele.msg}</p>
+            </div>
+          </div>`
+        }
+      })
+      chatBox.innerHTML = chatContent
+    }
+
     },
     error: function(xhr, status, error){
       console.log(xhr.responseText)

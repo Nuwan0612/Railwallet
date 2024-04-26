@@ -1,6 +1,8 @@
 <?php require APPROOT . '/views/user/includes/header.php'; ?>
-              
-                    <div class="travel-content">
+              <div class="content">
+
+           
+                <div class="travel-content">
                     <div class="travel-details">
                         <div class="title">
                         <!-- <i class='bx bx-history'></i> -->
@@ -39,6 +41,7 @@
                         </table>
                         </div>
                         
-                    </div>
+                    </div>  
+                 </div>
                     
  <?php require APPROOT . '/views/user/includes/footer.php';?>  

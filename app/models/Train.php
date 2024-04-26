@@ -67,111 +67,110 @@
       }
     }
 
-//find train by id when register
-  public function findTrainByID($trainID){
-    $this->db->query('SELECT * FROM trains WHERE trainID = :trainID');
-    $this->db->bind(':trainID', $trainID);
+    //find train by id when register
+    public function findTrainByID($trainID){
+      $this->db->query('SELECT * FROM trains WHERE trainID = :trainID');
+      $this->db->bind(':trainID', $trainID);
 
-    $row = $this->db->single();
+      $row = $this->db->single();
 
-    // Check row
-    if($this->db->rowCount() > 0){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public function searchTrainById($trainID){
-    $this->db->query('SELECT * FROM trains WHERE trainID = :trainID');
-    $this->db->bind(':trainID', $trainID);
-
-    $results = $this->db->resultSet();
-    return $results;
-  }
-
-
-  public function getTrain($trainID){
-    $this->db->query('SELECT * FROM trains WHERE trainID = :trainID');
-    $this->db->bind(':trainID', $trainID);
-
-    $row = $this->db->single();
-
-    return $row;
-  }
-
-//Set to not running train
-  public function notRunningTrain($trainID){
-    $this->db->query('UPDATE trains SET service = 0 WHERE trainID = :trainID');
-
-    $this->db->bind(':trainID', $trainID);
-    
-    if($this->db->execute()){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-//Set to not running train
-  public function RunningTrain($trainID){
-    $this->db->query('UPDATE trains SET service = 1 WHERE trainID = :trainID');
-
-    $this->db->bind(':trainID', $trainID);
-    
-    if($this->db->execute()){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-// Find Train by Id when edit 
-  public function findTrainID($trainID,$id){
-    $this->db->query('SELECT * FROM trains WHERE trainID = :trainID AND id != :id');
-    $this->db->bind(':trainID', $trainID);
-    $this->db->bind(':id', $id);
-
-    $row = $this->db->single();
-
-    // Check row
-    if($this->db->rowCount() > 0){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-// Find Train by name when edit 
-  // public function findTrainName($name,$trainID){
-  //   $this->db->query('SELECT * FROM trains WHERE name = :name AND id != :id');
-  //   $this->db->bind(':name', $name);
-  //   $this->db->bind(':id', $id);
-
-  //   $row = $this->db->single();
-
-  //   // Check row
-  //   if($this->db->rowCount() > 0){
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  public function findTrainName($name, $trainID){
-    $this->db->query('SELECT * FROM trains WHERE LOWER(name) LIKE LOWER(:name) AND trainID != :trainID');
-    $this->db->bind(':name', $name);
-    $this->db->bind(':trainID', $trainID);
-
-    $row = $this->db->single();
-
-    // Check row
-    if($this->db->rowCount() > 0){
+      // Check row
+      if($this->db->rowCount() > 0){
         return true;
-    } else {
+      } else {
         return false;
+      }
     }
+
+    public function searchTrainById($trainID){
+      $this->db->query('SELECT * FROM trains WHERE trainID = :trainID');
+      $this->db->bind(':trainID', $trainID);
+
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
+
+    public function getTrain($trainID){
+      $this->db->query('SELECT * FROM trains WHERE trainID = :trainID');
+      $this->db->bind(':trainID', $trainID);
+
+      $row = $this->db->single();
+
+      return $row;
+    }
+
+    //Set to not running train
+    public function notRunningTrain($trainID){
+      $this->db->query('UPDATE trains SET service = 0 WHERE trainID = :trainID');
+
+      $this->db->bind(':trainID', $trainID);
+      
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    //Set to not running train
+    public function RunningTrain($trainID){
+      $this->db->query('UPDATE trains SET service = 1 WHERE trainID = :trainID');
+
+      $this->db->bind(':trainID', $trainID);
+      
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // Find Train by Id when edit 
+    public function findTrainID($trainID,$id){
+      $this->db->query('SELECT * FROM trains WHERE trainID = :trainID AND id != :id');
+      $this->db->bind(':trainID', $trainID);
+      $this->db->bind(':id', $id);
+
+      $row = $this->db->single();
+
+      // Check row
+      if($this->db->rowCount() > 0){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    // Find Train by name when edit 
+      // public function findTrainName($name,$trainID){
+      //   $this->db->query('SELECT * FROM trains WHERE name = :name AND id != :id');
+      //   $this->db->bind(':name', $name);
+      //   $this->db->bind(':id', $id);
+
+      //   $row = $this->db->single();
+
+      //   // Check row
+      //   if($this->db->rowCount() > 0){
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // }
+
+    public function findTrainName($name, $trainID){
+      $this->db->query('SELECT * FROM trains WHERE LOWER(name) LIKE LOWER(:name) AND trainID != :trainID');
+      $this->db->bind(':name', $name);
+      $this->db->bind(':trainID', $trainID);
+
+      $row = $this->db->single();
+
+      // Check row
+      if($this->db->rowCount() > 0){
+          return true;
+      } else {
+          return false;
+      }
+    }
+
   }
-
-
-}
