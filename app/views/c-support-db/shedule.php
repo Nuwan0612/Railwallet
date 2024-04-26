@@ -5,7 +5,7 @@
             <div class="title2">Train Schedules</div>
         </div>
 
-        <div class="search-bar-outer-container-shedule">
+        <div class="search-bar-outer-container-shedule1">
             <form class="wrapper_shedule" action="<?php echo URLROOT?>supporters/searchSchedule" method="post">
             <input type="hidden" name="uId" value="<?= $data['uId']; ?>">
 

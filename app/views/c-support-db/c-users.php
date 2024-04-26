@@ -1,8 +1,8 @@
 <?php require APPROOT . '/views/c-support-db/header.php';?>
 
 <div class="content">
+    <div class="content-d">
     <div class="details">
-
         <div class="head">
             <div>Users</div>
         </div>
@@ -73,7 +73,7 @@
         </div>  
     </div>       
 </div>
-
+</div>
 <script>
     function searchUser(){
         let nic = document.getElementById('search-users').value;
