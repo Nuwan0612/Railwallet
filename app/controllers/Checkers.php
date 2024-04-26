@@ -95,6 +95,9 @@
           $this->checkerModel->updateTrasaction($data['passenger_id'], 'Fine', $data['amount']);
           $tr_id = $this->passengerModel->getTransactionId($data['passenger_id']);
           $this->checkerModel->updatefinePayment($data['journey_id'], $tr_id->tr_id);
+
+          $walletBalance = $this->passengerModel->getWalletBlance($data['passenger_id']);
+          $this->passengerModel->upateBalanceTable($data['passenger_id'], $walletBalance->balance, $tr_id->tr_id);
         }  
       }
       
@@ -166,6 +169,9 @@
           $tr_id = $this->passengerModel->getTransactionId($data['passenger']);
           $fineId = $this->checkerModel->getLatestFine($data['passenger']);
           $this->checkerModel->updatefinePaymentWhenNoJourney($fineId->fine_id, $tr_id->tr_id);
+
+          $walletBalance = $this->passengerModel->getWalletBlance($data['passenger']);
+          $this->passengerModel->upateBalanceTable($data['passenger'], $walletBalance->balance, $tr_id->tr_id);
         }
       }
       
