@@ -612,6 +612,10 @@ flex-wrap: wrap;
         width:700px;
         margin: 100px 20px;
       }
+
+      .brand-name p {
+        font-size: 21px;
+    }
   }
 
   @media (max-width: 920px) {

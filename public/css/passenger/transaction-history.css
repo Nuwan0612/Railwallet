@@ -66,11 +66,7 @@ td {
   }
 
   @media (max-width: 550px) {
-    /* .content .transaction-history .table-details th,.content .transaction-history .table-details td {
-        text-align: center;
-        padding: 0;
-        font-size: 12px;
-    } */
+    
     .content .transaction-history .table-container{
         padding: 5px;
         margin: 5px;
@@ -78,11 +74,7 @@ td {
   }
 
   @media (max-width: 480px) {
-    /* .content .transaction-history .table-details th,.content .transaction-history .table-details td {
-        text-align: center;
-        padding: 0;
-        font-size: 10px;
-    } */
+    
 
     .content .transaction-history .table-container{
         padding: 0;
