@@ -123,13 +123,14 @@
     }
 
 
-    // ##
+    // ## Get User Bookings
 
     public function getuserBookings($id){
       $this->db->query("SELECT * FROM `booking` WHERE userId=:uId ORDER BY `booking`.`bookingTime` DESC;");
       $this->db->bind(':uId',$id);
       
       $result=$this->db->resultSet();
+      return $result;
     }
 
     public function getNotification($id){

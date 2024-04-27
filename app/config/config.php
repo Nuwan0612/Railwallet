@@ -6,6 +6,7 @@
 
  define('DB_PASSWORD', '123456');
 
+
   define('DB_NAME', 'railwallet');
 
   // App Root
