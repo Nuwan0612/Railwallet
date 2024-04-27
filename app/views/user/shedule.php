@@ -1,5 +1,15 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
 <div class="deatails">
+    <div class="notification-outer-container">
+        <div class="notification-header">
+            <div class="notification-header-inner">
+                Notifications
+            </div>   
+        </div>
+        
+        <div class="notification-body-outer">        
+        </div>    
+    </div>
     <div class="all-trains">
         <div class="head">
             <div class="title2">Train Schedules</div>

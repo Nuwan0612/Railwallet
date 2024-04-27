@@ -59,7 +59,7 @@ td {
     align-items: flex-start;
     flex-wrap: wrap;
 }
-.container .content .content-2 .recent-payments{
+.container .content .content-2 .recent-fines{
     min-height: 50vh;
     flex: 5;
     background: white;
@@ -69,20 +69,33 @@ td {
     flex-direction: column;
     border-radius: 10px;
 }
-.container .content .content-2 .recent-payments .title{
+.container .content .content-2 .recent-fines .title{
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 15px 8px;
     border-bottom: 2px solid #999;
 }
-.container .content .content-2 .recent-payments .title i{
+.container .content .content-2 .recent-fines .title i{
     font-size: 30px;
     margin-right: 20px;
 }
-.container .content .content-2 .recent-payments .table-details{
+.container .content .content-2 .recent-fines .table-details{
     overflow-y: scroll;
     height:40vh;
     display: flex;
     flex-direction: column;
 }
+
+
+  @media (max-width: 550px) {
+    .content .content-2{
+        padding: 0;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .container .content .content-2 .recent-fines{
+        margin: 0 5px 5px 5px;
+    }
+  }

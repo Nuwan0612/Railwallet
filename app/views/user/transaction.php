@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
 <div class="container">
     <div class="content">
+    
     <form action="https://sandbox.payhere.lk/pay/checkout" method="POST" id="payhere-payment-form">
         <h3 class="transaction-title">Payment Details:</h3>
         <div class="row">

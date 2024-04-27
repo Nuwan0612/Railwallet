@@ -46,3 +46,54 @@ td {
     font-size: 30px;
     margin-right: -10px;
 }
+
+
+@media (max-width: 700px) {
+    .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        padding: 0;
+        font-size: 17px;
+    }
+    
+  }
+
+  @media (max-width: 600px) {
+    .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        padding: 0;
+        font-size: 15px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    /* .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        padding: 0;
+        font-size: 12px;
+    } */
+    .content .transaction-history .table-container{
+        padding: 5px;
+        margin: 5px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        padding: 0;
+        font-size: 10px;
+    } */
+
+    .content .transaction-history .table-container{
+        padding: 0;
+        margin: 0;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        padding: 0;
+        font-size: 12px;
+    }
+  }

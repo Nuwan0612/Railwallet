@@ -100,3 +100,14 @@ function replyToCustomer(){
   })
 }
 
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {  
+    document.getElementById('sendUserMessage').click();
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {  
+    document.getElementById('sendMessageToPassenger').click();
+  }
+});
