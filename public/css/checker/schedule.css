@@ -112,3 +112,32 @@
   td{
     text-align: center;
   }
+
+  /* @media screen and (max-width: 940px) {
+    .search-bar-inner-container{
+      max-width: 125px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 20px;
+    }
+
+  } */
+
+  /* @media screen and (max-width: 800px) {
+    .search-bar-inner-container-shedule {
+      
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .search-bar-shedule {
+      width: 100%; 
+    }
+  
+    .border-search {
+      margin-bottom: 10px; 
+    }
+  } */
+  
+  
+  
