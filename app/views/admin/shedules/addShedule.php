@@ -1,14 +1,16 @@
 <?php require APPROOT . '/views/admin/includes/header.php';?>
 <div class="content">
   <div class="register-from-outer-container">
-    <div class="add-train-details">
+    <div class="schedule-outer">
       <h1>Route Details</h1>
       <a href="<?php echo URLROOT; ?>admins/shedules" class="close-button">
         <i class="fas fa-times"></i> 
       </a>
-      <div class="add-train-form">
-        <form class="emp-train-form" action="<?php echo URLROOT; ?>admins/addTrainShedule" method ="post">
 
+      <div class="below-section">
+        <form action="<?php echo URLROOT; ?>admins/addTrainShedule" method ="post">
+
+        <div class="below-upper">
           <label for="sheduleID" class="labels">Schedule ID:</label> 
           <div class="tbox <?php echo !empty($data['sheduleID_err']) ? 'error' : ''; ?>">
             <input type="text" name="sheduleID" placeholder="Shedule ID" value="<?php echo $data['sheduleID']; ?>">
@@ -20,9 +22,10 @@
             <input type="text" name="trainID" placeholder="Train ID" value="<?php echo $data['trainID']; ?>">
             <div class="error-message"><?php echo $data['trainID_err'];?></div>
           </div>
-
+        </div>
           
-
+          <div class="station-details-outer">
+            <div class="below-upper">
               <label for="departureStationID" class="labels">Departure Station:</label>
               <div class="tbox <?php echo !empty($data['departureStationID_err']) ? 'error' : ''; ?>">
                 <input type="text" name="departureStationID" placeholder="Departure Station ID" value="<?php echo $data['departureStationID']; ?>">
@@ -40,10 +43,9 @@
                 <input type="text" name="departureTime" placeholder="Departure Time" onfocus="(this.type = 'time')" onblur="(this.type='text')" value="<?php echo $data['departureTime']; ?>">
                 <div class="error-message"><?php echo $data['departureTime_err'];?></div>
               </div>
-
+            </div>
           
-
-          
+            <div class="below-upper">
               <label for="arrivalStationID" class="labels">Arrival Station:</label>
               <div class="tbox <?php echo !empty($data['arrivalStationID_err']) ? 'error' : ''; ?>">
                 <input type="text" name="arrivalStationID" placeholder="Arrival Station ID" value="<?php echo $data['arrivalStationID']; ?>">
@@ -61,8 +63,9 @@
                 <input type="text" name="arrivalTime" placeholder="Arrival Time" onfocus="(this.type = 'time')" onblur="(this.type='text')" value="<?php echo $data['arrivalTime']; ?>">
                 <div class="error-message"><?php echo $data['arrivalTime_err'];?></div>
               </div>
+            </div>
+          </div>
 
-          <div></div>
           <div>
             <input class="sbtn" type="submit" value="Submit">
           </div>

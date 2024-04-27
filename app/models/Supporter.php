@@ -130,6 +130,7 @@
       $this->db->bind(':uId',$id);
       
       $result=$this->db->resultSet();
+      return $result;
     }
 
     public function getNotification($id){

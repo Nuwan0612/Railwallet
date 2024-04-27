@@ -26,7 +26,7 @@
         <p><?php echo SITENAME; ?></p>
     </div>
     <ul>
-        <a href="<?php echo URLROOT?>supporters/dashboard"><li><img src="<?php echo URLROOT;?>img/dashboard.png" >&nbsp;<span>Dashboard</span></li></a>
+        <!-- <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>img/dashboard.png" >&nbsp;<span>Dashboard</span></li></a> -->
         <a href="<?php echo URLROOT?>supporters/users"><li><img src="<?php echo URLROOT;?>img/user.png">&nbsp;<span>Users</span></li></a>
         <a href="<?php echo URLROOT?>supporters/feedbacks"><li><img src="<?php echo URLROOT;?>img/feedback.png" >&nbsp;<span>FeedBacks</span></li></a>
         <a href="<?php echo URLROOT?>supporters/faqs"><li><img src="<?php echo URLROOT;?>img/faq.png" >&nbsp;<span>FAQ</span></li></a>

@@ -1476,9 +1476,11 @@
         $data['departureTime_err'] = 'Departure time cannot be grater than the Arrival time';
         $data['arrivalTime_err'] = 'Arrival time cannot be smaller than the Departure time';
       }
+
+     
       
       //Make sure errors are empty
-      if(empty($data['sheduleID_err']) && empty($data['tarinID_err']) && empty($data['departureStationID_err']) && empty($data['departureDate_err']) && empty($data['departureTime_err']) && empty($data['arrivalStationID_err']) && empty($data['arrivalDate_err']) && empty($data['arrivalTime_err'])){
+      if(empty($data['sheduleID_err']) && empty($data['trainID_err']) && empty($data['departureStationID_err']) && empty($data['departureDate_err']) && empty($data['departureTime_err']) && empty($data['arrivalStationID_err']) && empty($data['arrivalDate_err']) && empty($data['arrivalTime_err'])){
 
         // $data['departureDate'] = date('y-m-d',strtotime(trim($_POST['departureDate'])));
         // $data['arrivalDate'] = date('y-m-d',strtotime(trim($_POST['arrivalDate'])));

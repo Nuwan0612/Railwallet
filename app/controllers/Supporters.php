@@ -14,9 +14,9 @@
       $this->chatModel = $this->model('Chat');
     }
 
-    public function dashboard(){
-      $this->view('c-support-db/c-support');
-    }
+    // public function dashboard(){
+    //   $this->view('c-support-db/c-support');
+    // }
 
     public function faqs(){
       $result=$this->chatModel->getFaq();
