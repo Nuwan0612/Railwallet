@@ -543,7 +543,7 @@
     // *Update wallet transaction*
     public function updateTransaction($data){
        $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) 
-                          VALUES (:uid,'recharge',:amount);");
+                          VALUES (:uid,'Recharge',:amount);");
 
       $this->db->bind(':uid', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);
@@ -671,7 +671,7 @@
     }
 
     public function getTotalSpends($id){
-      $this->db->query("SELECT SUM(amount) AS totalSpent FROM transactions WHERE user_id = :id");
+      $this->db->query("SELECT SUM(amount) AS totalSpent FROM transactions WHERE user_id = :id AND reason != 'Recharge'");
       $this->db->bind(':id', $id);
       $result = $this->db->single();
       return $result;
@@ -684,7 +684,7 @@
     }
 
     public function upateBalanceTable($passId, $walletBal, $trId){
-      $this->db->query("INSERT INTO balance (passenger_id, transaction_id, balance) VALUES (:passId, :balance, :trId)");
+      $this->db->query("INSERT INTO balance (passenger_id, transaction_id, balance) VALUES (:passId, :trId, :balance)");
       $this->db->bind(':passId', $passId);
       $this->db->bind(':balance', $walletBal);
       $this->db->bind(':trId', $trId);
@@ -711,5 +711,20 @@
       } else {
         return false;
       }
+    }
+
+    public function updateNotification($details){
+      $this->db->query("INSERT INTO notification (user_id, message) VALUES (:id, :mess)");
+      $this->db->bind(':id', $details['uid']);
+      $this->db->bind(':mess', $details['reason']);
+
+      $this->db->execute();
+    }
+
+    public function getTicketPrice($id){
+      $this->db->query("SELECT price from ticketprices WHERE ticketPriceID = :id");
+      $this->db->bind(":id", $id);
+      $result = $this->db->single();
+      return $result;
     }
   }

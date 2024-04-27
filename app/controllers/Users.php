@@ -229,7 +229,7 @@
 
       if($_SESSION['user_type'] == 'supporter'){
         if($this->userModel->activeTheAgent($user->id)){
-          redirect('supporters/dashboard');         
+          redirect('supporters/users');         
         } else {
           redirect('users/login');
         }
