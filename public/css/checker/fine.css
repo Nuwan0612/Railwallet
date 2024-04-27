@@ -4,13 +4,6 @@
   min-height: calc(100vh - 10vh);
 }
 
-.container{
-  margin-top: 40px;
-  margin-left: 0;
-  margin-right: 0;
-  padding: 20px;
-}
-
 /*search bar*/
 .search-bar-outer-container{
   display: grid;
