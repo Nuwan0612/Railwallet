@@ -478,6 +478,84 @@ flex-wrap: wrap;
   }
 
 
+  .notify{
+    margin: 0 40px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .notify:hover{
+    background: #fff;
+  }
+
+  .notify .bell{
+    font-size: 30px;
+    
+  }
+
+  .notify .notifi{
+    display: none;
+    position: absolute;
+    right: 9px;
+    top: 7px;
+    font-size: 15px;
+    color:#009688;
+  }
+
+  .notification-outer-container{
+    margin-top: 10px;
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    max-height: 500px;
+    width: 380px;
+    right: 130px;
+    background: #525151;
+  }
+
+  .notification-header{
+    padding: 10px;
+  }
+
+  .notification-header-inner{
+    background: white;
+    padding: 15px;
+    border-radius: 15px 15px 0  0 ;
+  }
+
+  .notification-body-outer{
+    height: 405px;
+    overflow-y: auto;
+  }
+
+  :is(.notification-body-outer)::-webkit-scrollbar{
+    width: 0px;
+  }
+
+  .notification-body{
+    background: white;
+    margin: 8px;
+    border-radius: 15px;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  .notification{
+    margin: 8px 0;
+    word-wrap: break-word;
+  }
+
+  .notification-body:hover{
+    background: #dadada;
+    cursor: pointer;
+  }
+
 @media (max-width: 1285px) {
     .content{
         position: relative;
