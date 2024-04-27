@@ -1,4 +1,6 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
+
+
     <div class="container">
         <div class="content">
             <div class="notification-outer-container">
@@ -8,13 +10,12 @@
                     </div>   
                 </div>
                 
-                <div class="notification-body-outer">
-                    
-                </div>
-                
+                <div class="notification-body-outer">        
+                </div>    
             </div>
 
             <div class="cards">
+               <a href="#">
                 <div class="card">
                 <div class="i">
                 <i class='bx bxs-credit-card' ></i>
@@ -22,8 +23,10 @@
                     <div class="box">
                         <h1>Rs. <?php echo $data['spents']->totalSpent?></h1>
                         <h2>Spent</h2>
+
                     </div>
                 </div>
+              </a>
                 <a href="<?php echo URLROOT;?>passengers/transaction">
                     <div class="card">
                         <div class="i">
@@ -34,7 +37,20 @@
                             <h2>Balance</h2>
                         </div>
                     </div>
-                </a>
+
+                    </a>
+                    <a href="<?php echo URLROOT;?>passengers/transaction">
+                        <div class="card">
+                            <div class="i">
+                            <i class='bx bxs-bank'></i>
+                            </div>
+                            <div class="box">
+                                <h1>Rs. <?php  echo $data['balance']->balance?></h1>
+                                <h2>Balance</h2>
+                            </div>
+                        </div>
+                    </a>
+
             </div>
             <div class="content-2">
                 <div class="recent-payments">
@@ -65,6 +81,7 @@
                         <?php $rowNumber++; endforeach; ?>
                         </tbody>
                     </table>
+
                 </div>
                 <div class="chart">
                     <div class="wallet-title">
@@ -96,18 +113,17 @@
         let date = [];
         let balance = [];
 
+
         // Log the data to the console
         chartData.forEach(ele => {
             date.push(ele.date);
             balance.push(ele.balance);
         })
-            
-        console.log(date);
-        console.log(balance);
 
         const ctx = document.getElementById('myChart');
 
         const data = {
+
         labels: date,
         datasets: [{
             label: 'My First Dataset',
@@ -128,11 +144,14 @@
             }
             }
         }
+
         };
 
         // Create a new chart instance
         const myChart = new Chart(ctx, config);
 
+
     </script>
+
 
 <?php require APPROOT . '/views/user/includes/footer.php';?>
