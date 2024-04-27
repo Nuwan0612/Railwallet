@@ -27,29 +27,18 @@
                     </div>
                 </div>
               </a>
-                <a href="<?php echo URLROOT;?>passengers/transaction">
-                    <div class="card">
-                        <div class="i">
-                        <i class='bx bxs-bank'></i>
-                        </div>
-                        <div class="box">
-                            <h1>Rs. <?php  echo $data['balance']->balance?></h1>
-                            <h2>Balance</h2>
-                        </div>
+        
+            <a href="<?php echo URLROOT;?>passengers/transaction">
+                <div class="card">
+                    <div class="i">
+                    <i class='bx bxs-bank'></i>
                     </div>
-
-                    </a>
-                    <a href="<?php echo URLROOT;?>passengers/transaction">
-                        <div class="card">
-                            <div class="i">
-                            <i class='bx bxs-bank'></i>
-                            </div>
-                            <div class="box">
-                                <h1>Rs. <?php  echo $data['balance']->balance?></h1>
-                                <h2>Balance</h2>
-                            </div>
-                        </div>
-                    </a>
+                    <div class="box">
+                        <h1>Rs. <?php  echo $data['balance']->balance?></h1>
+                        <h2>Balance</h2>
+                    </div>
+                </div>
+            </a>
 
             </div>
             <div class="content-2">
