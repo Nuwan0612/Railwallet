@@ -147,3 +147,15 @@ video {
 #html5-qrcode-anchor-scan-type-change{
 	display: none !important;
 }
+
+
+@media screen and (max-width: 1040px) {
+  .qr-content .qr-scanner-details .qr-scanner-outer-container{
+    overflow-y: auto;
+    height: calc(100vh - 15vh);
+  }
+  
+  .container .qr-content {
+    min-height: 180vh;
+	}
+}
