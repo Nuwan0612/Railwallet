@@ -20,10 +20,20 @@
 
 <?php require APPROOT . '/views/user/includes/sidemenu.php';?>
 
-  <div class="qr-content">
-    <div class="qr-scanner-details">
-      <div class="qr-scanner-outer-container">
-        <div class="qr-inner-container">
+  <div class="content">
+    <div class="notification-outer-container" style="z-index: 1000">
+      <div class="notification-header">
+        <div class="notification-header-inner">
+            Notifications
+        </div>   
+      </div>
+      
+      <div class="notification-body-outer">        
+      </div>    
+    </div>
+    <div class="scanner-details">
+      <div class="scanner-outer-container">
+        <div class="inner-container">
 
           <div class="section">
             <div id="my-qr-reader">

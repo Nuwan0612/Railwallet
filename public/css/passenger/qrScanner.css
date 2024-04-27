@@ -7,7 +7,7 @@
 }
 
 
-.qr-scanner-outer-container {
+.scanner-outer-container {
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -16,11 +16,16 @@
 	height: 100%;
 	box-sizing: border-box;
 	text-align: center;
+	overflow-y: auto;
 }
 
-.qr-inner-container {
+.inner-container {
 	width: 90%;
 	margin: 5px;
+}
+
+.scanner-details{
+	
 }
 
 .container h1 {
@@ -142,3 +147,17 @@ video {
 #html5-qrcode-anchor-scan-type-change{
 	display: none !important;
 }
+
+
+
+@media screen and (max-width: 1040px) {
+  .qr-content .qr-scanner-details .qr-scanner-outer-container{
+    overflow-y: auto;
+    height: calc(100vh - 15vh);
+  }
+  
+  .container .qr-content {
+    min-height: 180vh;
+	}
+}
+

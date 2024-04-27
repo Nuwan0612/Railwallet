@@ -4,13 +4,6 @@
   min-height: calc(100vh - 10vh);
 }
 
-.container{
-  margin-top: 40px;
-  margin-left: 0;
-  margin-right: 0;
-  padding: 20px;
-}
-
 /*search bar*/
 .search-bar-outer-container{
   display: grid;
@@ -75,6 +68,8 @@ input[type="date"] {
   margin-top: 5px;
 }
 
+
+
 .table-container table {
   width: 100%; 
   border-collapse: collapse; 
@@ -92,12 +87,48 @@ input[type="date"] {
   border: 1px solid #ddd; 
   padding: 8px;
   text-align: left;
+  font-size: 16px;
 }
 
 .table-container td{
-  z-index: 1; 
+  z-index: 1;
+  font-size: 15px;
 }
 
 td{
   text-align: center;
+}
+
+@media screen and (max-width: 940px) {
+
+  .table-container th{
+    font-size: 12px;
+  }
+
+  .table-container td{
+    font-size: 11px;
+  }
+
+}
+
+@media screen and (max-width: 740px) {
+  .table-container th{
+    font-size: 8px;
+  }
+
+  .table-container td{
+    font-size: 7px;
+  }
+
+}
+
+@media screen and (max-width: 580px) {
+  .table-container th{
+    font-size: 6px;
+  }
+
+  .table-container td{
+    font-size: 5px;
+  }
+
 }

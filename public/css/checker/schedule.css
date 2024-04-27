@@ -4,14 +4,6 @@
     min-height: calc(100vh - 10vh);
   }
   
-  /*Train Heading*/
-  .container{
-    margin-top: 40px;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 20px;
-  }
-  
   /*search bar*/
   .search-bar-outer-container{
     display: grid;
@@ -112,3 +104,27 @@
   td{
     text-align: center;
   }
+
+
+  @media screen and (max-width: 800px) {
+    .search-bar-inner-container-shedule {
+      
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .search-bar-shedule {
+      width: 100%; 
+    }
+  
+    .border-search {
+      margin-bottom: 10px; 
+    }
+  }
+  
+  .detail-body-outer{
+    padding: 20px;
+  }
+
+  
+  

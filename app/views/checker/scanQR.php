@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/checker/includes/header.php';?>
 
 <div class="content">
+  <div class="detail-body-outer">
   <div class="qr-scanner-outer-container">
     <div class="qr-inner-container">
       <div class="section">
@@ -15,6 +16,7 @@
       </div>      
       <div class="warning"></div>     
     </div>
+  </div>
   </div>
 </div> 
 

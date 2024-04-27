@@ -1,6 +1,16 @@
 <?php require APPROOT . '/views/user/includes/header.php';?>
 
 <div class="content">
+  <div class="notification-outer-container">
+    <div class="notification-header">
+      <div class="notification-header-inner">
+        Notifications
+      </div>   
+    </div>
+    
+      <div class="notification-body-outer">        
+      </div>    
+  </div>
   <div class="chat-outer-container">
     <div class="user-wrapper">
       <section class="chat-area">
@@ -17,7 +27,7 @@
         <div action="" class="typing-area">
           <input type="text" class="sender" value="<?php echo $_SESSION['user_id'] ?>" hidden>
           <input type="text" class="input-field" placeholder="Type a message here...">
-          <button class="btn" onclick="sendMessageAgent()"><i class="fa-solid fa-paper-plane"></i></button>
+          <button id="sendUserMessage" class="btn" onclick="sendMessageAgent()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
       </section>
     </div>
