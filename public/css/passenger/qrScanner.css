@@ -149,6 +149,7 @@ video {
 }
 
 
+
 @media screen and (max-width: 1040px) {
   .qr-content .qr-scanner-details .qr-scanner-outer-container{
     overflow-y: auto;
@@ -159,3 +160,4 @@ video {
     min-height: 180vh;
 	}
 }
+
