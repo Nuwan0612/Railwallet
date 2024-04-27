@@ -242,9 +242,11 @@ input[type="date"] {
 }
 
 @media screen and (max-width: 660px) {
-  .all-trains {
-    margin-top: 90px;
-    margin-left: 0;
-    margin-right: 0;
+  .search-bar-outer-container-shedule .wrapper_shedule{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: auto;
+    margin-left: 10px;
   }
 }
