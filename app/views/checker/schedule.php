@@ -1,9 +1,8 @@
 <?php require APPROOT . '/views/checker/includes/header.php';?>
 
-  <div class="deatails">
-    <div class="container">
-
-      <div class="search-bar-outer-container-shedule">
+<div class="content">
+ <div class="detail-body-outer">
+  <div class="search-bar-outer-container-shedule">  
         <div class="search-bar-inner-container-shedule">
           <div class="search-bar-shedule">
           <input class="border-search" type="text" id="search-shedule-by-SID" placeholder="Schedule ID" >
@@ -86,8 +85,8 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
   </div>
+ </div>
+</div>
 
 <?php require APPROOT . '/views/checker/includes/footer.php';?>
