@@ -92,7 +92,7 @@
                           JOIN 
                               trains ON shedules.trainID = trains.trainID
                           JOIN
-                              ticketprices ON ticketprices.departureStationID = shedules.departureStationID AND ticketprices.arrivalStationID = shedules.arrivalStationID
+                              ticketprices ON ticketprices.Station_1_ID = shedules.departureStationID AND ticketprices.Stataion_2_ID = shedules.arrivalStationID
                           WHERE 
                               shedules.departureStationID = :departureStationID
                               AND shedules.arrivalStationID = :arrivalStationID
@@ -198,7 +198,7 @@
 
     // ## Viw ticketId according to sheduleId and Class
     public function viewTicketId($data){
-      $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
+      $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND (`Station_1_ID`=:depSta AND `Station_2_ID`=:arrSta) OR (`Station_1_ID`=:arrSta AND `Station_2_ID`=:depSta );");
       $this->db->bind(':class', $data['class']);
       $this->db->bind(':depSta', $data['dStation']);
       $this->db->bind(':arrSta', $data['aStation']);
@@ -218,8 +218,7 @@
     public function ticketPricesByClass($data){
       $this->db->query("SELECT price 
       FROM `ticketprices` 
-      WHERE departureStationID=:dId
-      AND arrivalStationID=:aId 
+      WHERE  ((`Station_1_ID`=:dId AND `Station_2_ID`=:aId) OR (`Station_1_ID`=:aId AND `Station_2_ID`=:dId ))
       AND classID=:cId;
       ");
        $this->db->bind(':dId', $data['dId']);
@@ -230,7 +229,6 @@
        return $results;
 
     }
-
     // ## View Two End station according to stationId
     public function viewTwoEndStationBySheduleId($data){
       $this->db->query("SELECT `departureStationID`,`arrivalStationID` FROM `shedules` WHERE sheduleID=:shId ");
