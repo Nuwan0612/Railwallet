@@ -5,8 +5,10 @@
     <div class="card_box">
         <div class="card">
             <div class="title">
+                
                 <div class="train_name">
-                    <u><b><?php echo $data['trainName'];?></b></u> 
+                    <u><b><h3><?php echo $data['trainName'];?></h3></b></u> 
+                
                 </div>
                 <!-- <div class="title_stations">
                     <div class="start_station"><b> Hikkaduwa</b></div>

@@ -238,7 +238,11 @@ justify-content: center;
     color: red;
 }
 
-.content-d{
+/* .content-d{
     display: flex;
     justify-content: center;
+} */
+
+.all-trains .detail-body{
+    margin-left: 160px;
 }
