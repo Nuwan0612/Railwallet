@@ -27,7 +27,7 @@
         <div action="" class="typing-area">
           <input type="text" class="sender" value="<?php echo $_SESSION['user_id'] ?>" hidden>
           <input type="text" class="input-field" placeholder="Type a message here...">
-          <button class="btn" onclick="sendMessageAgent()"><i class="fa-solid fa-paper-plane"></i></button>
+          <button id="sendUserMessage" class="btn" onclick="sendMessageAgent()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
       </section>
     </div>
