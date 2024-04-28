@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="hide-outer-container">
-                <a class="links" href="<?php echo URLROOT;?>supporters/deactivateUsers"><button class="delete-btn">Blocked Users</button></a>
+                <a class="links" href="<?php echo URLROOT;?>supporters/deactivateUsers"><button class="delete-btn" style="font-size: 14px">Blocked Users</button></a>
             </div>
         </div>
         
@@ -47,24 +47,25 @@
                             <td><?php echo $user->fname.' '.$user->lname; ?></td>
                             <td><?php echo $user->nic; ?></td>
                             <td><?php echo $user->phone; ?></td>
-                            <td class="options">
-                                <a href="<?php echo URLROOT; ?>supporters/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                            <td>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">View</button></a>
                             </td>
                             <td>
-                                <a href="<?php echo URLROOT; ?>supporters/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
-                            </td>
-                            <td class="options">
-                                <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">View</button></a>
                             </td>
                             <td>
-                                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">View</button></a>
                             </td>
                             <td>
-                            <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">View</button></a>
                             </td>
-                            <td class="options">
-                                <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id; ?>"><button class="edit-btn">Add</button></a>
+                            <td>
+                            <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">View</button></a>
                             </td>
+
+                            <td>
+                                <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">Add</button></a>
+                             </td>
                         </tr>
                         <?php $rowNumber++; endforeach; ?>
                     </tbody>

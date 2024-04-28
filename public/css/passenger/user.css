@@ -483,15 +483,17 @@ flex-wrap: wrap;
     border-radius: 50%;
     width: 50px;
     height: 50px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    
     position: relative;
     cursor: pointer;
   }
 
   .notify:hover{
-    background: #fff;
+    background: #f1f1f1;
   }
 
   .notify .bell{
@@ -516,7 +518,8 @@ flex-wrap: wrap;
     max-height: 500px;
     width: 380px;
     right: 130px;
-    background: #525151;
+    background: #f1f1f1;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
   }
 
   .notification-header{
@@ -524,9 +527,11 @@ flex-wrap: wrap;
   }
 
   .notification-header-inner{
-    background: white;
+    background: #009688;
     padding: 15px;
     border-radius: 15px 15px 0  0 ;
+    font-weight: bold;
+    text-align: center;
   }
 
   .notification-body-outer{
@@ -539,11 +544,12 @@ flex-wrap: wrap;
   }
 
   .notification-body{
-    background: white;
+    background: #dad9d9;
     margin: 8px;
-    border-radius: 15px;
+    border-radius: 10px;
     align-items: center;
-    padding: 10px 20px;
+    padding: 5px 20px;
+    font-size: 15px;
   }
 
   .notification{
@@ -552,7 +558,7 @@ flex-wrap: wrap;
   }
 
   .notification-body:hover{
-    background: #dadada;
+    background: #cfcfcf;
     cursor: pointer;
   }
 
@@ -775,3 +781,6 @@ flex-wrap: wrap;
         width: 300px;
       }
   }
+
+
+  
