@@ -145,6 +145,37 @@
           return false;
       }
     }
+
+    public function getFeedback(){
+      $this->db->query("SELECT 
+                          f.*,
+                          u.fname,
+                          u.lname,
+                          u.userImage 
+                        FROM 
+                          feedbacks f
+                        JOIN 
+                          users u ON u.id = f.userID
+                        ORDER BY 
+                          f.rating DESC LIMIT 3");
+
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
+    public function addQuestion($data){
+      $this->db->query("INSERT INTO questionregardingproblems (name, email, message) VALUES (:name, :email, :message)");
+      $this->db->bind(':name', $data['name']);
+      $this->db->bind(':email', $data['email']);
+      $this->db->bind(':message', $data['message']);
+
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+    
   }
 
 ?>
