@@ -92,7 +92,7 @@
                           JOIN 
                               trains ON shedules.trainID = trains.trainID
                           JOIN
-                              ticketprices ON ticketprices.Station_1_ID = shedules.departureStationID AND ticketprices.Stataion_2_ID = shedules.arrivalStationID
+                              ticketprices ON ticketprices.Station_1_ID = shedules.departureStationID AND ticketprices.Station_2_ID = shedules.arrivalStationID
                           WHERE 
                               shedules.departureStationID = :departureStationID
                               AND shedules.arrivalStationID = :arrivalStationID

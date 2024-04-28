@@ -646,7 +646,7 @@
           }
 
           if(empty($data['error_details'])){
-            redirect('supporters/dashboard');
+            redirect('supporters/users');
           } else {
             $this->view('c-support-db/booking', $data);
           }
