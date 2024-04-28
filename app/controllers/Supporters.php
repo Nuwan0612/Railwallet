@@ -463,7 +463,7 @@
         $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
         $sFree= $trainDetails ? $trainDetails->secondCapacity: 0;
         $tFree= $trainDetails ? $trainDetails->thirdCapacity: 0;
-        $tId = $trainDetails ? $trainDetails->id: 0;
+        $tId = $trainDetails ? $trainDetails->id: '';
 
         // echo $trainDetails->id;
         

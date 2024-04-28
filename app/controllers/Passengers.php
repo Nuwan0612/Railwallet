@@ -177,9 +177,9 @@
 
         // print_r($trainDetails);
 
-        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
-        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
-        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+        $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
+        $sFree= $trainDetails ? $trainDetails->secondCapacity : 0;
+        $tFree= $trainDetails ? $trainDetails->thirdCapacity : 0;
 
         // echo $trainDetails->id;
         
@@ -187,7 +187,7 @@
           'fFree'=>$fFree,
           'sFree'=>$sFree,
           'tFree'=>$tFree,
-          'avlbleId'=>$trainDetails->id,
+          'avlbleId'=>$trainDetails ? $trainDetails->id : '',
           'dDate'=>trim($_POST['dDate']),
           'tID'=>trim($_POST['tId']),
           'way'=>trim($_POST['way']),
@@ -197,7 +197,8 @@
           'trainType'=>trim($_POST['train_type']),
           'departureStation'=>trim($_POST['departure_station']),
           'arrivalStation'=>trim($_POST['arrival_station']),
-          'shId'=>trim($_POST['schedule_id']) 
+          'sheduleId'=>trim($_POST['schedule_id']),
+          'error_details' => '' 
         ];
 
         $this->view('user/booking',$data);
@@ -218,11 +219,30 @@
         $avlbleId=trim($_POST['avlbleId']);
         $way=trim($_POST['way']);
         $tID=trim($_POST['tID']);
+        $fFree=trim($_POST['fFree']);
+        $sFree=trim($_POST['sFree']);
+        $tFree=trim($_POST['tFree']);
+        $dTime=trim($_POST['dTime']);
+        $dDate=trim($_POST['dDate']);
+        $aTime=trim($_POST['aTime']);
+        $trainName=trim($_POST['trainName']);
+        $trainType=trim($_POST['trainType']);
+        $departureStation=trim($_POST['departureStation']);
+        $arrivalStation=trim($_POST['arrivalStation']);
 
         // echo  $avlbleId;
 
         $data=[
-          // 'shid'=>trim($_POST['schedule_id']), 
+          'fFree'=>$fFree, 
+          'sFree'=>$sFree, 
+          'tFree'=>$tFree, 
+          'dTime'=>$dTime, 
+          'dDate'=>$dDate, 
+          'aTime'=>$aTime, 
+          'trainName'=>$trainName,
+          'trainType'=>$trainType, 
+          'departureStation'=>$departureStation,  
+          'arrivalStation'=>$arrivalStation,
           'avlbleId'=>$avlbleId, 
           'tID'=> $tID,
           'way'=> $way,
@@ -232,7 +252,8 @@
           'sheduleId'=>trim($_POST['sheduleId']),
           'dDate'=>trim($_POST['dDate']),
           'userId' => $_SESSION['user_id'],
-          // 'paymentId' => 'P0001'
+          'message' => '',
+          'error_details'=>''
           
         ];
 
@@ -252,8 +273,11 @@
       $tPrice=$this->passengerModel->ticketPricesByClass($class3);
 
       // echo $data['1count'];
+      $first = $fPrice ? $fPrice->price : 0;
+      $second = $sPrice ? $sPrice->price : 0;
+      $third = $tPrice ? $tPrice->price : 0;
 
-      $total=(float)(($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']));
+      $total=(float)(($first)*(int)($data['1count'])+($second)*(int)($data['2count'])+($third)*(int)($data['3count']));
       $walletBalance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
        
       $newBalance = ($walletBalance->balance - $total);
@@ -264,9 +288,10 @@
       if($total<=$walletBalance->balance){
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
-        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
-        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
-        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+        $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
+        $sFree= $trainDetails ? $trainDetails->secondCapacity : 0;
+        $tFree= $trainDetails ? $trainDetails->thirdCapacity : 0;
+
 
         if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount && ($fcount!=0 || $scount!=0 ||$tcount!=0)) {
           $this->passengerModel->updateSeatsByScheduleId($data);
@@ -330,26 +355,24 @@
                 $this->passengerModel->insertQrForBookingId($data5); 
                 }
             } 
-            // $data=['uId'=>$_SESSION['user_id'],
-            //        'newBalance'=>$newBalance];
-            // $this->passengerModel->updateBalance($data) ;  
-            $message = 'Booking Successfully Added';
-            
-             
       } else {
-         $message = 'Please enter valid seat numbers'; // or any other status message you want
+        $data['error_details'] = 'Please enter valid seat numbers';
       }       
         }else{
-          $message = 'Recharge Your Wallet';
+          $data['error_details'] = 'User Wallet Balance is not sufficent.';
         }
       }
-      }
-      $data=[
-      
-        'message'=>$message];
 
-        // Define the success message
+      if(empty($data['error_details'])){
+        redirect('passengers/wallet');
+      } else {
+        
         $this->view('user/booking', $data);
+      }
+
+      }
+
+        
     }
 
     public function getUserTicektsBySheduleID($data){
