@@ -4,7 +4,7 @@
     <div class="details">
 
         <div class="head" style="margin-bottom: 30px">
-            <div>Questions from Customers</div>
+            <div>Questions from customers</div>
         </div>
         
         <div class="detail-body">
