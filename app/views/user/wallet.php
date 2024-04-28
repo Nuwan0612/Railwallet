@@ -10,7 +10,14 @@
                     </div>   
                 </div>
                 
-                <div class="notification-body-outer">        
+                <div class="notification-body-outer">  
+
+                    <!-- <div class="notification-body">
+                        <div class="notification">
+                         ${message.message}
+                        </div>
+
+                    </div>       -->
                 </div>    
             </div>
 
