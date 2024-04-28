@@ -291,7 +291,7 @@
                     'user_id' => $data['userId'],
                     // 'paymentId' => $data['paymentId']
                 ];
-
+        
                 $data3=$this->passengerModel->viewTicketId($data2);
                 $amount=$data3->price;
                 $data2=[
