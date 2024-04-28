@@ -15,7 +15,7 @@
     </div>
 
     <div class="content">
-        <h1>Easy Travel With RailWallet</h1><br>
+        <h1>Easy Travel With Rail Wallet</h1><br>
         <p>Let's get started with signing up. If you already have an account,<br>Let's explore RailWallet.</p>
         <div>
             <button type="button" onclick="redirectToSignUp()"><span></span>SignUp</button>
