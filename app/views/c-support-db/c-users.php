@@ -1,8 +1,8 @@
 <?php require APPROOT . '/views/c-support-db/header.php';?>
 
 <div class="content">
+    <div class="content-d">
     <div class="details">
-
         <div class="head">
             <div>Users</div>
         </div>
@@ -62,9 +62,10 @@
                             <td>
                             <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">View</button></a>
                             </td>
+
                             <td>
                                 <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id?>"><button class="edit-btn" style="font-size: 13px">Add</button></a>
-                            </td>
+                             </td>
                         </tr>
                         <?php $rowNumber++; endforeach; ?>
                     </tbody>
@@ -73,7 +74,7 @@
         </div>  
     </div>       
 </div>
-
+</div>
 <script>
     function searchUser(){
         let nic = document.getElementById('search-users').value;

@@ -23,17 +23,18 @@
 =======================================================================================================================================*/ 
 
   public function dashboard(){ 
-    $users = count($this->adminModel->getUser());
+    // $users = count($this->adminModel->getUser());
     $trains = count($this->trainModel->getTrains());
-    $checkers = count($this->adminModel->getChecker());
-    $supporters = count($this->adminModel->getSupporter());
+    // $checkers = count($this->adminModel->getChecker());
+    // $supporters = count($this->adminModel->getSupporter());
     $stations = count($this->adminModel->getStation());
     $feedbacks = count($this->adminModel->getFeedback());
+
+    $yearsMonth = $this->adminModel->getYearsMonths();
+
     $data = [
-      'users' => $users,
+      'yearsMonth' => $yearsMonth,
       'trains' => $trains,
-      'checkers' => $checkers,
-      'supporters' => $supporters,
       'stations' => $stations,
       'feedbacks' => $feedbacks,
     ];
@@ -244,7 +245,7 @@
           'fname' => trim($_POST['fname']),
           'lname' => trim($_POST['lname']),
           'email' => trim($_POST['email']),
-          'phone' => trim($_POST['phone']),
+          'phone' => '0'.trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
           'newPassword' => trim($_POST['newPassword']),
           'confirmPassword' => trim($_POST['confirmPassword']),
@@ -374,6 +375,7 @@
           $data['lname'] = $admin->lname;
           $data['email'] = $admin->email;
           $data['phone'] = $admin->phone;
+          $data['image'] = $admin->userImage;
 
           // echo '<pre>';
           // var_dump($data);
@@ -393,6 +395,7 @@
           'nic' => $user->nic,
           'phone' => $user->phone,
           'email' => $user->email,
+          'image' => $user->userImage,
           'name_err' => '',
           'email_err' => '',
           'phone_err' => '',
@@ -1389,12 +1392,14 @@
       $data = [
         'sheduleID' => trim($_POST['sheduleID']),
         'trainID'=> trim($_POST['trainID']),
+        'way' => trim($_POST['way']),
         'departureStationID' => trim($_POST['departureStationID']),
         'departureDate' => (trim($_POST['departureDate'])),
         'departureTime' => trim($_POST['departureTime']),
         'arrivalStationID' => trim($_POST['arrivalStationID']),
         'arrivalDate' => trim($_POST['arrivalDate']),
         'arrivalTime' => trim($_POST['arrivalTime']),
+        'way_err' => '',
         'sheduleID_err' => '',
         'trainID_err' => '',
         'departureStationID_err' => '',
@@ -1476,13 +1481,16 @@
         $data['departureTime_err'] = 'Departure time cannot be grater than the Arrival time';
         $data['arrivalTime_err'] = 'Arrival time cannot be smaller than the Departure time';
       }
+
+     
       
       //Make sure errors are empty
-      if(empty($data['sheduleID_err']) && empty($data['tarinID_err']) && empty($data['departureStationID_err']) && empty($data['departureDate_err']) && empty($data['departureTime_err']) && empty($data['arrivalStationID_err']) && empty($data['arrivalDate_err']) && empty($data['arrivalTime_err'])){
+      if(empty($data['sheduleID_err']) && empty($data['trainID_err']) && empty($data['departureStationID_err']) && empty($data['departureDate_err']) && empty($data['departureTime_err']) && empty($data['arrivalStationID_err']) && empty($data['arrivalDate_err']) && empty($data['arrivalTime_err']) && empty($data['way_err'])){
 
         // $data['departureDate'] = date('y-m-d',strtotime(trim($_POST['departureDate'])));
         // $data['arrivalDate'] = date('y-m-d',strtotime(trim($_POST['arrivalDate'])));
 
+        // print_r($data);
         if($this->sheduleModel->addShedule($data)){
           redirect('admins/shedules');
         } else {
@@ -1500,6 +1508,7 @@
         'trainID'=>'',
         'departureStationID' =>'',
         'departureDate' =>'',
+        'way' =>'',
         'departureTime' =>'',
         'arrivalStationID' =>'',
         'arrivalDate' =>'',
@@ -1512,6 +1521,7 @@
         'arrivalStationID_err' => '',
         'arrivalDate_err' => '',
         'arrivalTime_err' => '',
+        'way_err' => ''
       ];
 
       $this->view('admin/shedules/addShedule', $data);

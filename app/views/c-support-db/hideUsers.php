@@ -4,7 +4,7 @@
     <div class="details">
 
       <div class="head">
-        <div class="title">Deactivated Users</div>
+        <div>Deactivated Users</div>
       </div>
 
       <div class="search-bar-outer-container">
@@ -33,11 +33,11 @@
                 <th>User Name</th>
                 <th>NIC</th>
                 <th>Phone</th>
-                <th>Status</th>
                 <th>Feedbacks</th>
                 <th>Fines</th>
-                <th>Complains</th>
                 <th>Travel History</th>
+                <th>Chat History</th>
+                <th>Bookings</th>
                 <th>Option</th>  
               </tr>
             </thead>
@@ -49,19 +49,24 @@
               <td><?php echo $user->fname.' '.$user->lname; ?></td>
               <td><?php echo $user->nic; ?></td>
               <td><?php echo $user->phone; ?></td>
-              <td><?php echo $user->status; ?></td>
               <td class="options">
-                <a href="<?php echo URLROOT; ?>admins/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                <a href="<?php echo URLROOT; ?>supporters/getuserfeedback/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               </td>
               <td>
-              <a href="<?php echo URLROOT; ?>admins/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                <a href="<?php echo URLROOT; ?>supporters/getuserFineDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
               </td>
-              <td></td>
               <td class="options">
-              <a href="<?php echo URLROOT; ?>admins/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+                <a href="<?php echo URLROOT; ?>supporters/getuserTravelDetails/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>
+              <td>
+                <a href="<?php echo URLROOT; ?>supporters/getuserChatHistory/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>
+              <td>
+                <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
+              </td>              
               <td>
                 <div class="options">
-                  <form action="<?php echo URLROOT; ?>users/activeUserStatus/<?php echo $user->id?>" method ="post"><input class="edit-btn" type="submit" value="Activate"></form>
+                  <a href="<?php echo URLROOT; ?>supporters/activeUserStatus/<?php echo $user->id?>"><button class="edit-btn">Activate</button></a>
                 </div> 
               </td>
             </tr>

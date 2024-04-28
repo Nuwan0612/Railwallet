@@ -12,7 +12,7 @@
             </div>    
         </div>
             <div class="cards">
-                <a href="#">
+                <!-- <a href="#">
                 <div class="card">
                     <div class="i">
                         <i class='bx bxs-dollar-circle' ></i>
@@ -22,7 +22,7 @@
                         <h2>Recent Fine</h2>
                     </div>
                 </div>
-                </a>
+                </a> -->
 
                 <a href="#">
                 <div class="card">

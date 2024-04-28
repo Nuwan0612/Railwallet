@@ -115,46 +115,21 @@
         <div class="feedback-container">
             <h1>Feedback</h1>
             <div class="feedback">
+                <?php foreach($data['feedbacks'] as $feedback): ?>
                 <div class="feedback-column">
                     <div class="feedback-card">
                         <div class="feedback-header">
                             <div class="profile-pic">
-                                <img src="<?php echo URLROOT; ?>public/css/index/profile.jpg" alt="Profile Picture1">
+                                <img src="<?php echo URLROOT; ?>public/pics/userPics/<?php echo $feedback->userImage?>" alt="Profile Picture1">
                             </div>
-                            <h2>Julia Fernando</h2>
+                            <h2><?php echo $feedback->fname.' '.$feedback->lname?></h2>
                         </div>
                         <div class="feedback-content">
-                            <p>"I really love this website. It's user-friendly and has great content."</p>
+                            <p><?php echo "\"" . $feedback->feedback . "\"";?></p>
                         </div>
                     </div>
                 </div>
-                <div class="feedback-column">
-                    <div class="feedback-card">
-                        <div class="feedback-header">
-                            <div class="profile-pic">
-                                <img src="<?php echo URLROOT; ?>public/css/index/profile.jpg" alt="Profile Picture2">
-                            </div>
-                            <h2>Gauri Abekoon</h2>
-                        </div>
-                        <div class="feedback-content">
-                            <p>"The information on this website is very helpful. Keep up the good work!"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="feedback-column">
-                    <div class="feedback-card">
-                        <div class="feedback-header">
-                            <div class="profile-pic">
-                                <img src="<?php echo URLROOT; ?>public/css/index/profile.jpg" alt="Profile Picture3">
-                            </div>
-                            <h2>Savithi Perera</h2>
-                        </div>
-                        <div class="feedback-content">
-                            <p>"This website has made my life easier. Thank you for providing such a valuable
-                                resource."</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
@@ -170,7 +145,7 @@
     <div class="c-container">
         <div class="contactInfo">
             <div class="box">
-                <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
                 <div class="text">
                     <h3>Address</h3>
                     <p>23/4,<br>Marcus Place,<br>Colombo 07.</p>
@@ -184,7 +159,7 @@
                 </div>
             </div>
             <div class="box">
-                <div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                <div class="icon"><i class="fa-solid fa-envelope"></i></div>
                 <div class="text">
                     <h3>Email</h3>
                     <p>railwallet123@gmail.com</p>
@@ -192,27 +167,70 @@
             </div>
         </div>
         <div class="contactForm">
-            <form>
-                <h2>Send Message</h2>
-                <div class="inputBox">
-                    <input type="text" name="" required="required">
-                    <span>Full Name</span>
-                </div>
-                <div class="inputBox">
-                    <input type="text" name="" required="required">
-                    <span>Email</span>
-                </div>
-                <div class="inputBox">
-                    <textarea required="required"></textarea>
-                    <span>Type Your Message ....</span>
-                </div>
-                <div class="inputBox">
-                    <input type="submit" name="" value="send">
-                </div>
-            </form>
+
+            <h2>Send Message</h2>
+            <div class="inputBox">
+                <input type="text" id="fullName" placeholder="Full name" required="required">
+            </div>
+            <div class="inputBox">
+                <input type="email" id="email" placeholder="Email" required="required">
+            </div>
+            <div class="inputBox">
+                <textarea required="required" placeholder="Type Your message here ...." id="message"></textarea>
+            </div>
+            <div class="inputBox">
+                <input type="submit" onclick="sendMessage()" value="send">
+            </div>
+
         </div>
     </div>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function sendMessage(){
+
+        let name = document.getElementById('fullName').value
+        let email = document.getElementById('email').value
+        let message = document.getElementById('message').value
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        if(name && email && message){
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost/railwallet/pages/getProblems',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    'name': name,
+                    'email': email,
+                    'message': message
+                }),
+                success: function (response){
+                    if(response){
+                        alert('Your message has sent successfully, We will send you a reply via your email.')
+                        window.location.href = 'http://localhost/railwallet'
+                    } else {
+                        alert('Something went wrong, Please try again')
+                    }
+                },
+                error: function(xhr, status, error){
+                    console.error(xhr.responseText)
+                }
+                
+            })
+
+        } else {
+            alert("Please enter all the details.")
+        }
+
+        
+    }
+</script>
 
 
 <!--## faq content script part ##-->

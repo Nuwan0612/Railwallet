@@ -142,20 +142,21 @@
     public function getTicketPriceById($id){
       $this->db->query('SELECT
                               tp.ticketPriceID,
-                              tp.departureStationID,
-                              depStation.name AS departureStationName,
-                              tp.arrivalStationID,
-                              arrStation.name AS arrivalStationName,
+                              tp.Station_1_ID,
+                              depStation.name AS station_1_name,
+                              tp.Station_2_ID,
+                              arrStation.name AS station_2_name,
                               tp.classID,
                               tc.className,
                               tp.price,
+                              tp.qrCode,
                               tp.valid
                           FROM
                               ticketprices tp
                           JOIN
-                              stations depStation ON tp.departureStationID = depStation.stationID
+                              stations depStation ON tp.Station_1_ID = depStation.stationID
                           JOIN
-                              stations arrStation ON tp.arrivalStationID = arrStation.stationID
+                              stations arrStation ON tp.Station_2_ID = arrStation.stationID
                           JOIN
                               trainclasses tc ON tp.classID = tc.classID
                           WHERE

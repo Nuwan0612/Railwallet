@@ -92,7 +92,7 @@
                           JOIN 
                               trains ON shedules.trainID = trains.trainID
                           JOIN
-                              ticketprices ON ticketprices.departureStationID = shedules.departureStationID AND ticketprices.arrivalStationID = shedules.arrivalStationID
+                              ticketprices ON (ticketprices.Station_1_ID = shedules.departureStationID AND ticketprices.Station_2_ID = shedules.arrivalStationID) OR (ticketprices.Station_1_ID = shedules.arrivalStationID AND ticketprices.Station_2_ID = shedules.departureStationID)
                           WHERE 
                               shedules.departureStationID = :departureStationID
                               AND shedules.arrivalStationID = :arrivalStationID
@@ -124,10 +124,21 @@
 
     // get available train seats in a train shedule
     public function bookingDetailsByScheduleId($data){
-      $this->db->query('SELECT a.firstClassBooked, a.secondClassBooked, a.thirdClassBooked, a.date,a.id, t.firstCapacity, t.secondCapacity, t.thirdCapacity 
-      FROM avlbleseats a 
-      JOIN trains t ON t.trainID = a.trainID 
-      WHERE a.trainID =:tId AND date=:date AND way=:way;
+      $this->db->query('SELECT 
+                          a.firstClassBooked, 
+                          a.secondClassBooked, 
+                          a.thirdClassBooked, 
+                          a.date,
+                          a.id, 
+                          t.firstCapacity, 
+                          t.secondCapacity, 
+                          t.thirdCapacity 
+                        FROM 
+                          avlbleseats a 
+                        JOIN 
+                          trains t ON t.trainID = a.trainID 
+                        WHERE 
+                          a.trainID =:tId AND date=:date AND way=:way;
       ');
       $this->db->bind(':tId', $data['tID']);
       $this->db->bind(':date', $data['dDate']);
@@ -198,7 +209,7 @@
 
     // ## Viw ticketId according to sheduleId and Class
     public function viewTicketId($data){
-      $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND `departureStationID`=:depSta AND `arrivalStationID`=:arrSta;");
+      $this->db->query("SELECT `ticketPriceID`,`price` FROM `ticketprices` WHERE `classID`=:class AND (`Station_1_ID`=:depSta AND `Station_2_ID`=:arrSta) OR (`Station_1_ID`=:arrSta AND `Station_2_ID`=:depSta );");
       $this->db->bind(':class', $data['class']);
       $this->db->bind(':depSta', $data['dStation']);
       $this->db->bind(':arrSta', $data['aStation']);
@@ -218,8 +229,7 @@
     public function ticketPricesByClass($data){
       $this->db->query("SELECT price 
       FROM `ticketprices` 
-      WHERE departureStationID=:dId
-      AND arrivalStationID=:aId 
+      WHERE  ((`Station_1_ID`=:dId AND `Station_2_ID`=:aId) OR (`Station_1_ID`=:aId AND `Station_2_ID`=:dId ))
       AND classID=:cId;
       ");
        $this->db->bind(':dId', $data['dId']);
@@ -230,7 +240,6 @@
        return $results;
 
     }
-
     // ## View Two End station according to stationId
     public function viewTwoEndStationBySheduleId($data){
       $this->db->query("SELECT `departureStationID`,`arrivalStationID` FROM `shedules` WHERE sheduleID=:shId ");
@@ -543,7 +552,7 @@
     // *Update wallet transaction*
     public function updateTransaction($data){
        $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) 
-                          VALUES (:uid,'recharge',:amount);");
+                          VALUES (:uid,'Recharge',:amount);");
 
       $this->db->bind(':uid', $data["uid"]);
       $this->db->bind(':amount', $data["amount"]);
@@ -671,7 +680,7 @@
     }
 
     public function getTotalSpends($id){
-      $this->db->query("SELECT SUM(amount) AS totalSpent FROM transactions WHERE user_id = :id");
+      $this->db->query("SELECT SUM(amount) AS totalSpent FROM transactions WHERE user_id = :id AND reason != 'Recharge'");
       $this->db->bind(':id', $id);
       $result = $this->db->single();
       return $result;
@@ -684,7 +693,7 @@
     }
 
     public function upateBalanceTable($passId, $walletBal, $trId){
-      $this->db->query("INSERT INTO balance (passenger_id, transaction_id, balance) VALUES (:passId, :balance, :trId)");
+      $this->db->query("INSERT INTO balance (passenger_id, transaction_id, balance) VALUES (:passId, :trId, :balance)");
       $this->db->bind(':passId', $passId);
       $this->db->bind(':balance', $walletBal);
       $this->db->bind(':trId', $trId);
@@ -711,5 +720,20 @@
       } else {
         return false;
       }
+    }
+
+    public function updateNotification($details){
+      $this->db->query("INSERT INTO notification (user_id, message) VALUES (:id, :mess)");
+      $this->db->bind(':id', $details['uid']);
+      $this->db->bind(':mess', $details['reason']);
+
+      $this->db->execute();
+    }
+
+    public function getTicketPrice($id){
+      $this->db->query("SELECT price from ticketprices WHERE ticketPriceID = :id");
+      $this->db->bind(":id", $id);
+      $result = $this->db->single();
+      return $result;
     }
   }

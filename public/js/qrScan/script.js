@@ -117,13 +117,15 @@ function onScanSuccess(decodeText, decodeResult, departureStation, arrivalStatio
 		document.querySelector('.warning').innerHTML = "Please Select Train class";	
 	} else if (decodeText == departureStation) {
 		if(ticket){
-			document.querySelector('.warning').innerHTML = "";
+			document.querySelector('.warning').style.color = 'var(--green)';
+			document.querySelector('.warning').innerHTML = "Scan is complete, Please click on the button to start journey";
 			document.getElementById('start-journey-btn').style.display = 'inline-block';
 			document.getElementById('end-journey-btn').style.display = 'none';
 		}
 	} else if (decodeText == arrivalStation) {
 		if(ticket){
-			document.querySelector('.warning').innerHTML = "";
+			document.querySelector('.warning').style.color = 'var(--green)';
+			document.querySelector('.warning').innerHTML = "Scan is complete, Please click on the button to end journey";
 			document.getElementById('end-journey-btn').style.display = 'inline-block';
 			document.getElementById('start-journey-btn').style.display = 'none';
 		}	
@@ -161,6 +163,7 @@ function startJourney() {
 		}),
 		success: function(response) {
 			if(response.unfinished) {
+				document.querySelector('.warning').style.color = 'var(--red)';
 				document.querySelector('.warning').innerHTML = `There is a unfinished journey from ${response.unfinished.depStationName} to ${response.unfinished.arrStationName} with ${response.unfinished.ticketClass.className} class ticket.`;
 				document.getElementById('start-journey-btn').style.display = 'none';
 			} else if (response.success) {
@@ -198,6 +201,7 @@ function endJourney(){
 				document.querySelector('.warning').innerHTML = 'You have completed the journey successfully';
 				reomveButtons()
 			} else if(!response.startJourney) {
+				document.querySelector('.warning').style.color = 'var(--red)';
 				document.querySelector('.warning').innerHTML = 'Please Start a Journey first';
 				reomveButtons()
 				console.log(response.startJourney)

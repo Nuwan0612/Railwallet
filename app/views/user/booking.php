@@ -166,26 +166,4 @@
     </script>
 <?php endif; ?>
 
-<!-- <script>
-    function checkAvailable(){
-        const first = parseInt(document.getElementById("first").value);
-        const second = parseInt(document.getElementById("second").value);
-        const third = parseInt(document.getElementById("third").value);
-
-        const fFree = <?php echo $data['fFree'];?>;
-        const sFree = <?php echo $data['sFree'];?>;
-        const tFree = <?php echo $data['tFree'];?>;
-
-        if(first <= fFree && second <= sFree && third <= tFree){
-            // Criteria are met, submit the form
-            document.querySelector(".bookingTickets").submit();
-        } else {
-            // Criteria are not met, show an alert and redirect
-            alert("Seats not available");
-            window.history.back();
-        }
-    }
-</script> -->
-
-
 <?php require APPROOT . '/views/user/includes/footer.php';?>   

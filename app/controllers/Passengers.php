@@ -58,6 +58,12 @@
 
       $result1 = $this->passengerModel->updateTransaction($data);
 
+      $resons = [
+        'uid' => $_SESSION["user_id"],
+        'reason' => 'Wallet successfully topped up by Rs. '.$details.' on '.date('Y-m-d').' at '.date('H:i:s')
+      ];
+      $this->passengerModel->updateNotification($resons);
+
       $result2 = $this->passengerModel->viewTr($_SESSION["user_id"]);
       $result3= $this->passengerModel->viewWalletBalnce($_SESSION["user_id"]);
       $data=['trId'=>$result2->tr_id,
@@ -84,13 +90,6 @@
         $this->view('user/transaction',$data);
       
     }
-
-    // *Fail transaction dashboard*
-    // public function failTransaction(){
-
-    //   $result = $this->passengerModel->walletRecharge($_SESSION["user_id"]);
-    //   $this->view('user/fail');
-    // }
 
     // *Fine Details*
     public function fineDetails(){
@@ -292,7 +291,7 @@
                     'user_id' => $data['userId'],
                     // 'paymentId' => $data['paymentId']
                 ];
-
+        
                 $data3=$this->passengerModel->viewTicketId($data2);
                 $amount=$data3->price;
                 $data2=[
@@ -716,6 +715,19 @@
             if($wallet && $transaction && $tr_id){
 
               if($this->passengerModel->addJourneyQrAndTransaction($this->genarateQR($current->id),$current->id, $tr_id->tr_id)){
+                $data = [
+                  'depStationName' => $this->adminModel->findStationByStationID($current->depStation)[0]->name,
+                  'arrStationName' => $this->adminModel->findStationByStationID($current->arrStation)[0]->name,
+                ];
+
+                $price = $this->passengerModel->getTicketPrice($current->ticket_id);
+
+                $reson = [
+                  'uid' => $_SESSION['user_id'],
+                  'reason' => 'Thank you for purchasing a train ticket with us! The journey is from '.$data['depStationName'].' to '.$data['arrStationName'].', with a ticket price of '.$price->price.' rupees. Travel date is '.date('Y-m-d').' at '.date('H:i:s').'.'
+                ];
+
+                $this->passengerModel->updateNotification($reson);
                 $responseData = array(
                   'success' => true
                 );
@@ -749,6 +761,7 @@
         );
       } else if($depID == $current->depStation && $arrID == $current->arrStation && $ticket == $current->ticket_id){
         if($this->passengerModel->endJourney($current->id)){
+          
           $responseData = array(
             'success' => true,
           );

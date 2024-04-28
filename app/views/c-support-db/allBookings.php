@@ -4,7 +4,7 @@
     <div class="details">
 
       <div class="head">
-        <div>Fine Details</div>
+        <div>All Bookings</div>
       </div>  
 
       <div class="detail-body" style="margin-top: 25px">

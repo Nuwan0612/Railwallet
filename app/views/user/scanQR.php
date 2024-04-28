@@ -53,7 +53,7 @@
                   </div>
                   <ul class="options">
                     <?php foreach($data['stations'] as $station):?>
-                      <li onclick="updateName(this, 'Departure', <?php echo $station->stationID?>)"><?php echo $station->name ?></li>
+                      <li onclick="updateName(this, 'Departure', '<?php echo $station->stationID?>')"><?php echo $station->name ?></li>
                     <?php endforeach; ?>
                   </ul>
                 </div> 
@@ -71,7 +71,7 @@
                   </div>
                   <ul class="options">
                     <?php foreach($data['stations'] as $station):?>
-                      <li onclick="updateName(this, 'arrival', <?php echo $station->stationID?>)"><?php echo $station->name ?></li>
+                      <li onclick="updateName(this, 'arrival', '<?php echo $station->stationID?>')"><?php echo $station->name ?></li>
                     <?php endforeach; ?>
                   </ul>
                 </div> 

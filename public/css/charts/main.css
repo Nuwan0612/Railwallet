@@ -1,0 +1,17 @@
+.charts{
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+.chart-left, .chart-right{
+  border-radius: 20px;
+ padding: 20px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+}
+
+#myChartLeft, #myChartRight{
+  padding: 20px;
+}
