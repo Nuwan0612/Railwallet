@@ -51,7 +51,7 @@
             <div class="form-group">
               <label for="fname">First name:</label>
               <div class="tbox <?php echo !empty($data['fname_err']) ? 'error' : ''; ?>">
-                <input type="text" name="fname">
+                <input type="text" name="fname" value="<?php echo $data['fname']?>">
                 <div class="error-message"><?php echo $data['fname_err'];?></div>  
               </div>
             </div>
@@ -59,7 +59,7 @@
             <div class="form-group">
               <label for="lname">Last name:</label>
               <div class="tbox <?php echo !empty($data['lname_err']) ? 'error' : ''; ?>">
-                <input type="text" name="lname">
+                <input type="text" name="lname" value="<?php echo $data['lname']?>">
                 <div class="error-message"><?php echo $data['lname_err'];?></div>  
               </div>
             </div>
@@ -67,14 +67,14 @@
             <div class="form-group">
               <label for="phone">Phone Number:</label>
               <div class="tbox <?php echo !empty($data['phone_err']) ? 'error' : ''; ?>">
-                <input type="number" name="phone" value="<?php echo !empty($data['phone_err']) ?  $data['phone_err_value']: ''; ?>">
+                <input type="number" name="phone" value="<?php echo !empty($data['phone_err']) ?  $data['phone_err_value']: $data['phone']; ?>">
                 <div class="error-message"><?php echo $data['phone_err'];?></div>
               </div>                 
             </div>
             <div class="form-group">
               <label for="email">Email:</label>
               <div class="tbox <?php echo !empty($data['email_err']) ? 'error' : ''; ?>">
-                <input type="email" name="email" value="<?php echo !empty($data['email_err']) ?  $data['email_err_value']: ''; ?>">
+                <input type="email" name="email" value="<?php echo !empty($data['email_err']) ?  $data['email_err_value']: $data['email']; ?>">
                 <div class="error-message"><?php echo $data['email_err'];?></div>
               </div>                 
             </div>
