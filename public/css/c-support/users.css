@@ -135,7 +135,7 @@ input[type="date"] {
 }
 
 .table-container th, td {
-  border: 1px solid #ddd; 
+  border: 2.4px solid #ddd; 
   padding: 8px;
   text-align: left;
 }
@@ -235,17 +235,3 @@ td{
   justify-content: center;
 }
 
-/* ## Others */
-
-/* .card_box{
-  height: 300px;
-  margin-top: 100px;
-}
-.container{
-  padding-top: 20px;
-}
-.sSchedules{
-  height: 25px;
-  padding-left: 5px;
-  padding-right: 5px;
-} */

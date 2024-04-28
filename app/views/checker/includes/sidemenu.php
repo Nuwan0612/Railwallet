@@ -27,9 +27,9 @@
             <div class="user">
                 <p>Welcome <?php echo $_SESSION['user_fname'].' '.$_SESSION['user_lname'] ?></p>
                 <img src="<?php echo URLROOT;?>public/pics/userPics/<?php echo $_SESSION['user_image']?>" >
-                <div class="img-case">
+                <!-- <div class="img-case">
                     <i class='bx bxs-bell-ring' ></i>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
