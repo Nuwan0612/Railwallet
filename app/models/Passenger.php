@@ -92,7 +92,7 @@
                           JOIN 
                               trains ON shedules.trainID = trains.trainID
                           JOIN
-                              ticketprices ON ticketprices.Station_1_ID = shedules.departureStationID AND ticketprices.Stataion_2_ID = shedules.arrivalStationID
+                              ticketprices ON (ticketprices.Station_1_ID = shedules.departureStationID AND ticketprices.Station_2_ID = shedules.arrivalStationID) OR (ticketprices.Station_1_ID = shedules.arrivalStationID AND ticketprices.Station_2_ID = shedules.departureStationID)
                           WHERE 
                               shedules.departureStationID = :departureStationID
                               AND shedules.arrivalStationID = :arrivalStationID
@@ -124,10 +124,21 @@
 
     // get available train seats in a train shedule
     public function bookingDetailsByScheduleId($data){
-      $this->db->query('SELECT a.firstClassBooked, a.secondClassBooked, a.thirdClassBooked, a.date,a.id, t.firstCapacity, t.secondCapacity, t.thirdCapacity 
-      FROM avlbleseats a 
-      JOIN trains t ON t.trainID = a.trainID 
-      WHERE a.trainID =:tId AND date=:date AND way=:way;
+      $this->db->query('SELECT 
+                          a.firstClassBooked, 
+                          a.secondClassBooked, 
+                          a.thirdClassBooked, 
+                          a.date,
+                          a.id, 
+                          t.firstCapacity, 
+                          t.secondCapacity, 
+                          t.thirdCapacity 
+                        FROM 
+                          avlbleseats a 
+                        JOIN 
+                          trains t ON t.trainID = a.trainID 
+                        WHERE 
+                          a.trainID =:tId AND date=:date AND way=:way;
       ');
       $this->db->bind(':tId', $data['tID']);
       $this->db->bind(':date', $data['dDate']);

@@ -17,10 +17,16 @@
             <div class="error-message"><?php echo $data['sheduleID_err'];?></div>
           </div>
 
-          <label for="name" class="labels">Train ID:</label> 
+          <label for="trainID" class="labels">Train ID:</label> 
           <div  class="tbox <?php echo !empty($data['trainID_err']) ? 'error' : ''; ?>">
             <input type="text" name="trainID" placeholder="Train ID" value="<?php echo $data['trainID']; ?>">
             <div class="error-message"><?php echo $data['trainID_err'];?></div>
+          </div>
+
+          <label for="way" class="labels">Way:</label> 
+          <div  class="tbox <?php echo !empty($data['way_err']) ? 'error' : ''; ?>">
+            <input type="number" name="way" placeholder="Way" value="<?php echo $data['way']; ?>">
+            <div class="error-message"><?php echo $data['way_err'];?></div>
           </div>
         </div>
           

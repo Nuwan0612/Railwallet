@@ -15,7 +15,7 @@
                 <div class="transaction-history">
                     <div class="table-container">
                     <div class="transaction-title">
-                        <i class='bx bx-history'></i>
+                        <!-- <i class='bx bx-history'></i> -->
                         <h2>Transaction History</h2>
                         <!-- <a href="#" class="btn">View All</a> -->
                     </div>

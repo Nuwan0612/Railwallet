@@ -5,7 +5,6 @@
         <div class="img-case">
           <img src="<?php echo URLROOT?>pics/userPics/<?php echo $_SESSION['user_image']; ?>">
         </div>
-        <i class="fa-regular fa-bell"></i>
       </div>
     </div>
   </div>

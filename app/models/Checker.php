@@ -348,7 +348,7 @@
     }
 
     public function fineTicket($id){
-      $this->db->query("UPDATE journey SET completed = 1, canceled = 1 WHERE id = :id");
+      $this->db->query("UPDATE journey SET completed = 1, canceled = 1, end_time = NOW() WHERE id = :id");
       $this->db->bind(':id', $id);
       if($this->db->execute()){
         return true;

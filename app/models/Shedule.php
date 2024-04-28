@@ -9,7 +9,7 @@
 
     //Add shedules
     public function addShedule($data){
-      $this->db->query('INSERT INTO shedules (sheduleID, trainID, departureStationID, departureDate, departureTime, arrivalStationID, arrivalDate, arrivalTime)VALUES (:sheduleID, :trainID, :departureStationID, :departureDate, :departureTime, :arrivalStationID, :arrivalDate, :arrivalTime);');
+      $this->db->query('INSERT INTO shedules (sheduleID, trainID, departureStationID, departureDate, departureTime, arrivalStationID, arrivalDate, arrivalTime, way)VALUES (:sheduleID, :trainID, :departureStationID, :departureDate, :departureTime, :arrivalStationID, :arrivalDate, :arrivalTime, :way);');
       $this->db->bind(':sheduleID', $data['sheduleID']);
       $this->db->bind(':trainID', $data['trainID']);
       $this->db->bind(':departureStationID', $data['departureStationID']);
@@ -18,6 +18,7 @@
       $this->db->bind(':arrivalStationID', $data['arrivalStationID']);
       $this->db->bind(':arrivalDate', $data['arrivalDate']);
       $this->db->bind(':arrivalTime', $data['arrivalTime']);
+      $this->db->bind(':way', $data['way']);
 
       if($this->db->execute()){
         return true;

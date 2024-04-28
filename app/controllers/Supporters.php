@@ -318,6 +318,7 @@
     public function shedules(){
       $shedules = $this->supporterModel->getAvailableShedules();
       $stations = $this->adminModel->getStation();
+      
       $data = [
         'shedules' => $shedules,
         'stations' => $stations
@@ -433,6 +434,7 @@
         ];
         $stations=$this->adminModel->getStation();
         $schedules = $this->passengerModel->searchSchedule($data);
+
         $data = ['stations'=>$stations,
                 'schedules' => $schedules,
                 'uId'=>trim($_POST['uId'])];
@@ -458,11 +460,10 @@
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
 
-        // print_r($trainDetails);
-
-        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
-        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
-        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+        $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
+        $sFree= $trainDetails ? $trainDetails->secondCapacity: 0;
+        $tFree= $trainDetails ? $trainDetails->thirdCapacity: 0;
+        $tId = $trainDetails ? $trainDetails->id: 0;
 
         // echo $trainDetails->id;
         
@@ -470,7 +471,7 @@
           'fFree'=>$fFree,
           'sFree'=>$sFree,
           'tFree'=>$tFree,
-          'avlbleId'=>$trainDetails->id,
+          'avlbleId'=>$tId,
           'uId' => trim($_POST['uId']),
           'dDate'=>trim($_POST['dDate']),
           'tID'=>trim($_POST['tId']),
@@ -486,7 +487,7 @@
         ];
 
         $this->view('c-support-db/booking',$data);
-        // // die($data['arrivalStation']);
+        // die($data['arrivalStation']);
         
       };
       
@@ -560,7 +561,11 @@
           $sPrice=$this->passengerModel->ticketPricesByClass($class2);
           $tPrice=$this->passengerModel->ticketPricesByClass($class3);
 
-          $total=(float)(($fPrice->price)*(int)($data['1count'])+($sPrice->price)*(int)($data['2count'])+($tPrice->price)*(int)($data['3count']));
+          $first = $fPrice ? $fPrice->price : 0;
+          $second = $sPrice ? $sPrice->price : 0;
+          $third = $tPrice ? $tPrice->price : 0;
+
+          $total=(float)(($first)*(int)($data['1count'])+($second)*(int)($data['2count'])+($third)*(int)($data['3count']));
           $walletBalance = $this->passengerModel->getWalletBalnce($data['uId']);
           
           $newBalance = ($walletBalance->balance - $total);
@@ -571,9 +576,9 @@
             if($total<=$walletBalance->balance){
 
               $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
-              $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
-              $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
-              $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+              $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
+              $sFree= $trainDetails ? $trainDetails->secondCapacity : 0;
+              $tFree= $trainDetails ? $trainDetails->thirdCapacity : 0;
 
               if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount && ($fcount!=0 || $scount!=0 ||$tcount!=0)) {
                 $this->passengerModel->updateSeatsByScheduleId($data);
@@ -651,9 +656,7 @@
             $this->view('c-support-db/booking', $data);
           }
       } 
-
-     
-        
+       
     }
 
 // ## View Bookings by UserId
