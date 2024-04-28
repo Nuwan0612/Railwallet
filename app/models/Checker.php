@@ -108,7 +108,7 @@
     }
     
     public function updatefinePayment($id,$tr_id){
-      $this->db->query("UPDATE fines SET payment_status = 1, end_time = NOW(), payment_date = NOW(), tr_id = :tr_id WHERE journey_id = :id");
+      $this->db->query("UPDATE fines SET payment_status = 1, payment_date = NOW(), tr_id = :tr_id WHERE journey_id = :id");
       $this->db->bind(':id', $id);
       $this->db->bind(':tr_id', $tr_id);
       if($this->db->execute()){

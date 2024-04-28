@@ -40,6 +40,24 @@
       return $results;
     }
 
+    public function getYearsMonths(){
+      $this->db->query("SELECT
+                        MONTH(date) AS month_number,
+                        YEAR(date) AS year,
+                        SUM(CASE WHEN type = 'checker' THEN 1 ELSE 0 END) AS num_checkers,
+                        SUM(CASE WHEN type = 'supporter' THEN 1 ELSE 0 END) AS num_supporters,
+                        SUM(CASE WHEN type = 'user' THEN 1 ELSE 0 END) AS num_users
+                      FROM
+                          users
+                      GROUP BY
+                          YEAR(date),
+                          MONTH(date);
+  
+  ");
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
     public function getBlockedUser(){
       $this->db->query("SELECT * FROM users WHERE type = 'user' and status = 0;
       ");

@@ -23,17 +23,18 @@
 =======================================================================================================================================*/ 
 
   public function dashboard(){ 
-    $users = count($this->adminModel->getUser());
+    // $users = count($this->adminModel->getUser());
     $trains = count($this->trainModel->getTrains());
-    $checkers = count($this->adminModel->getChecker());
-    $supporters = count($this->adminModel->getSupporter());
+    // $checkers = count($this->adminModel->getChecker());
+    // $supporters = count($this->adminModel->getSupporter());
     $stations = count($this->adminModel->getStation());
     $feedbacks = count($this->adminModel->getFeedback());
+
+    $yearsMonth = $this->adminModel->getYearsMonths();
+
     $data = [
-      'users' => $users,
+      'yearsMonth' => $yearsMonth,
       'trains' => $trains,
-      'checkers' => $checkers,
-      'supporters' => $supporters,
       'stations' => $stations,
       'feedbacks' => $feedbacks,
     ];
