@@ -8,16 +8,17 @@
   padding: 20px 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 .container .content .cards .card{
   width: 250px;
   /* width: calc(33.33% - 20px); */
-  height: 150px;
+  border-radius: 20px;
+  height: 140px;
   background: white;
-  margin: 30px 30px;
+  margin: 10px 30px;
   
   /* margin-bottom: 20px; */
   display: flex;
@@ -53,13 +54,6 @@
   /* background-color: #00d7c2; New background color on hover */
   transform: scale(1.05); /* Scale effect on hover */
   background-color: rgba(0, 150, 136, 0.3); 
-}
-
-/* .container .content .cards .db-link .card:hover h3 {
-  color: #009688; 
-} */
-
-  transform: translateY(-2px); /* Lift up effect */
 }
 
 
