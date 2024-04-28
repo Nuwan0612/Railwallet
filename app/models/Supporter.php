@@ -140,5 +140,11 @@
 
       return $result;
     }
+
+    public function getQuestions(){
+      $this->db->query("SELECT * FROM questionregardingproblems");
+      $result = $this->db->resultSet();
+      return $result;
+    }
   
   }

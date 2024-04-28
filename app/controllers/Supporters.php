@@ -645,4 +645,13 @@
       echo json_encode($responseData);
     }
 
+    public function questions(){
+      $questions = $this->supporterModel->getQuestions();
+
+      $data = [
+        'questions' => $questions
+      ];
+      $this->view('c-support-db/questions',$data);
+    }
+
   }
