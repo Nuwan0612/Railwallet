@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="hide-outer-container">
-                <a class="links" href="<?php echo URLROOT;?>supporters/deactivateUsers"><button class="delete-btn" style="font-size: 15px">Blocked Users</button></a>
+                <a class="links" href="<?php echo URLROOT;?>supporters/deactivateUsers"><button class="delete-btn" style="font-size: 14px">Blocked Users</button></a>
             </div>
         </div>
         

@@ -186,8 +186,16 @@ h2{
     border-bottom: 2px solid #999;
 }
 
+.title h2{
+    font-size: 23px;
+}
+
 table {
     padding: 10px;
+}
+
+.recent-payments td{
+    font-size: 16px;
 }
 
 th,
