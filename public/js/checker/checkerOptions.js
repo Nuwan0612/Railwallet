@@ -46,7 +46,7 @@ function issueFineWithUserId(){
           document.querySelector('.warning').innerHTML = ''
           window.location.href = `http://localhost/railwallet/checkers/isuueFineWithUserId?details=${fineDetails.value}&amount=${fineAmount.value}&passenger=${userId.value}`
         } else {
-          document.querySelector('.warning').innerHTML = 'Not a vlaid passenger id'
+          document.querySelector('.warning').innerHTML = 'Not a valid passenger id'
         }
       },
       error: function(xhr, status, error){

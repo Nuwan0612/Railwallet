@@ -51,8 +51,23 @@ td {
 @media (max-width: 700px) {
     .content .transaction-history .table-details th,.content .transaction-history .table-details td {
         text-align: center;
-        padding: 0;
         font-size: 17px;
+    }
+
+    .content .history-outer-container .transaction-history .table-container .table-details {
+        width: 400px;
+    }
+    
+  }
+
+  @media (max-width: 630px) {
+    .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .content .history-outer-container .transaction-history .table-container .table-details {
+        width: 350px;
     }
     
   }
@@ -65,24 +80,40 @@ td {
     }
   }
 
-  @media (max-width: 550px) {
-    /* .content .transaction-history .table-details th,.content .transaction-history .table-details td {
-        text-align: center;
-        padding: 0;
-        font-size: 12px;
-    } */
+  @media (max-width: 560px) {
+    
     .content .transaction-history .table-container{
         padding: 5px;
         margin: 5px;
     }
   }
 
-  @media (max-width: 480px) {
-    /* .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+  @media (max-width: 520px) {
+    
+    .content .transaction-history .table-details th,.content .transaction-history .table-details td {
         text-align: center;
-        padding: 0;
-        font-size: 10px;
-    } */
+        font-size: 14px;
+    }
+
+    .content .history-outer-container .transaction-history .table-container .table-details {
+        width: 300px;
+    }
+  }
+
+  @media (max-width: 440px) {
+    
+    .content .transaction-history .table-details th,.content .transaction-history .table-details td {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .content .history-outer-container .transaction-history .table-container .table-details {
+        width: 300px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    
 
     .content .transaction-history .table-container{
         padding: 0;

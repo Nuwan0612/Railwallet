@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/trains/form.css">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/passenger/ratingView.css">
   <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/maps/main.css">
+  <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/charts/main.css">
+
 
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 

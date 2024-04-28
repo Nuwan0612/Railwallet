@@ -14,7 +14,7 @@
         <input type="text" id="user-id" placeholder="Passenger id">
         <button id="fine-btn" onclick="issueFineWithUserId()">Isuue Fine</button>
       </div>      
-      <div class="warning"></div>     
+      <div class="warning" style="text-align: center;"></div>     
     </div>
   </div>
   </div>
