@@ -37,7 +37,7 @@
                 <th>Start time</th>
                 <th>End time</th> 
                 <th>QR</th>
-                <th>Status</th>  
+                <th>Status</th>
               </tr>
             </thead>
             

@@ -63,7 +63,7 @@
                             <a href="<?php echo URLROOT; ?>supporters/getuserBookings/<?php echo $user->id?>"><button class="edit-btn">View</button></a>
                             </td>
                             <td class="options">
-                                <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id?>"><button class="edit-btn">Add</button></a>
+                                <a href="<?php echo URLROOT; ?>supporters/addBooking/<?php echo $user->id; ?>"><button class="edit-btn">Add</button></a>
                             </td>
                         </tr>
                         <?php $rowNumber++; endforeach; ?>

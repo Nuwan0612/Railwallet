@@ -24,6 +24,13 @@
       $this->view('c-support-db/display-faq',$data);
     }
 
+    public function activeUserStatus($id){
+      if($this->userModel->activeUser($id)){
+        redirect('supporters/deactivateUsers');
+      }
+    }
+
+
     // <!--ADD FAQ--!>
     public function addfaq(){
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
