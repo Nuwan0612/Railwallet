@@ -898,5 +898,20 @@
 
       redirect('passengers/fineDetails');
     }
+
+    public function getAmount($id){
+      $responseData = false;
+
+      $fineAmount = $this->passengerModel->getFineAmount($id);
+      $walletBlance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+
+
+      if($fineAmount->fine_amount <= $walletBlance->balance){
+        $responseData = true;
+      }
+
+      header('content-type: application/json');
+      echo json_encode($responseData);
+    }
     
   }

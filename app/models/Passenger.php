@@ -599,7 +599,7 @@
     // *Fine Details*
     public function viewFineDetails($id){
       $this->db->query("SELECT *, 
-                          DATE(fine_date) AS fineDate 
+                          fine_date AS fineDate 
                           FROM `fines` 
                           WHERE passenger_id=:id;");
 
@@ -713,7 +713,7 @@
     }
 
     public function getNotifications($id){
-      $this->db->query("SELECT * FROM notification WHERE user_id = :id ORDER BY id DESC");
+      $this->db->query("SELECT * FROM notification WHERE user_id = :id ORDER BY id DESC LIMIT 10");
       $this->db->bind(':id', $id);
       $result = $this->db->resultSet();
       return $result;
@@ -763,7 +763,7 @@
     }
 
     public function updateFineTable($id){
-      $this->db->query("UPDATE fines SET payment_status = 1 WHERE fine_id = :id");
+      $this->db->query("UPDATE fines SET payment_status = 1, payment_date = NOW() WHERE fine_id = :id");
       $this->db->bind(":id", $id);
       if($this->db->execute()){
         return true;

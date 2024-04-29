@@ -17,7 +17,7 @@
     <div class="travel-details">
         <div class="title">
         <!-- <i class='bx bx-history'></i> -->
-            <h2>Travel History</h2>
+            <h2>All Bookings</h2>
             <!-- <a href="#" class="btn">View All</a> -->
         </div>
         <div class="table-details">
@@ -31,7 +31,7 @@
                 <th>Departute Station</th>
                 <th>Departute Time</th>
                 <th>Arrival Station</th>
-                <th>Arrival Time</th> 
+                <th></th> 
             </tr>
             </thead>
                 <tbody>

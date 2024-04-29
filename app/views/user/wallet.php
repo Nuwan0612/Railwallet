@@ -122,7 +122,7 @@
 
         labels: date,
         datasets: [{
-            label: 'My First Dataset',
+            label: 'Wallet Balance',
             data: balance,
             fill: false,
             borderColor: 'rgb(75, 192, 192)',

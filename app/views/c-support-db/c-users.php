@@ -10,7 +10,7 @@
         <div class="search-bar-outer-container">
             <div class="search-bar-inner-container">
                 <div class="search-bar">
-                    <input type="text" class="border-search" id="search-users" placeholder="Enter User NIC Number" style="font-size: 14px;>
+                    <input type="text" class="border-search" id="search-users" placeholder="Enter User NIC Number" style="font-size: 14px;">
                     <button class="search-button" onclick="searchUser()">
                         <i class="fas fa-search"></i>
                     </button> 

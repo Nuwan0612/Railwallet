@@ -73,12 +73,11 @@
                         <td><?php echo $fine->fineDate; ?></td>
                         <td><?php echo $fine->fine_reason; ?></td>
                         <?php 
-                            $url = URLROOT;
+                            // $url = URLROOT/ $url/passengers/payfine/$fine->fine_id;
                             if($fine->payment_status){
                                 echo "<td style='color: green; font-weight: bold'>Paid</td>";
                             } else {
-                                echo "<td style='font-weight: bold'><a href='$url/passengers/payfine/$fine->fine_id' style='color: red; text-decoration: none;'>Not paid</a></td>";
-
+                                echo "<td><button class='delete-btn' onclick='payFine($fine->fine_id)'>Not paid</button></td>";
                             }
                         ?>
                         <td><?php echo $fine->fine_amount; ?></td>
@@ -91,4 +90,26 @@
         </div>
         </div>
     </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    function payFine(id) {
+        $.ajax({
+            type: 'GET',
+            url: `http://localhost/railwallet/passengers/getAmount/${id}`,
+            success: function (response){
+                if(response){
+                    window.location.href = `http://localhost/railwallet/passengers/payfine/${id}`;
+                } else {
+                    alert('You do not have sufficient wallet balance to complete the fine, Pleaase recharge the wallet');
+                }
+            }
+
+           
+        })
+    }
+</script>
+
+
 <?php require APPROOT . '/views/user/includes/footer.php';?>

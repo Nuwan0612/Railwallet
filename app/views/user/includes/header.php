@@ -24,6 +24,17 @@
 
     <title><?php echo SITENAME; ?></title>
 
+    <style>
+        .delete-btn {
+            padding: 10px;
+            background-color: #96000e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }   
+    </style>
+
 
 </head>
 <body>
