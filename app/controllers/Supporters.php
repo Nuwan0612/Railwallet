@@ -460,9 +460,9 @@
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
 
-        $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
-        $sFree= $trainDetails ? $trainDetails->secondCapacity: 0;
-        $tFree= $trainDetails ? $trainDetails->thirdCapacity: 0;
+        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
         $tId = $trainDetails ? $trainDetails->id: '';
 
         // echo $trainDetails->id;
