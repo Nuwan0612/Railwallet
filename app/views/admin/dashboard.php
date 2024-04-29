@@ -96,37 +96,61 @@
     </div>
   </div>
 
+<?php 
+  $nu_user = array_fill(0, 12, 0); 
+  $nu_che = array_fill(0, 12, 0); 
+  $nu_sup = array_fill(0, 12, 0); 
+  $earning = array_fill(0, 12, 0);
+
+  foreach($data['yearsMonth'] as $detail):
+    $index = $detail->month_number - 1;
+    $nu_user[$index] = $detail->num_users;
+    $nu_che[$index] = $detail->num_checkers;
+    $nu_sup[$index] = $detail->num_supporters;
+  endforeach;
+
+  foreach($data['earnings'] as $earnings){
+    $index = $earnings->month - 1;
+    $earning[$index] = $earnings->total;
+  }
+
+  $user = json_encode($nu_user);
+  $checker = json_encode($nu_che);
+  $supporter = json_encode($nu_sup);
+  $supporter = json_encode($nu_sup);
+  $earnings = json_encode($earning);
+?>
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
+
+  let users = <?php echo $user; ?>;
+  let checkers = <?php echo $checker; ?>;
+  let supporters = <?php echo $supporter; ?>;
+  let earnings = <?php echo $earnings?>
+
   const ctxL = document.getElementById('myChartLeft');
   const ctxR = document.getElementById('myChartRight');
 
-  const monthNames = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
-  
-
-  
   new Chart(ctxL, {
     type: 'bar',
     data: {
       labels: ['January', 'February', 'March', 'Aprial', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [{
         label: 'Passengers',
-        data: [12, 19, 3, 5, 2, 3],
+        data: users,
         borderWidth: 1
       },
       {
         label: 'Supporters',
-        data: [12, 19, 3, 5, 2, 3],
+        data: supporters,
         borderWidth: 1
       },
       {
         label: 'Checkers',
-        data: [12, 19, 3, 5, 2, 3],
+        data: checkers,
         borderWidth: 1
       }]
     },
@@ -145,7 +169,7 @@
       labels: ['January', 'February', 'March', 'Aprial', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [{
         label: 'Total Earnings',
-        data: [12, 19, 3, 5, 2, 31, 45, 54, 98, 89, 12, 12],
+        data: earnings,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',   // August 
         ],

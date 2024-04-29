@@ -23,7 +23,7 @@
 =======================================================================================================================================*/ 
 
   public function dashboard(){ 
-    // $users = count($this->adminModel->getUser());
+    $totalEarnings = $this->adminModel->getEarnings();
     $trains = count($this->trainModel->getTrains());
     // $checkers = count($this->adminModel->getChecker());
     // $supporters = count($this->adminModel->getSupporter());
@@ -37,7 +37,10 @@
       'trains' => $trains,
       'stations' => $stations,
       'feedbacks' => $feedbacks,
+      'earnings' => $totalEarnings
     ];
+
+    // print_r($data);
     $this->view('admin/dashboard',$data);   
   }
 

@@ -40,6 +40,12 @@
       return $results;
     }
 
+    public function getEarnings(){
+      $this->db->query("SELECT SUM(amount) AS total, MONTH(date) AS month FROM `transactions` GROUP BY MONTH(date)");
+      $result = $this->db->resultSet();
+      return $result;
+    }
+
     public function getYearsMonths(){
       $this->db->query("SELECT
                         MONTH(date) AS month_number,
@@ -52,8 +58,7 @@
                       GROUP BY
                           YEAR(date),
                           MONTH(date);
-  
-  ");
+                        ");
       $result = $this->db->resultSet();
       return $result;
     }

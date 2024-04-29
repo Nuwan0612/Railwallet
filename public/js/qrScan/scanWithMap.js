@@ -268,6 +268,9 @@ navigator.geolocation.watchPosition(success,error,{
 		console.log(isInsideCircleStation1)
 		console.log(isInsideCircleStation2);
 
+		console.log(StartOrEnd);
+
+
 		if(isInsideCircleStation1 || isInsideCircleStation2) {
 			if(StartOrEnd == 'startJourney'){
 				document.querySelector('.warning').innerHTML = "";
@@ -277,7 +280,7 @@ navigator.geolocation.watchPosition(success,error,{
 				document.querySelector('.warning').innerHTML = "";
 				document.getElementById('end-journey-btn').style.display = 'inline-block';
 				document.getElementById('start-journey-btn').style.display = 'none';
-			}  
+			} 
 		} else {
 			document.querySelector('.warning').innerHTML = 'You are not at correct station'
 			reomveButtons()
