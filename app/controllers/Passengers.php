@@ -184,9 +184,10 @@
 
         // print_r($trainDetails);
 
-        $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
-        $sFree= $trainDetails ? $trainDetails->secondCapacity : 0;
-        $tFree= $trainDetails ? $trainDetails->thirdCapacity : 0;
+        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+        $tId = $trainDetails ? $trainDetails->id: '';
 
         // echo $trainDetails->id;
         
@@ -264,6 +265,7 @@
           
         ];
 
+
       //  print_r ($data);
       $result=$this->passengerModel->viewTwoEndStationBySheduleId($data);
       $class1=['dId'=>$result->departureStationID,
@@ -295,10 +297,13 @@
       if($total<=$walletBalance->balance){
 
         $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
-        $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
-        $sFree= $trainDetails ? $trainDetails->secondCapacity : 0;
-        $tFree= $trainDetails ? $trainDetails->thirdCapacity : 0;
+        $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+        $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+        $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
 
+        $data['fFree']=$fFree;
+        $data['sFree']=$sFree;
+        $data['tFree']=$tFree;
 
         if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount && ($fcount!=0 || $scount!=0 ||$tcount!=0)) {
           $this->passengerModel->updateSeatsByScheduleId($data);
