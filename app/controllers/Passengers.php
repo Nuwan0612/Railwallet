@@ -293,7 +293,7 @@
       $newBalance = ($walletBalance->balance - $total);
       // echo $newBalance;
       if(empty($fcount) && empty($scount) && empty($tcount) ){
-        $message = 'Please enter valid seat numbers';
+        $data['error_details'] = 'Please enter valid seat numbers';
     } else {
       if($total<=$walletBalance->balance){
 
