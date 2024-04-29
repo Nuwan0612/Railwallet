@@ -713,7 +713,7 @@
     }
 
     public function getNotifications($id){
-      $this->db->query("SELECT * FROM notification WHERE user_id = :id");
+      $this->db->query("SELECT * FROM notification WHERE user_id = :id ORDER BY id DESC");
       $this->db->bind(':id', $id);
       $result = $this->db->resultSet();
       return $result;
@@ -742,5 +742,45 @@
       $this->db->bind(":id", $id);
       $result = $this->db->single();
       return $result;
+    }
+
+    public function getFineAmount($id){
+      $this->db->query("SELECT * from fines WHERE fine_id = :id");
+      $this->db->bind(":id", $id);
+      $result = $this->db->single();
+      return $result;
+    }
+
+    public function reduceMoney($fine, $id){
+      $this->db->query("UPDATE wallet SET balance = (balance - :amount) WHERE passenger_id = :id");
+      $this->db->bind(":id", $id);
+      $this->db->bind(":amount", $fine);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function updateFineTable($id){
+      $this->db->query("UPDATE fines SET payment_status = 1 WHERE fine_id = :id");
+      $this->db->bind(":id", $id);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function updateTransactionFine($id,$amount){
+      $this->db->query("INSERT INTO `transactions`( `user_id`, `reason`,`amount`) 
+      VALUES (:id,'Settled the fine',:amount);");
+      $this->db->bind(":id", $id);
+      $this->db->bind(":amount", $amount);
+      if($this->db->execute()){
+        return true;
+      } else {
+        return false;
+      }
     }
   }

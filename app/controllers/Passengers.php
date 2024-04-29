@@ -62,14 +62,15 @@
       // print_r($result1);
     
       $result = $this->passengerModel->updateWalletBalance($data);
-
       $result1 = $this->passengerModel->updateTransaction($data);
 
-      $resons = [
-        'uid' => $_SESSION["user_id"],
-        'reason' => 'Wallet successfully topped up by Rs. '.$details.' on '.date('Y-m-d').' at '.date('H:i:s')
-      ];
-      $this->passengerModel->updateNotification($resons);
+      if($result){
+        $resons = [
+          'uid' => $_SESSION["user_id"],
+          'reason' => 'Wallet successfully topped up by Rs. '.$details.' on '.date('Y-m-d').' at '.date('H:i:s')
+        ];
+        $this->passengerModel->updateNotification($resons);
+      }
 
       $result2 = $this->passengerModel->viewTr($_SESSION["user_id"]);
       $result3= $this->passengerModel->viewWalletBalnce($_SESSION["user_id"]);
@@ -865,6 +866,32 @@
 
       header('Content-Type: application/json');
       echo json_encode($responseData);
+    }
+
+
+    public function payfine($id){
+      $fineAmount = $this->passengerModel->getFineAmount($id);
+      $walletBlance = $this->passengerModel->getWalletBalnce($_SESSION["user_id"]);
+
+      if($fineAmount->fine_amount <= $walletBlance->balance){
+        if($this->passengerModel->reduceMoney($fineAmount->fine_amount, $_SESSION["user_id"])){
+          $resons = [
+            'uid' => $_SESSION["user_id"],
+            'reason' => 'Your fine has been settled. Thank you.'.' on '.date('Y-m-d').' at '.date('H:i:s')
+          ];
+          $this->passengerModel->updateNotification($resons);
+          $this->passengerModel->updateFineTable($id);
+          $this->passengerModel->updateTransactionFine( $_SESSION["user_id"], $fineAmount->fine_amount);
+        } 
+      } else {
+        $resons = [
+          'uid' => $_SESSION["user_id"],
+          'reason' => 'You do not have enough balance to pay the fine.'
+        ];
+        $this->passengerModel->updateNotification($resons);
+      }
+
+      redirect('passengers/fineDetails');
     }
     
   }

@@ -73,10 +73,12 @@
                         <td><?php echo $fine->fineDate; ?></td>
                         <td><?php echo $fine->fine_reason; ?></td>
                         <?php 
+                            $url = URLROOT;
                             if($fine->payment_status){
                                 echo "<td style='color: green; font-weight: bold'>Paid</td>";
                             } else {
-                                echo "<td style='color: red; font-weight: bold'>Not paid</td>";
+                                echo "<td style='font-weight: bold'><a href='$url/passengers/payfine/$fine->fine_id' style='color: red; text-decoration: none;'>Not paid</a></td>";
+
                             }
                         ?>
                         <td><?php echo $fine->fine_amount; ?></td>
