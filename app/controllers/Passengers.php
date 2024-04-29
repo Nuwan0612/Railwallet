@@ -14,6 +14,13 @@
 
     }
 
+    public function viewJourney(){
+      $result = $this->passengerModel->getJourney($_SESSION['user_id']);
+      $data = ['journey' => $result];
+      // print_r($data);
+      $this->view('user/journey',$data);
+    }
+
     // *Wallet dashboard*
     public function wallet(){
 

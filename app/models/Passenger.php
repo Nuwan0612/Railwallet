@@ -122,6 +122,13 @@
       return $result;
     }
 
+    public function getJourney($id){
+      $this->db->query('SELECT j.id, DATE(j.start_time) AS date, j.qr_code, j.completed, j.canceled, dep.name AS depS, arr.name AS arr FROM stations dep JOIN journey j ON j.depStation = dep.stationID JOIN stations arr ON j.arrStation = arr.stationID WHERE j.passenger_id = :id ORDER BY j.id DESC');
+      $this->db->bind(':id',$id);
+      $result=$this->db->resultSet(); 
+      return $result;
+    }
+
     // get available train seats in a train shedule
     public function bookingDetailsByScheduleId($data){
       $this->db->query('SELECT 

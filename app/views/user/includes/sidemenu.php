@@ -18,7 +18,8 @@
 
             <a href="<?php echo URLROOT;?>passengers/wallet"><li><i class='bx bxs-wallet' ></i><span>Wallet</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/shedule"><li><i class='bx bxs-calendar'></i><span>Shedule</span></li></a>
-            <a href="<?php echo URLROOT;?>passengers/viewTicketsByUserId"><li><i class='bx bx-search-alt'></i><span>Travel History</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/viewTicketsByUserId"><li><i class="fa-solid fa-list"></i><span>All Bookings</span></li></a>
+            <a href="<?php echo URLROOT;?>passengers/viewJourney"><li><i class='bx bx-search-alt'></i><span>Journey History</span></li></a>
 <!--             <a href="#"><li><i class='bx bx-money-withdraw' ></i><span>Fines</span></li></a> -->
             <a href="<?php echo URLROOT;?>passengers/qrScan"><li><i class='bx bx-qr-scan' ></i><span>QR Scanner</span></li></a>
             <a href="<?php echo URLROOT;?>passengers/ticket"><li><i class='bx bxs-file-find'></i><span>View QR</span></li></a>
