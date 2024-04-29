@@ -135,7 +135,7 @@
           'fname' => trim($_POST['fname']),
           'lname' => trim($_POST['lname']),
           'email' => trim($_POST['email']),
-          'phone' => trim($_POST['phone']),
+          'phone' => '0'.trim($_POST['phone']),
           'oldPassword' => trim($_POST['oldPassword']),
           'newPassword' => trim($_POST['newPassword']),
           'confirmPassword' => trim($_POST['confirmPassword']),
