@@ -70,6 +70,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+
 .train_name{
     color: #009688;
 }
@@ -78,7 +79,7 @@
     background-color: #f7f0f0;
     padding: 15px;
     border-radius: 10px;
-    width: 600px;
+    width:800px;
 }
 
 .card_body{
@@ -160,6 +161,7 @@
     cursor: pointer;
     /* transition: background 0.3s ease, box-shadow 0.3s ease; */
     box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.5);
+    padding: 8px;
 }
 .stop_stations button:hover {
     /* background: linear-gradient(to right, #04776c, #9cc1e2); */
