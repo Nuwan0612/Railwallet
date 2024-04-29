@@ -11,7 +11,7 @@
       <div class="search-bar-outer-container-shedule">
         <div class="search-bar-inner-container-shedule">
           <div class="search-bar-shedule">
-          <input class="border-search" type="text" id="search-shedule-by-ID" placeholder="Shedule or Train ID" >
+          <input class="border-search" type="text" id="search-shedule-by-ID" placeholder="Shedule or Train ID" style="font-size: 14px;" >
             <button class="search-button" onclick="searchSheduleByID()">
               <i class="fas fa-search"></i>
             </button>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="search-bar-inner-container-shedule">
-          <select class="result-box1" id="depStation">
+          <select class="result-box1" id="depStation" style="font-size: 14px; color:light-dark(graytext, rgb(170, 170, 170));">
             <option value="" selected disabled>Departure Station</option>
               <?php
               foreach ($data['stations'] as $station) {
@@ -30,7 +30,7 @@
         </div>
 
         <div class="search-bar-inner-container-shedule">
-          <select class="result-box1" id="arrStation">
+          <select class="result-box1" id="arrStation" style="font-size: 14px; color:light-dark(graytext, rgb(170, 170, 170));">
             <option value="" selected disabled>Arrival Station</option>
               <?php
               foreach ($data['stations'] as $station) {
@@ -42,7 +42,7 @@
 
         <div class="search-bar-inner-container-shedule">
           <div class="search-bar-shedule">
-            <input class="border-search" type="text" id="search-date" placeholder="Date" onfocus="(this.type = 'date')" onblur="(this.type='text')">
+            <input class="border-search" type="text" id="search-date" placeholder="Date" onfocus="(this.type = 'date')" onblur="(this.type='text')" style="font-size: 14px; color:black" >
             <button class="search-button" onclick="searchSchedule()">
               <i class="fas fa-search"></i>
             </button>
