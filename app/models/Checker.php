@@ -130,7 +130,7 @@
     // *View fine details*
     public function viewFineDetailsByCheckerId($id){
       $this->db->query("SELECT * FROM `fines` 
-                          WHERE checker_id=:cid;");
+                          WHERE checker_id=:cid ORDER BY fine_id DESC");
 
       $this->db->bind(':cid', $id);
       $result = $this->db->resultSet();

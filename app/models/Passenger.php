@@ -601,7 +601,7 @@
       $this->db->query("SELECT *, 
                           fine_date AS fineDate 
                           FROM `fines` 
-                          WHERE passenger_id=:id;");
+                          WHERE passenger_id=:id ORDER BY fine_id DESC");
 
       $this->db->bind(':id', $id);
       $result=$this->db->resultSet();

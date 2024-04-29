@@ -119,6 +119,13 @@
       return $results;
     }
 
+    public function getuserBookingDetails($id){
+      $this->db->query("SELECT * FROM booking WHERE userId = :userId ORDER BY bookingId DESC");
+      $this->db->bind(':userId', $id);
+      $results = $this->db->resultSet();
+      return $results;
+    }
+
     public function searchTravelDetails($date,$id){
       $this->db->query("SELECT 
                           j.*, 

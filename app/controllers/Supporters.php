@@ -88,6 +88,14 @@
           'question_err' => '',
           'answer_err' => ''
         ];
+
+        if(empty($data['question'])){
+          $data['question_err']='Please enter the question';
+        }
+        if(empty($data['answer'])){
+          $data['answer_err']='Please enter the answer';
+        }
+        
         if(empty($data['question_err']) && (empty($data['answer_err']))) {
           if($this->chatModel->editfaq($data)){
             redirect('supporters/faqs');

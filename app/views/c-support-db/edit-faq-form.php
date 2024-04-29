@@ -11,7 +11,7 @@
             <textarea id="question" name="question" rows="4" cols="50"></textarea><br><br>
         </div> -->
         
-        <div  class="tbox <?php echo !empty($data['question_err']) ? 'error' : ''; ?>">
+        <div  class="tbox <?php echo !empty($data['question_err']) ? 'error' : ''; ?>" style="display: inline-block !important;">
             <textarea id="question" name="question" rows="4" cols="50"><?php echo $data['question']?></textarea><br><br>
         <div class="error-message"><?php if($data['question_err']) {echo $data['question_err']; }?></div>
         </div>
@@ -24,7 +24,7 @@
             <textarea id="answer" name="answer" rows="4" cols="50"></textarea><br><br>
         </div> -->
 
-        <div  class="tbox <?php echo !empty($data['answer_err']) ? 'error' : ''; ?>">
+        <div  class="tbox <?php echo !empty($data['answer_err']) ? 'error' : ''; ?>" style="display: inline-block !important;">
             <textarea id="answer" name="answer" rows="4" cols="50"><?php echo $data['answer']?></textarea><br><br>
         <div class="error-message"><?php echo $data['answer_err'];?></div>
         </div>

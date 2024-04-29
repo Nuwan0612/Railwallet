@@ -2082,4 +2082,11 @@
     $this->view('admin/users/userFines',$data);
   }
 
+
+  public function getuserBookingDetails($id){
+    $results = $this->adminModel->getuserBookingDetails($id);
+    $data = ['userBookings' => $results];
+    $this->view('admin/users/bookings',$data);
+  }
+
 }
