@@ -44,7 +44,7 @@
                                 } else if($journey->completed == 0 && $journey->canceled == 0){
                                   echo "<td style='font-weight: bold'>On Journey</td>";
                                 }else if($journey->completed == 1) {
-                                  echo "<td style='color: green; font-weight: bold'>On Journey</td>";
+                                  echo "<td style='color: green; font-weight: bold'>Completed</td>";
                                 }else{
                                     echo "<td style='color: red; font-weight: bold'>Not completed</td>";
                                 }
