@@ -2,7 +2,7 @@
 *
 
 {
-    margin: 0;
+    margin: 3px 1px;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -334,9 +334,10 @@ header p{
 }
 
 .chat-container .title{
-    background-color: #9f9c9c;
+    background-color: #009688;
     height: 50px;
     padding: 20px;
+    margin: -3px;
 }
 
 .chat-container .title p
@@ -345,9 +346,9 @@ header p{
     font-size: 20px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    margin-top: -1%;
+    margin-top: -2%;
     margin-bottom: 10px;
-    color: #333;
+    color: #fff;
   
 }
 
@@ -455,7 +456,8 @@ header p{
 .chat-container .tab label h2{
     width: 45px;
     height: 38px;
-    background: #333;
+    background: #009688;
+    opacity: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -466,6 +468,13 @@ header p{
     /* margin-bottom: 5px;  */
     margin-top: 10px;
 }
+
+.chat-container .tab label h2:hover {
+    opacity: 0.8; /* Reduce opacity when popping up */
+    transform: translateY(-0.4px); /* lift up */
+  
+  }
+
 .chat-container .tab input:checked ~ label h2
 {
     position: absolute;
