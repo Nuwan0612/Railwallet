@@ -15,7 +15,7 @@
     </div>
 
     <div class="content">
-        <h1>Easy Travel With RailWallet</h1><br>
+        <h1>Easy Travel With Rail Wallet</h1><br>
         <p>Let's get started with signing up. If you already have an account,<br>Let's explore RailWallet.</p>
         <div>
             <button type="button" onclick="redirectToSignUp()"><span></span>SignUp</button>
@@ -52,20 +52,20 @@
 
                 <div class="title">
                     
-                    <p>Chat With Us</p>
+                    <p>FAQs?</p>
                    
                 </div>
 
-                <div class="Chat">
+                <!-- <div class="Chat">
                     <header id="live-chat-header">
                         <h1>Live Chat</h1>
                     </header>
-                </div>
+                </div> -->
 
-                <header id="faqs-header">
+                <!-- <header id="faqs-header">
                     <h1>FAQs?</h1>
                     <span class="close-btn material-symbols-outlined">close</span>
-                </header>
+                </header> -->
 
                 <?php $qNumber = 1; foreach($data['messages'] as $faq): ?>
                     <div class="tab">
@@ -73,7 +73,7 @@
                         <div onclick="displayAnswer(<?php echo $faq->Q_ID?>)">
                             <label>
                                 <div class="qnum">
-                                     <h2><?php echo $qNumber?></h2>
+                                     <h2 style="background-color: 009688;"><?php echo $qNumber?></h2>
                                 </div>
                                 <div class="que">
                                      <h3><?php echo $faq->Question?></h3>
