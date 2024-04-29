@@ -576,9 +576,13 @@
             if($total<=$walletBalance->balance){
 
               $trainDetails = $this->passengerModel->bookingDetailsByScheduleId($data);
-              $fFree= $trainDetails ? $trainDetails->firstCapacity : 0;
-              $sFree= $trainDetails ? $trainDetails->secondCapacity : 0;
-              $tFree= $trainDetails ? $trainDetails->thirdCapacity : 0;
+              $fFree= $trainDetails->firstCapacity-$trainDetails->firstClassBooked;
+              $sFree= $trainDetails->secondCapacity-$trainDetails->secondClassBooked;
+              $tFree= $trainDetails->thirdCapacity-$trainDetails->thirdClassBooked;
+
+              $data['fFree']=$fFree;
+              $data['sFree']=$sFree;
+              $data['tFree']=$tFree;
 
               if ($fFree >= $fcount && $sFree >= $scount && $tFree >= $tcount && ($fcount!=0 || $scount!=0 ||$tcount!=0)) {
                 $this->passengerModel->updateSeatsByScheduleId($data);
@@ -651,7 +655,7 @@
           }
 
           if(empty($data['error_details'])){
-            redirect('supporters/dashboard');
+            redirect('supporters/shedules');
           } else {
             $this->view('c-support-db/booking', $data);
           }
